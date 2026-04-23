@@ -1,0 +1,29 @@
+# Ham ses verisi (büyük binary'ler)
+sounds/
+*.wav
+*.mp3
+*.flac
+*.aiff
+*.ogg
+*.m4a
+
+# Data dizinleri (hedef proje yapısı)
+data/raw/
+data/processed/*.parquet
+data/processed/*.npz
+
+# Üretilen çıktılar
+checkpoints/
+outputs/
+*.parquet
+*.csv
+
+# Python
+*.pyc
+__pycache__/
+.venv/
+
+# Araçlar
+wandb/
+.env
+.ipynb_checkpoints/
