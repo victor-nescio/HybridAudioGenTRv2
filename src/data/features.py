@@ -206,10 +206,36 @@ def segmentle(y: np.ndarray, sr: int,
     ]
 
 
+# ── Spektral doku (önden hesaplanmış STFT versiyonu, internal) ────────────────
+def _spektral_from_stft(y: np.ndarray, sr: int,
+                         stft_mag: np.ndarray, S_power: np.ndarray) -> np.ndarray:
+    """spektral_ozellik_cikar ile aynı hesaplama; STFT tekrar hesaplanmaz."""
+    def ms(feat):
+        return np.array([float(feat.mean()), float(feat.std())])
+
+    centroid  = librosa.feature.spectral_centroid(S=stft_mag, sr=sr, hop_length=HOP_LENGTH)
+    rolloff   = librosa.feature.spectral_rolloff(S=stft_mag, sr=sr, hop_length=HOP_LENGTH)
+    bandwidth = librosa.feature.spectral_bandwidth(S=stft_mag, sr=sr, hop_length=HOP_LENGTH)
+    zcr       = librosa.feature.zero_crossing_rate(y, hop_length=HOP_LENGTH)
+    rms       = librosa.feature.rms(S=stft_mag, hop_length=HOP_LENGTH)
+    contrast  = librosa.feature.spectral_contrast(
+        S=stft_mag, sr=sr, hop_length=HOP_LENGTH, n_bands=6)
+    flatness  = librosa.feature.spectral_flatness(S=S_power, hop_length=HOP_LENGTH)
+    flux_vals = np.sqrt(np.sum(np.diff(stft_mag, axis=1) ** 2, axis=0))
+    flux      = flux_vals.reshape(1, -1)
+
+    return np.concatenate([
+        ms(centroid), ms(rolloff), ms(bandwidth), ms(zcr), ms(rms),
+        contrast.mean(axis=1), contrast.std(axis=1),
+        ms(flatness), ms(flux),
+    ])  # 28-dim
+
+
 # ── LGBM için 467-dim düz vektör ─────────────────────────────────────────────
 def duz_ozellik_cikar(y: np.ndarray, sr: int) -> np.ndarray:
     """
     Tüm özellik gruplarını birleştirir → 467-dim düz vektör.
+    STFT ve mel spectrogram bir kez hesaplanır, tüm gruplara aktarılır.
 
       Grup 1 — MFCC genişletilmiş : 320-dim
       Grup 2 — Mel filterbank     :  80-dim
@@ -222,10 +248,38 @@ def duz_ozellik_cikar(y: np.ndarray, sr: int) -> np.ndarray:
     if len(y) == 0:
         return np.zeros(467)
 
-    return np.concatenate([
-        mfcc_ozellik_cikar(y, sr),       # 320
-        mel_enerji_cikar(y, sr),         #  80
-        spektral_ozellik_cikar(y, sr),   #  28
-        tonal_ozellik_cikar(y, sr),      #  36
-        zamansal_ozellik_cikar(y, sr),   #   3
-    ])  # 467-dim
+    # Ortak ön hesaplama — STFT ve mel her grup için ayrıca hesaplanmaz
+    stft_mag = np.abs(librosa.stft(
+        y, n_fft=N_FFT, hop_length=HOP_LENGTH, win_length=WIN_LENGTH))
+    S_power  = stft_mag ** 2
+
+    # MFCC için 128-band mel (librosa varsayılanını korur)
+    mel_128 = librosa.feature.melspectrogram(
+        S=S_power, sr=sr, n_mels=128, n_fft=N_FFT, hop_length=HOP_LENGTH)
+    # Mel filterbank grubu için 40-band mel
+    mel_40  = librosa.feature.melspectrogram(
+        S=S_power, sr=sr, n_mels=MEL_BANDS, n_fft=N_FFT, hop_length=HOP_LENGTH)
+
+    # Grup 1 — MFCC genişletilmiş (320-dim)
+    mfcc   = librosa.feature.mfcc(S=librosa.power_to_db(mel_128), n_mfcc=N_MFCC)
+    delta  = librosa.feature.delta(mfcc)
+    delta2 = librosa.feature.delta(mfcc, order=2)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        g1 = np.concatenate([
+            mfcc.mean(axis=1), mfcc.std(axis=1),
+            skew(mfcc, axis=1), kurtosis(mfcc, axis=1),
+            delta.mean(axis=1), delta.std(axis=1),
+            delta2.mean(axis=1), delta2.std(axis=1),
+        ])  # 320
+
+    # Grup 2 — Mel filterbank enerjisi (80-dim)
+    log_mel = np.log(mel_40 + 1e-9)
+    g2 = np.concatenate([log_mel.mean(axis=1), log_mel.std(axis=1)])  # 80
+
+    # Grup 3-5
+    g3 = _spektral_from_stft(y, sr, stft_mag, S_power)  # 28
+    g4 = tonal_ozellik_cikar(y, sr)                      # 36
+    g5 = zamansal_ozellik_cikar(y, sr)                   # 3
+
+    return np.concatenate([g1, g2, g3, g4, g5])  # 467-dim
