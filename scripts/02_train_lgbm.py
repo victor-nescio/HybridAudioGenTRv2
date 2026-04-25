@@ -166,22 +166,22 @@ def ozellik_ayir(df: pd.DataFrame):
 # ── Optuna HPO ────────────────────────────────────────────────────────────────
 def optuna_hedef(trial, X_train, y_train, X_val, y_val, sinif_agirliklari):
     params = dict(
-        n_estimators       = trial.suggest_int("n_estimators",   200, 1500),
-        num_leaves         = trial.suggest_int("num_leaves",      31,  511),
-        max_depth          = trial.suggest_int("max_depth",        4,   15),
-        learning_rate      = trial.suggest_float("learning_rate", 1e-3, 0.3, log=True),
+        n_estimators       = trial.suggest_int("n_estimators",   200,  800),
+        num_leaves         = trial.suggest_int("num_leaves",      31,  255),
+        max_depth          = trial.suggest_int("max_depth",        4,   12),
+        learning_rate      = trial.suggest_float("learning_rate", 5e-3, 0.2, log=True),
         subsample          = trial.suggest_float("subsample",     0.5,  1.0),
-        colsample_bytree   = trial.suggest_float("colsample_bytree", 0.3, 1.0),
-        min_child_samples  = trial.suggest_int("min_child_samples", 5, 100),
-        reg_alpha          = trial.suggest_float("reg_alpha",   0.0, 5.0),
-        reg_lambda         = trial.suggest_float("reg_lambda",  0.0, 5.0),
+        colsample_bytree   = trial.suggest_float("colsample_bytree", 0.4, 1.0),
+        min_child_samples  = trial.suggest_int("min_child_samples", 10, 80),
+        reg_alpha          = trial.suggest_float("reg_alpha",   0.0, 3.0),
+        reg_lambda         = trial.suggest_float("reg_lambda",  0.0, 3.0),
         random_state=SEED, n_jobs=-1, verbose=-1,
     )
     model = lgb.LGBMClassifier(**params)
     model.fit(
         X_train, y_train,
         sample_weight=[sinif_agirliklari[y] for y in y_train],
-        callbacks=[lgb.early_stopping(50, verbose=False),
+        callbacks=[lgb.early_stopping(30, verbose=False),
                    lgb.log_evaluation(-1)],
         eval_set=[(X_val, y_val)],
         eval_metric="multi_logloss",
