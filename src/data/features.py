@@ -217,7 +217,7 @@ def _spektral_from_stft(y: np.ndarray, sr: int,
     rolloff   = librosa.feature.spectral_rolloff(S=stft_mag, sr=sr, hop_length=HOP_LENGTH)
     bandwidth = librosa.feature.spectral_bandwidth(S=stft_mag, sr=sr, hop_length=HOP_LENGTH)
     zcr       = librosa.feature.zero_crossing_rate(y, hop_length=HOP_LENGTH)
-    rms       = librosa.feature.rms(S=stft_mag, hop_length=HOP_LENGTH)
+    rms       = librosa.feature.rms(S=stft_mag, frame_length=N_FFT, hop_length=HOP_LENGTH)
     contrast  = librosa.feature.spectral_contrast(
         S=stft_mag, sr=sr, hop_length=HOP_LENGTH, n_bands=6)
     flatness  = librosa.feature.spectral_flatness(S=S_power, hop_length=HOP_LENGTH)
