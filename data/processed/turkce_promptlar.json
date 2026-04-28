@@ -1,0 +1,418 @@
+{
+  "acil_servis": {
+    "turkce": [
+      "şehirde ambulans sireni çalıyor",
+      "itfaiye aracı sireniyle geçiyor",
+      "polis arabası alarm sesiyle yaklaşıyor",
+      "acil servis ekipleri müdahale ediyor",
+      "yangın söndürme pompası çalışıyor"
+    ],
+    "ingilizce": [
+      "ambulance siren wailing in city traffic",
+      "fire engine rushing past with siren blaring",
+      "emergency services responding to incident",
+      "999 emergency call with multiple vehicles",
+      "firefighting pumps operating at scene"
+    ]
+  },
+  "at_sesleri": {
+    "turkce": [
+      "atlar çakıl taşı üzerinde koşuyor",
+      "at nalları sert zeminde tıklar",
+      "birden fazla at dörtnala gidiyor",
+      "at ve araba çakıl yolda geçiyor",
+      "ahırda atlar huzursuz hışırdıyor"
+    ],
+    "ingilizce": [
+      "horses galloping on gravel road",
+      "horse hooves clattering on hard surface",
+      "multiple horses trotting on turf",
+      "horse and carriage passing on cobblestone",
+      "horses neighing and snorting in stable"
+    ]
+  },
+  "ayak_sesleri": {
+    "turkce": [
+      "metal merdivenlerden hızlı inen adımlar",
+      "çakıl yolda yavaş yürüyüş sesi",
+      "taş zeminde koşan ayak sesleri",
+      "tahta zeminli odada takunya adımları",
+      "uzaktan yaklaşan ağır adım sesleri"
+    ],
+    "ingilizce": [
+      "fast footsteps descending metal stairs",
+      "slow walking on gravel path",
+      "running footsteps on stone pavement",
+      "feet in wooden clogs on hard floor",
+      "heavy footsteps approaching from distance"
+    ]
+  },
+  "cocuk_bebek_sesleri": {
+    "turkce": [
+      "bebek yüksek sesle ağlıyor",
+      "çocuklar okul bahçesinde koşup oynuyor",
+      "küçük bebek mırıldanıyor ve gülüyor",
+      "yürümeye başlayan çocuk neşeyle bağırıyor",
+      "otuz çocuk açık alanda oyun oynuyor"
+    ],
+    "ingilizce": [
+      "baby crying loudly in distress",
+      "children playing and shouting in schoolyard",
+      "infant babbling and laughing contentedly",
+      "toddler squealing with excitement",
+      "group of children running and playing in field"
+    ]
+  },
+  "diger_hayvanlar": {
+    "turkce": [
+      "kedi miyavlıyor ve mırıldanıyor",
+      "çiftlik hayvanları açık alanda",
+      "eşekler tarlada anırıyor",
+      "koyun sürüsü meliyor",
+      "domuzlar çiftlik ahırında homurdanıyor"
+    ],
+    "ingilizce": [
+      "cats meowing and purring indoors",
+      "farm animals in rural countryside",
+      "donkeys braying loudly in field",
+      "flock of sheep bleating in pasture",
+      "pigs squealing and grunting in pen"
+    ]
+  },
+  "dini_mekan": {
+    "turkce": [
+      "katedralin içinde org müziği yankılanıyor",
+      "manastırda rahipler ilahi söylüyor",
+      "kilise içi sessiz ve derin atmosfer",
+      "dini tören sırasında dua okunuyor",
+      "kilisenin taş duvarlarından yansıyan ses"
+    ],
+    "ingilizce": [
+      "cathedral organ music echoing in nave",
+      "monastery monks chanting in prayer",
+      "quiet church interior with deep reverb",
+      "religious ceremony with congregation",
+      "sacred space ambience with distant bells"
+    ]
+  },
+  "doga_atmosferi": {
+    "turkce": [
+      "sakin İngiliz kır ortamı kuş sesleriyle",
+      "sonbahar ormanında yaprakların hışırtısı",
+      "tropikal ormanda böcek ve kuş sesleri",
+      "şömine ateşinin çıtırtısı dış mekanda",
+      "Norfolk kıyı bataklığında rüzgar ve kuşlar"
+    ],
+    "ingilizce": [
+      "peaceful British countryside with birdsong",
+      "autumn woodland with rustling leaves",
+      "tropical jungle with insects and birds",
+      "open countryside bonfire crackling",
+      "coastal marshland with wind and wildlife"
+    ]
+  },
+  "endustri_fabrika": {
+    "turkce": [
+      "fabrikada ağır makineler çalışıyor",
+      "demirci çekiçle metal döğüyor",
+      "marangoz atölyesinde şerit testere gürültüsü",
+      "bira fabrikasında fıçılar yuvarlanıyor",
+      "tekstil fabrikasında dokuma tezgahları"
+    ],
+    "ingilizce": [
+      "heavy machinery running on factory floor",
+      "blacksmith hammering metal at forge",
+      "band saw cutting wood in carpenter workshop",
+      "barrels rolling in brewery",
+      "weaving looms in textile factory"
+    ]
+  },
+  "ev_ici_sesler": {
+    "turkce": [
+      "mutfak aletleri çalışıyor, su kaynatılıyor",
+      "çamaşır makinesi sıkma programında",
+      "ev radyosundan müzik yayını",
+      "dikiş makinesi sürekli tıkırdıyor",
+      "banyoda lavabo ve duş su sesi"
+    ],
+    "ingilizce": [
+      "kitchen appliances running with kettle boiling",
+      "washing machine on spin cycle",
+      "domestic radio playing music at home",
+      "sewing machine stitching continuously",
+      "bathroom sounds with running water"
+    ]
+  },
+  "gemi_tekne_sesleri": {
+    "turkce": [
+      "gemi düdüğü açık denizde çalıyor",
+      "küçük motorlu tekne limanda gidiyor",
+      "balıkçı trolünün dizel motoru gümbürdüyor",
+      "kabin kruvaziyer salon içi sesi",
+      "büyük kargo gemisi iskelede yanaşıyor"
+    ],
+    "ingilizce": [
+      "ship horn sounding on open ocean",
+      "small motorboat engine running in harbor",
+      "diesel trawler engine at sea",
+      "cabin cruiser interior engine noise",
+      "large cargo ship maneuvering at dock"
+    ]
+  },
+  "hava_olaylari": {
+    "turkce": [
+      "gök gürültülü yoğun yağmur fırtınası",
+      "güçlü rüzgar uğultusunun sesi",
+      "dolu cam pencerelere çarpıyor",
+      "şimşek ve gök gürültüsü açık alanda",
+      "çığ düşüş sesi dağda"
+    ],
+    "ingilizce": [
+      "thunderstorm with heavy driving rain",
+      "strong wind howling through trees",
+      "hail beating hard on window pane",
+      "lightning strike followed by thunder",
+      "avalanche rumbling down mountain"
+    ]
+  },
+  "insaat_sesleri": {
+    "turkce": [
+      "pnömatik matkap inşaat sahasında",
+      "bina yıkımı halatlar ve enkazlarla",
+      "vinç inşaat alanında çalışıyor",
+      "ekskavatör toprak kazıyor",
+      "duvarcılar tuğla ve harç ile çalışıyor"
+    ],
+    "ingilizce": [
+      "pneumatic drill breaking up road surface",
+      "building demolition with crashing debris",
+      "crane operating on construction site",
+      "excavator digging foundation trench",
+      "bricklayers working with mortar and brick"
+    ]
+  },
+  "kalabalik_sesleri": {
+    "turkce": [
+      "büyük kalabalık stadyumda tezahürat yapıyor",
+      "konser salonu alkışı coşkuyla süruyor",
+      "futbol maçında tribün reaksiyonları",
+      "gösteri kalabalığı sokakta bağırıyor",
+      "tiyatro seyircisi perdeden önce bekleniyor"
+    ],
+    "ingilizce": [
+      "large crowd cheering at outdoor stadium",
+      "concert hall audience applauding enthusiastically",
+      "football match crowd reacting to play",
+      "protest demonstration crowd chanting",
+      "theatre audience buzzing before curtain"
+    ]
+  },
+  "kapi_sesleri": {
+    "turkce": [
+      "eski ahşap kapı gıcırdayarak açılıyor",
+      "hapishane kafes kapısı gümbürderek kapanıyor",
+      "büyük ahır kapısı rüzgarda gıcırdıyor",
+      "çekmece tekrar tekrar açılıp kapanıyor",
+      "ağır metal kapı menteşe sesiyle açılıyor"
+    ],
+    "ingilizce": [
+      "old wooden door creaking open slowly",
+      "prison cell door slamming shut with echo",
+      "large barn door creaking in wind",
+      "drawer being opened and closed repeatedly",
+      "heavy metal door swinging on hinges"
+    ]
+  },
+  "kara_tasitlari": {
+    "turkce": [
+      "şehir trafiğinde araba ve otobüs sesleri",
+      "dizel kamyon boşta motor sesi",
+      "motosiklet yüksek hızda geçiyor",
+      "otoyolda yoğun trafik ambiyansı",
+      "eski model araba motoru çalıştırılıyor"
+    ],
+    "ingilizce": [
+      "cars and buses in busy city traffic",
+      "diesel truck idling at traffic lights",
+      "motorcycle accelerating past at speed",
+      "heavy motorway traffic ambience",
+      "vintage car engine starting and revving"
+    ]
+  },
+  "kopek_sesleri": {
+    "turkce": [
+      "köpek öfkeyle güçlü sesle havlıyor",
+      "büyük köpek tehditkâr şekilde homurdanıyor",
+      "yavru köpek sızlanıyor ve ciyakliyor",
+      "köpek heyecanla soluyup koşuşturuyor",
+      "birkaç köpek bir arada birbirini tetikleyerek havlıyor"
+    ],
+    "ingilizce": [
+      "dog barking loudly and aggressively",
+      "large dog growling and snarling",
+      "puppy whimpering and yelping",
+      "dog panting and running excitedly",
+      "multiple dogs barking in kennel"
+    ]
+  },
+  "kus_sesleri": {
+    "turkce": [
+      "sabahın erken saatlerinde kuş korosu",
+      "tavuklar çiftlik avlusunda gıdaklıyor",
+      "muhabbet kuşları kafeste cıvıldıyor",
+      "çiftlik kuşları ve kümes hayvanları",
+      "İngiliz ötücü kuşlar bahçede şakıyor"
+    ],
+    "ingilizce": [
+      "birds singing at early morning dawn chorus",
+      "chickens clucking and pecking in farmyard",
+      "budgerigars chirping in aviary",
+      "farm birds and mixed poultry",
+      "British woodland birds singing in garden"
+    ]
+  },
+  "ofis_iletisim": {
+    "turkce": [
+      "ofiste daktilo sürekli tıkırdıyor",
+      "telefon çalıyor ve konuşma başlıyor",
+      "kasa makinesi tuşlanıyor ve çekmece açılıyor",
+      "eski bilgisayar ve nokta vuruşlu yazıcı sesi",
+      "telgraf Mors kodu çekiyor"
+    ],
+    "ingilizce": [
+      "typewriter clacking rapidly in office",
+      "telephone ringing then answered in conversation",
+      "cash register keys pressed and drawer opens",
+      "old computer and dot matrix printer running",
+      "telegraph machine tapping in morse code"
+    ]
+  },
+  "saat_can_sesleri": {
+    "turkce": [
+      "kilise çanları öğleyin on iki vuruyor",
+      "büyükbaba saati tıkırtısı ve melodisi",
+      "katedral çanları çınlıyor",
+      "Hint tapınağında el çanları çalınıyor",
+      "antika köşe saati vurular"
+    ],
+    "ingilizce": [
+      "church bells chiming noon twelve times",
+      "grandfather clock ticking and striking hour",
+      "cathedral bells pealing in sequence",
+      "temple hand bells being rung",
+      "antique bracket clock striking and ticking"
+    ]
+  },
+  "sehir_atmosferi": {
+    "turkce": [
+      "Londra işlek şehir caddesi ortamı",
+      "pazar yeri gürültüsü ve satıcı sesleri",
+      "restoran içi kalabalık ve sofra şıkırtısı",
+      "İngiliz pub içi sohbet ve içki bardakları",
+      "havaalanı lobi sesleri ve anons"
+    ],
+    "ingilizce": [
+      "busy London city street with traffic and crowds",
+      "outdoor market with vendors and shoppers",
+      "restaurant interior with chatter and cutlery",
+      "British pub interior with conversation",
+      "airport terminal with announcements and crowds"
+    ]
+  },
+  "silah_patlama": {
+    "turkce": [
+      "savaş meydanında topçu ateşi ve patlama",
+      "hava saldırısı sirenleri ve bombalama",
+      "küçük çaplı silah atışları çatışmada",
+      "Dünya Savaşı dönemine ait savaş sesleri",
+      "deniz topunun ateşlenmesi ve geri tepme"
+    ],
+    "ingilizce": [
+      "artillery cannon fire and explosions in battle",
+      "air raid sirens followed by bombing",
+      "small arms fire during ground combat",
+      "World War battle sounds with gunfire",
+      "naval cannon firing with recoil"
+    ]
+  },
+  "spor_eglence": {
+    "turkce": [
+      "futbol maçında kalabalık gol sevinciyle bağırıyor",
+      "lunapark sesleri, müzik ve ziyaretçiler",
+      "sirk gösterisi kalabalık ve müzik",
+      "tenis maçında seyirci ve vurma sesleri",
+      "okçuluk turnuvası atmosferi"
+    ],
+    "ingilizce": [
+      "football crowd roaring at goal",
+      "fairground with rides music and laughter",
+      "circus atmosphere with audience and band",
+      "tennis match with ball strikes and crowd",
+      "archery tournament with arrows hitting target"
+    ]
+  },
+  "su_sesleri": {
+    "turkce": [
+      "nehir kayalar üzerinden akıyor",
+      "ağır dalgalar sahil kenarına çarpıyor",
+      "dağ şelalesi güçlü şekilde düşüyor",
+      "şehir meydanında fıskiye sesi",
+      "yüzme havuzunda çocukların sıçraması"
+    ],
+    "ingilizce": [
+      "river flowing swiftly over rocks",
+      "heavy ocean waves breaking on shore",
+      "waterfall cascading down mountain",
+      "public fountain splashing in square",
+      "children splashing in swimming pool"
+    ]
+  },
+  "tarim_ciftlik": {
+    "turkce": [
+      "traktör tarlada sürerken gürültü çıkarıyor",
+      "biçerdöver tahıl hasadı yapıyor",
+      "süt çiftliği sabah rutini, inek ve ekipman",
+      "mısır değirmeni tahıl öğütüyor",
+      "döner çim biçme makinesi bahçede çalışıyor"
+    ],
+    "ingilizce": [
+      "tractor ploughing field with engine noise",
+      "combine harvester reaping grain",
+      "dairy farm morning with cows and machinery",
+      "corn mill grinding with rotating stones",
+      "rotary motor mower cutting grass"
+    ]
+  },
+  "tren_sesleri": {
+    "turkce": [
+      "buhar treni istasyona girerken ıslık çalıyor",
+      "dizel tren yüksek hızda geçiyor",
+      "yeraltı metrosu kapılar açılıp kapanarak ilerliyor",
+      "tramvay kentten geçerken elektrik sesi",
+      "British Rail tren istasyon ambiyansı"
+    ],
+    "ingilizce": [
+      "steam train whistling as it arrives at station",
+      "diesel train passing at high speed",
+      "underground metro with doors opening and closing",
+      "electric tram running through city streets",
+      "British Rail station atmosphere with trains"
+    ]
+  },
+  "ucak_sesleri": {
+    "turkce": [
+      "uçak düşük irtifada üzerinden geçiyor",
+      "helikopter pervanesi dönerek yaklaşıyor",
+      "pistonda jet motoru tam güçte",
+      "pistonlu savaş uçağı kalkarken motor sesi",
+      "büyük yolcu uçağı uzaklaşırken uğultu"
+    ],
+    "ingilizce": [
+      "airplane flying low overhead with roar",
+      "helicopter rotor blades approaching",
+      "jet engine at full thrust on runway",
+      "propeller aircraft taking off",
+      "large passenger airliner fading into distance"
+    ]
+  }
+}

@@ -1,0 +1,1979 @@
+=== SINIFLANDIRMA OZETI ===
+  [acil_servis] 140 WAV / 6 kaynak
+    - Ambulances
+    - Dial 999
+    - Fire Appliances
+    - Fire Engines
+    - Fire Service
+    - German Emergency Services
+  [at_sesleri] 554 WAV / 141 kaynak
+    - 2 Horses (Actuality)
+    - 2 Horses On Gravel (Studio)
+    - 2 Horses On Hard Surface (Studio)
+    - 2 Horses On Turf (Studio)
+    - 3 Horses On Gravel (Studio9
+    - 3 Horses On Turf (Studio)
+    - 4 Horses On Hard Surface (Studio)
+    - 6 Horses On Gravel (Studio)
+    - 6 Horses On Turf (Studio)
+    - Coach & Four
+    - Coaching Inn, changing horses with voices, jingling harnesses & horses_ hooves..07039343.wav
+    - Equestrian Events
+    - Group of prairie horses on the move (cantering)..07039313.wav
+    - Hansom Cab With Bells (Interior Or Exterior) (Loose Surface)
+    - Horse & Cart
+    - Horse & light cart trotting on hard road..07039308.wav
+    - Horse & light cart walking on hard road..07039307.wav
+    - Horse (Flat) Racing
+    - Horse (Flat) Racing_ Oak Stakes
+    - Horse (Flat) Racing_ P.A. Anncts & Atmosphere
+    - Horse canters & stops on hard road..07039349.wav
+    - Horse canters & stops..07039317.wav
+    - Horse canters away & returns to stop on gravel road..07039324.wav
+    - Horse galloping away on hard road..07039306.wav
+    - Horse galloping on hard surface, approach & stop..07039263.wav
+    - Horse galloping on hard surface..07039268.wav
+    - Horse galloping on hard surface..07039269.wav
+    - Horse galloping on turf..07039333.wav
+    - Horse galloping, comes to halt..07039272.wav
+    - Horse galloping..07039275.wav
+    - Horse gallops & stops on soft surface..07039345.wav
+    - Horse gallops & stops on soft surface..07039346.wav
+    - Horse gallops & stops..07039318.wav
+    - Horse gallops & stops..07039347.wav
+    - Horse gallops away on hard road..07039325.wav
+    - Horse gallops into distance..07039273.wav
+    - Horse gallops past on soft cinder road..07039331.wav
+    - Horse gallops up & stops on hard road..07039326.wav
+    - Horse gallops up, stamps, rider dismounts, rider remounts, horse canters off on soft cinder road..07039329.wav
+    - Horse gallops up, stamps, rider dismounts, rider remounts, horse canters off on soft cinder road..07039330.wav
+    - Horse jiggling harness..07039257.wav
+    - Horse On Gravel (Studio)
+    - Horse On Hard Surface (Studio)
+    - Horse On Turf
+    - Horse On Turf (Studio)
+    - Horse Racing
+    - Horse Racing (Chases)
+    - Horse stamping on hard surface..07039270.wav
+    - Horse stamping..07039274.wav
+    - Horse trots & stops on hard road..07039351.wav
+    - Horse trots past on soft cinder road..07039328.wav
+    - Horse trots past on wet muddy road..07039332.wav
+    - Horse trots, gallops & stops on hard road..07039344.wav
+    - Horse trotting fast, with sleigh bells..07039322.wav
+    - Horse trotting on cobblestones..07039311.wav
+    - Horse trotting on gravel..07039300.wav
+    - Horse trotting on gravel..07039301.wav
+    - Horse trotting, with sleigh bells..07039321.wav
+    - Horse turning & trotting..07039353.wav
+    - Horse walking on cobblestones..07039310.wav
+    - Horse walking on gravel..07039299.wav
+    - Horse walking on road..07039298.wav
+    - Horse walks & stops on hard road..07039350.wav
+    - Horse walks & stops..07039319.wav
+    - Horse walks & stops..07039320.wav
+    - Horse walks on turf, canters, jumps, canters & stops..07039315.wav
+    - Horse walks past on soft cinder road..07039327.wav
+    - Horse whinnying..07037453.wav
+    - Horse-drawn Coach pulled by four horses, start into continuous run..07039338.wav
+    - Horse-drawn coach pulled by four horses, start into trot..07039339.wav
+    - Horse-drawn coach pulled by four trotting horses, stop..07039340.wav
+    - Horse-drawn Coach pulled by four trotting horses, with coach horn playing _Pop goes the weasel_..07039342.wav
+    - Horse-drawn Coach pulled by four trotting horses, with coach horn..07039341.wav
+    - Horse-drawn Hansom Cab approaching & stopping on cobblestones..07039286.wav
+    - Horse-drawn Hansom Cab approaching at walk & passing on cobblestones..07039285.wav
+    - Horse-drawn Hansom Cab approaching, stopping, setting off..07039259.wav
+    - Horse-drawn Hansom Cab approaching, stopping, setting off..07039261.wav
+    - Horse-drawn Hansom Cab trotting past, with traffic background..07039258.wav
+    - Horse-drawn Hansom Cab trotting past..07039260.wav
+    - Horse-drawn Hansom Cab turning..07039284.wav
+    - Horse-drawn Hansom Cab, approaching & passes..07039283.wav
+    - Horse-drawn Hansom Cab, approaching & passing (twice), approaching & stopping..07039287.wav
+    - Horse-drawn Hansom Cab, approaching, stops, passenger descends..07039281.wav
+    - Horse-drawn Hansom Cab, approaching, stops..07039282.wav
+    - Horse-drawn Hansom Cab, interior, starting into continuous walk..07039278.wav
+    - Horse-drawn Hansom Cab, interior, starting, trotting, stopping..07039276.wav
+    - Horse-drawn Hansom Cab, interior, starting, trotting, stopping..07039277.wav
+    - Horse-drawn Hansom Cab, passenger into cab, cab moves off with horse trotting..07039279.wav
+    - Horse-drawn Hansom Cab, starting, trotting off..07039280.wav
+    - Horse-drawn Milk Float approaches & stops, with bottles clinking..07039354.wav
+    - Horse-drawn Tram. (Recorded in Douglas, I.O.M.).07039262.wav
+    - Horsedrawn Brewer_S Dray_ On Gravel
+    - Horsedrawn Traffic
+    - Horsedrawn Vehicles
+    - Horsedrawn Vehicles_ Heavy Cart
+    - Horses
+    - Horses (Actuality)
+    - Horses 1
+    - Horses _ Dogs
+    - Horses cantering on turf & stopping..07039314.wav
+    - Horses On Hard Surface (Studio)
+    - Horses On Hard Surfaces
+    - Horses On Turf
+    - Horses stampeding on hard ground..07039312.wav
+    - Horses stamping on hard ground..07039265.wav
+    - Horses trotting on turf..07039289.wav
+    - Horses trotting, approach & stop on hard surface..07039264.wav
+    - Horses trotting, approaching & stopping on hard surface..07039267.wav
+    - Horses walking on road..07039291.wav
+    - Horses walking on road..07039292.wav
+    - Horses walking on soft surface..07039271.wav
+    - Horses walking on turf..07039290.wav
+    - Horses walking then departing at a trot on hard surface..07039266.wav
+    - Horses, one year old foal calling to companion..07037441.wav
+    - Horses, one year old foal calling to companion..07037442.wav
+    - Mail Coach (4 Horses) (Interior)
+    - One-Horse Trap (2 Wheeler) On Hard Surface
+    - Pony & Cart
+    - Pony Trekking
+    - Restless horse on turf..07039316.wav
+    - Traffic with trams & horse-drawn drays. (Recorded in Belfast.).07039371.wav
+    - Troop of horses galloping on turf..07039304.wav
+    - Troop of horses trotting on gravel..07039303.wav
+    - Troop of horses walking..07039302.wav
+    - Two horses canter & stop..07039355.wav
+    - Two horses canter, walk & stop on hard road..07039348.wav
+    - Two horses cantering on road..07039296.wav
+    - Two horses cantering on road..07039297.wav
+    - Two horses gallop & stop..07039356.wav
+    - Two horses galloping on turf..07039335.wav
+    - Two horses galloping on turf..07039336.wav
+    - Two horses trotting fast, with sleigh bells..07039323.wav
+    - Two horses trotting on hard road..07039305.wav
+    - Two horses trotting on road..07039294.wav
+    - Two horses trotting on road..07039295.wav
+    - Two horses trotting on turf..07039288.wav
+    - Two horses trotting on turf..07039334.wav
+    - Two horses walk & stops on hard road..07039352.wav
+    - Two horses walking on hard road..07039337.wav
+    - Two horses walking on road..07039293.wav
+    - Two-Horse Brake (On Hard Surface)
+  [ayak_sesleri] 622 WAV / 57 kaynak
+    - Bicycle, approach & fall over on gravel..07037431.wav
+    - Bicycle, approach & fall over on gravel..07037432.wav
+    - Bicycle, passing on gravel with bell..07037430.wav
+    - Dragon_s footsteps. (Specially created effect.).07037444.wav
+    - Fast Footsteps Down Metal Stairs
+    - Fast Footsteps Down Stone Stars
+    - Fast Footsteps Up Stone Stairs (Slight Echo)
+    - Fast Footsteps Up Wooden Stairs
+    - Feet in Clogs, running, approaching & passing..07039234.wav
+    - Feet in Clogs, steady running..07039235.wav
+    - Feet in Clogs, walking downstairs, out of building, on concrete then gravel..07039233.wav
+    - Feet in Clogs, walking on gravel, concrete, into building & upstairs..07039232.wav
+    - Feet in Clogs, walking, approaching & passing..07039236.wav
+    - Footsteps
+    - Footsteps 1
+    - Footsteps 2
+    - Footsteps Down Metal Stairs
+    - Footsteps Down Stone Stairs
+    - Footsteps In Snow
+    - Footsteps In Undergrowth_ Running
+    - Footsteps On Country Road_ Running
+    - Footsteps On Country Road_ Walking
+    - Footsteps On Pavement_ Running
+    - Footsteps On Pavement_ Walking
+    - Footsteps On Stone_ Running
+    - Footsteps On Stone_ Walking (Slight Echo)
+    - Footsteps On Stones & Shingle
+    - Footsteps On Wood_ Running (Dead Acoustic)
+    - Footsteps On Wood_ Walking (Dead Acoustic)
+    - Footsteps scrambling & slipping in loose dirt..07037420.wav
+    - Footsteps Up Stone Stairs (Slight Echo)
+    - Footsteps, one pair of feet running away on gravel..07041189.wav
+    - Footsteps, one pair of feet running in grass..07041194.wav
+    - Footsteps, one pair of feet walking in grass..07041193.wav
+    - Footsteps, two pairs of feet running away on gravel..07041190.wav
+    - Footsteps, two pairs of feet walking on gravel..07041187.wav
+    - Footsteps, two pairs of feet walking on gravel..07041188.wav
+    - Footsteps, walking through leaves & undergrowth..07041195.wav
+    - Man walking on country road in heavy boots..07039252.wav
+    - Man walking on gravel with heavy boots..07039251.wav
+    - Man walking on gravel..07039246.wav
+    - Man walking on gravel..07039247.wav
+    - Men entering room with wooden floor..07039239.wav
+    - Several men entering room with wooden floor..07039237.wav
+    - Several men running on wooden floor & stopping after command..07039241.wav
+    - Several men running on wooden floor & stopping suddenly..07039242.wav
+    - Several men running on wooden floor, out of room on to gravel..07039243.wav
+    - Slow Footsteps Down Wooden Stairs
+    - Slow Footsteps Up Metal Stairs
+    - Slow Footsteps Up Wooden Stairs
+    - Squelching footsteps..07039255.wav
+    - Squelching footsteps..07039256.wav
+    - Three men walking on gravel..07039249.wav
+    - Two men walking on gravel..07039248.wav
+    - Woman walking on country road..07039250.wav
+    - Woman walking on country road..07039253.wav
+    - Woman walking on gravel..07039254.wav
+  [cocuk_bebek_sesleri] 344 WAV / 39 kaynak
+    - 30 Children Playing In Field
+    - 5-10 Year Old Children Playing
+    - Army_ Infantry Arms Drill
+    - Babies
+    - Babies (Girls)
+    - Baby
+    - Baby (Boy)
+    - Baby (Girl (Playing)
+    - Baby (Girl)
+    - Baby (Girl) (20 Weeks Old)
+    - Baby (Girl)_ 12 Months
+    - Baby (Girl)_ 15 Months
+    - Baby (Girl)_ 18 Months
+    - Baby (Girl)_ 2 1_2 Years
+    - Baby (Girl)_ 2 Years
+    - Baby (Girl)Trying To Talk)
+    - Baby Boy Crying
+    - Baby Boy_ 4 Weeks Old _ Foetal Heartbeats (38 Weeks)
+    - Baby Boy_ Waking Up Sounds
+    - Baby Girl_ Nine Months Old
+    - Boys_ School
+    - Children
+    - Children - Babies & Infants
+    - Children - Middle & Secondary Schools
+    - Children - Singing Games & School
+    - Children At Play
+    - Children Playing In School
+    - Children Playing Indoors
+    - Children Playing Outdoors
+    - Crowds, Children & Footsteps
+    - Indoor Ice Rink (Children)
+    - Italy (Rome)_ Children Playing
+    - Junior Children_S Sports Day
+    - Mixed School Children
+    - Mixed School Children (10-13 Year Olds In Classroom)
+    - Schoolchildren
+    - Small Children
+    - Small Children (Indoors)
+    - Small Children At Play
+  [diger_hayvanlar] 233 WAV / 22 kaynak
+    - Animals
+    - Cats
+    - Cats and Kittens
+    - Donkeys
+    - Farm Animals
+    - Farm Animals_ Pigs
+    - Goat bells ringing..07037650.wav
+    - Goats
+    - Lambretta Motor Scooter, 1968 (Exterior)
+    - Lambretta Motor Scooter, 1969
+    - Lambs
+    - Livestock 1
+    - Livestock 2
+    - Mice
+    - Opossum, sound made by opossum..07037449.wav
+    - Polar Bear splashing in water..07038285.wav
+    - Reindeer Ride, with bells, orders shouted & dogs barking..07037447.wav
+    - Sheep, ewe & lamb..07037450.wav
+    - Sheep, ewe & two lambs..07037451.wav
+    - Sheep, flock on Hampshire Downs..07037439.wav
+    - Sheep, flock on Hampshire Downs..07037440.wav
+    - Sheep, single lamb..07037452.wav
+  [dini_mekan] 110 WAV / 10 kaynak
+    - Chapel Bells_ Magdalen College, Oxford
+    - Church Atmosphere
+    - Church Atmosphere_ Parish Church Wedding
+    - Coventry Cathedral
+    - Ecclesiastical Effects 1
+    - Ecclesiastical Effects 2
+    - Monastery handbell sounded..07037647.wav
+    - Religion in Britain
+    - St. Paul_S Cathedral
+    - St. Paul_S Cathedral Clock (Great Tom)
+  [doga_atmosferi] 317 WAV / 28 kaynak
+    - Africa 2 - The Natural World
+    - Autumn Atmosphere (Southern England)
+    - British Rural Backgrounds
+    - British Rural Backgrounds 1
+    - British Rural Backgrounds 2
+    - Coastal Garden In Winter
+    - Country Garden
+    - Country Scene
+    - Countryside In January_ Early Morning
+    - Covent Garden Market
+    - Dawn In A Suburban Garden
+    - Devon Hedgerow
+    - Gardening
+    - Gardens
+    - India, Pakistan and Nepal - Countryside
+    - New Zealand - The Natural World 1
+    - New Zealand - The Natural World 2
+    - Rural England
+    - Rural South America
+    - South America - Rural & Urban Atmospheres
+    - Summer Atmospheres
+    - Sydney & Urban New Zealand
+    - Tropical Forest_ West Africa
+    - Wild Places - Patagonia
+    - Winter In A Suburban Garden
+    - Woodland Atmosphere
+    - Woodland Atmosphere_ Daylight
+    - Woodland Edge_ June
+  [endustri_fabrika] 691 WAV / 54 kaynak
+    - Ammunition Factory
+    - Atomic Power Station
+    - Brickworks
+    - Chatter In Factory
+    - Coal Mining
+    - Diesel & Petrol Engines
+    - Drilling For Oil
+    - Drop Forge Effects
+    - Dynamo, starting up, running & stopping..07039220.wav
+    - Dynamo, starting up, running & stopping..07039221.wav
+    - Engines
+    - Engines & Machinery
+    - Factory Atmosphere
+    - Factory Hooters & Sirens
+    - Factory Machines_ Blanket Manufacture
+    - Factory On Fire (Electrical Component Works)
+    - Factory Siren sounded..07037406.wav
+    - Farm Machinery
+    - Farm Machinery_ Combine Harvester
+    - Farm Machinery_ Tractor-Drawn Straw Baler
+    - Gasworks
+    - Granite Quarry
+    - Heavy Engineering Works
+    - Heavy Industry
+    - Industry
+    - Industry 2
+    - Industry 3
+    - Industry 4
+    - Light Industry
+    - Machine Shop
+    - Machinery
+    - Machinery_ Blowers & Extractors
+    - Metal Lathes
+    - Modern Agricultural Machinery & Vehicles
+    - Motor Industry
+    - Oil Refinery
+    - Oil Rigs
+    - Old Textile Machinery
+    - Open-Air Timber Yard
+    - Papermaking
+    - Papermaking_ Pulp Breaker
+    - Pottery Factory
+    - Power Station (Conventional Type)
+    - Power Stations
+    - Sewage Pumps (All With Start & Stop)
+    - Sheet Metal Engineering
+    - Static Diesel Engines
+    - Static Engines
+    - Static Engines (Constant Runs)
+    - Studio Pottery
+    - Textile Industry
+    - Timber Yard
+    - Traction Engine (Single Cylinder)
+    - Woodworking Factory
+  [ev_ici_sesler] 464 WAV / 27 kaynak
+    - Bathroom Effects
+    - Domestic Radio Effects
+    - Domestic Sewing Machines
+    - Hand-Operated Sewing Machine
+    - Home Movies
+    - Home Textile Industries
+    - House Door_ Interior
+    - Household
+    - Household (Kitchen) Effects
+    - Household 1
+    - Household 2
+    - Household Effects
+    - Household Effects_ Electric Automatic Washing Machine
+    - Household Effects_ Electric Food Mixer
+    - Household Effects_ Gas Appliances
+    - Household Effects_ Open Fireplace
+    - Household Effects_ Refrigerator & Lighting Hums
+    - Household Effects_ Vacuum Cleaners
+    - Household Washing Machines_ Automatic
+    - Kettle being filled..07038291.wav
+    - Kitchens
+    - Kitchens_ Busy Chinese Restaurant, London
+    - Launderette
+    - Restaurants & Kitchens
+    - Tap dribbling..07038293.wav
+    - Tap dripping irregularly..07038294.wav
+    - Washing Machine
+  [gemi_tekne_sesleri] 522 WAV / 65 kaynak
+    - 16Ft Speedboat (40 H.P. Outboard)
+    - 19Ft Motor Boat (12 H.P. Petrol Engine)
+    - Beam Fishing Trawler
+    - Boat (4 Hp Outboard Engine)
+    - Boat (7 H.P. Twin-Cylinder Diesel Engine)
+    - Boats
+    - Canal Longboat
+    - Canal Narrow Boat (Exterior)
+    - Canal Narrow Boat_ On Board
+    - Canoes
+    - Container Ship
+    - Continuous rowing, boat stops & drifts..07038326.wav
+    - Cross-Channel Car Ferry
+    - Cross-Channel Ferry Boat _Dover_
+    - Diesel Electric Submarine (1961)
+    - Dinghy (Powered By A Small Outboard Motor)
+    - Fitting oars in boat & rowing starts..07038327.wav
+    - Fitting oars in boat, rowing starts, stopping to drift & shipping oars..07038328.wav
+    - Fitting oars in boat, rowing with feathering..07038329.wav
+    - Harbour Atmosphere
+    - Harbour Wall Atmosphere
+    - Hovercraft_ Srn 6 (Exterior)
+    - Hovercraft_ Srn 6 (Interior)
+    - Lifeboat
+    - Lifeboat_ Selsey 48_6_ Oakley Class Lifeboat
+    - Lifeboat_ Selsey 48_6_ Oakley Class Lifeboat (Self Righting With Crew Of 7)
+    - Lifeboat_ Selsey 48_6_ Oakley Class Lifeboat_ At Sea
+    - Man rowing..07038284.wav
+    - Man rowing..07038295.wav
+    - Mersey Ferry, Liverpool
+    - Motor Launch (On Deck)
+    - Paddle Steamer (2400 H.P.)
+    - Paddle Steamer_ Built 1940, Horizontal Steam Engine
+    - Paddle Steamer_ Built 1940, Horizontal Steam Engine (Rec. From Quay)
+    - Paddling a canoe..07038316.wav
+    - Paddling a canoe..07038317.wav
+    - Quiet Harbour Background
+    - Rowing
+    - Rowing (Sea Scouts Whaler)
+    - Rowing crew rowing with instructions from Cox..07038289.wav
+    - Rowing_ 1St Century Slave Galley
+    - Sailing
+    - Sailing Dinghy
+    - Sailing Ship_ Gaff-Rigged Ketch
+    - Sailing Ship_ Gaff-Rigged Ketch_ Exterior
+    - Sailing Ship_ Gaff-Rigged Ketch_ Interior
+    - Sailing Vessel (19Ft. Cabin Sloop)
+    - Sailing Vessel (Clipper)
+    - Sailing Vessel_ Sts Malcolm Miller
+    - Ship Launch_ 3,200 Tons Sideways Launch
+    - Ships & Tugs_ Whistles & Sirens
+    - Ships and Boats 1
+    - Ships and Boats 2
+    - Ships_ Sirens
+    - Small Boat On Lake
+    - Steel door on ship opened & closed..07037626.wav
+    - Submarines (1960 _P_ Class)
+    - Thames Sailing Barge_ Wooden
+    - Thames Sailing Barge_ Wooden_ Interior
+    - Trawler
+    - Tug (180 H.P.)
+    - Tug (450 H.P.)
+    - Wharf
+    - World War II Submarine
+    - Yacht (25Ft)
+  [hava_olaylari] 242 WAV / 41 kaynak
+    - Avalanche actuality..07039191.wav
+    - Avalanche actuality..07039192.wav
+    - Creaking door in wind..07037505.wav
+    - Curtains & Windows
+    - Deep wind..07038331.wav
+    - Foghorn
+    - Hail Beating On Window
+    - Heavy Rain
+    - Heavy rain..07038337.wav
+    - Heavy tropical rain..07038334.wav
+    - Howling wind..07038330.wav
+    - Low-Pitched Wind
+    - Moaning wind down cottage chimney..07038340.wav
+    - Rain With Thunder
+    - Rattling shutters & rain rushing down gutters..07038336.wav
+    - Sandstorm with deep wind & rumbling thunder..07038332.wav
+    - Sash window opened & shut..07037520.wav
+    - Sash window opened & shut..07037521.wav
+    - Sinister Wind
+    - South America - Amazon Rainforest
+    - Strong wind..07038335.wav
+    - Strong, Gusty Wind
+    - Thailand 1
+    - Thunder
+    - Thunder & rain..07038339.wav
+    - Thunder actuality..07038338.wav
+    - Thunder And Rain
+    - Thunderstorm with heavy rain, rumbling thunder & three claps..07038333.wav
+    - Thunderstorm With Light Rain
+    - Weather 1 - Wind
+    - Weather 2 - Storms
+    - White Noise Synthesised Wind (Constant Pitch)
+    - Wind
+    - Wind & Water
+    - Wind And Rain
+    - Wind howling round building. (Recorded inside building.).07038341.wav
+    - Wind howling round building. (Recorded inside building.).07038342.wav
+    - Wind In Hedge
+    - Wind In Trees
+    - Windmill (Exterior)
+    - Windmill (Interior)
+  [insaat_sesleri] 170 WAV / 12 kaynak
+    - Bricklaying
+    - Building & Demolition Work
+    - Building Construction
+    - Building Sites
+    - Building Under Construction
+    - Building Work
+    - D.I.Y. and Building
+    - Demolition
+    - Demolition Work
+    - Pneumatic Drills
+    - Ready-Mixed Cement
+    - Road Re-Surfacing
+  [kalabalik_sesleri] 531 WAV / 58 kaynak
+    - Applause
+    - Applause At Concert
+    - Arabic Crowds_ Tangier
+    - Association Football Match_ Crowd Reactions
+    - Audience In Hall
+    - Badminton (No Crowd)
+    - Battle Crowd
+    - Crowd In Marquee
+    - Crowd Of 6000 At Protest Meeting
+    - Crowd Reaction & Chatter
+    - Crowd Reaction (Farcical)
+    - Crowded Beach
+    - Crowds
+    - Crowds At Rugby Football Match
+    - Crowds Cheering (Outdoors)
+    - Crowds Outside Buckingham Palace, London (Mid-Distant Perspective)
+    - Crowds-Interior
+    - Crowds_ Chatter Yugoslav
+    - Crowds_ Foreign
+    - Crowds_ Interior
+    - Crowds_ Interior- London Airport
+    - Crowds_ Outdoor
+    - Dutch Crowds
+    - Exhibition Crowds
+    - Expectant Crowd Background
+    - Exterior Crowds 1
+    - Exterior Crowds 2
+    - Finnish Crowds
+    - Football & Rugby Crowds
+    - Foreign Crowds
+    - French Crowds
+    - German Crowds
+    - Indoor Crowds
+    - Indoor Crowds (Male)
+    - Indoor Crowds_ Small Group (English)
+    - Italy (Caracalla)_ Indoor Crowds
+    - Italy_ Outdoor Crowds
+    - Large Outdoor Crowd_ Men
+    - Local Football Match (Crowd Of 300)
+    - Maltese Crowds
+    - Middle East Crowds
+    - Mixed Outdoor Crowd
+    - Mixed Outdoor Crowds
+    - Nigerian Crowds
+    - Outdoor Crowd
+    - Outdoor Crowds
+    - Outdoor Crowds (30 People)
+    - Outdoor Crowds_ Boys
+    - Outdoor Crowds_ Henley Regatta
+    - Public Demonstration In A London Square
+    - Public Demonstration_ Paris Riots
+    - Schools _ Crowds
+    - Sports Crowd
+    - Sports Crowd_ Outdoor
+    - Teenage Crowds
+    - Theatre Crowds
+    - West Indian Crowds (Indoors)
+    - World War II_ Nau Crowd
+  [kapi_sesleri] 372 WAV / 121 kaynak
+    - Barn Doors (Wooden)
+    - Bells, Door Chimes And Buzzers
+    - Cell Doors (Modern)
+    - Chatter (Indoors)
+    - Chatter_ Outdoor Restaurant
+    - Church Doors
+    - Creaking door closed..07037513.wav
+    - Creaking door closed..07037514.wav
+    - Creaking door..07037506.wav
+    - Cupboard door opened & closed..07037633.wav
+    - Cupboard door opened & closed..07037634.wav
+    - Door being shut..07037542.wav
+    - Door being shut..07037544.wav
+    - Door being shut..07037545.wav
+    - Door creak..07037551.wav
+    - Door creak..07037552.wav
+    - Door creak..07037553.wav
+    - Door creak..07037554.wav
+    - Door creak..07037555.wav
+    - Door creak..07037556.wav
+    - Door creak..07037557.wav
+    - Door creaking..07037522.wav
+    - Door creaking..07037523.wav
+    - Door creaking..07037524.wav
+    - Door creaks open & shut twice..07037518.wav
+    - Door key in door, opened, feet wiped, door shut..07037546.wav
+    - Door knocked on twice..07037537.wav
+    - Door knocked on twice..07037539.wav
+    - Door knocked on twice..07037541.wav
+    - Door knocker banged three times..07037538.wav
+    - Door knocker banged twice..07037543.wav
+    - Door opened & closed..07037630.wav
+    - Door opened & closed..07037631.wav
+    - Door opened & closed..07037632.wav
+    - Door opened & shut..07037540.wav
+    - Door opens & shuts..07037616.wav
+    - Door opens & shuts..07037617.wav
+    - Door opens with squeak..07037612.wav
+    - Door shuts with rattle..07037620.wav
+    - Door shuts with squeak..07037610.wav
+    - Door shuts with squeak..07037613.wav
+    - Door shuts..07037609.wav
+    - Door shuts..07037611.wav
+    - Door shuts..07037615.wav
+    - Door shuts..07037618.wav
+    - Door shuts..07037619.wav
+    - Door slams..07037621.wav
+    - Door slams..07037622.wav
+    - Door squeaks..07037519.wav
+    - Door unlocked & locked..07037508.wav
+    - Door, key & handle turned, door opened & reverse..07037507.wav
+    - Door, latch lifted & door opens with squeak..07037614.wav
+    - Doors & Drawers
+    - Doors & Lift Gates
+    - Doors (Large & Heavy)
+    - Exterior gate slamming..07037578.wav
+    - French telephone kiosk door opened & shut..07037576.wav
+    - Garage doors closing..07037548.wav
+    - Garage doors opening..07037547.wav
+    - Heavy door opened & shut..07037517.wav
+    - Heavy door opens & shuts, with reverberation..07037598.wav
+    - Heavy door opens & shuts, with reverberation..07037599.wav
+    - Heavy door opens & shuts, with reverberation..07037600.wav
+    - Heavy door opens & shuts, with reverberation..07037601.wav
+    - Heavy door opens & shuts, with reverberation..07037602.wav
+    - Heavy door opens & shuts, with reverberation..07037605.wav
+    - Heavy door shuts, with reverberation..07037597.wav
+    - Heavy door shuts, with reverberation..07037607.wav
+    - Heavy door shuts, with reverberation..07037608.wav
+    - Heavy door unbolted & opened  with reverberation..07037603.wav
+    - Heavy door unbolted & opened  with reverberation..07037606.wav
+    - Heavy door unbolted with reverberation..07037604.wav
+    - Heavy door with lock & bolts opened & shut..07037516.wav
+    - Heavy door, interior, shut. (Distant perspective recording.).07037550.wav
+    - Hollow Doors_ Interior
+    - Indoor Chatter
+    - Indoor Shopping Centre, Birmingham
+    - Indoor Wrestling
+    - Interior House Doors (Wooden)
+    - Iron gate opened & closed..07037623.wav
+    - Iron gate opened & closed..07037624.wav
+    - Iron gate opened & closed..07037625.wav
+    - Kitchen Appliance Doors
+    - Lift in Block of Flats, doors close, ascends, doors open. (Automatic lift.).07039222.wav
+    - Lift in Block of Flats, doors close, descends, doors open. (Automatic lift.).07039223.wav
+    - Lift in Block of Flats, doors close, stops at every floor, doors open. (Automatic lift.).07039224.wav
+    - Lift in Block of Flats, doors close. (Automatic lift.).07039226.wav
+    - Lift in Block of Flats, doors open. (Automatic lift.).07039225.wav
+    - Lift, doors close, lift in motion, doors open..07039227.wav
+    - Lift, doors close, lift in motion, doors open..07039229.wav
+    - Lift, doors close, lift in motion, doors open..07039230.wav
+    - Lift, gates close, lift in motion, gates open..07039228.wav
+    - Lift, gates close, lift in motion, gates open..07039231.wav
+    - Locks, Knockers, Banging, Etc
+    - Metal door closed twice..07037512.wav
+    - Metal door closed with a clang twice..07037511.wav
+    - Metal Doors
+    - Modern Interior Doors
+    - Noisy door opened & closed..07037509.wav
+    - Noisy door opened & closed..07037510.wav
+    - Old Fashioned Lift With Gates (Exterior)
+    - Outdoor Clock
+    - Pair of swing doors..07037629.wav
+    - Prison Doors
+    - Prison doors opened & closed, with keys jangling..07037515.wav
+    - Sliding door opened & shut..07037577.wav
+    - Sliding door opened & shut..07037579.wav
+    - Sliding door opened & shut..07037581.wav
+    - Sliding door shut..07037580.wav
+    - Small iron gate shut..07037549.wav
+    - Steel door closed..07037628.wav
+    - Steel door closed..07037637.wav
+    - Steel door closed..07037638.wav
+    - Steel door closed..07037640.wav
+    - Steel door opened & closed..07037635.wav
+    - Steel door opened & closed..07037641.wav
+    - Steel door opened & closed..07037642.wav
+    - Steel door opened..07037627.wav
+    - Steel door opened..07037636.wav
+    - Steel door opened..07037639.wav
+    - Wooden Door Creaks
+  [kara_tasitlari] 1463 WAV / 155 kaynak
+    - 15 Cwt Commer Diesel Truck (Interior)
+    - 1964 Renault 1100 Saloon Car
+    - 1964 Renault 1100 Saloon Car (Exterior)
+    - 1964 Renault 1100 Saloon Car (Microphone Outside)
+    - 2 Ton Diesel Truck
+    - 2 Ton Diesel Truck (Interior)
+    - 5 Ton Austin Diesel Truck
+    - 5 Ton Austin Diesel Truck (Interior)
+    - 5-7 Cwt Bedford Light Van (Exterior)
+    - 5-7 Cwt Bedford Light Van (Interior)
+    - Aec Regent Bus (1950_S Model)_ Exterior
+    - Aec Routemaster Bus_ Diesel
+    - Ambulance (Austin Automatic_ Exterior)
+    - Ambulance (Bedford_ Interior)
+    - Articulated Lorry (Diesel)_ Exterior
+    - Articulated Lorry (Diesel, 1976)_ Interior
+    - Austin A35 Van 1968 (Exterior)
+    - Austin A35 Van 1968 (Interior)
+    - Austin Gipsy Cross-Country Vehicle (Exterior)
+    - Austin Gipsy Cross-Country Vehicle (Interor)
+    - Austin Maestro Vanden Plas_ Interior
+    - Austin Maestro Vanden Plas_ Interior (Dashboard Audible Warnings)
+    - Austin Taxi, approach, stop on gravel with squeak of brakes, door opens, meter, tickover, departs. (1950 model, 16hp engine.).07039366.wav
+    - Austin Taxi, reverses. (1950 model, 16hp engine.).07039370.wav
+    - Austin Taxi, slow stop, handbrake, tickover, switch off. (1950 model, 16hp engine.).07039364.wav
+    - Austin Taxi, start, approach, stop with squeak of brakes, door opens, meter, tickover, depart. (1950 model, 16hp engine.).07039368.wav
+    - Austin Taxi, start, approach, stop, door opens, meter, depart. (1950 model, 16hp engine.).07039369.wav
+    - Austin Taxi, start, tickover, depart, stopping in traffic, door opens, depart. (1950 model, 16hp engine.).07039367.wav
+    - Austin Taxi, start, tickover, depart. (1950 model, 16hp engine.).07039363.wav
+    - Austin Taxi, start, tickover, quick departure into run, stop, tickover, stop. (1950 model, 16hp engine.).07039365.wav
+    - Bmc Mini 1000 Car 1972 Model_ Exterior
+    - Bmc Mini 1000 Car_ Interior
+    - Bmc Mini Car 1966 (848Cc) (Exterior)
+    - Bmc Mini Car 1966 (848Cc) (Interior)
+    - Buses
+    - Cars & Buses
+    - City Traffic Background
+    - Diesel Bus (On Country Route)
+    - Diesel Taxi (Exterior)
+    - Diesel Taxi (Interior)
+    - Fire_ Ambulence in traffic approaching.07025146.wav
+    - Fire_ Ambulence in traffic departing.07025147.wav
+    - Five Veteran cars running in traffic & stopping..07039362.wav
+    - Ford Anglia 105E Van (1963, 997Cc)_ Exterior
+    - Ford Anglia 105E Van (1963, 997Cc)_ Interior
+    - Ford Anglia 105E Van (1963, 997Cc)_ Interior-On Rough Road
+    - Ford Fiesta Motor Car (1980 Model, 1300Cc) Exterior
+    - Ford Fiesta Motor Car (1980 Model, 1300Cc) Interior
+    - Foreign Traffic_ Middle East
+    - Formula One
+    - French Traffic
+    - Heathrow Airport_ Air Traffic Control
+    - Honda 250 Motor Cycle
+    - Honda 90 Motor Cycle
+    - Hospital Equipment_ Pulse Monitor (Actuality) (All Bands With Activity & Traffic)
+    - Land Rover (Exterior)
+    - Land Rover (Interior)
+    - London Traffic
+    - Luton Airport_ Air Traffic Control
+    - Motor Car (Badly Worn, Exterior)
+    - Motor Car (Badly Worn, Interior)
+    - Motor Car Accessories
+    - Motor Car Works
+    - Motor Car_ 1 1_2 Litre Riley, 1959 (Worn Engine_ Exterior)
+    - Motor Car_ 1 1_2 Litre Riley, 1959 (Worn Engine_ Interior)
+    - Motor Car_ 1914 Model _T_ Ford
+    - Motor Car_ 1929 4 1_2 Litre Bentley
+    - Motor Car_ 1929 Austin 7
+    - Motor Car_ 1929 Riley 9 H.P. Saloon (Exterior)
+    - Motor Car_ 1929 Riley 9 H.P. Saloon (Interior)
+    - Motor Car_ 1940 Period _Old Banger_ (Exterior)
+    - Motor Car_ 1940 Period _Old Banger_ (Interior)
+    - Motor Car_ 1953 14 H.P. Citroen
+    - Motor Car_ 1960 Ford Anglia
+    - Motor Car_ 1960 Ford Anglia (Interior)
+    - Motor Car_ 1968 Citroen Am 1.6 (Exterior)
+    - Motor Car_ 1968 Citroen Am 1.6 (Interior)
+    - Motor Car_ Ford Cortina 1.6 Gl (Manual) 1982 Model
+    - Motor Car_ Ford Cortina 1.6 Gl (Manual) 1982 Model_ Exterior
+    - Motor Car_ Ford Cortina 1.6 Gl (Manual) 1982 Model_ Interior
+    - Motor Car_ Ford Cortina 1500C 1969 Model_ Exterior
+    - Motor Car_ Ford Cortina 1500C 1969 Model_ Interior
+    - Motor Car_ Ford Cortina 1600 (Exterior)
+    - Motor Car_ Ford Cortina 1600 (Interior)
+    - Motor Car_ Ford Ecsort 1300 (Automatic)
+    - Motor Car_ Ford Ecsort 1300 (Manual) (Exterior)
+    - Motor Car_ Ford Ecsort 1300 (Manual) (Interior)
+    - Motor Car_ Morris Bullnose, 1922
+    - Motor Car_ Morris Bullnose, 1922 (Exterior)
+    - Motor Car_ Porsche 924 1984Cc (1979)  Exterior
+    - Motor Car_ Porsche 924 1984Cc (1979)  Interior
+    - Motor Cars Passing
+    - Motor Cycle Racing_ Isle Of Man Tourist Trophy Races, 1967
+    - Motor Horns
+    - Motor Horns (Electric)
+    - Motor Horns (Single & Multitone)
+    - Motor Racing
+    - Motor Racing_ Brands Hatch
+    - Motor Racing_ Formula 1_ 1.3 Litre
+    - Motor Racing_ Le Mans
+    - Motor Racing_ Silverstone
+    - Motor Traffic
+    - Motor Traffic_ London
+    - Motorcycle Scrambling_ Atmosphere at beginning of pre-1965 race, starts 52_ in.07020211.wav
+    - Motorcycle Scrambling_ Atmosphere at beginning of sidecar race starts 40_ in.07020210.wav
+    - Motorcycle Scrambling_ Atmosphere at beginning of solo race, starts 16_ in.07020209.wav
+    - Motorcycle Scrambling_ Atmosphere near bend, pre 1965 machines.07020212.wav
+    - Motorcycle Scrambling_ Atmosphere near uphill bend, sidecars passing from right to left, some intelligible P.A..07020213.wav
+    - Motorcycle Scrambling_ General atmosphere, modern solo machines, 250-500cc.07020208.wav
+    - Motorcycle Scrambling_ General atmosphere, pre-1965 machines, 250-500cc.07020207.wav
+    - Motorcycle starts & departs..07037502.wav
+    - Motorway Construction
+    - Night Traffic
+    - Norton 500 Cc Motor Cycle
+    - Open-Top Vintage Bus_ Dennis (1925)_ 4 Cylinder Petrol Engine
+    - Open-Top Vintage Bus_ Dennis (1925)_ 4 Cylinder Petrol Engine_ Exterior
+    - Oxford College Clocks Ticking
+    - Petrol Bus (On Country Route)
+    - Police Car (Jaguar_ Interior)
+    - Police Cars (Exterior)
+    - Pool Game_ With distant traffic..07028090.wav
+    - Renault 4 Saloon Car 1967 (Exterior)
+    - Renault 4 Saloon Car 1967 (Interior)
+    - Road Tunnel Traffic
+    - Rome Traffic
+    - Sliding gates into guard_s van opened & shut twice..07037530.wav
+    - Stock Car Racing
+    - Suburban Traffic
+    - Traffic
+    - Traffic 2
+    - Traffic 3
+    - Traffic actuality. (Recorded in Bristol.).07039376.wav
+    - Traffic At Night
+    - Traffic On M1 Motorway
+    - Traffic On Wet Main Road
+    - Traffic_ A41 Trunk Road
+    - Traffic_ Hammersmith
+    - Traffic_ Provincial Town
+    - Triumph 650 Cc Motor Cycle
+    - Triumph 650 Cc Twin Motor Cycle
+    - Triumph Tr3 Sports Car, 1957 (Exterior)
+    - Triumph Tr3 Sports Car, 1957 (Interior)
+    - Triumph Tr6 Sports Car, 1971 (Exterior)
+    - Triumph Tr6 Sports Car, 1971 (Interior)
+    - Vespa Motor Scooter, 1956 (Exterior)
+    - Veteran Cars
+    - Veteran Cars_ Exterior (Benz _Comfortable_ 1900 Open Top)
+    - Veteran Cars_ Rolls Royce _Silver Ghost_ (1911 Model, 6 Cylinders, 35 Hp)
+    - Vintage Motor Car_ Citroen 5Cv Van
+    - Vintage Motor Car_ Citroen 5Cv Van_ Exterior
+    - Vintage Motor Car_ Citroen 5Cv Van_ Interior
+    - Vintage Motor Car_ Fiat 509A Saloon
+    - Vintage Motor Car_ Fiat 509A Saloon_ Exterior
+    - Vintage Motor Car_ Fiat 509A Saloon_ Interior
+    - Winter Traffic. (Recorded in Zakopane, Poland.).07039372.wav
+  [kopek_sesleri] 90 WAV / 50 kaynak
+    - Aircraft_ Beagle (Airdale)
+    - Aircraft_ Beagle Pup
+    - Airedale barking angrily..07037461.wav
+    - Airedale barking..07037458.wav
+    - Airedale barking..07037459.wav
+    - Airedale barks once..07037462.wav
+    - Airedale panting excitedly..07037460.wav
+    - Bulldog barking..07037434.wav
+    - Cairn Terrier barking & yelping..07037486.wav
+    - Cairn Terrier yelping, whining & barking..07037487.wav
+    - Cairn Terrier, yelp & howls..07037488.wav
+    - Collie barking..07037438.wav
+    - Cruft_S Dog Show
+    - Dog barking..07037489.wav
+    - Dog barking..07037490.wav
+    - Dog barks as door opened & closed..07037476.wav
+    - Dog fight. (Breed unknown.).07037436.wav
+    - Dog lapping water. (Breed unknown.).07037437.wav
+    - Dog, angry barking & growls..07037473.wav
+    - Dog, angry snapping & growls, with a few barks..07037472.wav
+    - Dog, anxious barking with whines..07037484.wav
+    - Dog, distant barking..07037474.wav
+    - Dog, distant barking..07037475.wav
+    - Dogs, angry snarls & barks..07037485.wav
+    - Dogs_ Beagles (Interior)
+    - Dogs_ Malamute Alaskan Huskies
+    - Dogs_ Spaniels
+    - Golden Retriever barking & whining..07037469.wav
+    - Golden Retriever growling..07037467.wav
+    - Golden Retriever growling..07037468.wav
+    - Huskies barking & panting..07037456.wav
+    - Huskies fighting..07037457.wav
+    - Irish Wolfhound barking..07037479.wav
+    - Irish Wolfhound, howling, barking & whining..07037478.wav
+    - Knock on door, dog barks, door closed..07037477.wav
+    - Maltese Terrier barking..07037464.wav
+    - Maltese Terrier barking..07037465.wav
+    - Maltese Terriers, two barking in distance..07037466.wav
+    - Maltese Terriers, two yapping & fighting..07037463.wav
+    - Mongrel Terrier barking..07037480.wav
+    - Puppy whining & barking. (Breed unknown.).07037435.wav
+    - Samoyed Dogs
+    - Spaniel, angry snarling..07037471.wav
+    - Springer Spaniel barking & panting..07037481.wav
+    - Springer Spaniel barking, growling & panting..07037482.wav
+    - Springer Spaniel, angry snarling..07037470.wav
+    - Springer Spaniel, distant barking, approaches..07037483.wav
+    - West Highland Terrier barking. (Recorded indoors.).07037454.wav
+    - West Highland Terrier barking. (Recorded outdoors.).07037455.wav
+    - Wire-Haired Fox Terrier Dog
+  [kus_sesleri] 163 WAV / 22 kaynak
+    - Animals and Birds
+    - British Birds
+    - British Birds 2
+    - Budgerigars
+    - Chickens
+    - Dawn Chorus
+    - Farm Birds
+    - Owl imitation..07037491.wav
+    - Parrots
+    - Pheasant Shoot
+    - Pigeon loft, door opens & closes, footsteps on wooden floor of loft..07037495.wav
+    - Pigeon loft, general atmosphere with wings flapping...07037494.wav
+    - Pigeon, landing with flap of wings..07037501.wav
+    - Pigeons
+    - Pigeons actuality..07037492.wav
+    - Pigeons cooing. (Close perspective recording.).07037496.wav
+    - Pigeons cooing..07037493.wav
+    - Pigeons, flapping of wings with human whistles..07037500.wav
+    - Pigeons, flapping of wings with rifle shots..07037499.wav
+    - Pigeons, flapping of wings..07037498.wav
+    - Poultry
+    - Village Green Cricket Match (Rec. May With Birdsong On Each Band)
+  [ofis_iletisim] 769 WAV / 44 kaynak
+    - 19Th Century Static Steam Engine
+    - American Telephones
+    - Apricot Portable Micro Computer_ 1985 Model
+    - Cash Registers
+    - Communication & Electronics
+    - Communications
+    - Computer Room Equipment
+    - Computers
+    - Continental Telephones_ Engaged Tones
+    - Electric Typewriter (Close Perspective)
+    - Electric Typewriter (Live Acoustic)
+    - Electrical Sounds
+    - Electrical-Miscellaneous
+    - Electronic Alarm Signals
+    - Electronic Cash Registers_ Ncr Machine With Printer & Bleeps
+    - Electronic Monotony
+    - Electronic Sounds
+    - Electronically Generated Sounds
+    - Fast Typing (Mid-Distant Office Acoustic)
+    - Interference
+    - Interiors - Shops and Cash Registers
+    - Manual Telephone Switchboard
+    - Manual Typewriter (Close Perspective)
+    - Manual Typewriter (Live Acoustic)
+    - Morse & Static
+    - Office & Printing
+    - Office Atmosphere
+    - Office Equipment
+    - Office Equipment, Business & Control Areas
+    - Office Printing Equipment
+    - Portable Typewriter (Close Perspective)
+    - Portable Typewriter (Live Acoustic, Distant)
+    - Post Office Telegraph Equipment
+    - Post Office Telephones
+    - Post Office Telephones (Std)
+    - Radio And Electrical Sounds
+    - Slot Machines
+    - Slot Machines_ Food & Beverages_ Background Hum
+    - Static
+    - Telephone Confidence Tones
+    - Telephones
+    - Telephones - 1985_ Sceptre 100 Telephone
+    - Telephones_ Telephone Box 1985
+    - Warble Frequency Notes
+  [saat_can_sesleri] 862 WAV / 116 kaynak
+    - Anne Boleyn_s Clock, Hampton Court
+    - Balliol College Clock, Oxford
+    - Basutoland, mission bell sounded. (Basutoland renamed Lesotho.).07037651.wav
+    - Bicycle Bell ringing..07037422.wav
+    - Bicycle Bell ringing..07037423.wav
+    - Bicycle Bell ringing..07037424.wav
+    - Bicycle Bell ringing..07037425.wav
+    - Bicycle Bell ringing..07037426.wav
+    - Bicycle Bells, several ringing..07037427.wav
+    - Bicycle Bells, two bells ringing followed by several..07037428.wav
+    - Bicycles, several passing on gravel with bells..07037429.wav
+    - Big Ben
+    - Bracket clock striking eight o_clock..07039176.wav
+    - Bracket clock striking eleven o_clock..07039179.wav
+    - Bracket clock striking five o_clock..07039173.wav
+    - Bracket clock striking four o_clock..07039172.wav
+    - Bracket clock striking nine o_clock..07039177.wav
+    - Bracket clock striking one o_clock..07039169.wav
+    - Bracket clock striking seven o_clock..07039175.wav
+    - Bracket clock striking six o_clock..07039174.wav
+    - Bracket clock striking ten o_clock..07039178.wav
+    - Bracket clock striking three o_clock..07039171.wav
+    - Bracket clock striking twelve o_clock..07039180.wav
+    - Bracket clock striking two o_clock..07039170.wav
+    - Bracket clock ticking..07039181.wav
+    - Caius College Clock, Cambridge
+    - Cambridge Clocks
+    - Canterbury Cathedral Bells_ Interior
+    - Cathedral Bells, London
+    - Christ_S College Clock, Cambridge
+    - Christchurch College Clock, Oxford
+    - Church Belles_ Evercreech
+    - Church Bells
+    - Church Bells St. John The Baptist, Croydon
+    - Church Bells_ Czechoslovakia
+    - Church Bells_ London
+    - Church Bells_ St. Albans Abbey
+    - Clocks
+    - Cuckoo Clock (Cuckoo & Chimes)
+    - Cuckoo Clock (Cuckoo Only)
+    - Domestic Clock
+    - Domestic Clock (19Th Century)
+    - Domestic Clock (Bell)
+    - Domestic Clock (Bell_ Double-Strike)
+    - Domestic Clock (Bell_ Heavy Mechanism)
+    - Domestic Clock (Bell_ Mid-Perspective)
+    - Domestic Clock (Double-Strike On Wood)
+    - Domestic Clock (English, 1810)
+    - Domestic Clock (Heavy Gong)
+    - Domestic Clock Ticking
+    - Domestic Clock_ Double-Strike
+    - Domestic Clock_ Double-Strike (Heavy Mechanism)
+    - Domestic Clock_ Strike Removed_ Hammer Merely Vibrates
+    - Domestic Clock_ Westminster Chimes
+    - Electric Alarm Bells
+    - Emmanuel College Clock, Cambridge
+    - English Church Bells
+    - English Domestic Clock_ Double Strike
+    - Fourteen cwt. bell ringing..07037657.wav
+    - Grandfather Clock_ Bell Type (London, 1845)
+    - Handbells sounded..07037648.wav
+    - Jesus College Clock, Oxford
+    - Keble College Clock, Oxford
+    - Lantern Clock, 1615
+    - Lincoln College Clock, Oxford
+    - Lincoln_s Inn clock striking eight o_clock..07039152.wav
+    - Lincoln_s Inn clock striking eleven o_clock..07039155.wav
+    - Lincoln_s Inn clock striking five o_clock..07039149.wav
+    - Lincoln_s Inn clock striking four o_clock..07039148.wav
+    - Lincoln_s Inn clock striking nine o_clock..07039153.wav
+    - Lincoln_s Inn clock striking one o_clock..07039145.wav
+    - Lincoln_s Inn clock striking seven o_clock..07039151.wav
+    - Lincoln_s Inn clock striking six o_clock..07039150.wav
+    - Lincoln_s Inn clock striking ten o_clock..07039154.wav
+    - Lincoln_s Inn clock striking three o_clock..07039147.wav
+    - Lincoln_s Inn clock striking twelve o_clock..07039156.wav
+    - Lincoln_s Inn clock striking two o_clock..07039146.wav
+    - Magdalen College Clock, Oxford
+    - Merton College Clock, Oxford
+    - Miscellaneous Bells
+    - Muffled Church Bells
+    - New College Clock, Oxford
+    - Oriel College Clock, Oxford
+    - Osterley House Clock
+    - Oxen pulling cart, with bells & voices..07039309.wav
+    - Queens College Clock, Oxford
+    - Sirens And Bells
+    - Six cwt. bell ringing..07037656.wav
+    - Sleigh Bells. (Recorded in St. Moritz.).07039374.wav
+    - St Magnus_ Cathedral, Kirkwall clock chiming half past the hour..07039184.wav
+    - St Magnus_ Cathedral, Kirkwall clock chiming quarter past the hour..07039183.wav
+    - St Magnus_ Cathedral, Kirkwall clock chiming quarter to the hour..07039185.wav
+    - St Magnus_ Cathedral, Kirkwall clock striking twelve o_clock..07039186.wav
+    - St. Chad_S Parish Church, Rochdale (8 Bells)
+    - St. Mary-Le-Bow Church Bells, London
+    - Time - Clocks & Bells
+    - Time Signals & Clocks
+    - Tompion & Banger household clock striking eight o_clock..07039164.wav
+    - Tompion & Banger household clock striking eleven o_clock..07039167.wav
+    - Tompion & Banger household clock striking five o_clock..07039161.wav
+    - Tompion & Banger household clock striking four o_clock..07039160.wav
+    - Tompion & Banger household clock striking nine o_clock..07039165.wav
+    - Tompion & Banger household clock striking one o_clock..07039157.wav
+    - Tompion & Banger household clock striking seven o_clock..07039163.wav
+    - Tompion & Banger household clock striking six o_clock..07039162.wav
+    - Tompion & Banger household clock striking ten o_clock..07039166.wav
+    - Tompion & Banger household clock striking three o_clock..07039159.wav
+    - Tompion & Banger household clock striking twelve o_clock..07039168.wav
+    - Tompion & Banger household clock striking two o_clock..07039158.wav
+    - Trinity & St. John_S College Clock, Cambridge
+    - Trinity College Clock, Oxford
+    - University College Clock, Oxford
+    - University Of St. Mary The Virgin Church Clock, Oxford
+    - Vintage Benz car, ticking over. (1896 model.).07039360.wav
+    - Wadham College Clock, Oxford
+    - Worcester College Clock, Oxford
+  [sehir_atmosferi] 698 WAV / 69 kaynak
+    - Africa 1 - The Human World
+    - America 2
+    - Aylesbury Market
+    - Belgium
+    - Botswana_ Africa
+    - Bridge Building_ London Bridge
+    - Bullring Market, Birmingham
+    - Bus Ticket Machines (London Transport)
+    - Church Bells (Foreign)
+    - Country Market
+    - Dunedin Town Hall clock striking & chiming twelve o_clock..07039187.wav
+    - Egypt
+    - English Church Bells Village Church
+    - Ethiopia
+    - European Cities
+    - Fish Market_ Grimsby
+    - Foreign Atmospheres
+    - France
+    - France - Paris
+    - France_ Tour De France
+    - French Markets
+    - General Background
+    - Germany
+    - Germany - Atmospheres
+    - Glass & China Crashes
+    - Greece
+    - Hungary
+    - In A City Side Street
+    - In A Provincial Town
+    - India and Nepal - City Life
+    - India_ General Backgrounds
+    - Istanbul
+    - Italian Market
+    - Italian Markets
+    - Lerwick Town Hall clock striking & chiming twelve o_clock..07039182.wav
+    - London 2
+    - London Chain Store
+    - London Green Line Coach
+    - London Green Line Coach (Exterior)
+    - London Green Line Coach (Interior)
+    - London Street Market
+    - Markets
+    - Markets 1
+    - Markets 2
+    - New York Backgrounds
+    - Orly Airport, Paris, France
+    - Peterhead Fish Market
+    - Poland
+    - Pontypridd Market
+    - Quiet Urban Post Office
+    - Romania 1
+    - Romania 2
+    - Scandinavia 1
+    - Scandinavia 2
+    - Shops_ Supermarket
+    - Skyline
+    - Small Town
+    - Street actuality, with shovelling..07039373.wav
+    - Street Cleaning & Refuse Collection
+    - Suburb
+    - Suburbia
+    - Suburbia 2 and Skylines
+    - Supermarket
+    - Urban South America
+    - Urban South West Africa
+    - Village And Playground Atmospheres
+    - Village Green Cricket Match
+    - West Country Market
+    - World War II_ Air Raids_ London At Night
+  [silah_patlama] 671 WAV / 47 kaynak
+    - 18Th Century Naval Cannon
+    - 1916 World War I Mk. V Tank (Interior)
+    - Air Battles, Air Raids & Sirens
+    - Antique Firearms
+    - Army Catering
+    - Army Drill With Orders
+    - BANG_
+    - Battle Of Britain
+    - Blows & Crashes
+    - Chieftain Main Battle Tank (Diesel)
+    - Gunfire
+    - Gunfire & Guns
+    - Gunfire (Artillery, Rifle Fire)
+    - Guns_ Revolvers_ Exterior
+    - Heavy Explosions
+    - Mark V Centurion Tank (Exterior)
+    - Military Vehicles
+    - Napoleonic Battle_ 18Th Century_ Re-Enactment
+    - Naval Bombardment Of North Vietnam
+    - Period Battle
+    - Period Battle (11Th Century)
+    - Period Battle (17Th Century)
+    - R.A.F. V-Bomber (Exterior)
+    - Small Arms Fire
+    - Sporting Gun Factory
+    - Tank Guns
+    - Tanks_ World War II
+    - V1 Flying Bomb (Doodle Bug), approach & explosion..07041212.wav
+    - V1 Flying Bomb (Doodle Bug), approach & explosion..07041213.wav
+    - V1 Flying Bomb (Doodle Bug), approach & explosion..07041214.wav
+    - V1 Flying Bomb (Doodle Bug), approach, engine cuts out, pause & explosion..07041211.wav
+    - V1 Flying Bomb (Doodle Bug), seven in succession, each approach, engine cuts out, pause & explosion..07041210.wav
+    - Warfare_ Vietnam
+    - World War 2
+    - World War 2 - 1
+    - World War 2 - 2
+    - World War I
+    - World War I Army Drill
+    - World War II Battle Actualities
+    - World War II Battle Actuality
+    - World War II Bombers
+    - World War II Flying Bomb (Vi) (German Doodle Bug)
+    - World War II German V2 Rocket
+    - World War II_ Air Raids
+    - World War II_ Ground Warfare
+    - World War II_ Heavy Gunfire
+    - World War II_ Sirens & Gunfire
+  [spor_eglence] 456 WAV / 46 kaynak
+    - Adventure
+    - Archery
+    - Archery, arrows shot into target..07037408.wav
+    - Archery, flight of arrows shot into target..07037409.wav
+    - Archery, flight of arrows..07037410.wav
+    - Archery, single arrows shot into target..07037407.wav
+    - Archery_ Long Bows_ Tournament Atmosphere
+    - Association Football
+    - Association Football - League Match
+    - Athletics
+    - Billiards
+    - Billiards Saloon
+    - Bond Sports Car (C. 1970)
+    - Bond Sports Car (C. 1970) Exterior
+    - Bowling (American Type)
+    - Boxing & Wrestling
+    - Circus
+    - County Cricket Match
+    - County Rugby Football Match
+    - Cricket Match (From Umpire_S Perspective)
+    - Fairgrounds
+    - Fairgrounds and The Circus
+    - Girls_ Grammar School_ Gymnasium
+    - Greyhound Racing
+    - Local Football Match
+    - M.G. Midget Sports Car 1967 (Exterior)
+    - M.G. Midget Sports Car 1967 (Interior)
+    - Mgb Open Sports Car 1966 (1798Cc) (Exterior)
+    - Mgb Open Sports Car 1966 (1798Cc) (Interior)
+    - Professional Boxing
+    - Professional League Football
+    - Skateboarding_ Hard wheeled board, from skater_s position..07028094.wav
+    - Skateboarding_ One passing..07028092.wav
+    - Skateboarding_ Soft wheeled board, from skater_s position..07028093.wav
+    - Skateboarding_ Three passing on flagstones..07028091.wav
+    - Sport and Leisure
+    - Sports & Games_ Gymnasium
+    - Sports Club Bar
+    - Ten-Pin Bowling
+    - Tennis_ Hard Court In Park
+    - Transport
+    - Transport Depot
+    - Wimbledon 1997
+    - Wimbledon Tennis, 1964
+    - Winter Sports
+    - Winter Sports_ Sking
+  [su_sesleri] 385 WAV / 84 kaynak
+    - Children Shouting With Seawash
+    - Children_S Swimming Pool
+    - Crystal Palace Swimming Pool (Indoor)
+    - Footsteps, one pair of feet running in shallow water..07041192.wav
+    - Footsteps, one pair of feet walking in shallow water..07041191.wav
+    - Fountains_ Rome
+    - Heavy crash into water..07039189.wav
+    - Heavy crash into water..07039190.wav
+    - Heavy Sea Breaking On Promenade
+    - Heavy Seawash On Shingle
+    - Hot metal in water..07039218.wav
+    - Hot metal in water..07039219.wav
+    - Indoor Swimming Bath
+    - Lifebelt thrown into water..07038323.wav
+    - Log thrown into water..07038297.wav
+    - Log thrown into water..07038298.wav
+    - Log thrown into water..07038299.wav
+    - Log thrown into water..07038300.wav
+    - Log thrown into water..07038301.wav
+    - Log thrown into water..07038302.wav
+    - Log thrown into water..07038303.wav
+    - Log thrown into water..07038304.wav
+    - Log thrown into water..07038305.wav
+    - London Riverside Atmosphere
+    - Man punting..07038288.wav
+    - Mountain Stream
+    - Mountain stream actuality..07038287.wav
+    - North Sea Gas
+    - North Sea Gas Rig
+    - Oil Rigs (Offshore Oil Rig _Sea Quest_
+    - Outdoor Swimming Pool
+    - Person diving into water & light splashing..07038306.wav
+    - Person diving into water & light splashing..07038307.wav
+    - Person diving into water, splashing, gasping & swimming..07038312.wav
+    - Person diving into water, splashing, gasping, pulling out of water..07038308.wav
+    - Person diving into water, thrashing & splashing..07038309.wav
+    - Person floundering in water, gaspsing for breath..07038311.wav
+    - Person swimming, breast stroke..07038314.wav
+    - Person swimming, breast stroke..07038318.wav
+    - Person swimming, dive in, overarm crawl, pulling out of water..07038315.wav
+    - Person swimming, rhythmic kicking..07038313.wav
+    - Person wading through water..07039245.wav
+    - Plank thrown into water..07038324.wav
+    - Plank thrown into water..07038325.wav
+    - Punting (With Aluminium Pole)
+    - River
+    - River Cascading Over Rocks
+    - Rushing Water_ Rapids
+    - Rushing weir..07038290.wav
+    - Sea Wash
+    - Seawash
+    - Seawash On Rocks
+    - Sine Wave Tones
+    - Splash in water..07038310.wav
+    - Splash in water..07038319.wav
+    - Splash in water..07038320.wav
+    - Splash in water..07038321.wav
+    - Splash in water..07038322.wav
+    - Stream
+    - Swimming
+    - Swimming (Outdoor Pool)
+    - Swimming And Diving
+    - Swimming Match At Crystal Palace (Indoors-With Crowd Reaction)
+    - Swimming Pool_ Busy indoor pool..07028097.wav
+    - Swimming Pool_ Busy outdoor pool..07028098.wav
+    - Victoria Falls
+    - Victoria Falls actuality..07038286.wav
+    - Walking in shallow water or mud..07039244.wav
+    - Water
+    - Water 1
+    - Water 2 - Sea
+    - Water 4
+    - Water gurgling..07038281.wav
+    - Water Mill
+    - Water Pumping Engines (Diesel)
+    - Water Pumping Station
+    - Water running into basin, basin emptying..07038292.wav
+    - Water Running Into Large Drain
+    - Water Rushing Through Lock Gates
+    - Water_ Stream.07031080.wav
+    - Water_ Streams
+    - Waterfall actuality..07038296.wav
+    - Weir In Full Flood
+    - White Noise Filtered To Simulate Sea Effects
+  [tarim_ciftlik] 53 WAV / 8 kaynak
+    - Combine Harvester_ Reaping
+    - Corn Mill
+    - Dairy Farming
+    - Ferguson Tractor (Exterior)
+    - Perkins-Fordson Tractor, 1945
+    - Tractor
+    - Tractor (1976)
+    - Tractors & Lorries Passing Slowly
+  [tren_sesleri] 781 WAV / 152 kaynak
+    - Aberdeen Tram, exterior, run at speed with hooter..07039408.wav
+    - Aberdeen Trams, exterior, new tram crossing points followed by older model tram..07039407.wav
+    - British Rail High Speed Train (Inter-City 125) (Exterior)
+    - British Rail_ Southern Region
+    - British Rail_ Southern Region Multiple Unit Diesel Train (Exterior)
+    - British Rail_ Southern Region Multiple Unit Diesel Train (Interior)
+    - British Trams
+    - Corridor Doors of steam train closing..07041050.wav
+    - Diesel Electric Train (Interior) English Electric Vulcan_ 20000 B.H.P
+    - Diesel Electric Train English Electric Vulcan_ 20000 B.H.P
+    - Diesel Electric Train Fast Constant Run On Welded Track
+    - Diesel Railcar (Exterior)
+    - Diesel Railcar (Interior)
+    - Diesel Train
+    - Dividing door in railway carriage door opened & shut..07037533.wav
+    - Doors of steam train closing..07041051.wav
+    - Edinburgh Tram, exterior, approach & pass..07039409.wav
+    - Edinburgh Tram, exterior, approach & pass..07039410.wav
+    - Edinburgh Tram, exterior, approach & pass..07039411.wav
+    - Edinburgh Tram, exterior, approach & passing with bell..07039414.wav
+    - Edinburgh Tram, exterior, pass with bell, crosses points & stops..07039412.wav
+    - Edinburgh Tram, exterior, passing with fender down...07039413.wav
+    - Eurostar
+    - Euston Station
+    - Ffestinog Narrow Gauge Steam Train. Exterior
+    - French Steam Trains
+    - French Steam Trains (Interior)
+    - French Trains
+    - Glasgow Tram, interior, bell rings, start, run & stop..07039405.wav
+    - Glasgow Tram, interior, start, slow run over points, stop..07039406.wav
+    - Heavy Goods Train, approach & pass. (Steam train.).07041049.wav
+    - Hyde Tram, constant run on gradients & stop..07039390.wav
+    - Hyde Tram, departs..07039391.wav
+    - Hyde Tram, stop with electric brakes..07039392.wav
+    - Italian Steam Train arrives at station..07041061.wav
+    - Italian Steam Train departs station with whistle..07041062.wav
+    - Italian Steam Train passes at speed..07041064.wav
+    - Italian Steam Train, departs with whistle, enters & leaves tunnel...07041065.wav
+    - Italian Steam Train, interior, constant run..07041063.wav
+    - Italian Trains
+    - Leicester Tram (Interior)
+    - Local Steam Trains
+    - Local Steam Trains_ Eastern Region
+    - London Midland Region Electric Trains (Exterior)
+    - London Midland Region Electric Trains (Interior)
+    - London Midland Region Electric Trains (Interior)_ 25 Kv Pantograph System
+    - London Railway Station Victoria
+    - London Railway Stations
+    - London Railway Stations_ Pa Announcements And Atmosphere
+    - London Tram, approach with Driver_s bell, stop, second tram passes..07039395.wav
+    - London Tram, approach, pass & stop..07039393.wav
+    - London Tram, approach, stop, passengers alight, depart..07039394.wav
+    - London Underground
+    - London Underground (Interior)
+    - London Underground_ Bakerloo Line Train_ 1938 Stock_ Exterior
+    - London Underground_ Oxford Circus Station_ Ticket Hall Atmosphere
+    - London Underground_ Victoria Line
+    - Manual Signal Box atmosphere..07041053.wav
+    - Metronome Ticking
+    - Model Railways
+    - Narrow-Gauge Light Railway (Exterior)
+    - Narrow-Gauge Light Railway (Interior)
+    - Narrow-Gauge Light Railway (Interior)_ In Closed Coach
+    - Paris Metro
+    - Rail Terminus
+    - Railway carriage door opened & shut three times..07037531.wav
+    - Railway carriage door opened & slammed..07037527.wav
+    - Railway carriage door opened & slammed..07037532.wav
+    - Railway carriage window lowered & raised four times..07037534.wav
+    - Railway carriage window lowered & raised three times..07037528.wav
+    - Railway carriage window lowered & raised three times..07037536.wav
+    - Railway carriage window lowered, door opened & shut, window raised..07037535.wav
+    - Railway Goods Yard, coal tipped from hopper..07041066.wav
+    - Railway Goods Yard, coal tipped from hopper..07041067.wav
+    - Railway Goods Yard, raking coal in hopper..07041068.wav
+    - Railway Goods Yard, trucks running down incline & through truck controller..07041059.wav
+    - Railway Station
+    - Railway Station Booking Halls. Erith, Kent
+    - Railway Station Buffet_ London Bridge
+    - Railway Station_ Birmingham (New Street) Station Announcements
+    - Railway Station_ Local Diesel Trains
+    - Railway Stations_ Continuous Pa Anncts_ Early Afternoon
+    - Rome_ Metropolitana (Underground Railway)
+    - Rome_ Termini Railway Station
+    - Sheffield Tram (Interior)
+    - Signal Box, obstruction detonators & train stopping..07041057.wav
+    - Signal Box, obstruction warning..07041056.wav
+    - Signal Box, signal & point levers..07041054.wav
+    - Signal Box, various bells signals..07041055.wav
+    - Sliding corridor door in railway carriage opened & shut three times..07037525.wav
+    - Sliding door between compartments in railway carriage opened & shut three times..07037526.wav
+    - Sliding door in railway carriage opened & shut twice..07037529.wav
+    - Southern & Western Region Goods Trains
+    - Southern Region Electric Trains
+    - Southern Region Electric Trains (Interior)
+    - Southern Region Steam Train (Express_ Interior)
+    - Southern Region Steam Train_ Hauled By Stroudley 0-6-0 Tank Locomotive
+    - Southern Region Steam Trains
+    - Southern Region Suburban Train (Interior)
+    - Steam Cranes operating in railway yard. (Recorded in Germany.).07041058.wav
+    - Steam Goods & Express Trains overtaking..07041048.wav
+    - Steam Railway Goods Yard
+    - Steam Train (4-6-0 Locomotive, No. 5231) Exterior
+    - Steam Train, screech of brakes..07041052.wav
+    - Steam Trains
+    - Steam Trains (With 6 Or 7 Coaches, Some Voices)
+    - Steam Trains Passing Without Siren
+    - Steam Trains_ Br _Standard_ Class 4_ 2-6-4T Locomotive (With 6 Or 7 Coaches)
+    - Steam Trains_ Exterior
+    - Steam Trains_ Interior
+    - Steam Trains_ Kings Cross Station (Suburban Lines)
+    - Suburban Steam Train_ Exterior (2-6-2 Tank Locomotive, Past 1945)
+    - Suburban Steam Train_ Interior (2-6-2 Tank Locomotive, Past 1945)
+    - Traffic actuality, with trams & cars. (Recorded in Glasgow.).07039377.wav
+    - Traffic actuality, with trams & cars. (Recorded in Glasgow.).07039378.wav
+    - Train Doors & Windows
+    - Train shunting..07041060.wav
+    - Trains
+    - Trains & Bridges
+    - Trains & Tunnels
+    - Trains 2
+    - Trains Crossing Metal Bridge
+    - Trains Passing
+    - Trains_ Diesel Electric
+    - Trains_ Diesel Multiple Unit (Exterior)
+    - Trains_ Goods Yard (Feltham)
+    - Trains_ Paris Metro, France
+    - Tram (Interior)
+    - Tram, approach & pass..07039401.wav
+    - Tram, approach & pass..07039402.wav
+    - Tram, approach at speed & stop with electric brakes..07039383.wav
+    - Tram, approach at speed & stop..07039382.wav
+    - Tram, approach, crosses points & away..07039385.wav
+    - Tram, approach, crosses points & away..07039386.wav
+    - Tram, approach, pass & stop..07039400.wav
+    - Tram, approach, pass & stop..07039404.wav
+    - Tram, Conductor_s bell rung one, rung twice, rung four times..07039387.wav
+    - Tram, constant run in long stages..07039389.wav
+    - Tram, constant run in short stages..07039388.wav
+    - Tram, driver_s bell sounds with brake..07039381.wav
+    - Tram, interior, start, run & stop. (Recorded on top deck.).07039399.wav
+    - Tram, run with increasing & decreasing speed, stop..07039398.wav
+    - Tram, start & accelerate away..07039384.wav
+    - Tram, start, crosses points, continuous run, stop. (Recorded on lower deck.).07039380.wav
+    - Tram, start, crosses points, continuous run, stop. (Recorded on open-top deck.).07039379.wav
+    - Tram, start, run, stop with Conductor, whistle & faint bell..07039396.wav
+    - Tram, stop, start & run..07039397.wav
+    - Trams
+    - Trams (1903)_ Newcastle_ Exterior
+    - Trams_ Sheffield Tram No. 189
+    - Two trams pass..07039403.wav
+    - Victoria Station, London
+  [ucak_sesleri] 793 WAV / 142 kaynak
+    - Aircraft
+    - Aircraft 1
+    - Aircraft 2
+    - Aircraft 3
+    - Aircraft Standard Beam Approach, complete run with outer & inner Marker beacons. (Recorded on aircraft.).07047111.wav
+    - Aircraft Standard Beam Approach, complete run with outer & inner Marker beacons. (Recorded on aircraft.).07047112.wav
+    - Aircraft, Aeroplane engines background.07025006.wav
+    - Aircraft_ Auster
+    - Aircraft_ Bac 111 (Exterior)
+    - Aircraft_ Bac 111 (Interior)
+    - Aircraft_ Barracuda (On Aircraft Carrier)
+    - Aircraft_ Beaufighters
+    - Aircraft_ Comet Iv (Exterior)
+    - Aircraft_ Comet Iv (Interior)
+    - Aircraft_ Concorde_ Exterior
+    - Aircraft_ D. H. Dove (Exterior)
+    - Aircraft_ Hawker Harrier Vertical Take-Off Jet (Exterior)
+    - Aircraft_ Lightning Twin-Jet Fighter (Exterior)
+    - Aircraft_ Trident (Exterior)
+    - Aircraft_ Trident (Interior)
+    - Aircraft_ Vc 10
+    - Aircraft_ Vc 10 (Exterior)
+    - Airfield Atmosphere (No Jets)
+    - Airfield atmosphere..07037405.wav
+    - Boeing 707 Jet Aircraft (Exterior) Landing
+    - Boeing 707 Jet Aircraft (Interior)
+    - Boeing 707 Jet Aircraft_ Interior
+    - Boeing 747 Jet Aircraft (Exterior)
+    - Boeing 747 Jet Aircraft (Interior)
+    - Boeing 747 Jumbo Jet Aircraft_ Exterior
+    - Boeing 747 Jumbo Jet Aircraft_ Interior
+    - Brantley B2B 2-Seater Helicopter (Exterior) (3-Bladed Rotor_ 180 H.P. Lycoming Engine)
+    - Brantley B2B 2-Seater Helicopter (Interior)
+    - Bristol Britannia on-board pre-flight announcement..07047110.wav
+    - Bristol Britannia, engines running. (Medium-range airliner, four piston engines.).07041201.wav
+    - Bristol Britannia, take off. (Medium-range airliner, four piston engines.).07041200.wav
+    - Bristol Sycamore S171 Helicopter (Exterior)
+    - Cessna Light Aircraft
+    - De Havilland Comet DH 106, exterior, landing. (Medium_long-range airliner, 4 jet engines.).07047098.wav
+    - De Havilland Comet DH 106, exterior, pass over. (Medium_long-range airliner, 4 jet engines.).07047097.wav
+    - De Havilland Comet DH 106, exterior, take off. (Medium_long-range airliner, 4 jet engines.).07047096.wav
+    - De Havilland Comet III, exterior, landing. (Medium_long-range airliner, 4 jet engines.).07047095.wav
+    - De Havilland Comet IV, exterior, landing. (Medium_long-range airliner, 4 jet engines.).07047093.wav
+    - De Havilland Comet IV, exterior, taxiing. (Medium_long-range airliner, 4 jet engines.).07047094.wav
+    - De Havilland Vampire, aircraft land in succession..07047116.wav
+    - De Havilland Vampire, aircraft take off in succession..07047115.wav
+    - De Havilland Vampire, exterior, approach & pass. (Single jet-engined fighter plane.).07047101.wav
+    - De Havilland Vampire, exterior, two planes taxiing. (Single jet-engined fighter plane.).07047102.wav
+    - De Havilland Vampire, interior, constant flight into descent. (Single jet-engined fighter plane.).07047099.wav
+    - De Havilland Vampire, interior, descent, touchdown & stop. (Single jet-engined fighter plane.).07047100.wav
+    - De Havilland Vampire, interior, engine running, take off, climb, levelling out. (Single jet-engined fighter plane.).07047104.wav
+    - De Havilland Vampire, interior, start engine, run-up & taxi. (Single jet-engined fighter plane.).07047103.wav
+    - De Havilland Vemon, pass over..07047117.wav
+    - Fairey Rotodyne Prototype, 2 Napier Prop Jet Engines
+    - Fairley Ultralite Helicopter (Exterior) 2-Seater_ Jet Engine
+    - Farnborough Air Show
+    - Flying Fortress, interior, engines starting. (Recorded inside cockpit.) (World War II US bomber.).07037404.wav
+    - Flying Fortress, ticking over. (World War II US bomber.).07037403.wav
+    - Four-engined aircraft, emergency stop on take off..07041197.wav
+    - Four-engined aircraft, heavy landing..07041196.wav
+    - Four-engined aircraft, heavy landing..07041199.wav
+    - Four-engined aircraft, landing..07041198.wav
+    - Gloster Meteor, four aircraft pass over into slow roll..07047113.wav
+    - Helicopters
+    - Hercules, Aircraft, landing & taxing R - L.07025004.wav
+    - Hercules, Aircraft, take off R - L.07025003.wav
+    - Hercules, Aircraft, take off R - L.07025005.wav
+    - Junkers Ju 88, circling with four dives. (German World War II fighter_bomber, two piston engines.).07041209.wav
+    - Junkers Ju 88, start, warm up, switch off. (German World War II fighter_bomber, two piston engines.).07041208.wav
+    - Liquid fuel rocket motor..07041217.wav
+    - London Airport (Heathrow)
+    - London Airport Buffet
+    - Massed aircraft flypast..07047114.wav
+    - Messerschmitt 110, circling at 500 to 1000 feet with one dive. (German World War II fighter, single piston engine.).07041206.wav
+    - Messerschmitt 110, in flight. (German World War II fighter, single piston engine.).07041207.wav
+    - Military Aerodrome, De Havilland Vampires running up, Gloster Meteor take off (at 2m15s)..07047105.wav
+    - On-board London Airport arrival announcement..07047109.wav
+    - On-board Rangoon Airport transit announcement..07047108.wav
+    - Piper Cherokee Light Aircraft_ Interior
+    - Piper Light Aircraft (Single Pistol Engine) (Exterior)
+    - Piper Light Aircraft (Single Pistol Engine) (Interior)
+    - Pre-flight announcement over aircraft P.A. system by stewardess (on board De Havilland Comet)..07047106.wav
+    - Quiet Airfield Atmosphere
+    - Sea King Helicopter_ Exterior
+    - Shackleton (4 Piston-Engined Aircraft) (Exterior)
+    - Shackleton (4 Piston-Engined Aircraft) (Interior)
+    - Sikorski 61N (24 Seater) Helicopter Exterior
+    - Sikorski S 55 Helicopter
+    - Solid fuel rocket motor..07041215.wav
+    - Solid fuel rocket motor..07041216.wav
+    - Space Travel
+    - Space Travel & Interplanetary Effects
+    - Starfighter Single-Engined Jet Fighter
+    - Tiger Moth Light Aircraft (Single Piston Engine, Open Cockpit) (Exterior)
+    - Tiger Moth Light Aircraft (Single Piston Engine, Open Cockpit) (Interior)
+    - U.S. Space Ship Launching
+    - Vc10 Aircraft_ Exterior
+    - Vickers Vanguard, exterior, two aircraft taxiing & stopping. (Short_medium-range airliner, four piston engines.).07041205.wav
+    - Vickers Vanguard, interior, constant flight (to Rome), Captain describes view over P.A. system. (Short_medium-range airliner, four.07041202.wav
+    - Vickers Vanguard, interior, constant flight, Captain using P.A. system. (Short_medium-range airliner, four piston engines.).07041204.wav
+    - Vickers Vanguard, interior, constant flight. (Short_medium-range airliner, four piston engines.).07041203.wav
+    - Vickers Viscount, exterior, landing & taxiing. (Short_medium-range airliner, 4 piston-engines.).07047119.wav
+    - Vickers Viscount, exterior, landing. (Short_medium-range airliner, 4 piston-engines.).07047118.wav
+    - Vickers Viscount, exterior, landing. (Short_medium-range airliner, 4 piston-engines.).07047120.wav
+    - Vickers Viscount, exterior, passing over low. (Short_medium-range airliner, 4 piston-engines.).07047121.wav
+    - Vickers Viscount, exterior, passing over. (Short_medium-range airliner, 4 piston-engines.).07047122.wav
+    - Vickers Viscount, exterior, passing over. (Short_medium-range airliner, 4 piston-engines.).07047123.wav
+    - Vickers Viscount, interior, constant flight, descent, landing & passengers disembark. (Short_medium-range airliner, 4 piston-engin.07047131.wav
+    - Vickers Viscount, interior, constant flight. (Short_medium-range airliner, 4 piston-engines.).07047129.wav
+    - Vickers Viscount, interior, in-flight announcement by captain. (Short_medium-range airliner, 4 piston-engines.).07047126.wav
+    - Vickers Viscount, interior, in-flight announcement. (Short_medium-range airliner, 4 piston-engines.).07047125.wav
+    - Vickers Viscount, interior, in-flight prelanding announcement. (Short_medium-range airliner, 4 piston-engines.).07047127.wav
+    - Vickers Viscount, interior, pre-landing announcement. (Short_medium-range airliner, 4 piston-engines.).07047130.wav
+    - Vickers Viscount, interior, taxiing & preflight announcement. (Short_medium-range airliner.).07047128.wav
+    - Vickers Viscount, interior, taxiing, preflight announcement (at 0m45s), take off (at 2m35). (Short_medium-range airliner, 4 piston.07047124.wav
+    - Wessex Ii 16-Seater Helicopter (Exterior) (2 Bristol Siddeley Gnome Turbines)
+    - Wessex Ii 16-Seater Helicopter (Interior) (2 Bristol Siddeley Gnome Turbines)
+    - Westland Lynx Helicopter (Exterior) Anglo-French Prototype_ Two 1800 H.P. Jet Engines
+    - Whirlwind 10-Seater Helicopter (Exterior), 1 Bristol Siddeley Gnome Turbine
+    - Whirlwind 10-Seater Helicopter (Interior) (1 Bristol Siddeley Gnome Turbine)
+    - World War Aircraft_ 1916 Bristol Fighter (Exterior)
+    - World War Aircraft_ 1916 Bristol Fighter (Interior)
+    - World War I Aircraft_ 1917 Aerodrome Activity
+    - World War I Aircraft_ S.E. 5A Fighter (Exterior)
+    - World War II Aircraft
+    - World War II Aircraft Carriers
+    - World War II Aircraft_ British Naval Seafire (Griffon Engine)
+    - World War II Aircraft_ Focke-Wulf 190 (German)
+    - World War II Aircraft_ German
+    - World War II Aircraft_ Heinkel 115 (German)
+    - World War II Aircraft_ Heinkel Iii (German)
+    - World War II Aircraft_ Heinkel Iii (German) (Interior)
+    - World War II Aircraft_ Junkers 88 (German)
+    - World War II Aircraft_ Lancaster Bomber
+    - World War II Aircraft_ Lancaster Bomber (Interior)
+    - World War II Aircraft_ Messerschmitt 110 (German)
+    - World War II Aircraft_ Night Bombers (German)
+    - World War II Aircraft_ Spitfire Fighter (Exterior)
+    - World War II Mosquito Fighter Bomber Exterior
+    - World War II, unidentified aircraft swooping with gunfire..07037497.wav
+    - World War II_ Aircraft Carriers
+    - World War II_ Aircraft Usaaf
+
+ESLESMEYEN (334):
+  - 1 Woman Screaming & Crying
+  - 16Mm Rca Cine Projector
+  - 17-Bore Twin-Barrel Shotgun, 1870
+  - 2-Stroke Band Saw
+  - 2.6 Litre Rover Saloon Car
+  - 2.6 Litre Rover Saloon Car (Interior)
+  - 27Ft Cabin Cruiser (50 Hp. Diesel)
+  - 27Ft Cabin Cruiser (50 Hp. Diesel)_ In Cabin
+  - 27Ft Cabin Cruiser (50 Hp. Diesel)_ In Cockpit
+  - 3 People In Hall
+  - 700 People In Large Hall
+  - Airports
+  - America
+  - American Chatter
+  - Army
+  - Army_ Parade Ground Manoeuvres (Without Spoken Commands)
+  - Atmosphere At An R.A.F. Station
+  - Atmosphere In Villa Borghese Museum
+  - Atmosphere_ Norfolk Broads
+  - Atmospheres
+  - Barrels rolling over cobbles..07039188.wav
+  - Basket Ball - Crystal Palace (Ursiline V Sutton)
+  - BBC News Sound Effects (Fairly Random)
+  - BBC News Sound Effects Tape
+  - BBC News Sound Effects Tape (Old)
+  - Beirut (Lebanon)
+  - Bells
+  - Bells at an Indian Temple sounded..07037646.wav
+  - Bells ringing at Bergen Cathedral..07037643.wav
+  - Bells ringing at Lavenham Church, Suffolk..07037649.wav
+  - Bells ringing at Nidaros Cathedral..07037644.wav
+  - Bells ringing at San Giovanni Church, Laterno (Rome)..07037654.wav
+  - Bells ringing at San Petronio Church, Bologna..07037652.wav
+  - Bells ringing at San Sabino, Rome..07037655.wav
+  - Bells ringing at Santa Agnese Church, Rome..07037653.wav
+  - Bells ringing at St Francis Church, Valetta..07037645.wav
+  - Betting Shop
+  - Bicycles
+  - Bits & Pieces
+  - Blacksmith_S Shop
+  - Blank Record
+  - Bo_Sun_S Pipe
+  - Bonfires
+  - Boys_ Comprehensive School_ In Classroom
+  - Boys_ Secondary School
+  - Brewing
+  - Bristol Britannina Prop-Jet Airliner (Exterior)
+  - Bristol Britannina Prop-Jet Airliner (Interior)
+  - British Museum
+  - Bubbling Liquid
+  - Bus Depot
+  - Bus horns. (Recorded in St. Moritz.).07039375.wav
+  - Busy Bank
+  - Busy Post Office
+  - Butcher_S Shop
+  - Cambridge
+  - Cameras
+  - Car Crashes
+  - Car Park Atmosphere
+  - Carpebter_S Workshop
+  - Carpenter_S Workshop
+  - Carpentry
+  - Cars
+  - Caving & Pot-Holing
+  - Caving & Potholing
+  - Chatter
+  - Chatter_ Golf Club Bar
+  - Chatter_ Women
+  - Chemical & Electrical Reactions
+  - China
+  - Chuchyard
+  - Cicadas stridulating..07041218.wav
+  - Circular Saws
+  - Clatter & creak of signs..07037504.wav
+  - Club Bar
+  - Clubs And Bars
+  - Coach Horns
+  - Cocktail Party
+  - Comedy 2
+  - Comedy 3
+  - Comedy Sounds
+  - Comedy Sounds_ Impact Rhythms
+  - Comedy, Fantasy & Horror
+  - Concert Hall
+  - Constant Movement Background To Simulate Troop Movements Over Rough Ground
+  - Cottage Industries
+  - Coughing, Breathing, Etc
+  - Cranes
+  - Crash 1
+  - Crash 2
+  - Crashes
+  - Czechoslovakia
+  - Dairies
+  - Dance Hall Atmosphere
+  - Dental Surgery
+  - Dogs
+  - Dogs barking. (Breed unknown.).07037448.wav
+  - Door, interior, opened & shut noisily..07037572.wav
+  - Door, interior, opened & shut with reverberation..07037590.wav
+  - Door, interior, opened & shut with reverberation..07037591.wav
+  - Door, interior, opened & shut with reverberation..07037592.wav
+  - Door, interior, opened & shut with reverberation..07037593.wav
+  - Door, interior, opened & shut with reverberation..07037594.wav
+  - Door, interior, opened & shut with reverberation..07037595.wav
+  - Door, interior, opened & shut with reverberation..07037596.wav
+  - Door, interior, opened & shut..07037558.wav
+  - Door, interior, opened & shut..07037560.wav
+  - Door, interior, opened & shut..07037561.wav
+  - Door, interior, opened & shut..07037562.wav
+  - Door, interior, opened & shut..07037565.wav
+  - Door, interior, opened & shut..07037569.wav
+  - Door, interior, opened & shut..07037570.wav
+  - Door, interior, opened & shut..07037571.wav
+  - Door, interior, opened & shut..07037574.wav
+  - Door, interior, opened & shut..07037575.wav
+  - Door, interior, opened & shut..07037582.wav
+  - Door, interior, opened & shut..07037583.wav
+  - Door, interior, opened & shut..07037584.wav
+  - Door, interior, opened & shut..07037585.wav
+  - Door, interior, opened & shut..07037586.wav
+  - Door, interior, opened & shut..07037587.wav
+  - Door, interior, opened & shut..07037588.wav
+  - Door, interior, opened & shut..07037589.wav
+  - Door, interior, opened & slammed..07037559.wav
+  - Door, interior, opened & slammed..07037563.wav
+  - Door, interior, shut..07037568.wav
+  - Door, interior, shut..07037573.wav
+  - Dragon roaring. (Specially created effect.).07037443.wav
+  - Drawbridge lowered..07038283.wav
+  - Dressmaking
+  - Drums
+  - Eating Places & Food Shops
+  - Electrical Radiation
+  - Escaping steam..07038282.wav
+  - Excavators & Pumps
+  - Exterior Atmospheres
+  - Exterior Effects
+  - F.A. Cup Final_ Wembley, 1966
+  - Factories
+  - Farm Machnery_ Drum Threshing Machine
+  - Fencing
+  - Fire
+  - Fire_ Atmosphere at the scene of a fire.07025145.wav
+  - Firefighting Pumps (1860-1890)
+  - Firework Display
+  - Fireworks
+  - Fish & Chip Shop
+  - Fitness & Health
+  - Fox Hunting_ Quorn Hunt
+  - Fox Hunting_ Whaddon Chase Hunt
+  - Gambling
+  - Gaming Club
+  - General Purpose Rumble
+  - German Gasthof
+  - Girls_ Grammar School
+  - Girls_ Secondary School
+  - Glass
+  - Glass Crashes
+  - Glassworks_ Glassware
+  - Glassworks_ Sheet Glass And Bottles
+  - Gold & Gems
+  - Gongs & Cymbals
+  - Greenland
+  - Grinding & Sharpening
+  - Hammering (Exterior)
+  - Hampshire Farm, early morning atmosphere..07037503.wav
+  - Heavy Goods Lifts (Interior)
+  - Hell to Heaven
+  - Holland
+  - Hospital Casualty Reception Atmosphere
+  - Hospitals
+  - Hotel
+  - Ice
+  - Insurance_ Lloyd_S Of London
+  - Interior Backgrounds
+  - Interiors - Concert Halls
+  - Interiors - Pubs and Clubs
+  - Interiors - Restaurants
+  - Interiors - Theatres and Halls
+  - Interiors - Various 1
+  - Interiors - Various 2
+  - International
+  - Italian Conversation
+  - Italy
+  - Italy_ Venice, St. Mark_S Squre
+  - Large Canteen
+  - Large wooden structure crushed..07039193.wav
+  - Large wooden structure crushed..07039194.wav
+  - Laughter
+  - Library
+  - Lifts
+  - Lightning Twin-Jet Fighter (Exterior)
+  - Lloyd_S Underwriting Room
+  - London
+  - Loose dirt falling..07037418.wav
+  - Loose dirt falling..07037419.wav
+  - Loose stones falling..07037411.wav
+  - Loose stones falling..07037412.wav
+  - Loose stones falling..07037413.wav
+  - Loose stones falling..07037414.wav
+  - Loose stones falling..07037415.wav
+  - Loose stones falling..07037416.wav
+  - Loose stones falling..07037417.wav
+  - Marine Bugle Calls
+  - Marine-Type Steam Engine, 1911
+  - Mechanical Digger (Four Wheels)
+  - Meeting
+  - Men_S Hairdressing Saloon
+  - Metal Crashes
+  - Metal Scrap Yards
+  - Metal Squeaks
+  - Mills & Grain
+  - Mixed
+  - Modern 35Mm Cine Projector
+  - Monasteries
+  - More Phones
+  - National Daily Newspaper
+  - Natural Atmospheres 1
+  - Newsagent_Confectioner_S Shop
+  - Newspapers
+  - Offices
+  - Oil & Petrol
+  - Oil Exploration
+  - On-board BOAC post-take off announcement (suitable for use for any long-distance BOAC plane)..07047107.wav
+  - Pet Shop
+  - Petrol Stations
+  - Peugeot 205GT 1982 1300cc petrol (car misfiring quite badly)
+  - Playhouse Theatre
+  - Plymouth Fire, 1941
+  - Pool Game_ Money inserted, table set up..07028089.wav
+  - Pool Of London
+  - Post Office
+  - Printing
+  - Printing - Newspapers
+  - Printing - Newspapers_ Webb-Offset Press
+  - Processions
+  - Public Bar
+  - Public Houses
+  - Pulleys, Winches & Chains
+  - Pulse Monitor
+  - Quiet Park
+  - Rats scampering & scraping..07037446.wav
+  - Rats squeaking..07037445.wav
+  - Reception Hall
+  - Refuse Collection (Occasional Distant Speech)
+  - Restaurant
+  - Restaurants_ Large Canteen, quiet, loud hiss of steam..07027134.wav
+  - Restaurants_ Large Canteen, quiet, urn filled at 001m00s..07027133.wav
+  - Road Tunnel
+  - Roller Skating_ One skater passing..07028095.wav
+  - Roller Skating_ Skater approaching and stopping..07028096.wav
+  - Rome
+  - Rotary Motor Mower
+  - Royal Albert Hall
+  - Royal Albert Hall_ Last Night of the Proms
+  - Royal Festival Hall
+  - Saracen Or Saladin Armoured Car (Exterior)
+  - School Dining Hall
+  - Scuba Diving
+  - Setrite Push-Button Ticket Machine
+  - Several men leaving room with wooden floor..07039240.wav
+  - Several men running into room with wooden floor..07039238.wav
+  - Shoe Repairing
+  - Shopping Precinct
+  - Shops
+  - Six urgent knocks on a door..07037566.wav
+  - Skids
+  - Sleigh running over frozen road..07037433.wav
+  - Snack Bar
+  - Spain
+  - Squeaks, Creaks & Rattles
+  - Srn Super 4 Hobercraft
+  - St. Clemen Danes Church, London
+  - St. James_S Park, London
+  - Steam Launch (Length 31Ft, Built In 19Th Century)
+  - Swaziland, Africa
+  - Talking Toys
+  - Tate Gallery
+  - Tea Tent
+  - Teenage Cafe
+  - Telemetry_ Interplanetary Effects
+  - Ten urgent knocks on a door..07037567.wav
+  - Textiles
+  - The Age of Steam
+  - Theatre
+  - Theatre Chatter
+  - Theatre Foyers
+  - Three discreet knocks on a door..07037564.wav
+  - Timber & Wood
+  - Timber crushed then collapses..07039195.wav
+  - Timber crushed then collapses..07039196.wav
+  - Timber crushed then collapses..07039197.wav
+  - Timber crushed then collapses..07039198.wav
+  - Timber crushed then collapses..07039199.wav
+  - Toys
+  - Tram
+  - Tree-Felling
+  - Trouser Manufacture
+  - Tug
+  - Turnstiles
+  - Undergrowth
+  - Vintage Alldays car, start, constant run, stop. (1903 model.).07039357.wav
+  - Vintage Benz car, start, constant run. (1896 model.).07039361.wav
+  - Vintage Mercedes car, start, constant run, stop. (1903 model.).07039359.wav
+  - Vintage Wolseley car, start, constant run, stop. (1903 model.).07039358.wav
+  - Vocal & Heart Effects
+  - Volcanic Forces
+  - Volvo 244 Police Ar_ Exterior (Pa 150 _Yelp_ & _Wail_ Siren
+  - Wall being pulled down..07039213.wav
+  - Wall being pulled down..07039214.wav
+  - Warehouses
+  - Washing Line, very wet heavy washing flapping on line..07037421.wav
+  - Waste Disposal
+  - Wolseley Sixteen-Sixty Car 1967 (Exterior)
+  - Wolseley Sixteen-Sixty Car 1967 (Interior)
+  - Wood creaking & collapsing..07039205.wav
+  - Wood creaking & collapsing..07039206.wav
+  - Wood crushed then collapses..07039200.wav
+  - Wood crushed..07039203.wav
+  - Wood crushed..07039204.wav
+  - Wood crushed..07039207.wav
+  - Wood slowly creaking & crushed..07039208.wav
+  - Wood slowly creaking & crushed..07039209.wav
+  - Wood splintering..07039201.wav
+  - Wood splintering..07039202.wav
+  - Wooden Crashes
+  - Wooden Creeks
+  - Wooden structure crushed..07039210.wav
+  - Wooden structure crushed..07039211.wav
+  - Wooden structure crushed..07039212.wav
+  - Wooden structure crushed..07039215.wav
+  - Wooden structure crushed..07039216.wav
+  - Wooden structure crushed..07039217.wav
+  - Wrestling

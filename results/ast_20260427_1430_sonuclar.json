@@ -1,0 +1,83 @@
+{
+  "model": "ast",
+  "tarih": "20260427_1430",
+  "egitim_dakika": 548.0,
+  "toplam_epoch": 9,
+  "planlanan_epoch": 20,
+  "erken_durdurma": true,
+  "en_iyi_val_f1": 0.6064,
+  "en_iyi_epoch": 7,
+  "test_macro_f1": null,
+  "args": {
+    "model": "ast",
+    "epochs": 20,
+    "batch_size": 32,
+    "lr": 0.0001,
+    "num_workers": 0
+  },
+  "epoch_tarih": [
+    {
+      "epoch": 1,
+      "train_loss": 1.2653,
+      "train_acc": 0.767,
+      "val_loss": 1.9329,
+      "val_f1": 0.5489
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.8284,
+      "train_acc": 0.926,
+      "val_loss": 1.9886,
+      "val_f1": 0.5689
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.7568,
+      "train_acc": 0.951,
+      "val_loss": 2.018,
+      "val_f1": 0.5729
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.7241,
+      "train_acc": 0.962,
+      "val_loss": 2.0146,
+      "val_f1": 0.5808
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.7023,
+      "train_acc": 0.97,
+      "val_loss": 1.9799,
+      "val_f1": 0.598
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.6875,
+      "train_acc": 0.976,
+      "val_loss": 2.0237,
+      "val_f1": 0.5911
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.6751,
+      "train_acc": 0.98,
+      "val_loss": 2.0004,
+      "val_f1": 0.6064
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.666,
+      "train_acc": 0.984,
+      "val_loss": 2.0262,
+      "val_f1": 0.6026
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.6576,
+      "train_acc": 0.987,
+      "val_loss": 2.0531,
+      "val_f1": 0.5989
+    }
+  ]
+}

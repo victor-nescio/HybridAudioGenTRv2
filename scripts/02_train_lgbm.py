@@ -30,7 +30,6 @@ import warnings
 from pathlib import Path
 
 import joblib
-import lightgbm as lgb
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -38,11 +37,10 @@ import numpy as np
 import optuna
 import pandas as pd
 import seaborn as sns
-import shap
 from sklearn.metrics import (accuracy_score, balanced_accuracy_score,
                              classification_report, confusion_matrix,
                              f1_score)
-from sklearn.model_selection import StratifiedKFold, train_test_split
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.utils.class_weight import compute_class_weight
 
@@ -54,44 +52,19 @@ ISLENMIS   = ROOT / "data" / "processed"
 CHECKPTS   = ROOT / "checkpoints"
 OUTPUTS    = ROOT / "outputs"
 
+sys.path.insert(0, str(ROOT))
+from src.models.lgbm import (OZELLIK_GRUPLARI_250, OZELLIK_GRUPLARI_467,
+                              VARSAYILAN_PARAMS, cv_degerlendir, lgbm_olustur,
+                              optuna_hedef, shap_grup_onemi)
+
 # ── Sabitler ──────────────────────────────────────────────────────────────────
-SEED        = 42
-N_FOLDS     = 5
-TEST_ORANI  = 0.15
-VAL_ORANI   = 0.15
+SEED       = 42
+N_FOLDS    = 5
+TEST_ORANI = 0.15
+VAL_ORANI  = 0.15
 
-# N_DIM parquetten otomatik tespit edilir (bkz. veri_yukle)
 N_DIM: int = 0
-
-# 467-dim icin ozellik grubu sinirlari.
-# 250-dim eski parquet ile calısilıyorsa SHAP grafigi atlanir.
-OZELLIK_GRUPLARI_467 = {
-    "MFCC genisletilmis (320)":    (0,   320),
-    "Mel filterbank enerjisi (80)": (320, 400),
-    "Spektral doku (28)":          (400, 428),
-    "Tonal / harmonik (36)":       (428, 464),
-    "Zamansal dinamik (3)":        (464, 467),
-}
-OZELLIK_GRUPLARI_250 = {
-    "MFCC (240)":             (0,   240),
-    "Spektral ozellikler (10)":(240, 250),
-}
 OZELLIK_GRUPLARI: dict = {}  # veri_yukle() tarafindan doldurulur
-
-VARSAYILAN_PARAMS = dict(
-    n_estimators=500,
-    num_leaves=127,
-    max_depth=8,
-    learning_rate=0.05,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    reg_alpha=0.1,
-    reg_lambda=0.1,
-    min_child_samples=20,
-    random_state=SEED,
-    n_jobs=-1,
-    verbose=-1,
-)
 
 
 # ── Veri yukleme ve bolme ─────────────────────────────────────────────────────
@@ -163,34 +136,9 @@ def ozellik_ayir(df: pd.DataFrame):
     return df[sutunlar].values.astype(np.float32), df["sinif_idx"].values
 
 
-# ── Optuna HPO ────────────────────────────────────────────────────────────────
-def optuna_hedef(trial, X_train, y_train, X_val, y_val, sinif_agirliklari):
-    params = dict(
-        n_estimators       = trial.suggest_int("n_estimators",   200,  800),
-        num_leaves         = trial.suggest_int("num_leaves",      31,  255),
-        max_depth          = trial.suggest_int("max_depth",        4,   12),
-        learning_rate      = trial.suggest_float("learning_rate", 5e-3, 0.2, log=True),
-        subsample          = trial.suggest_float("subsample",     0.5,  1.0),
-        colsample_bytree   = trial.suggest_float("colsample_bytree", 0.4, 1.0),
-        min_child_samples  = trial.suggest_int("min_child_samples", 10, 80),
-        reg_alpha          = trial.suggest_float("reg_alpha",   0.0, 3.0),
-        reg_lambda         = trial.suggest_float("reg_lambda",  0.0, 3.0),
-        random_state=SEED, n_jobs=-1, verbose=-1,
-    )
-    model = lgb.LGBMClassifier(**params)
-    model.fit(
-        X_train, y_train,
-        sample_weight=[sinif_agirliklari[y] for y in y_train],
-        callbacks=[lgb.early_stopping(30, verbose=False),
-                   lgb.log_evaluation(-1)],
-        eval_set=[(X_val, y_val)],
-        eval_metric="multi_logloss",
-    )
-    return f1_score(y_val, model.predict(X_val), average="macro")
-
-
+# ── HPO sarmalayici ───────────────────────────────────────────────────────────
 def hpo_calistir(X_train, y_train, X_val, y_val,
-                 sinif_agirliklari, n_deneme: int):
+                 ag_map: dict, n_deneme: int) -> dict:
     print(f"\n  Optuna HPO: {n_deneme} deneme, val macro-F1 maksimizasyonu")
     study = optuna.create_study(
         direction="maximize",
@@ -198,67 +146,13 @@ def hpo_calistir(X_train, y_train, X_val, y_val,
         pruner=optuna.pruners.MedianPruner(n_startup_trials=10),
     )
     study.optimize(
-        lambda t: optuna_hedef(t, X_train, y_train, X_val, y_val, sinif_agirliklari),
+        lambda t: optuna_hedef(t, X_train, y_train, X_val, y_val, ag_map),
         n_trials=n_deneme,
         show_progress_bar=True,
     )
     print(f"  En iyi val macro-F1 : {study.best_value:.4f}")
     print(f"  En iyi parametreler : {study.best_params}")
     return {**study.best_params, "random_state": SEED, "n_jobs": -1, "verbose": -1}
-
-
-# ── Cross-validation (dosya duzeyinde) ───────────────────────────────────────
-def cv_degerlendir(df_trainval: pd.DataFrame, scaler: StandardScaler,
-                   params: dict, sinif_adlari: list, n_folds: int):
-    """Dosya duzeyinde stratified k-fold CV."""
-    dosya_sinif = (df_trainval.groupby("dosya")["sinif_idx"]
-                   .first().reset_index())
-    dosya_arr   = dosya_sinif["dosya"].values
-    sinif_arr   = dosya_sinif["sinif_idx"].values
-
-    skf = StratifiedKFold(n_splits=n_folds, shuffle=True, random_state=SEED)
-    fold_sonuclari = []
-
-    for fold, (tr_idx, te_idx) in enumerate(skf.split(dosya_arr, sinif_arr), 1):
-        tr_dosyalar = set(dosya_arr[tr_idx])
-        te_dosyalar = set(dosya_arr[te_idx])
-
-        df_tr = df_trainval[df_trainval["dosya"].isin(tr_dosyalar)]
-        df_te = df_trainval[df_trainval["dosya"].isin(te_dosyalar)]
-
-        X_tr, y_tr = ozellik_ayir(df_tr)
-        X_te, y_te = ozellik_ayir(df_te)
-
-        X_tr = scaler.transform(X_tr)
-        X_te = scaler.transform(X_te)
-
-        siniflar = np.unique(y_tr)
-        agirliklar = compute_class_weight("balanced", classes=siniflar, y=y_tr)
-        ag_map = dict(zip(siniflar, agirliklar))
-
-        # CV icin hafif parametreler — buyuk modelin serializasyon OOM'unu onler.
-        # Son model ayri olarak tam parametrelerle egitilir.
-        cv_params = dict(**params)
-        cv_params["n_estimators"] = min(cv_params.get("n_estimators", 500), 300)
-        cv_params["num_leaves"]   = min(cv_params.get("num_leaves",   127),  63)
-
-        model = lgb.LGBMClassifier(**cv_params)
-        model.fit(X_tr, y_tr,
-                  sample_weight=[ag_map[y] for y in y_tr])
-
-        y_pred = model.predict(X_te)
-        fold_sonuclari.append({
-            "fold":                fold,
-            "accuracy":            accuracy_score(y_te, y_pred),
-            "balanced_accuracy":   balanced_accuracy_score(y_te, y_pred),
-            "macro_f1":            f1_score(y_te, y_pred, average="macro"),
-            "weighted_f1":         f1_score(y_te, y_pred, average="weighted"),
-        })
-        print(f"    Fold {fold}/{n_folds}  "
-              f"acc={fold_sonuclari[-1]['accuracy']:.4f}  "
-              f"macro-F1={fold_sonuclari[-1]['macro_f1']:.4f}")
-
-    return pd.DataFrame(fold_sonuclari)
 
 
 # ── Cikti fonksiyonlari ───────────────────────────────────────────────────────
@@ -280,19 +174,9 @@ def karmasiklik_matrisi_ciz(y_gercek, y_tahmin, sinif_adlari, cikti_yolu):
 
 
 def shap_grup_onemi_ciz(model, X_ornek, cikti_yolu):
-    """SHAP degerlerini ozellik gruplarina gore toplar ve gorsellestirir."""
+    """SHAP grup katkilerini hesaplar ve gorsellestirir."""
     print("  SHAP hesaplaniyor (ornek)...")
-    explainer   = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(X_ornek)   # (sinif, ornek, ozellik)
-    # Tum siniflar icin mutlak ortalama
-    shap_abs = np.abs(np.array(shap_values)).mean(axis=(0, 1))  # (467,)
-
-    grup_onemleri = {}
-    for ad, (bas, son) in OZELLIK_GRUPLARI.items():
-        grup_onemleri[ad] = float(shap_abs[bas:son].sum())
-
-    toplam = sum(grup_onemleri.values())
-    grup_onemleri = {k: v / toplam * 100 for k, v in grup_onemleri.items()}
+    grup_onemleri = shap_grup_onemi(model, X_ornek, OZELLIK_GRUPLARI)
 
     fig, ax = plt.subplots(figsize=(9, 5))
     renkler = ["#2196F3", "#4CAF50", "#FF9800", "#9C27B0", "#F44336"]
@@ -377,16 +261,20 @@ def main():
         np.array([ag_map.get(y, 1.0) for y in y_val])
     ])
 
-    son_model = lgb.LGBMClassifier(**en_iyi_params)
-    son_model.fit(X_trainval, y_trainval, sample_weight=sw_trainval)
+    son_model = lgbm_olustur(en_iyi_params, X_trainval, y_trainval,
+                             sample_weight=sw_trainval)
     joblib.dump(son_model, CHECKPTS / "lgbm_model.pkl")
     print(f"  Model kaydedildi : checkpoints/lgbm_model.pkl")
 
     # ── 7. Cross-validation ────────────────────────────────────────────────
     print(f"\n  {args.cv}-katli stratified CV (dosya duzeyinde)...")
     df_trainval = pd.concat([df_train, df_val], ignore_index=True)
+    ozellik_sutunlari = sorted(
+        [c for c in df.columns if c.startswith("f") and c[1:].isdigit()],
+        key=lambda c: int(c[1:])
+    )
     cv_df = cv_degerlendir(df_trainval, scaler, en_iyi_params,
-                           sinif_adlari, args.cv)
+                           ozellik_sutunlari, args.cv)
     cv_df.to_csv(OUTPUTS / "lgbm_cv_results.csv", index=False)
 
     print(f"\n  CV Ozeti ({args.cv} fold):")

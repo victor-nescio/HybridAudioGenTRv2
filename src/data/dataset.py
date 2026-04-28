@@ -31,13 +31,27 @@ import numpy as np
 import pandas as pd
 import soundfile as sf
 import torch
+import torchaudio
+import torchaudio.transforms as T
 from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Dataset
 
-from src.data.features import HOP_LENGTH, N_MELS, SEGMENT_SN, log_mel_cikar, segmentle
-from src.data.preprocessing import onisle
+from src.data.features import HOP_LENGTH, N_FFT, N_MELS, SEGMENT_SN, WIN_LENGTH
 
 warnings.filterwarnings("ignore")
+
+def _mel_hesapla(y: np.ndarray, sr: int) -> np.ndarray:
+    """torchaudio ile log-mel spectrogram hesapla (librosa'dan ~10x hizli)."""
+    transform = T.MelSpectrogram(
+        sample_rate=sr, n_mels=N_MELS,
+        n_fft=N_FFT, hop_length=HOP_LENGTH, win_length=WIN_LENGTH,
+        power=2.0,
+    )
+    amp_to_db = T.AmplitudeToDB(stype="power", top_db=80.0)
+    y_t  = torch.from_numpy(y).unsqueeze(0)   # (1, T)
+    mel  = transform(y_t)                      # (1, N_MELS, frames)
+    mel  = amp_to_db(mel)
+    return mel.squeeze(0).numpy()              # (N_MELS, frames)
 
 # ── Sabitler ──────────────────────────────────────────────────────────────────
 SEED    = 42
@@ -65,28 +79,54 @@ class BBCSegmentDataset(Dataset):
 
     def __init__(self, df: pd.DataFrame, root,
                  mod: str = "cnn", sr: int = SR,
-                 segment_sn: float = SEGMENT_SN, T_max: int = T_MAX):
+                 segment_sn: float = SEGMENT_SN, T_max: int = T_MAX,
+                 preload: bool = True):
         self.root       = Path(root)
         self.mod        = mod
         self.sr         = sr
         self.segment_sn = segment_sn
         self.T_max      = T_max
+        self.cache_dir  = self.root / "data" / "mel_cache"
 
-        # Segment indeksi: [(wav_yolu_str, sinif_idx, seg_no), ...]
-        # soundfile.info() ile sadece baslik okunarak segment sayisi tahmin edilir
         self.indeks = self._indeks_olustur(df)
+
+        # Tum mel dosyalarini RAM'e yukle (disk I/O tamamen ortadan kalkar)
+        self._mel_ram: dict | None = None
+        if preload:
+            self._mel_ram = self._ram_yukle()
+
+    def _cache_yolu(self, wav_yolu: str) -> Path | None:
+        try:
+            rel = Path(wav_yolu).relative_to(self.root)
+            return self.cache_dir / rel.with_suffix(".npy")
+        except ValueError:
+            return None
+
+    def _ram_yukle(self) -> dict:
+        """Benzersiz WAV dosyalarinin mel cache'lerini RAM'e yukler."""
+        benzersiz = {wav for wav, _, _ in self.indeks}
+        mel_ram   = {}
+        for wav in benzersiz:
+            cache = self._cache_yolu(wav)
+            if cache and cache.exists():
+                mel_ram[wav] = np.load(str(cache))   # float16, RAM'de
+        return mel_ram
 
     # ── Init ──────────────────────────────────────────────────────────────────
     def _indeks_olustur(self, df: pd.DataFrame) -> list[tuple]:
         indeks = []
+        has_n_segs = "n_segs" in df.columns
         for _, satir in df.iterrows():
-            wav_yolu = str(self.root / satir["dosya"])
+            wav_yolu  = str(self.root / satir["dosya"])
             sinif_idx = int(satir["sinif_idx"])
-            try:
-                bilgi  = sf.info(wav_yolu)
-                n_seg  = max(1, int(bilgi.duration / self.segment_sn))
-            except Exception:
-                n_seg = 1
+            if has_n_segs:
+                n_seg = max(1, int(satir["n_segs"]))
+            else:
+                try:
+                    bilgi = sf.info(wav_yolu)
+                    n_seg = max(1, int(bilgi.duration / self.segment_sn))
+                except Exception:
+                    n_seg = 1
             for s in range(n_seg):
                 indeks.append((wav_yolu, sinif_idx, s))
         return indeks
@@ -99,19 +139,34 @@ class BBCSegmentDataset(Dataset):
         wav_yolu, sinif_idx, seg_no = self.indeks[idx]
 
         try:
-            y, sr_out = onisle(wav_yolu, sr=self.sr)
-            segmentler = segmentle(y, sr_out, self.segment_sn)
-
-            if seg_no < len(segmentler):
-                seg = segmentler[seg_no]
-            elif segmentler:
-                seg = segmentler[-1]      # son segment kullan
+            # 1. RAM cache (en hizli) — sadece ilgili dilimi float32'ye cevir
+            if self._mel_ram is not None and wav_yolu in self._mel_ram:
+                baslangic = seg_no * self.T_max
+                mel = self._mel_ram[wav_yolu][:, baslangic: baslangic + self.T_max].astype(np.float32)
+            # 2. Disk cache
+            elif (cache_yolu := self._cache_yolu(wav_yolu)) and cache_yolu.exists():
+                mel_tam   = np.load(str(cache_yolu))
+                baslangic = seg_no * self.T_max
+                mel       = mel_tam[:, baslangic: baslangic + self.T_max].astype(np.float32)
             else:
-                seg = y
-
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore")
-                mel = log_mel_cikar(seg, sr_out)  # (N_MELS, T)
+                # Cache yoksa WAV'dan hesapla
+                seg_ornekler = int(self.segment_sn * self.sr)
+                y, sr_dosya  = sf.read(wav_yolu,
+                                       start=seg_no * seg_ornekler,
+                                       stop=(seg_no + 1) * seg_ornekler,
+                                       dtype="float32", always_2d=False)
+                if y.ndim > 1:
+                    y = y.mean(axis=1)
+                if sr_dosya != self.sr:
+                    import librosa
+                    y = librosa.resample(y, orig_sr=sr_dosya, target_sr=self.sr)
+                y = y - y.mean()
+                tepe = np.abs(y).max()
+                if tepe > 0:
+                    y *= 0.99 / tepe
+                if len(y) < seg_ornekler:
+                    y = np.pad(y, (0, seg_ornekler - len(y)))
+                mel = _mel_hesapla(y, self.sr)
         except Exception:
             mel = np.full((N_MELS, self.T_max), fill_value=-80.0, dtype=np.float32)
 
@@ -155,19 +210,21 @@ def dataloader_olustur(
     T_max: int = T_MAX,
     batch_size: int = 32,
     shuffle: bool = True,
-    num_workers: int = 4,
+    num_workers: int = 0,
+    preload: bool = False,
 ) -> DataLoader:
     """BBCSegmentDataset + DataLoader'u tek satirda olusturur."""
     dataset = BBCSegmentDataset(
-        df, root, mod=mod, sr=sr, T_max=T_max)
+        df, root, mod=mod, sr=sr, T_max=T_max, preload=preload)
     return DataLoader(
         dataset,
         batch_size=batch_size,
         shuffle=shuffle,
         num_workers=num_workers,
         pin_memory=torch.cuda.is_available(),
-        persistent_workers=(num_workers > 0),
-        drop_last=(shuffle),   # train'de son eksik batch'i at
+        persistent_workers=False,
+        prefetch_factor=2 if num_workers > 0 else None,
+        drop_last=(shuffle),
     )
 
 
