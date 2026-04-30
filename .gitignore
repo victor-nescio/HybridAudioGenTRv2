@@ -25,6 +25,10 @@ outputs/model_selection*
 outputs/report/*.png
 *.parquet
 *.csv
+# Istisnalar: commit edilmesi gereken kucuk veri dosyalari
+!data/processed/turkce_promptlar.json
+!data/processed/dosya_ceviri.json
+!data/processed/ses_metin_eslestirme.parquet
 
 # Python
 *.pyc
