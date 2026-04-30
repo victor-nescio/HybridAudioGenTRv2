@@ -34,6 +34,7 @@ SENTETIK_DIR  = ROOT / "data" / "synthetic"
 MODEL_ADI      = "audioldm2-full"   # audioldm2 paketi içindeki model adı
 SURE_SN        = 5.0                # 5 saniyelik klip (eğitim segmentleriyle eşleşir)
 ORNEKLEME_HZ   = 16000
+SURE_URET_SN   = 10.0   # audioldm2 sadece 10s destekliyor
 NEGATIF_PROMPT = "low quality, noise, distortion, silence, music"
 
 
@@ -53,13 +54,12 @@ def ses_uret(model, prompt: str, n: int, n_adim: int = 200,
     audios = text_to_audio(
         latent_diffusion=model,
         text=prompt,
-        original_audio_file_path=None,
+        transcription="",
         seed=42,
-        duration=SURE_SN,
+        duration=SURE_URET_SN,   # audioldm2 sadece 10s destekliyor
         batchsize=n,
         guidance_scale=guidance_scale,
         n_candidate_gen_per_text=n,
-        transcription="",
         ddim_steps=n_adim,
     )
     return audios  # (n, örnekler)
@@ -70,7 +70,8 @@ def sinif_uret(model, sinif: str, promptlar: list[str], n_klip: int,
     cikis_dir = SENTETIK_DIR / sinif
     cikis_dir.mkdir(parents=True, exist_ok=True)
 
-    mevcut = list(cikis_dir.glob("*.wav"))
+    # Sadece 0'dan buyuk dosyalari say (yarim kalmis dosyalari atla)
+    mevcut = [p for p in cikis_dir.glob("*.wav") if p.stat().st_size > 1000]
     print(f"\n[{sinif}]  hedef={n_klip}  mevcut={len(mevcut)}")
 
     if len(mevcut) >= n_klip:
@@ -99,7 +100,13 @@ def sinif_uret(model, sinif: str, promptlar: list[str], n_klip: int,
             continue
 
         for audio in audios:
+            # audioldm2 cikisi: (1, 1, ornekler) ya da (1, ornekler) -> (ornekler,) squeeze
+            audio = np.squeeze(audio)        # (ornekler,) float32
             audio = np.clip(audio, -1.0, 1.0)
+            # 10s -> 5s: egitim segmentleriyle eslessin
+            hedef_ornek = int(SURE_SN * ORNEKLEME_HZ)
+            if audio.ndim == 1 and len(audio) > hedef_ornek:
+                audio = audio[:hedef_ornek]
             isim = f"{sinif}_{p_idx}_{uuid.uuid4().hex[:8]}.wav"
             sf.write(cikis_dir / isim, audio, samplerate=ORNEKLEME_HZ)
             toplam_uretilen += 1
