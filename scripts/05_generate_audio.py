@@ -93,23 +93,28 @@ def sinif_uret(model, sinif: str, promptlar: list[str], n_klip: int,
             continue
 
         print(f"  [{p_idx+1}/{n_prompt}] '{prompt[:60]}' -> {gerekli} klip")
-        try:
-            audios = ses_uret(model, prompt, gerekli, n_adim)
-        except Exception as e:
-            print(f"  HATA: {e}")
-            continue
 
-        for audio in audios:
-            # audioldm2 cikisi: (1, 1, ornekler) ya da (1, ornekler) -> (ornekler,) squeeze
-            audio = np.squeeze(audio)        # (ornekler,) float32
-            audio = np.clip(audio, -1.0, 1.0)
-            # 10s -> 5s: egitim segmentleriyle eslessin
-            hedef_ornek = int(SURE_SN * ORNEKLEME_HZ)
-            if audio.ndim == 1 and len(audio) > hedef_ornek:
-                audio = audio[:hedef_ornek]
-            isim = f"{sinif}_{p_idx}_{uuid.uuid4().hex[:8]}.wav"
-            sf.write(cikis_dir / isim, audio, samplerate=ORNEKLEME_HZ)
-            toplam_uretilen += 1
+        for k in range(gerekli):
+            # Her klip 1'er uretilir — RTX 3060 12GB icin batchsize>1 OOM veriyor
+            torch.cuda.empty_cache()
+            try:
+                audios = ses_uret(model, prompt, 1, n_adim)
+            except Exception as e:
+                print(f"  HATA (klip {k+1}/{gerekli}): {e}")
+                continue
+
+            for audio in audios:
+                # audioldm2 cikisi: (1, 1, ornekler) ya da (1, ornekler) -> (ornekler,)
+                audio = np.squeeze(audio)
+                audio = np.clip(audio, -1.0, 1.0)
+                # 10s -> 5s: egitim segmentleriyle eslessin
+                hedef_ornek = int(SURE_SN * ORNEKLEME_HZ)
+                if audio.ndim == 1 and len(audio) > hedef_ornek:
+                    audio = audio[:hedef_ornek]
+                isim = f"{sinif}_{p_idx}_{uuid.uuid4().hex[:8]}.wav"
+                sf.write(cikis_dir / isim, audio, samplerate=ORNEKLEME_HZ)
+                toplam_uretilen += 1
+                print(f"    [{toplam_uretilen}] kaydedildi: {isim}")
 
     print(f"  {toplam_uretilen} yeni klip uretildi -> {cikis_dir}")
     return len(mevcut) + toplam_uretilen
