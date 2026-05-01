@@ -429,16 +429,17 @@ def belge_olustur(figler, st):
 
     # Ozet kutusu
     ozet_metni = (
-        "Bu rapor, BBC Ses Arsivi uzerinde gerceklestirilen kapsamli ses siniflandirma "
-        "deneylerinin bulgularini sunmaktadir. 15.356 WAV dosyasi ve 26 sinifi kapsayan "
-        "veri seti uzerinde; 6 geleneksel makine ogrenimi algoritmasi, 3 derin ogrenme "
-        "modeli (CNN, BiLSTM, AST Transformer) ve 4 farkli geç füzyon yaklasimi "
-        "sistematik olarak degerlendirilmistir. En yuksek bireysel performans, "
-        "pretrained ResNet-18 tabanli CNN modeli ile Test Macro-F1 = 0.6716 olarak elde "
-        "edilmistir. Geleneksel ML'de LightGBM, Optuna HPO ile Test Macro-F1 = 0.5857 "
-        "degerine ulasarak en iyi klasik model olmustur. Geç füzyon analizinde Oracle "
-        "ust sinirinin 0.7812 oldugu saptanmis; model ciktilarinin yuksek korelasyonu "
-        "nedeniyle Val-F1 agirlikli füzyon bireysel CNN performansini gecememistir."
+        "Bu rapor, BBC Ses Arsivi uzerinde yurutulmekte olan doktora tezi arastirmasinin "
+        "ikinci ara raporunu sunmaktadir. 15.356 WAV dosyasi ve 26 sinifi kapsayan veri "
+        "seti uzerinde; 6 geleneksel ML algoritmasi, 3 derin ogrenme modeli (CNN, BiLSTM, "
+        "AST Transformer) ve 4 late fusion yontemi sistematik olarak degerlendirilmistir. "
+        "En yuksek bireysel performans ResNet-18 CNN ile Test Macro-F1 = 0.6716 olarak "
+        "elde edilmistir. Oracle analizi (0.7812) ve dusuk performansli siniflar "
+        "(insaat_sesleri F1=0.39, dini_mekan F1=0.46) uretici veri artirmanin "
+        "gerekliligini ortaya koymaktadir. Tezin asil bilimsel katkisi olan AudioLDM2 "
+        "tabanli iteratif uretici artirma dongusu aktif olarak devam etmektedir: "
+        "Tur 1 (pretrained, zero-shot) sentetik ses uretimi tamamlanmakta, "
+        "Tur 2 icin CLAP ile Turkce prompt fine-tuning planlanmaktadir."
     )
     ozet_tablo = Table(
         [[P(ozet_metni, st["ozet_kutu"])]],
@@ -734,7 +735,7 @@ def belge_olustur(figler, st):
         ("FONTNAME", (0, -1), (-1, -1), "Helvetica-Bold"),
     ]))
     icerik += [
-        P("Tablo 5. Late Fusion Sonuc Tablosu", st["sekil_altyazi"]),
+        P("Tablo 6. Late Fusion Sonuc Tablosu", st["sekil_altyazi"]),
         t, Spacer(1, 0.3*cm),
         P("Meta-Learner val kumesinde 0.7027 gibi yuksek bir skor elde etmis; ancak "
           "test kumesinde 0.6397'ye duserek overfitting sergilemistir. Bunun temel "
@@ -747,10 +748,71 @@ def belge_olustur(figler, st):
         PageBreak(),
     ]
 
-    # ── BOLUM 5: TARTISMA ─────────────────────────────────────────────────────
+    # ── BOLUM 5: URETICI VERI ARTIRMA ────────────────────────────────────────
     icerik += [
-        P("5. Tartisma", st["bolum"]),
-        P("5.1 CNN'in Ustunlugu", st["alt_bolum"]),
+        P("5. Uretici Yapay Zeka ile Veri Artirma", st["bolum"]),
+        P("5.1 AudioLDM2 — Yontem ve Motivasyon", st["alt_bolum"]),
+        P("Dusuk performansli siniflarda (insaat_sesleri F1=0.39, dini_mekan F1=0.46) "
+          "gercek veri toplamanin maliyeti ve BBC arsivinin kapali dogasi goz onunde "
+          "bulunduruldugunda, uretici modeller en makul veri artirma stratejisini "
+          "olusturmaktadir. Bu calismada AudioLDM2 (Liu et al., 2023 — University of "
+          "Surrey) kullanilmaktadir. AudioLDM2, latent diffusion mimarisine dayali bir "
+          "metin-sesten ses uretici modeldir; CLAP (Contrastive Language-Audio "
+          "Pretraining) kodlayicisi araciligiyla dogal dil promptlarini akustik "
+          "uzaya donusturur.", st["govde"]),
+        P("Pretrained model LAION-Audio-630K ve AudioSet uzerinde egitilmis olup "
+          "genel akustik kavramlari kodlamaktadir. BBC'ye ozgu akustik karakterleri "
+          "ogrenmesi icin Turkce/Ingilizce promptlarla birlestirilmis gercek BBC "
+          "sesleriyle fine-tuning yapilacaktir (Tur 2).", st["govde"]),
+
+        P("5.2 Iteratif Artirma Dongusu", st["alt_bolum"]),
+    ]
+
+    tur_satirlar = [
+        ["Asama", "Uretici Model", "Prompt Dili", "Hedef", "Durum"],
+        ["Tur 1\n(Zero-shot)", "AudioLDM2-full\n(pretrained)", "Ingilizce\n(LAION/AudioSet)",
+         "F1<0.5 olan 4 sinif\n50 klip/sinif", "DEVAM EDIYOR"],
+        ["Tur 2\n(Fine-tuned)", "AudioLDM2\n+ CLAP fine-tune", "Turkce + Ingilizce\n(ses_metin_eslestirme)",
+         "Tum zayif siniflar\n50 klip/sinif", "PLANLANDI"],
+    ]
+    t = Table(tur_satirlar, colWidths=[2.8*cm, 3.5*cm, 3.5*cm, 4*cm, 3.2*cm])
+    t.setStyle(tablo_stili_temel(tur_satirlar))
+    for row_idx, row in enumerate(tur_satirlar):
+        if "DEVAM" in str(row[-1]):
+            t.setStyle(TableStyle([
+                ("BACKGROUND", (-1, row_idx), (-1, row_idx), colors.HexColor("#FFF9C4")),
+                ("TEXTCOLOR",  (-1, row_idx), (-1, row_idx), colors.HexColor("#F57F17")),
+                ("FONTNAME",   (-1, row_idx), (-1, row_idx), "Helvetica-Bold"),
+            ]))
+        elif "PLANLANDI" in str(row[-1]):
+            t.setStyle(TableStyle([
+                ("TEXTCOLOR",  (-1, row_idx), (-1, row_idx), colors.HexColor("#1565C0")),
+            ]))
+
+    icerik += [
+        P("Tablo 5. Iteratif Uretici Artirma Tur Plani", st["sekil_altyazi"]),
+        t, Spacer(1, 0.3*cm),
+        P("Tur 1'in amaci, pretrained modelin bile anlamli bir F1 iyilesmesi "
+          "saglayip saglamadigini olcmektir (ablation / baseline karsilastirma). "
+          "Tur 2'de CLAP, 15.356 gercek BBC ses-metin ciftinden (ses_metin_eslestirme"
+          ".parquet) fine-tune edilecek; bu sayede AudioLDM2 BBC'ye ozgu akustik "
+          "karakterleri ogrenecektir. Tur 1 ile Tur 2 arasindaki F1 farki, "
+          "fine-tuning'in katki buyuklugunu sayisallastiracaktir.", st["govde"]),
+
+        P("5.3 Teknik Altyapi", st["alt_bolum"]),
+        P("AudioLDM2-full 346.94M parametreye sahip olup RTX 3060 12GB VRAM'de "
+          "float16 ile calistirilmaktadir. DDIM ornekleyici 50 adimda ~90s/klip "
+          "uretim hizina ulasir (200 adimda ~7 dk/klip). Her klip 10 saniye "
+          "olarak uretilip ilk 5 saniyeye kirpilmakta, 16 kHz WAV olarak "
+          "kaydedilmektedir. Crash-safe uretim: her klip anlinda kaydedilir, "
+          "yarida kesilirse kaldigi yerden devam eder.", st["govde"]),
+        PageBreak(),
+    ]
+
+    # ── BOLUM 6: TARTISMA ─────────────────────────────────────────────────────
+    icerik += [
+        P("6. Tartisma", st["bolum"]),
+        P("6.1 CNN'in Ustunlugu", st["alt_bolum"]),
         P("ResNet-18 tabanli CNN, her model ailesinde acik ara lider konumundadir. "
           "Bu sonuc birkac gozlemle aciklanabilir: (1) konvolusyonel mimari, "
           "spektrogramdaki yerel zaman-frekans kaliplari icin induktif bir on-bilgi "
@@ -758,7 +820,7 @@ def belge_olustur(figler, st):
           "agirliklar, ses veriyle ince ayar icin guclü bir baslangic noktasi olusturur; "
           "(3) spektrogramlar goruntulerle yeterince benzer oldugunden transfer learning "
           "etkili bir sekilde calismaktadir.", st["govde"]),
-        P("5.2 AST Transformerin Overfitting Davranisi", st["alt_bolum"]),
+        P("6.2 AST Transformerin Overfitting Davranisi", st["alt_bolum"]),
         P("85.5M parametreli AST modeli, 9 epoch sonrasinda val loss artisina bagli "
           "overfitting sergiledi. Ozellikle dikkat cekici olan, train accuracy'nin "
           "epoch 7'de >%98'e ulasmisken val F1'in 0.60'ta plateolar yapmasidir. "
@@ -766,7 +828,7 @@ def belge_olustur(figler, st):
           "gostermektedir. AST'nin potansiyelinden tam olarak faydalanmak icin "
           "SpecAugment, dropout artisi (0.2'den 0.4'e) ve gradual layer unfreezing "
           "gibi regularizasyon stratejilerinin denenmesi onerilmektedir.", st["govde"]),
-        P("5.3 LightGBM'in Rekabetci Performansi", st["alt_bolum"]),
+        P("6.3 LightGBM'in Rekabetci Performansi", st["alt_bolum"]),
         P("El-yapimi 467-boyutlu ozellikler uzerinde calisan LightGBM'in "
           "0.5857 test F1 ile derin ogrenme modellerine rekabetci yaklasabilmesi "
           "dikkat cekicidir. Bu sonuc; veri miktarinin sinirli oldugu, hesaplama "
@@ -777,7 +839,7 @@ def belge_olustur(figler, st):
           "konusu olabilir.", st["govde"]),
         Spacer(1, 0.2*cm),
 
-        P("6. Sonuc ve Sonraki Adimlar", st["bolum"]),
+        P("7. Sonuc ve Sonraki Adimlar", st["bolum"]),
         P("Bu calismada BBC Ses Arsivi uzerinde kapsamli bir karsilastirmali analiz "
           "gerceklestirilmistir. Temel bulgular soyle ozetlenebilir:", st["govde"]),
     ]
@@ -800,27 +862,42 @@ def belge_olustur(figler, st):
     icerik += [t, Spacer(1, 0.4*cm)]
 
     sonraki_satirlar = [
-        ["Asama", "Gorev", "Oncelik"],
-        ["1.4", "Late Fusion (tamamlandi)", "BITTI"],
-        ["2.1", "26 sinif x 5 Turkce prompt listesi (tamamlandi)", "BITTI"],
-        ["3.1", "AudioLDM kurulum + ilk uretim deneyi (50 klip/sinif)", "YUKSEK"],
-        ["3.2", "FAD olcumu — VGGish + CLAP karsilastirmali", "YUKSEK"],
-        ["3.3", "Iteratif artirma Tur 1: F1<0.5 siniflar", "YUKSEK"],
-        ["3.4", "AudioLDM Turkce CLAP fine-tuning", "ORTA"],
-        ["3.5", "Iteratif artirma Tur 2: fine-tuned model ile", "ORTA"],
-        ["4.1", "McNemar istatistiksel anlamlilik testleri", "DUSUK"],
-        ["4.2", "Grad-CAM ve attention gorselleştirmesi", "DUSUK"],
+        ["Asama", "Gorev", "Durum"],
+        ["1.1-1.3", "Klasik ML + LightGBM + HPO", "TAMAMLANDI"],
+        ["1.4",     "Late Fusion (CNN + BiLSTM + AST)", "TAMAMLANDI"],
+        ["2.1",     "BBC dosya adi cevirileri (1915 EN->TR)", "TAMAMLANDI"],
+        ["2.2",     "26 sinif x 5 Turkce/Ingilizce prompt listesi", "TAMAMLANDI"],
+        ["2.3",     "ses_metin_eslestirme.parquet (15.356 satir)", "TAMAMLANDI"],
+        ["3.1",     "AudioLDM2 kurulum + VRAM optimizasyonu", "TAMAMLANDI"],
+        ["3.2",     "Tur 1: Zero-shot uretim — 4 sinif x 50 klip (DDIM 50 adim)", "DEVAM EDIYOR"],
+        ["3.3",     "Tur 1: CNN augmented yeniden egitimi + F1 karsilastirmasi", "BEKLIYOR"],
+        ["3.4",     "FAD olcumu — VGGish + CLAP (gercek vs sentetik)", "BEKLIYOR"],
+        ["4.1",     "CLAP fine-tuning — gercek BBC sesi + Turkce/Ingilizce promptlar", "PLANLANDI"],
+        ["4.2",     "Tur 2: Fine-tuned AudioLDM2 ile uretim + CNN yeniden egitimi", "PLANLANDI"],
+        ["4.3",     "Tur 1 vs Tur 2 F1 delta karsilastirmasi (fine-tuning katkisi)", "PLANLANDI"],
+        ["5.1",     "McNemar istatistiksel anlamlilik testleri (CNN vs Aug-CNN)", "PLANLANDI"],
+        ["5.2",     "Tez yazimi — Bolum 3 (Yontem) ve Bolum 4 (Deneyler)", "PLANLANDI"],
     ]
-    t = Table(sonraki_satirlar, colWidths=[1.5*cm, 10*cm, 3.5*cm])
+    t = Table(sonraki_satirlar, colWidths=[1.8*cm, 10.7*cm, 3*cm])
     t.setStyle(tablo_stili_temel(sonraki_satirlar))
     for row_idx, row in enumerate(sonraki_satirlar):
-        if row[-1] == "BITTI":
+        if row[-1] == "TAMAMLANDI":
             t.setStyle(TableStyle([
                 ("TEXTCOLOR", (-1, row_idx), (-1, row_idx), colors.HexColor("#2E7D32")),
                 ("FONTNAME",  (-1, row_idx), (-1, row_idx), "Helvetica-Bold"),
             ]))
+        elif row[-1] == "DEVAM EDIYOR":
+            t.setStyle(TableStyle([
+                ("BACKGROUND", (0, row_idx), (-1, row_idx), colors.HexColor("#FFF9C4")),
+                ("TEXTCOLOR",  (-1, row_idx), (-1, row_idx), colors.HexColor("#E65100")),
+                ("FONTNAME",   (-1, row_idx), (-1, row_idx), "Helvetica-Bold"),
+            ]))
+        elif row[-1] == "BEKLIYOR":
+            t.setStyle(TableStyle([
+                ("TEXTCOLOR",  (-1, row_idx), (-1, row_idx), colors.HexColor("#1565C0")),
+            ]))
     icerik += [
-        P("Tablo 6. Sonraki Arastirma Adimlari", st["sekil_altyazi"]),
+        P("Tablo 7. Arastirma Ilerleme Tablosu (Tamamlanan + Planlanan Adimlar)", st["sekil_altyazi"]),
         t, Spacer(1, 0.5*cm),
         HRFlowable(width="100%", thickness=0.5, color=colors.HexColor("#B0BEC5")),
         Spacer(1, 0.2*cm),
