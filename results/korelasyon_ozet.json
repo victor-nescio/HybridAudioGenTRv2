@@ -1,0 +1,67 @@
+{
+  "siniflar": [
+    {
+      "sinif": "insaat_sesleri",
+      "cos_dispersion": 0.16843272842231394,
+      "fad": 11.447272369713774,
+      "gain": -0.0068999999999999895,
+      "grup": "ilk"
+    },
+    {
+      "sinif": "dini_mekan",
+      "cos_dispersion": 0.1890228249266556,
+      "fad": 16.28805094779537,
+      "gain": -0.01757499999999998,
+      "grup": "ilk"
+    },
+    {
+      "sinif": "acil_servis",
+      "cos_dispersion": 0.13864268533776308,
+      "fad": 22.264189574211713,
+      "gain": -0.007475000000000037,
+      "grup": "ilk"
+    },
+    {
+      "sinif": "diger_hayvanlar",
+      "cos_dispersion": 0.13945105602495264,
+      "fad": 7.1320511721527975,
+      "gain": -0.01577500000000001,
+      "grup": "ilk"
+    },
+    {
+      "sinif": "kopek_sesleri",
+      "cos_dispersion": 0.09946937909181018,
+      "fad": 16.038183733975387,
+      "gain": 0.01849999999999999,
+      "grup": "tutarli"
+    },
+    {
+      "sinif": "kus_sesleri",
+      "cos_dispersion": 0.10361752458751677,
+      "fad": 20.87977901012697,
+      "gain": 0.05027499999999993,
+      "grup": "tutarli"
+    },
+    {
+      "sinif": "hava_olaylari",
+      "cos_dispersion": 0.12839396859717836,
+      "fad": 11.354059160700416,
+      "gain": 0.033525,
+      "grup": "tutarli"
+    }
+  ],
+  "dispersion_gain": {
+    "pearson_r": -0.7572148664217155,
+    "pearson_p": 0.04870268284602216,
+    "spearman_r": -0.7857142857142859,
+    "spearman_p": 0.03623846267982713,
+    "n": 7
+  },
+  "fad_gain": {
+    "pearson_r": 0.3010623004872972,
+    "pearson_p": 0.511744995688888,
+    "spearman_r": 0.07142857142857144,
+    "spearman_p": 0.8790481931481541,
+    "n": 7
+  }
+}

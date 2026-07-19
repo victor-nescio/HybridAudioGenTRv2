@@ -1,0 +1,86 @@
+{
+  "tarih": "20260504_0016",
+  "tur": 1,
+  "hedef_siniflar": [
+    "insaat_sesleri",
+    "dini_mekan",
+    "acil_servis",
+    "diger_hayvanlar"
+  ],
+  "n_sentetik": 200,
+  "baseline": {
+    "val_f1": 0.669964095553422,
+    "test_f1": 0.6716,
+    "sinif_f1": {
+      "acil_servis": 0.5894,
+      "at_sesleri": 0.8675,
+      "ayak_sesleri": 0.9475,
+      "cocuk_bebek_sesleri": 0.8351,
+      "diger_hayvanlar": 0.5823,
+      "dini_mekan": 0.4614,
+      "doga_atmosferi": 0.5871,
+      "endustri_fabrika": 0.6731,
+      "ev_ici_sesler": 0.7328,
+      "gemi_tekne_sesleri": 0.7612,
+      "hava_olaylari": 0.5534,
+      "insaat_sesleri": 0.3877,
+      "kalabalik_sesleri": 0.6434,
+      "kapi_sesleri": 0.8038,
+      "kara_tasitlari": 0.7621,
+      "kopek_sesleri": 0.6652,
+      "kus_sesleri": 0.5913,
+      "ofis_iletisim": 0.6531,
+      "saat_can_sesleri": 0.838,
+      "sehir_atmosferi": 0.6279,
+      "silah_patlama": 0.6432,
+      "spor_eglence": 0.6628,
+      "su_sesleri": 0.5567,
+      "tarim_ciftlik": 0.5249,
+      "tren_sesleri": 0.7411,
+      "ucak_sesleri": 0.7691
+    },
+    "tarih": [],
+    "sure_dk": 0.0
+  },
+  "augmented": {
+    "val_f1": 0.5768,
+    "test_f1": 0.5823,
+    "sinif_f1": {
+      "acil_servis": 0.4171,
+      "at_sesleri": 0.7225,
+      "ayak_sesleri": 0.9227,
+      "cocuk_bebek_sesleri": 0.7795,
+      "diger_hayvanlar": 0.4613,
+      "dini_mekan": 0.3248,
+      "doga_atmosferi": 0.5665,
+      "endustri_fabrika": 0.5838,
+      "ev_ici_sesler": 0.5469,
+      "gemi_tekne_sesleri": 0.7138,
+      "hava_olaylari": 0.5127,
+      "insaat_sesleri": 0.2225,
+      "kalabalik_sesleri": 0.5465,
+      "kapi_sesleri": 0.5329,
+      "kara_tasitlari": 0.6924,
+      "kopek_sesleri": 0.6295,
+      "kus_sesleri": 0.6686,
+      "ofis_iletisim": 0.6103,
+      "saat_can_sesleri": 0.7529,
+      "sehir_atmosferi": 0.5877,
+      "silah_patlama": 0.5712,
+      "spor_eglence": 0.5291,
+      "su_sesleri": 0.5239,
+      "tarim_ciftlik": 0.419,
+      "tren_sesleri": 0.5975,
+      "ucak_sesleri": 0.7031
+    },
+    "tarih": [
+      {
+        "epoch": 1,
+        "train_loss": 1.36594,
+        "val_f1": 0.5768
+      }
+    ],
+    "sure_dk": 11.6
+  },
+  "delta_test_f1": -0.0893
+}

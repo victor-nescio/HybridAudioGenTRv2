@@ -80,13 +80,17 @@ class BBCSegmentDataset(Dataset):
     def __init__(self, df: pd.DataFrame, root,
                  mod: str = "cnn", sr: int = SR,
                  segment_sn: float = SEGMENT_SN, T_max: int = T_MAX,
-                 preload: bool = True):
+                 preload: bool = True, spec_augment: bool = False):
         self.root       = Path(root)
         self.mod        = mod
         self.sr         = sr
         self.segment_sn = segment_sn
         self.T_max      = T_max
         self.cache_dir  = self.root / "data" / "mel_cache"
+        # SpecAugment (yalnizca egitimde aciktir): normalize sonrasi mel uzerinde
+        # zaman/frekans maskeleme. Geleneksel augmentasyon temeli (M2) icin.
+        self.spec_augment = spec_augment
+        self._sa_rng = np.random.default_rng(0)
 
         self.indeks = self._indeks_olustur(df)
 
@@ -195,10 +199,34 @@ class BBCSegmentDataset(Dataset):
         # CNN / LSTM icin: ornek bazli normalize (sifir ortalama, birim varyas)
         mel = (mel - mel.mean()) / (mel.std() + 1e-6)
 
+        # SpecAugment: normalize sonrasi (sifir = ortalama) maskeleme
+        if self.spec_augment:
+            mel = self._spec_augment(mel)
+
         if self.mod == "lstm":
             return mel.T                    # (T_max, 128) zaman-birinci
 
         return mel[np.newaxis]              # (1, 128, T_max) cnn
+
+    def _spec_augment(self, mel: np.ndarray,
+                      n_freq: int = 2, max_freq: int = 15,
+                      n_time: int = 2, max_time: int = 20) -> np.ndarray:
+        """SpecAugment (Park ve ark. 2019): 2 frekans + 2 zaman maskesi.
+        Normalize edilmis mel uzerinde 0 (=ortalama) ile maskeler."""
+        mel = mel.copy()
+        F, T = mel.shape
+        rng = self._sa_rng
+        for _ in range(n_freq):
+            f = int(rng.integers(0, max_freq + 1))
+            if f > 0 and F - f > 0:
+                f0 = int(rng.integers(0, F - f))
+                mel[f0:f0 + f, :] = 0.0
+        for _ in range(n_time):
+            t = int(rng.integers(0, max_time + 1))
+            if t > 0 and T - t > 0:
+                t0 = int(rng.integers(0, T - t))
+                mel[:, t0:t0 + t] = 0.0
+        return mel
 
 
 # ── Yardimci: DataLoader fabrikasi ────────────────────────────────────────────
@@ -212,10 +240,12 @@ def dataloader_olustur(
     shuffle: bool = True,
     num_workers: int = 0,
     preload: bool = False,
+    spec_augment: bool = False,
 ) -> DataLoader:
     """BBCSegmentDataset + DataLoader'u tek satirda olusturur."""
     dataset = BBCSegmentDataset(
-        df, root, mod=mod, sr=sr, T_max=T_max, preload=preload)
+        df, root, mod=mod, sr=sr, T_max=T_max, preload=preload,
+        spec_augment=spec_augment)
     return DataLoader(
         dataset,
         batch_size=batch_size,

@@ -1,0 +1,1110 @@
+"""
+CLAP Fine-Tuning — BBC Ses Arsivi ile Turkce/Ingilizce Kontrastif Ogrenme
+
+Arastirma motivasyonu:
+    AudioLDM2'nin CLAP encoder'i LAION-Audio-630K ve AudioSet uzerinde egitilmistir.
+    BBC Ses Arsivi'nin kendine ozgu akustik karakterleri (1930-1990 arasi kayitlar,
+    Ingiliz radyo efektleri, spesifik Ingilizce yer/nesne isimleri) ile Turkce
+    aciklamalar arasindaki semantik kopuklugu kapatmak icin contrastive fine-tuning
+    uygulanmaktadir.
+
+Yontem (Wu et al. 2023 — CLAP; Elizalde et al. 2022 — CLAP-LAION):
+    - NT-Xent kayip fonksiyonu (InfoNCE / SimCLR loss)
+    - Soft negative mining: ayni siniftan farklı promptlar negative degil, hard
+      negative olarak isaretlenir (beta agirlik ile yumusatilir)
+    - Selective layer freezing: audio_branch ve text_branch'in alt katmanlari
+      dondurulur; sadece projeksiyon katmanlari + ust transformer bloklari guncellenir
+    - Dil dengesi: her batch'te %50 TR + %50 EN prompt (dil-dengeli ornekleme)
+    - Gradient checkpointing: VRAM tasarrufu icin
+    - EMA (Exponential Moving Average): stabil inference modeli icin
+
+Dondurulan katmanlar:
+    - audio_branch: ilk N_FROZEN_AUDIO transformer blogu donuk
+    - text_branch: ilk N_FROZEN_TEXT transformer katmani donuk
+    - Projeksiyon + transform katmanlari her zaman egitilir
+
+Degerlendirme metrikleri:
+    - R@1, R@5, R@10 (audio-to-text ve text-to-audio recall)
+    - mAP@10
+    - Sinif bazinda embedding uzayinda kNN dogrulugu
+
+Kullanim:
+    python scripts/08_clap_finetune.py --config             # varsayilan konfig
+    python scripts/08_clap_finetune.py --epochs 20 --lr 3e-5
+    python scripts/08_clap_finetune.py --sadece_ingilizce   # ablasyon: TR olmadan
+    python scripts/08_clap_finetune.py --kuru_calistirma    # egitim baslatmadan kontrol
+"""
+
+import argparse
+import json
+import logging
+import math
+import sys
+import time
+from dataclasses import asdict, dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+import numpy as np
+import pandas as pd
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.cuda.amp import GradScaler, autocast
+from torch.optim import AdamW
+from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
+from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s  %(levelname)-8s  %(message)s",
+    datefmt="%H:%M:%S",
+)
+log = logging.getLogger(__name__)
+
+# ── Sabitler ──────────────────────────────────────────────────────────────────
+PARQUET      = ROOT / "data" / "processed" / "ses_metin_eslestirme.parquet"
+CHECKPT_DIR  = ROOT / "checkpoints"
+RESULT_DIR   = ROOT / "results"
+SR           = 16_000       # CLAP beklenen ornek hizi
+CLIP_SN      = 10.0         # CLAP beklenen klip suresi (saniye)
+CLIP_SAMPLES = int(SR * CLIP_SN)
+DEVICE       = "cuda" if torch.cuda.is_available() else "cpu"
+
+# Hangi transformer bloklari dondurulacak (0-indexed)
+N_FROZEN_AUDIO = 6    # HTSAT-base: toplam 12 blok → ilk 6 donuk
+N_FROZEN_TEXT  = 8    # RoBERTa-base: toplam 12 katman → ilk 8 donuk
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Konfigurasyon
+# ════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class FinetuneConfig:
+    # Egitim
+    epochs: int             = 30
+    batch_size: int         = 16      # RTX 3060 12GB icin guvenli
+    lr: float               = 3e-5
+    weight_decay: float     = 1e-4
+    warmup_orani: float     = 0.1     # toplam adimin %10'u warmup
+    patience: int           = 7
+    grad_clip: float        = 1.0
+
+    # Kayip fonksiyonu
+    sicaklik: float         = 0.07    # NT-Xent sicaklik parametresi (tau)
+    # Hard negative azaltma: ayni siniftan negative'lere bu agirlik uygulanir
+    # 0.0 = tamamen yok say, 1.0 = tam negative muamelesi
+    hard_neg_beta: float    = 0.3
+
+    # Dil dengesi
+    tr_orani: float         = 0.5     # batch'te Turkce prompt orani
+    sadece_ingilizce: bool  = False   # ablasyon
+
+    # Dondurma stratejisi
+    n_frozen_audio: int     = N_FROZEN_AUDIO
+    n_frozen_text: int      = N_FROZEN_TEXT
+
+    # Veri
+    val_orani: float        = 0.1
+    test_orani: float       = 0.1
+    maks_saniye: float      = CLIP_SN
+    num_workers: int        = 0       # Windows'ta multiprocessing sorunu yok
+
+    # Diger
+    seed: int               = 42
+    fp16: bool              = False   # CLAP spectrogram ops fp32 gerektirir
+    ema_decay: float        = 0.999
+    log_adim: int           = 50      # kac adimda bir log
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Veri Seti
+# ════════════════════════════════════════════════════════════════════════════
+
+class BBCSesMetinVeriSeti(Dataset):
+    """
+    BBC ses-metin cifti veri seti.
+
+    Her ornek:
+        wav_tensor : (CLIP_SAMPLES,) float32 — normalize edilmis mono dalga formu
+        prompt     : str — Turkce veya Ingilizce aciklama
+        sinif_idx  : int — sinif etiketi (hard negative icin)
+        dosya      : str — kayit icin
+    """
+
+    def __init__(
+        self,
+        df: pd.DataFrame,
+        root: Path,
+        sr: int = SR,
+        clip_samples: int = CLIP_SAMPLES,
+        tr_orani: float = 0.5,
+        sadece_ingilizce: bool = False,
+        augment: bool = False,
+    ):
+        self.df           = df.reset_index(drop=True)
+        self.root         = root
+        self.sr           = sr
+        self.clip_samples = clip_samples
+        self.tr_orani     = 0.0 if sadece_ingilizce else tr_orani
+        self.augment      = augment
+
+    def __len__(self) -> int:
+        return len(self.df)
+
+    def __getitem__(self, idx: int) -> dict:
+        satir = self.df.iloc[idx]
+
+        # ── Ses yukle — basarisizsa rastgele gecerli bir ornek sec ────────
+        wav = self._wav_yukle(satir["dosya"])
+        # Sifir tensoru (yuklenemedi) yerine rastgele gecerli ornek kullan
+        if wav.abs().max() < 1e-6:
+            yeni_idx = np.random.randint(0, len(self.df))
+            satir    = self.df.iloc[yeni_idx]
+            wav      = self._wav_yukle(satir["dosya"])
+
+        # ── Prompt sec (dil dengesi) ──────────────────────────────────────
+        if self.tr_orani > 0 and np.random.rand() < self.tr_orani:
+            prompt = str(satir["prompt_tr"])
+        else:
+            prompt = str(satir["prompt_en"])
+
+        return {
+            "wav":       wav,
+            "prompt":    prompt,
+            "sinif_idx": int(satir["sinif_idx"]),
+            "dosya":     str(satir["dosya"]),
+        }
+
+    def _wav_yukle(self, dosya_yolu: str) -> torch.Tensor:
+        """WAV dosyasini yukle, CLIP_SAMPLES uzunluguna getir."""
+        import soundfile as sf
+        import resampy
+
+        tam_yol = self.root / dosya_yolu
+        try:
+            data, sr_oku = sf.read(str(tam_yol), dtype="float32", always_2d=False)
+        except Exception as e:
+            log.warning(f"Ses yuklenemedi: {tam_yol} — {e}")
+            return torch.zeros(self.clip_samples)
+
+        # Stereo → mono
+        if data.ndim > 1:
+            data = data.mean(axis=1)
+
+        # Yeniden ornekleme
+        if sr_oku != self.sr:
+            data = resampy.resample(data, sr_oku, self.sr)
+
+        # Kirp veya dolgula
+        if len(data) >= self.clip_samples:
+            # Rastgele baslangic noktasindan kirp (egitim augmentasyonu)
+            if self.augment and len(data) > self.clip_samples:
+                baslangic = np.random.randint(0, len(data) - self.clip_samples)
+                data = data[baslangic : baslangic + self.clip_samples]
+            else:
+                data = data[: self.clip_samples]
+        else:
+            # Sifir ile dolgula (sag taraf)
+            data = np.pad(data, (0, self.clip_samples - len(data)))
+
+        # Normalize: peak normalization
+        maks = np.abs(data).max()
+        if maks > 0:
+            data = data / maks
+
+        return torch.from_numpy(data.astype(np.float32))
+
+
+def collate_fn(batch: list[dict]) -> dict:
+    """Değişken uzunluklu WAV'lari batch'e topla."""
+    return {
+        "wav":       torch.stack([b["wav"] for b in batch]),
+        "prompt":    [b["prompt"] for b in batch],
+        "sinif_idx": torch.tensor([b["sinif_idx"] for b in batch], dtype=torch.long),
+        "dosya":     [b["dosya"] for b in batch],
+    }
+
+
+def sinif_dengeli_sampler(df: pd.DataFrame) -> WeightedRandomSampler:
+    """Az ornekli siniflar icin agirlikli ornekleyici."""
+    sinif_sayilari = df["sinif_idx"].value_counts()
+    agirliklar = df["sinif_idx"].map(lambda x: 1.0 / sinif_sayilari[x]).values
+    return WeightedRandomSampler(
+        weights=agirliklar,
+        num_samples=len(agirliklar),
+        replacement=True,
+    )
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# CLAP Model Sargici
+# ════════════════════════════════════════════════════════════════════════════
+
+class CLAPFinetune(nn.Module):
+    """
+    CLAP'i BBC verisine fine-tune etmek icin sargi sinifi.
+
+    AudioLDM2'nin kendi CLAPAudioEmbeddingClassifierFreev2 modeli kullanilir
+    (audioldm2.clap.open_clip.factory.create_model — HTSAT-base + RoBERTa-base).
+    Bu, AudioLDM2 checkpoint'indeki CLAP ile tam mimarı uyum saglar.
+
+    Dondurma stratejisi:
+        - audio_branch.layers[:n_frozen]: donuk (HTSAT Swin Transformer bloklari)
+        - text_branch.encoder.layer[:n_frozen]: donuk (RoBERTa katmanlari)
+        - Projeksiyon katmanlari: her zaman egitilir
+    """
+
+    def __init__(self, cfg: FinetuneConfig):
+        super().__init__()
+        from audioldm2.latent_diffusion.modules.encoders.modules import (
+            CLAPAudioEmbeddingClassifierFreev2,
+        )
+        from transformers import RobertaTokenizer
+
+        self.cfg = cfg
+
+        log.info("AudioLDM2 CLAP modeli yukleniyor (HTSAT-base + RoBERTa-base)...")
+        # training_mode=True: dropout aktif, gradient akisi acik
+        clap_enc = CLAPAudioEmbeddingClassifierFreev2(
+            sampling_rate=SR,
+            embed_mode="audio",
+            amodel="HTSAT-base",
+            training_mode=True,
+        )
+        self.model   = clap_enc.model         # CLAP çekirdek modeli
+        self.tokenize = RobertaTokenizer.from_pretrained("roberta-base")
+
+        self.audio_cfg = clap_enc.model_cfg["audio_cfg"]
+        # HTSAT kendi mel cikarmini yapiyor — harici transform gerekmez
+
+        # AudioLDM2 checkpoint'inden pretrained CLAP agirliklarini yukle
+        self._audioldm2_agirliklarini_yukle()
+
+        # Once tum parametreleri egitilabilir yap, sonra secici dondur
+        for p in self.model.parameters():
+            p.requires_grad_(True)
+
+        self._katmanlari_dondur()
+        self._egitilecek_parametreler_yaz()
+
+    def _audioldm2_agirliklarini_yukle(self):
+        """
+        AudioLDM2 tam checkpoint'inden CLAP agirliklarini cikar ve yukle.
+        Checkpoint'teki 'clap.model.*' keyleri bu modelin 'model.*' keylerini oluşturur.
+        """
+        from audioldm2 import download_checkpoint
+        ckpt_path = download_checkpoint("audioldm2-full")
+        log.info(f"AudioLDM2 checkpoint'inden CLAP agirliklar yukleniyor: {ckpt_path}")
+        sd_tam = torch.load(ckpt_path, map_location="cpu")["state_dict"]
+
+        # 'clap.model.' prefix'ini 'model.' ile degistir
+        clap_sd = {}
+        for k, v in sd_tam.items():
+            if k.startswith("clap.model."):
+                yeni_k = k[len("clap."):]   # 'clap.model.X' → 'model.X'
+                clap_sd[yeni_k] = v
+
+        eksik, beklenmeyen = self.load_state_dict(clap_sd, strict=False)
+        log.info(
+            f"CLAP agirlik yukleme: {len(clap_sd)} key yukleneli  "
+            f"eksik={len(eksik)}  beklenmeyen={len(beklenmeyen)}"
+        )
+
+    def _katmanlari_dondur(self):
+        """Secici katman dondurma."""
+        # Audio branch — HTSAT Swin Transformer bloklari (4 stage)
+        audio_frozen_n = 0
+        for p in self.model.audio_branch.patch_embed.parameters():
+            p.requires_grad_(False)
+
+        # Spectrogram + logmel: sabit DSP filtreleri, egitilmez, NaN kaynagi olabilir
+        for sub in ["spectrogram_extractor", "logmel_extractor", "bn0"]:
+            if hasattr(self.model.audio_branch, sub):
+                for p in getattr(self.model.audio_branch, sub).parameters():
+                    p.requires_grad_(False)
+
+        if hasattr(self.model.audio_branch, "layers"):
+            for stage in self.model.audio_branch.layers:
+                if audio_frozen_n >= self.cfg.n_frozen_audio:
+                    break
+                for blk in stage.blocks:
+                    for p in blk.parameters():
+                        p.requires_grad_(False)
+                    audio_frozen_n += 1
+                    if audio_frozen_n >= self.cfg.n_frozen_audio:
+                        break
+
+        # Text branch — RoBERTa encoder katmanlari
+        text_frozen_n = min(
+            self.cfg.n_frozen_text,
+            len(self.model.text_branch.encoder.layer),
+        )
+        for p in self.model.text_branch.embeddings.parameters():
+            p.requires_grad_(False)
+        for layer in self.model.text_branch.encoder.layer[:text_frozen_n]:
+            for p in layer.parameters():
+                p.requires_grad_(False)
+
+        log.info(f"Dondurma: audio {audio_frozen_n} blok, text {text_frozen_n} katman")
+
+    def _egitilecek_parametreler_yaz(self):
+        toplam     = sum(p.numel() for p in self.parameters())
+        egitilecek = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        log.info(
+            f"Parametreler: {egitilecek/1e6:.2f}M egitilecek / "
+            f"{toplam/1e6:.2f}M toplam  ({100*egitilecek/toplam:.1f}%)"
+        )
+
+    def ses_embedding(self, wav: torch.Tensor) -> torch.Tensor:
+        """(B, CLIP_SAMPLES) → (B, D) normalize embedding."""
+        import torchaudio
+        wav = wav.to(DEVICE)
+        # HTSAT 48kHz bekliyor; wav 16kHz geliyor
+        target_sr = self.audio_cfg["sample_rate"]
+        if SR != target_sr:
+            wav = torchaudio.functional.resample(wav, SR, target_sr)
+        # HTSAT input: dict{"waveform": (B, samples)} — kendi mel cikarmini yapiyor
+        out = self.model.audio_branch({"waveform": wav}, mixup_lambda=None)
+        emb = self.model.audio_projection(out["embedding"])
+        # NaN koruması: sifir vektoru yerine küçük gurultu
+        emb = torch.where(emb.isnan(), torch.randn_like(emb) * 1e-6, emb)
+        return F.normalize(emb, dim=-1)
+
+    def metin_embedding(self, promptlar: list[str]) -> torch.Tensor:
+        """[str, ...] → (B, D) normalize embedding."""
+        tokenized = self.tokenize(
+            promptlar,
+            padding=True,
+            truncation=True,
+            max_length=77,
+            return_tensors="pt",
+        ).to(DEVICE)
+        out = self.model.text_branch(**tokenized)
+        # [CLS] token embedding
+        cls_emb = out.last_hidden_state[:, 0, :]
+        emb = self.model.text_projection(cls_emb)
+        return F.normalize(emb, dim=-1)
+
+    def forward(self, wav: torch.Tensor, promptlar: list[str]) -> tuple:
+        audio_emb = self.ses_embedding(wav)
+        metin_emb = self.metin_embedding(promptlar)
+        return audio_emb, metin_emb
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Kayip Fonksiyonu — NT-Xent + Hard Negative
+# ════════════════════════════════════════════════════════════════════════════
+
+class NTXentHardNeg(nn.Module):
+    """
+    NT-Xent (InfoNCE) kayip fonksiyonu — soft hard negative destegiyle.
+
+    Referans:
+        Chen et al. 2020 — SimCLR
+        Wu et al. 2023 — CLAP
+
+    Hard negative mantigi:
+        Ayni siniftan iki ornek birbirine "cok benzer" — bunlari tam negative
+        saymak yaniltici olabilir. Beta agirligiyla yumusatilir:
+            logit[i,j] = logit[i,j] * beta   (ayni sinif, farkli ornek)
+    """
+
+    def __init__(self, sicaklik: float = 0.07, hard_neg_beta: float = 0.3):
+        super().__init__()
+        self.tau  = sicaklik
+        self.beta = hard_neg_beta
+
+    def forward(
+        self,
+        audio_emb: torch.Tensor,    # (B, D)
+        metin_emb: torch.Tensor,    # (B, D)
+        sinif_idx: torch.Tensor,    # (B,)
+    ) -> torch.Tensor:
+        B = audio_emb.size(0)
+
+        # Cosine benzerlik matrisi / tau
+        logits = (audio_emb @ metin_emb.T) / self.tau  # (B, B)
+
+        # Hard negative masking: ayni sinif, farkli ornek → yumusatilmis logit
+        sinif_matrisi = sinif_idx.unsqueeze(0) == sinif_idx.unsqueeze(1)  # (B, B)
+        kimlik        = torch.eye(B, dtype=torch.bool, device=DEVICE)
+        hard_neg_mask = sinif_matrisi & ~kimlik   # ayni sinif ama kendisi degil
+
+        # Hard negative'lerin logit'lerini azalt (onlari daha az cezbedici yap)
+        logits = logits.clone()
+        logits[hard_neg_mask] = logits[hard_neg_mask] * self.beta
+
+        # Simetrik InfoNCE kaybi
+        hedef = torch.arange(B, device=DEVICE)
+        kayip_a2t = F.cross_entropy(logits,   hedef)   # audio → text
+        kayip_t2a = F.cross_entropy(logits.T, hedef)   # text → audio
+        return (kayip_a2t + kayip_t2a) / 2.0
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# EMA (Exponential Moving Average)
+# ════════════════════════════════════════════════════════════════════════════
+
+class EMA:
+    """
+    Model agirliklarinin EMA'sini tutar.
+    Inference'da EMA agirliklar kullanilarak daha stabil sonuclar alinir.
+    """
+
+    def __init__(self, model: nn.Module, decay: float = 0.999):
+        self.model  = model
+        self.decay  = decay
+        self.shadow: dict = {}
+        self.yedek: dict  = {}
+        for name, p in model.named_parameters():
+            if p.requires_grad:
+                self.shadow[name] = p.data.clone()
+
+    @torch.no_grad()
+    def guncelle(self):
+        for name, p in self.model.named_parameters():
+            if p.requires_grad and name in self.shadow:
+                self.shadow[name] = (
+                    self.decay * self.shadow[name]
+                    + (1 - self.decay) * p.data
+                )
+
+    def yukle(self):
+        """EMA agirliklarini modele yukle (inference icin)."""
+        for name, p in self.model.named_parameters():
+            if name in self.shadow:
+                self.yedek[name] = p.data.clone()
+                p.data.copy_(self.shadow[name])
+
+    def geri_al(self):
+        """Orijinal egitim agirliklarini geri yukle."""
+        for name, p in self.model.named_parameters():
+            if name in self.yedek:
+                p.data.copy_(self.yedek[name])
+        self.yedek.clear()
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Degerlendirme Metrikleri
+# ════════════════════════════════════════════════════════════════════════════
+
+@torch.no_grad()
+def recall_at_k(
+    audio_emb: torch.Tensor,
+    metin_emb: torch.Tensor,
+    k_degerleri: list[int] = [1, 5, 10],
+) -> dict[str, float]:
+    """
+    Audio-to-Text ve Text-to-Audio Recall@K hesapla.
+
+    Referans: Doh et al. 2023 — LP-MusicCaps
+    """
+    sim = audio_emb @ metin_emb.T   # (N, N)
+    N   = sim.size(0)
+    hedef = torch.arange(N, device=sim.device)
+
+    sonuclar = {}
+    for k in k_degerleri:
+        k_gercek = min(k, N)
+
+        # Audio → Text
+        _, top_idx = sim.topk(k_gercek, dim=1)
+        a2t_isabet = (top_idx == hedef.unsqueeze(1)).any(dim=1).float().mean().item()
+
+        # Text → Audio
+        _, top_idx = sim.T.topk(k_gercek, dim=1)
+        t2a_isabet = (top_idx == hedef.unsqueeze(1)).any(dim=1).float().mean().item()
+
+        sonuclar[f"A2T_R@{k}"] = round(a2t_isabet, 4)
+        sonuclar[f"T2A_R@{k}"] = round(t2a_isabet, 4)
+
+    return sonuclar
+
+
+@torch.no_grad()
+def sinif_knn_dogrulugu(
+    audio_emb: torch.Tensor,
+    sinif_idx: torch.Tensor,
+    k: int = 5,
+) -> float:
+    """
+    Audio embedding uzayinda k-NN sinif dogrulugu.
+    Embedding kalitesinin sinif ayirt ediciligi acisindan olcusu.
+    """
+    sim = audio_emb @ audio_emb.T
+    sim.fill_diagonal_(-1e9)          # kendini disla
+
+    _, top_idx = sim.topk(k, dim=1)   # (N, k)
+    komsu_siniflar = sinif_idx[top_idx]   # (N, k)
+    tahmin = komsu_siniflar.mode(dim=1).values
+    return (tahmin == sinif_idx).float().mean().item()
+
+
+@torch.no_grad()
+def val_degerlendirme(
+    model: CLAPFinetune,
+    loader: DataLoader,
+    kayip_fn: NTXentHardNeg,
+) -> dict:
+    """Validasyon seti uzerinde tam degerlendirme."""
+    model.eval()
+    tum_audio, tum_metin, tum_sinif = [], [], []
+    toplam_kayip, n_batch = 0.0, 0
+
+    for batch in loader:
+        wav       = batch["wav"].to(DEVICE)
+        promptlar = batch["prompt"]
+        siniflar  = batch["sinif_idx"].to(DEVICE)
+
+        with autocast(enabled=(DEVICE == "cuda")):
+            a_emb, t_emb = model(wav, promptlar)
+            kayip = kayip_fn(a_emb, t_emb, siniflar)
+
+        toplam_kayip += kayip.item()
+        n_batch      += 1
+        tum_audio.append(a_emb.cpu())
+        tum_metin.append(t_emb.cpu())
+        tum_sinif.append(siniflar.cpu())
+
+    audio_emb = torch.cat(tum_audio)
+    metin_emb = torch.cat(tum_metin)
+    sinif_idx = torch.cat(tum_sinif)
+
+    metrikler = {"val_kayip": round(toplam_kayip / n_batch, 4)}
+    metrikler.update(recall_at_k(audio_emb, metin_emb))
+    metrikler["knn_acc"] = round(sinif_knn_dogrulugu(audio_emb, sinif_idx), 4)
+
+    return metrikler
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Warmup + Cosine LR Scheduler
+# ════════════════════════════════════════════════════════════════════════════
+
+class WarmupCosineScheduler:
+    """
+    Lineer warmup + cosine annealing scheduler.
+    torch.optim.lr_scheduler ile uyumlu __call__ arayuzu.
+    """
+
+    def __init__(
+        self,
+        optimizer: torch.optim.Optimizer,
+        warmup_adim: int,
+        toplam_adim: int,
+        min_lr_orani: float = 0.01,
+    ):
+        self.optimizer    = optimizer
+        self.warmup_adim  = warmup_adim
+        self.toplam_adim  = toplam_adim
+        self.min_lr_orani = min_lr_orani
+        self.mevcut_adim  = 0
+        self.baz_lr       = [g["lr"] for g in optimizer.param_groups]
+
+    def adim(self):
+        self.mevcut_adim += 1
+        t = self.mevcut_adim
+
+        if t < self.warmup_adim:
+            lr_orani = t / max(1, self.warmup_adim)
+        else:
+            ilerleme = (t - self.warmup_adim) / max(
+                1, self.toplam_adim - self.warmup_adim
+            )
+            lr_orani = self.min_lr_orani + 0.5 * (1 - self.min_lr_orani) * (
+                1 + math.cos(math.pi * ilerleme)
+            )
+
+        for g, baz in zip(self.optimizer.param_groups, self.baz_lr):
+            g["lr"] = baz * lr_orani
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Veri Bolme
+# ════════════════════════════════════════════════════════════════════════════
+
+def veri_bol(
+    df: pd.DataFrame,
+    val_orani: float,
+    test_orani: float,
+    seed: int = 42,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Dosya duzeyinde stratified split.
+    Ayni dosyanin farkli promptlari ayni bolume gider (veri sizintisi yok).
+    """
+    from sklearn.model_selection import train_test_split
+
+    dosya_sinif = (
+        df.groupby("dosya")["sinif_idx"].first().reset_index()
+    )
+
+    d_tv, d_te = train_test_split(
+        dosya_sinif,
+        test_size=test_orani,
+        stratify=dosya_sinif["sinif_idx"],
+        random_state=seed,
+    )
+    val_orani_ayarli = val_orani / (1 - test_orani)
+    d_tr, d_vl = train_test_split(
+        d_tv,
+        test_size=val_orani_ayarli,
+        stratify=d_tv["sinif_idx"],
+        random_state=seed,
+    )
+
+    def filtre(d_alt):
+        return df[df["dosya"].isin(d_alt["dosya"])].reset_index(drop=True)
+
+    return filtre(d_tr), filtre(d_vl), filtre(d_te)
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Egitim Dongusu
+# ════════════════════════════════════════════════════════════════════════════
+
+def egitim_dongusu(
+    model: CLAPFinetune,
+    kayip_fn: NTXentHardNeg,
+    dl_tr: DataLoader,
+    dl_vl: DataLoader,
+    cfg: FinetuneConfig,
+    ema: EMA,
+    baslangic_epoch: int = 1,
+    resume_metrik: float = -1.0,
+    ckpt_adi: str = "clap_bbc_best.pt",
+) -> dict:
+    """
+    Tam egitim dongusu.
+    Returns: egitim tarihi (epoch bazinda metrikler)
+    """
+    optimizer = AdamW(
+        [p for p in model.parameters() if p.requires_grad],
+        lr=cfg.lr,
+        weight_decay=cfg.weight_decay,
+        betas=(0.9, 0.98),   # CLAP makalesi onerisi
+    )
+
+    toplam_adim  = len(dl_tr) * cfg.epochs
+    warmup_adim  = int(toplam_adim * cfg.warmup_orani)
+    scheduler    = WarmupCosineScheduler(optimizer, warmup_adim, toplam_adim)
+    scaler       = GradScaler(enabled=(DEVICE == "cuda" and cfg.fp16))
+
+    en_iyi_metrik = resume_metrik  # A2T R@1 izlenir
+    en_iyi_epoch  = baslangic_epoch - 1
+    patience_sayac = 0
+    tarih = []
+
+    ckpt_yolu = CHECKPT_DIR / ckpt_adi
+    CHECKPT_DIR.mkdir(parents=True, exist_ok=True)
+
+    log.info(f"Egitim basliyor: epoch {baslangic_epoch}/{cfg.epochs}, {toplam_adim} toplam adim")
+    log.info(f"Warmup: {warmup_adim} adim, LR: {cfg.lr}")
+
+    for epoch in range(baslangic_epoch, cfg.epochs + 1):
+        model.train()
+        epoch_kayip = 0.0
+        t0 = time.time()
+
+        for adim, batch in enumerate(dl_tr, 1):
+            wav       = batch["wav"].to(DEVICE)
+            promptlar = batch["prompt"]
+            siniflar  = batch["sinif_idx"].to(DEVICE)
+
+            optimizer.zero_grad(set_to_none=True)
+
+            with autocast(enabled=(DEVICE == "cuda" and cfg.fp16)):
+                a_emb, t_emb = model(wav, promptlar)
+                kayip = kayip_fn(a_emb, t_emb, siniflar)
+
+            # NaN kayip: bu batch'i atla, optimizer adimi yapma
+            if torch.isnan(kayip) or torch.isinf(kayip):
+                log.warning(f"  [!] NaN/Inf kayip adim {adim}, batch atlaniyor")
+                optimizer.zero_grad(set_to_none=True)
+                continue
+
+            scaler.scale(kayip).backward()
+            scaler.unscale_(optimizer)
+            nn.utils.clip_grad_norm_(
+                [p for p in model.parameters() if p.requires_grad],
+                cfg.grad_clip,
+            )
+            scaler.step(optimizer)
+            scaler.update()
+            scheduler.adim()
+            ema.guncelle()
+
+            epoch_kayip += kayip.item()
+
+            if adim % cfg.log_adim == 0:
+                lr_simdi = optimizer.param_groups[0]["lr"]
+                log.info(
+                    f"  Epoch {epoch}/{cfg.epochs}  "
+                    f"Adim {adim}/{len(dl_tr)}  "
+                    f"Kayip={kayip.item():.4f}  "
+                    f"LR={lr_simdi:.2e}"
+                )
+
+        # ── Epoch sonu degerlendirme (EMA agirliklarla) ───────────────────
+        ema.yukle()
+        val_m = val_degerlendirme(model, dl_vl, kayip_fn)
+        ema.geri_al()
+
+        sure = (time.time() - t0) / 60
+        ort_kayip = epoch_kayip / len(dl_tr)
+
+        log.info(
+            f"Epoch {epoch:3d}/{cfg.epochs}  "
+            f"train_loss={ort_kayip:.4f}  "
+            f"val_loss={val_m['val_kayip']:.4f}  "
+            f"A2T_R@1={val_m['A2T_R@1']:.4f}  "
+            f"kNN={val_m['knn_acc']:.4f}  "
+            f"({sure:.1f}dk)"
+        )
+
+        epoch_kayit = {
+            "epoch": epoch,
+            "train_loss": round(ort_kayip, 5),
+            **val_m,
+            "sure_dk": round(sure, 1),
+        }
+        tarih.append(epoch_kayit)
+
+        # En iyi model: A2T R@1 ile izle
+        if val_m["A2T_R@1"] > en_iyi_metrik:
+            en_iyi_metrik  = val_m["A2T_R@1"]
+            en_iyi_epoch   = epoch
+            patience_sayac = 0
+
+            # EMA agirliklarla kaydet
+            ema.yukle()
+            torch.save(
+                {
+                    "epoch":       epoch,
+                    "model_state": model.state_dict(),
+                    "ema_shadow":  ema.shadow,
+                    "val_metrik":  val_m,
+                    "cfg":         asdict(cfg),
+                },
+                ckpt_yolu,
+            )
+            ema.geri_al()
+            log.info(f"  ✓ En iyi model kaydedildi: A2T_R@1={en_iyi_metrik:.4f}")
+        else:
+            patience_sayac += 1
+
+        # Her epoch sonunda "son durum" checkpoint'i kaydet (resume icin)
+        son_ckpt_yolu = ckpt_yolu.parent / ckpt_yolu.name.replace(".pt", "_son.pt")
+        torch.save(
+            {
+                "epoch":       epoch,
+                "model_state": model.state_dict(),
+                "ema_shadow":  ema.shadow,
+                "val_metrik":  val_m,
+                "cfg":         asdict(cfg),
+            },
+            son_ckpt_yolu,
+        )
+        log.info(f"  Son durum kaydedildi: epoch {epoch} -> {son_ckpt_yolu.name}")
+        if patience_sayac >= cfg.patience:
+                log.info(
+                    f"Erken durdurma: {patience_sayac} epoch iyilesme yok. "
+                    f"En iyi: epoch {en_iyi_epoch}"
+                )
+                break
+
+    return {
+        "tarih":         tarih,
+        "en_iyi_epoch":  en_iyi_epoch,
+        "en_iyi_metrik": en_iyi_metrik,
+        "ckpt":          str(ckpt_yolu),
+    }
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Kuru Calistirma (Dry Run)
+# ════════════════════════════════════════════════════════════════════════════
+
+def kuru_calistirma(cfg: FinetuneConfig):
+    """
+    Egitim baslatmadan; veri, model ve batch akisini dogrula.
+    Hafiza tahminleri de yapilir.
+    """
+    log.info("=" * 60)
+    log.info("  KUR CALISTIRMA — egitim baslatilmiyor")
+    log.info("=" * 60)
+
+    # Veri
+    log.info(f"\nVeri: {PARQUET}")
+    df = pd.read_parquet(PARQUET)
+    log.info(f"  Toplam: {len(df)} satir, {df['sinif'].nunique()} sinif")
+
+    df_tr, df_vl, df_te = veri_bol(df, cfg.val_orani, cfg.test_orani, cfg.seed)
+    log.info(f"  Train={len(df_tr)}  Val={len(df_vl)}  Test={len(df_te)}")
+
+    # Model
+    log.info("\nModel yukleniyor...")
+    model = CLAPFinetune(cfg).to(DEVICE)
+
+    # Tek batch testi
+    log.info("\nTek batch testi...")
+    ds = BBCSesMetinVeriSeti(df_tr.head(cfg.batch_size * 2), ROOT,
+                             tr_orani=cfg.tr_orani,
+                             sadece_ingilizce=cfg.sadece_ingilizce)
+    dl = DataLoader(ds, batch_size=cfg.batch_size, collate_fn=collate_fn)
+    batch = next(iter(dl))
+
+    wav       = batch["wav"].to(DEVICE)
+    promptlar = batch["prompt"]
+    siniflar  = batch["sinif_idx"].to(DEVICE)
+
+    log.info(f"  WAV shape: {wav.shape}, dtype: {wav.dtype}")
+    log.info(f"  Promptlar[0]: '{promptlar[0]}'")
+
+    kayip_fn = NTXentHardNeg(cfg.sicaklik, cfg.hard_neg_beta)
+
+    # Kuru calistirmada fp32 kullan (fp16 overflow olasiligi)
+    with autocast(enabled=False):
+        a_emb, t_emb = model(wav, promptlar)
+        kayip = kayip_fn(a_emb, t_emb, siniflar)
+
+    log.info(f"  Audio emb: {a_emb.shape}")
+    log.info(f"  Metin emb: {t_emb.shape}")
+    log.info(f"  Kayip: {kayip.item():.4f}")
+
+    # VRAM tahmini
+    if DEVICE == "cuda":
+        ayrilan = torch.cuda.memory_allocated() / 1e9
+        ayrilmis = torch.cuda.memory_reserved() / 1e9
+        log.info(f"\nVRAM: {ayrilan:.2f}GB ayrilan / {ayrilmis:.2f}GB rezerv")
+
+    log.info("\nKuru calistirma basarili — egitim baslatmak icin --kuru_calistirma olmadan calistirin.")
+
+
+# ════════════════════════════════════════════════════════════════════════════
+# Ana
+# ════════════════════════════════════════════════════════════════════════════
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="CLAP fine-tuning — BBC Ses Arsivi"
+    )
+    parser.add_argument("--epochs",              type=int,   default=30)
+    parser.add_argument("--batch_size",          type=int,   default=16)
+    parser.add_argument("--lr",                  type=float, default=3e-5)
+    parser.add_argument("--patience",            type=int,   default=7)
+    parser.add_argument("--sicaklik",            type=float, default=0.07,
+                        help="NT-Xent sicaklik parametresi tau")
+    parser.add_argument("--hard_neg_beta",       type=float, default=0.3,
+                        help="Hard negative yumusatma katsayisi (0=yok, 1=tam)")
+    parser.add_argument("--n_frozen_audio",      type=int,   default=N_FROZEN_AUDIO,
+                        help="Audio branch'te donuk blok sayisi")
+    parser.add_argument("--n_frozen_text",       type=int,   default=N_FROZEN_TEXT,
+                        help="Text branch'te donuk katman sayisi")
+    parser.add_argument("--tr_orani",            type=float, default=0.5,
+                        help="Batch'te Turkce prompt orani")
+    parser.add_argument("--sadece_ingilizce",    action="store_true",
+                        help="Ablasyon: sadece Ingilizce prompt kullan")
+    parser.add_argument("--kuru_calistirma",     action="store_true",
+                        help="Egitim baslatmadan dogrulama yap")
+    parser.add_argument("--fp16",                action="store_true", default=True)
+    parser.add_argument("--ema_decay",           type=float, default=0.999)
+    parser.add_argument("--resume",              action="store_true",
+                        help="Mevcut clap_bbc_best.pt checkpoint'ten devam et")
+    parser.add_argument("--sentetik_veri",       type=str, default=None,
+                        help="Sentetik WAV dizini (orn: data/synthetic_tur2). "
+                             "Promptlar turkce_promptlar.json'dan alinir.")
+    parser.add_argument("--dongu",               type=str, default=None,
+                        help="Dongu etiketi — checkpoint adini degistirir "
+                             "(orn: dongu2 -> clap_bbc_dongu2_best.pt)")
+    args = parser.parse_args()
+
+    torch.manual_seed(42)
+    np.random.seed(42)
+
+    cfg = FinetuneConfig(
+        epochs           = args.epochs,
+        batch_size       = args.batch_size,
+        lr               = args.lr,
+        patience         = args.patience,
+        sicaklik         = args.sicaklik,
+        hard_neg_beta    = args.hard_neg_beta,
+        n_frozen_audio   = args.n_frozen_audio,
+        n_frozen_text    = args.n_frozen_text,
+        tr_orani         = args.tr_orani,
+        sadece_ingilizce = args.sadece_ingilizce,
+        fp16             = args.fp16,
+        ema_decay        = args.ema_decay,
+    )
+
+    log.info("=" * 60)
+    log.info("  CLAP Fine-Tuning — BBC Ses Arsivi")
+    log.info(f"  Cihaz   : {DEVICE}")
+    log.info(f"  Epochs  : {cfg.epochs}  Batch: {cfg.batch_size}  LR: {cfg.lr}")
+    log.info(f"  Tau     : {cfg.sicaklik}  Hard-neg-beta: {cfg.hard_neg_beta}")
+    log.info(f"  Donuk   : audio={cfg.n_frozen_audio} blok, text={cfg.n_frozen_text} katman")
+    log.info(f"  TR/EN   : {cfg.tr_orani:.0%} Turkce" +
+             (" (ABLASYON: sadece EN)" if cfg.sadece_ingilizce else ""))
+    log.info("=" * 60)
+
+    if args.kuru_calistirma:
+        kuru_calistirma(cfg)
+        return
+
+    # ── Checkpoint adini belirle ──────────────────────────────────────────
+    global CHECKPT_DIR
+    ckpt_en_iyi_adi = "clap_bbc_best.pt"
+    if args.dongu:
+        ckpt_en_iyi_adi = f"clap_bbc_{args.dongu}_best.pt"
+        log.info(f"  Checkpoint: {ckpt_en_iyi_adi}")
+
+    # ── Veri ─────────────────────────────────────────────────────────────
+    log.info(f"\nVeri yukleniyor: {PARQUET}")
+    df = pd.read_parquet(PARQUET)
+
+    # Sentetik veri ekle (Dongu 2+)
+    if args.sentetik_veri:
+        import json as _json
+        synt_dir = ROOT / args.sentetik_veri
+        promptlar_yol = ROOT / "data" / "processed" / "turkce_promptlar.json"
+        with open(promptlar_yol, encoding="utf-8") as f:
+            promptlar_veri = _json.load(f)
+
+        synt_satirlar = []
+        for sinif_dir in synt_dir.iterdir():
+            if not sinif_dir.is_dir():
+                continue
+            sinif = sinif_dir.name
+            if sinif not in promptlar_veri:
+                continue
+            promptlar_en = promptlar_veri[sinif].get("ingilizce", [])
+            promptlar_tr = promptlar_veri[sinif].get("turkce", promptlar_en)
+            wavlar = [w for w in sinif_dir.glob("*.wav") if w.stat().st_size > 1000]
+            for i, wav in enumerate(wavlar):
+                synt_satirlar.append({
+                    "dosya":     str(wav.relative_to(ROOT)),
+                    "sinif":     sinif,
+                    "sinif_idx": df[df["sinif"] == sinif]["sinif_idx"].iloc[0]
+                                 if sinif in df["sinif"].values else 0,
+                    "n_segs":    1,
+                    "prompt_en": promptlar_en[i % len(promptlar_en)] if promptlar_en else "",
+                    "prompt_tr": promptlar_tr[i % len(promptlar_tr)] if promptlar_tr else "",
+                })
+        if synt_satirlar:
+            df_synt = pd.DataFrame(synt_satirlar)
+            df = pd.concat([df, df_synt], ignore_index=True)
+            log.info(f"  Sentetik {len(df_synt)} satir eklendi ({synt_dir.name})")
+        else:
+            log.warning(f"  Sentetik dizinde gecerli WAV bulunamadi: {synt_dir}")
+
+    df_tr, df_vl, df_te = veri_bol(df, cfg.val_orani, cfg.test_orani, cfg.seed)
+    log.info(f"  Train={len(df_tr)}  Val={len(df_vl)}  Test={len(df_te)}")
+
+    ds_tr = BBCSesMetinVeriSeti(
+        df_tr, ROOT,
+        tr_orani=cfg.tr_orani,
+        sadece_ingilizce=cfg.sadece_ingilizce,
+        augment=True,
+    )
+    ds_vl = BBCSesMetinVeriSeti(
+        df_vl, ROOT,
+        tr_orani=0.5,   # val'da her iki dili de degerlendir
+        augment=False,
+    )
+    ds_te = BBCSesMetinVeriSeti(
+        df_te, ROOT,
+        tr_orani=0.5,
+        augment=False,
+    )
+
+    sampler = sinif_dengeli_sampler(df_tr)
+    dl_tr = DataLoader(
+        ds_tr, batch_size=cfg.batch_size,
+        sampler=sampler,
+        collate_fn=collate_fn,
+        num_workers=cfg.num_workers,
+        pin_memory=(DEVICE == "cuda"),
+    )
+    dl_vl = DataLoader(
+        ds_vl, batch_size=cfg.batch_size * 2,
+        shuffle=False,
+        collate_fn=collate_fn,
+        num_workers=cfg.num_workers,
+    )
+    dl_te = DataLoader(
+        ds_te, batch_size=cfg.batch_size * 2,
+        shuffle=False,
+        collate_fn=collate_fn,
+        num_workers=cfg.num_workers,
+    )
+
+    # ── Model ────────────────────────────────────────────────────────────
+    model    = CLAPFinetune(cfg).to(DEVICE)
+    kayip_fn = NTXentHardNeg(cfg.sicaklik, cfg.hard_neg_beta)
+    ema      = EMA(model, decay=cfg.ema_decay)
+
+    # ── Resume ───────────────────────────────────────────────────────────
+    baslangic_epoch = 1
+    resume_metrik   = -1.0
+    # Once "son durum" checkpoint'ini dene, yoksa "en iyi"yi kullan
+    ckpt_son_adi    = ckpt_en_iyi_adi.replace(".pt", "_son.pt")
+    ckpt_yolu_son   = CHECKPT_DIR / ckpt_son_adi
+    ckpt_yolu_resume = ckpt_yolu_son if ckpt_yolu_son.exists() else CHECKPT_DIR / ckpt_en_iyi_adi
+    if args.resume and ckpt_yolu_resume.exists():
+        ck = torch.load(ckpt_yolu_resume, map_location=DEVICE)
+        model.load_state_dict(ck["model_state"])
+        ema.shadow = ck["ema_shadow"]
+        tamamlanan_epoch = ck.get("epoch", 0)
+        baslangic_epoch  = tamamlanan_epoch + 1
+        resume_metrik    = ck.get("val_metrik", {}).get("A2T_R@1", -1.0)
+        log.info(f"Resume: {ckpt_yolu_resume.name} yuklendi (epoch {tamamlanan_epoch}), "
+                 f"A2T_R@1={resume_metrik:.4f}, epoch {baslangic_epoch}'den devam")
+    elif args.resume:
+        log.warning("--resume verildi ama checkpoint bulunamadi, sifirdan basliyor.")
+
+    # ── Egitim ───────────────────────────────────────────────────────────
+    t0 = time.time()
+    sonuc = egitim_dongusu(model, kayip_fn, dl_tr, dl_vl, cfg, ema,
+                           baslangic_epoch=baslangic_epoch,
+                           resume_metrik=resume_metrik,
+                           ckpt_adi=ckpt_en_iyi_adi)
+    egitim_suresi = (time.time() - t0) / 3600
+
+    # ── Test Degerlendirmesi (EMA agirliklarla) ───────────────────────────
+    log.info("\nTest degerlendirmesi (EMA agirliklar)...")
+    ckpt = torch.load(sonuc["ckpt"], map_location=DEVICE)
+    model.load_state_dict(ckpt["model_state"])
+    test_m = val_degerlendirme(model, dl_te, kayip_fn)
+    log.info("Test metrikleri:")
+    for k, v in test_m.items():
+        log.info(f"  {k}: {v}")
+
+    # ── Kaydet ───────────────────────────────────────────────────────────
+    RESULT_DIR.mkdir(exist_ok=True)
+    tarih_str = datetime.now().strftime("%Y%m%d_%H%M")
+    cikti = RESULT_DIR / f"clap_finetune_{tarih_str}.json"
+    kayit = {
+        "tarih":          tarih_str,
+        "cfg":            asdict(cfg),
+        "egitim_saat":    round(egitim_suresi, 2),
+        "en_iyi_epoch":   sonuc["en_iyi_epoch"],
+        "val_A2T_R1":     sonuc["en_iyi_metrik"],
+        "test":           test_m,
+        "tarih_detay":    sonuc["tarih"],
+    }
+    with open(cikti, "w", encoding="utf-8") as f:
+        json.dump(kayit, f, ensure_ascii=False, indent=2)
+
+    log.info(f"\nSonuclar kaydedildi: {cikti}")
+    log.info(f"Toplam sure: {egitim_suresi:.2f} saat")
+    log.info(f"En iyi checkpoint: {sonuc['ckpt']}")
+
+
+if __name__ == "__main__":
+    main()

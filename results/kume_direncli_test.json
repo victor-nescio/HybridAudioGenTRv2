@@ -1,0 +1,255 @@
+{
+  "tarih": "20260716_2126",
+  "baseline_ckpt": "cnn_baseline_iter_best.pt",
+  "B_bootstrap": 10000,
+  "konfigurasyonlar": {
+    "H1": {
+      "hedef_3": {
+        "n_dosya": 91,
+        "n_segment": 2343,
+        "fark_segment_acc": 0.034571062740076826,
+        "wilcoxon_n_sifir_disi": 38,
+        "wilcoxon_p": 0.4638871114373315,
+        "bootstrap_p": 0.0964,
+        "bootstrap_ga95": [
+          -0.005001262626262625,
+          0.07929585640311264
+        ]
+      },
+      "kopek_sesleri": {
+        "n_dosya": 29,
+        "n_segment": 547,
+        "fark_segment_acc": 0.012797074954296161,
+        "wilcoxon_n_sifir_disi": 10,
+        "wilcoxon_p": 0.361328125,
+        "bootstrap_p": 0.4034,
+        "bootstrap_ga95": [
+          -0.017153231508517407,
+          0.03931203931203931
+        ]
+      },
+      "kus_sesleri": {
+        "n_dosya": 25,
+        "n_segment": 386,
+        "fark_segment_acc": 0.10621761658031088,
+        "wilcoxon_n_sifir_disi": 12,
+        "wilcoxon_p": 0.423828125,
+        "bootstrap_p": 0.0928,
+        "bootstrap_ga95": [
+          -0.008957246898039919,
+          0.23437845685840702
+        ]
+      },
+      "hava_olaylari": {
+        "n_dosya": 37,
+        "n_segment": 1410,
+        "fark_segment_acc": 0.023404255319148935,
+        "wilcoxon_n_sifir_disi": 16,
+        "wilcoxon_p": 0.8971253901089049,
+        "bootstrap_p": 0.4586,
+        "bootstrap_ga95": [
+          -0.031136921407864185,
+          0.08531403130993878
+        ]
+      },
+      "diger_hayvanlar": {
+        "n_dosya": 36,
+        "n_segment": 754,
+        "fark_segment_acc": 0.011936339522546418,
+        "wilcoxon_n_sifir_disi": 17,
+        "wilcoxon_p": 1.0,
+        "bootstrap_p": 0.6082,
+        "bootstrap_ga95": [
+          -0.023551286546553026,
+          0.05419854061591574
+        ]
+      }
+    },
+    "C2": {
+      "hedef_3": {
+        "n_dosya": 91,
+        "n_segment": 2343,
+        "fark_segment_acc": 0.03286384976525822,
+        "wilcoxon_n_sifir_disi": 40,
+        "wilcoxon_p": 0.6000785462190898,
+        "bootstrap_p": 0.188,
+        "bootstrap_ga95": [
+          -0.01268211289092296,
+          0.08593825455714518
+        ]
+      },
+      "kopek_sesleri": {
+        "n_dosya": 29,
+        "n_segment": 547,
+        "fark_segment_acc": -0.009140767824497258,
+        "wilcoxon_n_sifir_disi": 12,
+        "wilcoxon_p": 0.9697265625,
+        "bootstrap_p": 0.7684,
+        "bootstrap_ga95": [
+          -0.06600094339622642,
+          0.036072144288577156
+        ]
+      },
+      "kus_sesleri": {
+        "n_dosya": 25,
+        "n_segment": 386,
+        "fark_segment_acc": 0.13471502590673576,
+        "wilcoxon_n_sifir_disi": 11,
+        "wilcoxon_p": 0.30859375,
+        "bootstrap_p": 0.0232,
+        "bootstrap_ga95": [
+          0.014491011705685621,
+          0.2599482758620689
+        ]
+      },
+      "hava_olaylari": {
+        "n_dosya": 37,
+        "n_segment": 1410,
+        "fark_segment_acc": 0.02127659574468085,
+        "wilcoxon_n_sifir_disi": 17,
+        "wilcoxon_p": 0.8312869323529962,
+        "bootstrap_p": 0.5814,
+        "bootstrap_ga95": [
+          -0.04101894250897129,
+          0.09926359137062729
+        ]
+      },
+      "diger_hayvanlar": {
+        "n_dosya": 36,
+        "n_segment": 754,
+        "fark_segment_acc": -0.015915119363395226,
+        "wilcoxon_n_sifir_disi": 16,
+        "wilcoxon_p": 0.7367478167773949,
+        "bootstrap_p": 0.4874,
+        "bootstrap_ga95": [
+          -0.057878046170096925,
+          0.02341294141661561
+        ]
+      }
+    },
+    "C3": {
+      "hedef_3": {
+        "n_dosya": 91,
+        "n_segment": 2343,
+        "fark_segment_acc": 0.034997865983781476,
+        "wilcoxon_n_sifir_disi": 44,
+        "wilcoxon_p": 0.3688468828856407,
+        "bootstrap_p": 0.1256,
+        "bootstrap_ga95": [
+          -0.00829411841005906,
+          0.08467246824405308
+        ]
+      },
+      "kopek_sesleri": {
+        "n_dosya": 29,
+        "n_segment": 547,
+        "fark_segment_acc": 0.003656307129798903,
+        "wilcoxon_n_sifir_disi": 14,
+        "wilcoxon_p": 0.5935272605600672,
+        "bootstrap_p": 0.8738,
+        "bootstrap_ga95": [
+          -0.04920501140200851,
+          0.050083621778694964
+        ]
+      },
+      "kus_sesleri": {
+        "n_dosya": 25,
+        "n_segment": 386,
+        "fark_segment_acc": 0.09326424870466321,
+        "wilcoxon_n_sifir_disi": 13,
+        "wilcoxon_p": 0.465576171875,
+        "bootstrap_p": 0.1964,
+        "bootstrap_ga95": [
+          -0.04104713772907614,
+          0.2237401828555059
+        ]
+      },
+      "hava_olaylari": {
+        "n_dosya": 37,
+        "n_segment": 1410,
+        "fark_segment_acc": 0.031205673758865248,
+        "wilcoxon_n_sifir_disi": 17,
+        "wilcoxon_p": 0.8536376953125,
+        "bootstrap_p": 0.3404,
+        "bootstrap_ga95": [
+          -0.02555038234336729,
+          0.10101887647858879
+        ]
+      },
+      "diger_hayvanlar": {
+        "n_dosya": 36,
+        "n_segment": 754,
+        "fark_segment_acc": -0.026525198938992044,
+        "wilcoxon_n_sifir_disi": 18,
+        "wilcoxon_p": 0.5860915647947087,
+        "bootstrap_p": 0.4602,
+        "bootstrap_ga95": [
+          -0.08957753184351847,
+          0.01809215486318329
+        ]
+      }
+    },
+    "C4": {
+      "hedef_3": {
+        "n_dosya": 91,
+        "n_segment": 2343,
+        "fark_segment_acc": 0.06274007682458387,
+        "wilcoxon_n_sifir_disi": 42,
+        "wilcoxon_p": 0.09138376886655324,
+        "bootstrap_p": 0.004,
+        "bootstrap_ga95": [
+          0.01740783957753865,
+          0.115249068629115
+        ]
+      },
+      "kopek_sesleri": {
+        "n_dosya": 29,
+        "n_segment": 547,
+        "fark_segment_acc": 0.038391224862888484,
+        "wilcoxon_n_sifir_disi": 11,
+        "wilcoxon_p": 0.009765625,
+        "bootstrap_p": 0.0498,
+        "bootstrap_ga95": [
+          0.0013475732194866046,
+          0.0826036972924402
+        ]
+      },
+      "kus_sesleri": {
+        "n_dosya": 25,
+        "n_segment": 386,
+        "fark_segment_acc": 0.08031088082901554,
+        "wilcoxon_n_sifir_disi": 14,
+        "wilcoxon_p": 0.7774578498594635,
+        "bootstrap_p": 0.322,
+        "bootstrap_ga95": [
+          -0.0649362370481504,
+          0.20564105310766737
+        ]
+      },
+      "hava_olaylari": {
+        "n_dosya": 37,
+        "n_segment": 1410,
+        "fark_segment_acc": 0.0673758865248227,
+        "wilcoxon_n_sifir_disi": 17,
+        "wilcoxon_p": 0.12976439603398718,
+        "bootstrap_p": 0.032,
+        "bootstrap_ga95": [
+          0.00452872312066821,
+          0.1456541736909913
+        ]
+      },
+      "diger_hayvanlar": {
+        "n_dosya": 36,
+        "n_segment": 754,
+        "fark_segment_acc": -0.013262599469496022,
+        "wilcoxon_n_sifir_disi": 16,
+        "wilcoxon_p": 0.231201171875,
+        "bootstrap_p": 0.5054,
+        "bootstrap_ga95": [
+          -0.049495199519951995,
+          0.02998759469822607
+        ]
+      }
+    }
+  }
+}

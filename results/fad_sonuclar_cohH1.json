@@ -1,0 +1,20 @@
+{
+  "kopek_sesleri": {
+    "fad": 12.515204711158866,
+    "embedding": "vggish",
+    "n_gercek": 294,
+    "n_sentetik": 50
+  },
+  "kus_sesleri": {
+    "fad": 19.36317076887474,
+    "embedding": "vggish",
+    "n_gercek": 264,
+    "n_sentetik": 50
+  },
+  "hava_olaylari": {
+    "fad": 8.472919860026849,
+    "embedding": "vggish",
+    "n_gercek": 300,
+    "n_sentetik": 50
+  }
+}

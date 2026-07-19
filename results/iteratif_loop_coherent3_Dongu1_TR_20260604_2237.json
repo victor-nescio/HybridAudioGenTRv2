@@ -1,0 +1,232 @@
+{
+  "tarih": "20260604_1833",
+  "tur": "coherent3_Dongu1_TR",
+  "hedef_siniflar": [
+    "hava_olaylari",
+    "kopek_sesleri",
+    "kus_sesleri"
+  ],
+  "cnn": {
+    "baseline": {
+      "val_f1": 0.669964095553422,
+      "test_f1": 0.6716,
+      "sinif_f1": {
+        "acil_servis": 0.5894,
+        "at_sesleri": 0.8675,
+        "ayak_sesleri": 0.9475,
+        "cocuk_bebek_sesleri": 0.8351,
+        "diger_hayvanlar": 0.5823,
+        "dini_mekan": 0.4614,
+        "doga_atmosferi": 0.5871,
+        "endustri_fabrika": 0.6731,
+        "ev_ici_sesler": 0.7328,
+        "gemi_tekne_sesleri": 0.7612,
+        "hava_olaylari": 0.5534,
+        "insaat_sesleri": 0.3877,
+        "kalabalik_sesleri": 0.6434,
+        "kapi_sesleri": 0.8038,
+        "kara_tasitlari": 0.7621,
+        "kopek_sesleri": 0.6652,
+        "kus_sesleri": 0.5913,
+        "ofis_iletisim": 0.6531,
+        "saat_can_sesleri": 0.838,
+        "sehir_atmosferi": 0.6279,
+        "silah_patlama": 0.6432,
+        "spor_eglence": 0.6628,
+        "su_sesleri": 0.5567,
+        "tarim_ciftlik": 0.5249,
+        "tren_sesleri": 0.7411,
+        "ucak_sesleri": 0.7691
+      },
+      "tarih": [],
+      "sure_dk": 0.0
+    },
+    "augmented": {
+      "val_f1": 0.661,
+      "test_f1": 0.6824,
+      "sinif_f1": {
+        "acil_servis": 0.6041,
+        "at_sesleri": 0.8428,
+        "ayak_sesleri": 0.9659,
+        "cocuk_bebek_sesleri": 0.802,
+        "diger_hayvanlar": 0.5647,
+        "dini_mekan": 0.501,
+        "doga_atmosferi": 0.6011,
+        "endustri_fabrika": 0.6679,
+        "ev_ici_sesler": 0.7415,
+        "gemi_tekne_sesleri": 0.7896,
+        "hava_olaylari": 0.5906,
+        "insaat_sesleri": 0.374,
+        "kalabalik_sesleri": 0.6488,
+        "kapi_sesleri": 0.7792,
+        "kara_tasitlari": 0.7647,
+        "kopek_sesleri": 0.679,
+        "kus_sesleri": 0.6421,
+        "ofis_iletisim": 0.6814,
+        "saat_can_sesleri": 0.8349,
+        "sehir_atmosferi": 0.6257,
+        "silah_patlama": 0.6452,
+        "spor_eglence": 0.6799,
+        "su_sesleri": 0.5988,
+        "tarim_ciftlik": 0.601,
+        "tren_sesleri": 0.743,
+        "ucak_sesleri": 0.7733
+      },
+      "tarih": [
+        {
+          "epoch": 1,
+          "train_loss": 1.30231,
+          "val_f1": 0.5643
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.86403,
+          "val_f1": 0.6081
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.77835,
+          "val_f1": 0.61
+        },
+        {
+          "epoch": 4,
+          "train_loss": 0.73657,
+          "val_f1": 0.6197
+        },
+        {
+          "epoch": 5,
+          "train_loss": 0.71169,
+          "val_f1": 0.622
+        },
+        {
+          "epoch": 6,
+          "train_loss": 0.69523,
+          "val_f1": 0.634
+        },
+        {
+          "epoch": 7,
+          "train_loss": 0.6847,
+          "val_f1": 0.6305
+        },
+        {
+          "epoch": 8,
+          "train_loss": 0.6763,
+          "val_f1": 0.6375
+        },
+        {
+          "epoch": 9,
+          "train_loss": 0.67011,
+          "val_f1": 0.6294
+        },
+        {
+          "epoch": 10,
+          "train_loss": 0.66384,
+          "val_f1": 0.6343
+        },
+        {
+          "epoch": 11,
+          "train_loss": 0.66017,
+          "val_f1": 0.6464
+        },
+        {
+          "epoch": 12,
+          "train_loss": 0.65631,
+          "val_f1": 0.6361
+        },
+        {
+          "epoch": 13,
+          "train_loss": 0.65281,
+          "val_f1": 0.6482
+        },
+        {
+          "epoch": 14,
+          "train_loss": 0.64996,
+          "val_f1": 0.6425
+        },
+        {
+          "epoch": 15,
+          "train_loss": 0.64749,
+          "val_f1": 0.6565
+        },
+        {
+          "epoch": 16,
+          "train_loss": 0.64519,
+          "val_f1": 0.6572
+        },
+        {
+          "epoch": 17,
+          "train_loss": 0.64315,
+          "val_f1": 0.6541
+        },
+        {
+          "epoch": 18,
+          "train_loss": 0.64176,
+          "val_f1": 0.6557
+        },
+        {
+          "epoch": 19,
+          "train_loss": 0.63986,
+          "val_f1": 0.6548
+        },
+        {
+          "epoch": 20,
+          "train_loss": 0.63865,
+          "val_f1": 0.66
+        },
+        {
+          "epoch": 21,
+          "train_loss": 0.6376,
+          "val_f1": 0.656
+        },
+        {
+          "epoch": 22,
+          "train_loss": 0.63663,
+          "val_f1": 0.6554
+        },
+        {
+          "epoch": 23,
+          "train_loss": 0.63562,
+          "val_f1": 0.661
+        },
+        {
+          "epoch": 24,
+          "train_loss": 0.6349,
+          "val_f1": 0.6599
+        },
+        {
+          "epoch": 25,
+          "train_loss": 0.63428,
+          "val_f1": 0.66
+        },
+        {
+          "epoch": 26,
+          "train_loss": 0.63386,
+          "val_f1": 0.6589
+        },
+        {
+          "epoch": 27,
+          "train_loss": 0.63352,
+          "val_f1": 0.6608
+        },
+        {
+          "epoch": 28,
+          "train_loss": 0.63326,
+          "val_f1": 0.6595
+        },
+        {
+          "epoch": 29,
+          "train_loss": 0.63311,
+          "val_f1": 0.6593
+        },
+        {
+          "epoch": 30,
+          "train_loss": 0.63303,
+          "val_f1": 0.66
+        }
+      ],
+      "sure_dk": 239.4
+    },
+    "delta": 0.0108
+  },
+  "lgbm": {}
+}

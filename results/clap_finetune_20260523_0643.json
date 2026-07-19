@@ -1,0 +1,54 @@
+{
+  "tarih": "20260523_0643",
+  "cfg": {
+    "epochs": 5,
+    "batch_size": 16,
+    "lr": 3e-05,
+    "weight_decay": 0.0001,
+    "warmup_orani": 0.1,
+    "patience": 7,
+    "grad_clip": 1.0,
+    "sicaklik": 0.07,
+    "hard_neg_beta": 0.3,
+    "tr_orani": 0.5,
+    "sadece_ingilizce": false,
+    "n_frozen_audio": 6,
+    "n_frozen_text": 8,
+    "val_orani": 0.1,
+    "test_orani": 0.1,
+    "maks_saniye": 10.0,
+    "num_workers": 0,
+    "seed": 42,
+    "fp16": true,
+    "ema_decay": 0.999,
+    "log_adim": 50
+  },
+  "egitim_saat": 8.42,
+  "en_iyi_epoch": 4,
+  "val_A2T_R1": 0.0,
+  "test": {
+    "val_kayip": 3.5026,
+    "A2T_R@1": 0.0,
+    "T2A_R@1": 0.0006,
+    "A2T_R@5": 0.0019,
+    "T2A_R@5": 0.0032,
+    "A2T_R@10": 0.0051,
+    "T2A_R@10": 0.0051,
+    "knn_acc": 0.045
+  },
+  "tarih_detay": [
+    {
+      "epoch": 5,
+      "train_loss": 2.91038,
+      "val_kayip": 3.4898,
+      "A2T_R@1": 0.0,
+      "T2A_R@1": 0.0,
+      "A2T_R@5": 0.0019,
+      "T2A_R@5": 0.0013,
+      "A2T_R@10": 0.0058,
+      "T2A_R@10": 0.0058,
+      "knn_acc": 0.0533,
+      "sure_dk": 505.2
+    }
+  ]
+}

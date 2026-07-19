@@ -1,0 +1,12 @@
+{
+  "tur": "coh3",
+  "model": "audioldm2-full",
+  "dil": "turkce",
+  "base_seed": 7000,
+  "siniflar": {
+    "kopek_sesleri": 50,
+    "kus_sesleri": 50,
+    "hava_olaylari": 50
+  },
+  "n_klip_hedef": 50
+}

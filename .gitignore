@@ -1,5 +1,9 @@
-# Ham ses verisi (büyük binary'ler)
+# ── Ham ve türetilmiş ses verisi (büyük binary) ─────────────────────────────
 sounds/
+data/raw/
+data/mel_cache/
+data/synthetic*/
+data/_dup_backup*/
 *.wav
 *.mp3
 *.flac
@@ -7,35 +11,47 @@ sounds/
 *.ogg
 *.m4a
 
-# Data dizinleri (hedef proje yapısı)
-data/raw/
+# İşlenmiş büyük ara dosyalar — küçük istisnalar aşağıda
 data/processed/*.parquet
 data/processed/*.npz
-data/mel_cache/
-
-# Egitilmis model agirliklari (buyuk binary)
-/models/
-/checkpoints/
-*.pt
-*.pkl
-
-# Uretilen ciktilar (rapor klasoru haric)
-outputs/lgbm_*
-outputs/model_selection*
-outputs/report/*.png
 *.parquet
 *.csv
-# Istisnalar: commit edilmesi gereken kucuk veri dosyalari
 !data/processed/turkce_promptlar.json
 !data/processed/dosya_ceviri.json
 !data/processed/ses_metin_eslestirme.parquet
 
-# Python
+# ── Model ağırlıkları ────────────────────────────────────────────────────────
+models/
+checkpoints/
+*.pt
+*.pkl
+*.ckpt
+
+# ── Üretilen çıktılar: raporlar, makale dosyaları, şekiller ──────────────────
+outputs/
+
+# ── Türetilmiş büyük sonuç dosyaları (JSON metrikler results/ altında kalır) ─
+results/*.npz
+
+# ── Arşiv: eski loglar, süpersede edilmiş scriptler ──────────────────────────
+arsiv/
+
+# ── Loglar ve geçici dosyalar ────────────────────────────────────────────────
+*.log
+*_err.log
+*.tmp
+gece_log.txt
+
+# ── Python ───────────────────────────────────────────────────────────────────
 *.pyc
 __pycache__/
 .venv/
+.ipynb_checkpoints/
 
-# Araçlar
+# ── Araçlar / IDE / OS ───────────────────────────────────────────────────────
 wandb/
 .env
-.ipynb_checkpoints/
+*.code-workspace
+.vscode/
+Thumbs.db
+desktop.ini

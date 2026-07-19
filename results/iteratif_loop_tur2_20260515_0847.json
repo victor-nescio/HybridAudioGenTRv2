@@ -1,0 +1,80 @@
+{
+  "tarih": "20260515_0811",
+  "tur": "tur2",
+  "hedef_siniflar": [
+    "acil_servis",
+    "diger_hayvanlar",
+    "dini_mekan",
+    "insaat_sesleri"
+  ],
+  "cnn": {},
+  "lgbm": {
+    "baseline": {
+      "val_f1": 0.5485,
+      "test_f1": 0.542,
+      "sinif_f1": {
+        "acil_servis": 0.3679,
+        "at_sesleri": 0.713,
+        "ayak_sesleri": 0.9106,
+        "cocuk_bebek_sesleri": 0.7004,
+        "diger_hayvanlar": 0.5008,
+        "dini_mekan": 0.3174,
+        "doga_atmosferi": 0.5397,
+        "endustri_fabrika": 0.561,
+        "ev_ici_sesler": 0.3723,
+        "gemi_tekne_sesleri": 0.6082,
+        "hava_olaylari": 0.3619,
+        "insaat_sesleri": 0.3461,
+        "kalabalik_sesleri": 0.4827,
+        "kapi_sesleri": 0.6014,
+        "kara_tasitlari": 0.6769,
+        "kopek_sesleri": 0.5814,
+        "kus_sesleri": 0.5291,
+        "ofis_iletisim": 0.6388,
+        "saat_can_sesleri": 0.7792,
+        "sehir_atmosferi": 0.5598,
+        "silah_patlama": 0.572,
+        "spor_eglence": 0.4064,
+        "su_sesleri": 0.5509,
+        "tarim_ciftlik": 0.2,
+        "tren_sesleri": 0.5316,
+        "ucak_sesleri": 0.6818
+      },
+      "sure_dk": 12.7
+    },
+    "augmented": {
+      "val_f1": 0.5472,
+      "test_f1": 0.5462,
+      "sinif_f1": {
+        "acil_servis": 0.3988,
+        "at_sesleri": 0.7189,
+        "ayak_sesleri": 0.9202,
+        "cocuk_bebek_sesleri": 0.6873,
+        "diger_hayvanlar": 0.4925,
+        "dini_mekan": 0.3155,
+        "doga_atmosferi": 0.5436,
+        "endustri_fabrika": 0.566,
+        "ev_ici_sesler": 0.3881,
+        "gemi_tekne_sesleri": 0.6101,
+        "hava_olaylari": 0.3911,
+        "insaat_sesleri": 0.3586,
+        "kalabalik_sesleri": 0.481,
+        "kapi_sesleri": 0.6149,
+        "kara_tasitlari": 0.6785,
+        "kopek_sesleri": 0.584,
+        "kus_sesleri": 0.5333,
+        "ofis_iletisim": 0.6399,
+        "saat_can_sesleri": 0.7744,
+        "sehir_atmosferi": 0.5548,
+        "silah_patlama": 0.5797,
+        "spor_eglence": 0.4146,
+        "su_sesleri": 0.5589,
+        "tarim_ciftlik": 0.1835,
+        "tren_sesleri": 0.5301,
+        "ucak_sesleri": 0.6817
+      },
+      "sure_dk": 22.8
+    },
+    "delta": 0.0042
+  }
+}

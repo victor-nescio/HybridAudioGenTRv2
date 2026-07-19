@@ -1,0 +1,82 @@
+{
+  "tarih": "20260716_2122",
+  "model": "cnn_baseline_iter_best.pt",
+  "konfigurasyonlar": {
+    "H1": {
+      "n_klip": 200,
+      "hedefe_atama_orani": 0.175,
+      "sinif_basina": {
+        "diger_hayvanlar": {
+          "n": 50,
+          "hedefe_atama": 0.32
+        },
+        "hava_olaylari": {
+          "n": 50,
+          "hedefe_atama": 0.02
+        },
+        "kopek_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.28
+        },
+        "kus_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.08
+        }
+      }
+    },
+    "C2": {
+      "n_klip": 150,
+      "hedefe_atama_orani": 0.12,
+      "sinif_basina": {
+        "hava_olaylari": {
+          "n": 50,
+          "hedefe_atama": 0.02
+        },
+        "kopek_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.32
+        },
+        "kus_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.02
+        }
+      }
+    },
+    "C3": {
+      "n_klip": 150,
+      "hedefe_atama_orani": 0.0,
+      "sinif_basina": {
+        "hava_olaylari": {
+          "n": 50,
+          "hedefe_atama": 0.0
+        },
+        "kopek_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.0
+        },
+        "kus_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.0
+        }
+      }
+    },
+    "C4": {
+      "n_klip": 150,
+      "hedefe_atama_orani": 0.16,
+      "sinif_basina": {
+        "hava_olaylari": {
+          "n": 50,
+          "hedefe_atama": 0.04
+        },
+        "kopek_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.38
+        },
+        "kus_sesleri": {
+          "n": 50,
+          "hedefe_atama": 0.06
+        }
+      }
+    }
+  }
+}

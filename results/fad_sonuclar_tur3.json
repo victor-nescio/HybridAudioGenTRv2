@@ -1,0 +1,26 @@
+{
+  "insaat_sesleri": {
+    "fad": 21.07621438712247,
+    "embedding": "vggish",
+    "n_gercek": 218,
+    "n_sentetik": 50
+  },
+  "dini_mekan": {
+    "fad": 19.245004695076368,
+    "embedding": "vggish",
+    "n_gercek": 117,
+    "n_sentetik": 50
+  },
+  "acil_servis": {
+    "fad": 10.155873700355897,
+    "embedding": "vggish",
+    "n_gercek": 209,
+    "n_sentetik": 50
+  },
+  "diger_hayvanlar": {
+    "fad": 13.126715138417868,
+    "embedding": "vggish",
+    "n_gercek": 243,
+    "n_sentetik": 50
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "tur": 1,
+  "model": "audioldm2-full",
+  "siniflar": {
+    "dini_mekan": 50,
+    "acil_servis": 50,
+    "diger_hayvanlar": 50
+  },
+  "n_klip_hedef": 50
+}

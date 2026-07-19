@@ -1,0 +1,76 @@
+{
+  "tarih": "20260606_1416",
+  "etiket": "SpecA_vs_Gen",
+  "baseline_ckpt": "cnn_baseline_specaug_best.pt",
+  "aug_ckpt": "cnn_aug_coherent_coh4.pt",
+  "n_test": 48144,
+  "testler": {
+    "global": {
+      "n": 48144,
+      "chi2": 12.235542779844437,
+      "p": 0.00046887702055564695,
+      "anlam": "***",
+      "n01": 2822,
+      "n10": 3092
+    },
+    "tutarli_3": {
+      "siniflar": [
+        "kopek_sesleri",
+        "kus_sesleri",
+        "hava_olaylari"
+      ],
+      "n": 2343,
+      "chi2": 0.060836501901140684,
+      "p": 0.8051786669413034,
+      "anlam": "ns",
+      "n01": 129,
+      "n10": 134
+    },
+    "sinif_basina": {
+      "kopek_sesleri": {
+        "rol": "tutarli",
+        "n": 547,
+        "acc_baseline": 0.6270566727605119,
+        "acc_augmented": 0.603290676416819,
+        "chi2": 3.2,
+        "p": 0.07363827012030255,
+        "anlam": "ns",
+        "n01": 16,
+        "n10": 29
+      },
+      "kus_sesleri": {
+        "rol": "tutarli",
+        "n": 386,
+        "acc_baseline": 0.6243523316062176,
+        "acc_augmented": 0.5751295336787565,
+        "chi2": 4.207792207792208,
+        "p": 0.04023867711975915,
+        "anlam": "*",
+        "n01": 29,
+        "n10": 48
+      },
+      "hava_olaylari": {
+        "rol": "tutarli",
+        "n": 1410,
+        "acc_baseline": 0.4907801418439716,
+        "acc_augmented": 0.5099290780141844,
+        "chi2": 4.794326241134752,
+        "p": 0.02855362234341885,
+        "anlam": "*",
+        "n01": 84,
+        "n10": 57
+      },
+      "diger_hayvanlar": {
+        "rol": "kontrol",
+        "n": 754,
+        "acc_baseline": 0.45225464190981435,
+        "acc_augmented": 0.4442970822281167,
+        "chi2": 0.32894736842105265,
+        "p": 0.566279574045329,
+        "anlam": "ns",
+        "n01": 35,
+        "n10": 41
+      }
+    }
+  }
+}

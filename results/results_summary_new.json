@@ -1,0 +1,268 @@
+{
+  "fad": {
+    "Tur1": {
+      "insaat_sesleri": 8.7,
+      "dini_mekan": 15.02,
+      "acil_servis": 25.55,
+      "diger_hayvanlar": 5.3,
+      "ORT": 13.64
+    },
+    "Tur2": {
+      "insaat_sesleri": 8.47,
+      "dini_mekan": 15.88,
+      "acil_servis": 25.03,
+      "diger_hayvanlar": 5.0,
+      "ORT": 13.59
+    },
+    "Tur3": {
+      "insaat_sesleri": 21.08,
+      "dini_mekan": 19.25,
+      "acil_servis": 10.16,
+      "diger_hayvanlar": 13.13,
+      "ORT": 15.9
+    },
+    "Tur4": {
+      "insaat_sesleri": 7.55,
+      "dini_mekan": 15.02,
+      "acil_servis": 28.32,
+      "diger_hayvanlar": 5.1,
+      "ORT": 14.0
+    }
+  },
+  "siniflandirma": {
+    "Tur1": {
+      "_dosya": "iteratif_loop_1_20260601_1725.json",
+      "cnn": {
+        "baseline": 0.6716,
+        "augmented": 0.6764,
+        "delta": 0.0048,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3877,
+            "a": 0.3978,
+            "d": 0.0101
+          },
+          "dini_mekan": {
+            "b": 0.4614,
+            "a": 0.4487,
+            "d": -0.0127
+          },
+          "acil_servis": {
+            "b": 0.5894,
+            "a": 0.5618,
+            "d": -0.0276
+          },
+          "diger_hayvanlar": {
+            "b": 0.5823,
+            "a": 0.5722,
+            "d": -0.0101
+          }
+        }
+      },
+      "lgbm": {
+        "baseline": 0.542,
+        "augmented": 0.5461,
+        "delta": 0.0041,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3461,
+            "a": 0.3586,
+            "d": 0.0125
+          },
+          "dini_mekan": {
+            "b": 0.3174,
+            "a": 0.3155,
+            "d": -0.0019
+          },
+          "acil_servis": {
+            "b": 0.3679,
+            "a": 0.3988,
+            "d": 0.0309
+          },
+          "diger_hayvanlar": {
+            "b": 0.5008,
+            "a": 0.4925,
+            "d": -0.0083
+          }
+        }
+      }
+    },
+    "Tur2": {
+      "_dosya": "iteratif_loop_tur2_20260601_2132.json",
+      "cnn": {
+        "baseline": 0.6716,
+        "augmented": 0.6744,
+        "delta": 0.0028,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3877,
+            "a": 0.403,
+            "d": 0.0153
+          },
+          "dini_mekan": {
+            "b": 0.4614,
+            "a": 0.438,
+            "d": -0.0234
+          },
+          "acil_servis": {
+            "b": 0.5894,
+            "a": 0.5761,
+            "d": -0.0133
+          },
+          "diger_hayvanlar": {
+            "b": 0.5823,
+            "a": 0.5928,
+            "d": 0.0105
+          }
+        }
+      },
+      "lgbm": {
+        "baseline": 0.542,
+        "augmented": 0.5462,
+        "delta": 0.0042,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3461,
+            "a": 0.3586,
+            "d": 0.0125
+          },
+          "dini_mekan": {
+            "b": 0.3174,
+            "a": 0.3155,
+            "d": -0.0019
+          },
+          "acil_servis": {
+            "b": 0.3679,
+            "a": 0.4012,
+            "d": 0.0333
+          },
+          "diger_hayvanlar": {
+            "b": 0.5008,
+            "a": 0.4925,
+            "d": -0.0083
+          }
+        }
+      }
+    },
+    "Tur3": {
+      "_dosya": "iteratif_loop_tur3_20260602_0303.json",
+      "cnn": {
+        "baseline": 0.6716,
+        "augmented": 0.6761,
+        "delta": 0.0045,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3877,
+            "a": 0.3616,
+            "d": -0.0261
+          },
+          "dini_mekan": {
+            "b": 0.4614,
+            "a": 0.4411,
+            "d": -0.0203
+          },
+          "acil_servis": {
+            "b": 0.5894,
+            "a": 0.5802,
+            "d": -0.0092
+          },
+          "diger_hayvanlar": {
+            "b": 0.5823,
+            "a": 0.5439,
+            "d": -0.0384
+          }
+        }
+      },
+      "lgbm": {
+        "baseline": 0.542,
+        "augmented": 0.5463,
+        "delta": 0.0043,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3461,
+            "a": 0.3586,
+            "d": 0.0125
+          },
+          "dini_mekan": {
+            "b": 0.3174,
+            "a": 0.3155,
+            "d": -0.0019
+          },
+          "acil_servis": {
+            "b": 0.3679,
+            "a": 0.4012,
+            "d": 0.0333
+          },
+          "diger_hayvanlar": {
+            "b": 0.5008,
+            "a": 0.4938,
+            "d": -0.007
+          }
+        }
+      }
+    },
+    "Tur4": {
+      "_dosya": "iteratif_loop_tur4_20260602_0701.json",
+      "cnn": {
+        "baseline": 0.6716,
+        "augmented": 0.6727,
+        "delta": 0.0011,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3877,
+            "a": 0.3608,
+            "d": -0.0269
+          },
+          "dini_mekan": {
+            "b": 0.4614,
+            "a": 0.4475,
+            "d": -0.0139
+          },
+          "acil_servis": {
+            "b": 0.5894,
+            "a": 0.6096,
+            "d": 0.0202
+          },
+          "diger_hayvanlar": {
+            "b": 0.5823,
+            "a": 0.5572,
+            "d": -0.0251
+          }
+        }
+      },
+      "lgbm": {
+        "baseline": 0.542,
+        "augmented": 0.5462,
+        "delta": 0.0042,
+        "sinif": {
+          "insaat_sesleri": {
+            "b": 0.3461,
+            "a": 0.3586,
+            "d": 0.0125
+          },
+          "dini_mekan": {
+            "b": 0.3174,
+            "a": 0.3155,
+            "d": -0.0019
+          },
+          "acil_servis": {
+            "b": 0.3679,
+            "a": 0.4012,
+            "d": 0.0333
+          },
+          "diger_hayvanlar": {
+            "b": 0.5008,
+            "a": 0.4925,
+            "d": -0.0083
+          }
+        }
+      }
+    }
+  },
+  "mcnemar_dosyalari": [
+    "mcnemar_sonuclar.json",
+    "mcnemar_lgbm_tur4.json",
+    "mcnemar_lgbm_tum_turler.json",
+    "mcnemar_cnn_vs_lgbm.json"
+  ]
+}

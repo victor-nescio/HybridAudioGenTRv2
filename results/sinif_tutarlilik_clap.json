@@ -1,0 +1,137 @@
+{
+  "n_klip_hedef": 100,
+  "embedding": "clap",
+  "olcut": "clap mean-pool, cos_dispersion (dusuk=tutarli)",
+  "siniflar": {
+    "acil_servis": {
+      "n": 100,
+      "cos_dispersion": 0.38766111873153825,
+      "norm_trace": 1.7203537727194878
+    },
+    "at_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.25688409589324074,
+      "norm_trace": 0.8199105696546148
+    },
+    "ayak_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.195934318625314,
+      "norm_trace": 0.5724644556845009
+    },
+    "cocuk_bebek_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.3847498391689647,
+      "norm_trace": 1.6316340138998606
+    },
+    "diger_hayvanlar": {
+      "n": 100,
+      "cos_dispersion": 0.3879888033513138,
+      "norm_trace": 1.7005507062330443
+    },
+    "dini_mekan": {
+      "n": 100,
+      "cos_dispersion": 0.35112607548162755,
+      "norm_trace": 1.3581683856953861
+    },
+    "doga_atmosferi": {
+      "n": 100,
+      "cos_dispersion": 0.45410523752117243,
+      "norm_trace": 2.3105546847002407
+    },
+    "endustri_fabrika": {
+      "n": 100,
+      "cos_dispersion": 0.39575120650291723,
+      "norm_trace": 1.7457584277454261
+    },
+    "ev_ici_sesler": {
+      "n": 100,
+      "cos_dispersion": 0.4001149352976256,
+      "norm_trace": 1.8014938114405294
+    },
+    "gemi_tekne_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.37211556929892525,
+      "norm_trace": 1.5480278809647827
+    },
+    "hava_olaylari": {
+      "n": 100,
+      "cos_dispersion": 0.43035836709236236,
+      "norm_trace": 2.0784987279010236
+    },
+    "insaat_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.4031819803454071,
+      "norm_trace": 1.8347600945113844
+    },
+    "kalabalik_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.3211169784106413,
+      "norm_trace": 1.1629275340973224
+    },
+    "kapi_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.27960988856108315,
+      "norm_trace": 0.9581389500611517
+    },
+    "kara_tasitlari": {
+      "n": 100,
+      "cos_dispersion": 0.3702257956165237,
+      "norm_trace": 1.5453106422594072
+    },
+    "kopek_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.2545985071634189,
+      "norm_trace": 0.7858828840611548
+    },
+    "kus_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.3473049311998946,
+      "norm_trace": 1.3435929543204106
+    },
+    "ofis_iletisim": {
+      "n": 100,
+      "cos_dispersion": 0.49614052128638697,
+      "norm_trace": 2.953130556532937
+    },
+    "saat_can_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.2601354196934852,
+      "norm_trace": 0.8437825632838349
+    },
+    "sehir_atmosferi": {
+      "n": 100,
+      "cos_dispersion": 0.4222837534141962,
+      "norm_trace": 1.9521004119873921
+    },
+    "silah_patlama": {
+      "n": 100,
+      "cos_dispersion": 0.3596916849082674,
+      "norm_trace": 1.4710036624619334
+    },
+    "spor_eglence": {
+      "n": 100,
+      "cos_dispersion": 0.43252905549345266,
+      "norm_trace": 2.1212774646786534
+    },
+    "su_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.3813831788176158,
+      "norm_trace": 1.6006994142670232
+    },
+    "tarim_ciftlik": {
+      "n": 79,
+      "cos_dispersion": 0.2912527189176111,
+      "norm_trace": 1.0035706398938091
+    },
+    "tren_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.36161696253170666,
+      "norm_trace": 1.4691469250947946
+    },
+    "ucak_sesleri": {
+      "n": 100,
+      "cos_dispersion": 0.24783760894929194,
+      "norm_trace": 0.7717941344936261
+    }
+  }
+}

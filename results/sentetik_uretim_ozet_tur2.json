@@ -1,0 +1,13 @@
+{
+  "tur": "2",
+  "model": "audioldm2-full",
+  "dil": "ingilizce",
+  "base_seed": 2000,
+  "siniflar": {
+    "insaat_sesleri": 50,
+    "dini_mekan": 50,
+    "acil_servis": 50,
+    "diger_hayvanlar": 50
+  },
+  "n_klip_hedef": 50
+}
