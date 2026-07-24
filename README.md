@@ -7,6 +7,7 @@
 ![Status](https://img.shields.io/badge/paper-submitted%20to%20IEEE%20Access-00629B)
 ![Reproducibility](https://img.shields.io/badge/deterministic-seed%2042-success)
 ![Hardware](https://img.shields.io/badge/GPU-RTX%203060%20·%2012%20GB-76B900)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 Code and experimental artefacts for the paper:
 
@@ -150,6 +151,13 @@ GitHub's *"Cite this repository"* button (from `CITATION.cff`) produces the same
 
 This work was supported by the Yıldız Technical University Scientific Research Projects
 Coordination Unit under project FDK-2026-7516.
+
+## License
+
+The code in this repository is released under the [MIT License](LICENSE).
+The BBC Sound Effects Archive audio is **not** covered by this license — it is
+distributed by the BBC under the RemArc licence and must be obtained from the
+official archive.
 
 ## Notes
 

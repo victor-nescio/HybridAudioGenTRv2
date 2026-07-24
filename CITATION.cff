@@ -11,6 +11,7 @@ authors:
     given-names: "Fatma"
     affiliation: "Yıldız Technical University"
 repository-code: "https://github.com/victor-nescio/HybridAudioGenTRv2"
+license: MIT
 keywords:
   - audio data augmentation
   - AudioLDM2
