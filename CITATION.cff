@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below (under review at IEEE Access)."
+title: "HybridAudioGenTR: Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Low-Resource Environmental Sound Classification"
+type: software
+authors:
+  - family-names: "Cellat"
+    given-names: "Fatih Doğan"
+    email: "fdcellat@gmail.com"
+    affiliation: "Yıldız Technical University; HDI Sigorta (Talanx Group)"
+  - family-names: "Noyan Tekeli"
+    given-names: "Fatma"
+    affiliation: "Yıldız Technical University"
+repository-code: "https://github.com/victor-nescio/HybridAudioGenTRv2"
+keywords:
+  - audio data augmentation
+  - AudioLDM2
+  - CLAP
+  - environmental sound classification
+  - generative artificial intelligence
+  - Fréchet Audio Distance
+preferred-citation:
+  type: article
+  title: "Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Low-Resource Environmental Sound Classification: A Reproducible Multi-Configuration Evaluation"
+  authors:
+    - family-names: "Cellat"
+      given-names: "Fatih Doğan"
+    - family-names: "Noyan Tekeli"
+      given-names: "Fatma"
+  year: 2026
+  journal: "Submitted to IEEE Access"
