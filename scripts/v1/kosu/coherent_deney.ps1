@@ -11,7 +11,7 @@
 #  Tahmini: ~3.3s uretim + ~3s siniflandirma
 # ============================================================
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 
 Write-Host "=== ADIM 1: URETIM (tutarli siniflar + catch-all kontrol) $(Get-Date -Format HH:mm) ==="

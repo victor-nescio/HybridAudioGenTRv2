@@ -20,7 +20,7 @@ sys.path.insert(0, str(ROOT))
 
 RAW_DIR       = ROOT / "data" / "raw"
 SENTETIK_DIR  = ROOT / "data" / "synthetic"
-SONUCLAR_YOL  = ROOT / "results" / "fad_sonuclar.json"
+SONUCLAR_YOL  = ROOT / "results" / "v1" / "fad_sonuclar.json"
 
 VARSAYILAN_SINIFLAR = ["insaat_sesleri", "dini_mekan", "acil_servis", "diger_hayvanlar"]
 
@@ -119,7 +119,7 @@ def main():
     if args.sentetik_dir:
         SENTETIK_DIR = ROOT / args.sentetik_dir
     if args.tur:
-        SONUCLAR_YOL = ROOT / "results" / f"fad_sonuclar_{args.tur}.json"
+        SONUCLAR_YOL = ROOT / "results" / "v1" / f"fad_sonuclar_{args.tur}.json"
 
     hedef_siniflar = args.siniflar or VARSAYILAN_SINIFLAR
 

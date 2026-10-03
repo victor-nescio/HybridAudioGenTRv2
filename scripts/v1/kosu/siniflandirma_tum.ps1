@@ -12,11 +12,11 @@
 #  Tahmini sure: ~12-16 saat (5 CNN egitimi x ~2-3s + LGBM).
 #  Her tur ayri log: outputs\sinif_turN.log
 #  NOT: Tur mid-resume DEGIL; kesilirse o tur bastan. Biten
-#  turlarin JSON'lari korunur (results/iteratif_loop_*.json).
+#  turlarin JSON'lari korunur (results/v1/iteratif_loop_*.json).
 # ============================================================
 
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 $bs = 64   # batch (orijinal CNN ile uyumlu, hizli)
 $baslangic = Get-Date

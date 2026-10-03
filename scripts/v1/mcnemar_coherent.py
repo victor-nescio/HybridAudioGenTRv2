@@ -3,7 +3,7 @@ siniflari (kopek/kus/hava) anlamli iyilestiriyor mu? Catch-all diger_hayvanlar k
 
 Paylasilan baseline (cnn_baseline_iter_best.pt) vs H1 augmented (cnn_aug_coherent_H1.pt).
 Sadece hedef siniflarin test segmentlerinde McNemar (duyarli test). Yeni egitim yok.
-Sonuc results/mcnemar_coherent.json'a kaydedilir.
+Sonuc results/v1/mcnemar_coherent.json'a kaydedilir.
 
 Kullanim: python scripts/mcnemar_coherent.py
 """
@@ -14,7 +14,7 @@ import numpy as np
 import torch
 from scipy.stats import chi2 as chi2_dist
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from src.data.dataset import dataloader_olustur, veri_bol
 from src.models.cnn import SpectrogramCNN
@@ -44,7 +44,7 @@ def parse_args():
     ap.add_argument("--aug_ckpt", default="cnn_aug_coherent_H1.pt",
                     help="Augmented checkpoint dosya adi (models/ icinde)")
     ap.add_argument("--baseline_ckpt", default="cnn_baseline_iter_best.pt")
-    ap.add_argument("--out", default="results/mcnemar_coherent.json")
+    ap.add_argument("--out", default="results/v1/mcnemar_coherent.json")
     ap.add_argument("--etiket", default="H1", help="Kosu etiketi (rapor icin)")
     return ap.parse_args()
 

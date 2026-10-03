@@ -5,7 +5,7 @@ hedef sinifa atadigini olcer (classifier-based validity). Algisal dinleme
 testinin ucuz ve nesnel vekilidir.
 
 Kullanim: python scripts/14_sentetik_dogrulama.py
-Cikti   : results/sentetik_dogrulama.json
+Cikti   : results/v1/sentetik_dogrulama.json
 """
 import sys, json
 from pathlib import Path
@@ -84,7 +84,7 @@ def main():
         sonuc["konfigurasyonlar"][etiket] = blok
         print(f"{etiket}: {len(gt)} klip, hedefe atama {blok['hedefe_atama_orani']:.1%}")
 
-    out = ROOT / "results" / "sentetik_dogrulama.json"
+    out = ROOT / "results" / "v1" / "sentetik_dogrulama.json"
     out.write_text(json.dumps(sonuc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Kaydedildi: {out}")
 

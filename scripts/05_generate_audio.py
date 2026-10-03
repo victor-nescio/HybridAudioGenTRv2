@@ -228,7 +228,7 @@ def main():
         print(f"    {sinif:<30} {n} klip")
     print("=" * 60)
 
-    ozet_yol = ROOT / "results" / f"sentetik_uretim_ozet_tur{args.tur}.json"
+    ozet_yol = ROOT / "results" / "v1" / f"sentetik_uretim_ozet_tur{args.tur}.json"
     ozet_yol.parent.mkdir(exist_ok=True)
     with open(ozet_yol, "w", encoding="utf-8") as f:
         json.dump({"tur": args.tur, "model": args.model, "dil": args.dil,

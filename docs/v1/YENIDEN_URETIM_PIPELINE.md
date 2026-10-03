@@ -1,5 +1,7 @@
 # Yeniden Üretim Pipeline'ı — seed çeşitlilik düzeltmesi sonrası
 
+> **v1 (ilk gönderim) belgesi.** Bu dosya IEEE Access ilk gönderiminin (etiket `v1-submission`) yeniden üretim akışını anlatır; sonuçlar `results/v1/`, koşu scriptleri `scripts/v1/kosu/` altındadır.
+
 **Neden:** `05_generate_audio.py` her klibi `seed=42` ile üretiyordu → prompt başına ~10 klip birebir aynı. Düzeltme: her klip `base_seed + global_idx` ile benzersiz seed alır (resume güvenli). Smoke-test doğrulandı: aynı prompt, farklı seed → farklı klip ✅.
 
 **Eski (kopya) klipler yedeklendi:** `data/_dup_backup_20260531/` (4 tur × 4 sınıf). Orijinal dizinler temizlendi; Tur1'de smoke-test'ten 6 gerçek-çeşitli klip var (koşum bunları 50'ye tamamlar).
@@ -52,7 +54,7 @@ $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 & $py scripts/07_iterative_loop.py --sentetik_dir data/synthetic_tur3 --tur_etiketi tur3
 & $py scripts/07_iterative_loop.py --sentetik_dir data/synthetic_tur4 --tur_etiketi tur4
 ```
-Çıktı: `results/iteratif_loop_*.json` (baseline/augmented makro-F1 + sınıf F1).
+Çıktı: `results/v1/iteratif_loop_*.json` (baseline/augmented makro-F1 + sınıf F1).
 
 ---
 
@@ -60,8 +62,8 @@ $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 ```powershell
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 & $py scripts/12_mcnemar_test.py            # CNN bsl->aug (Tur1-3 + Tur4) -> ayri dosyalara kaydet
-& $py scripts/12c_mcnemar_lgbm_tum_turler.py
-& $py scripts/12d_mcnemar_cnn_vs_lgbm.py
+& $py scripts/v1/12c_mcnemar_lgbm_tum_turler.py
+& $py scripts/v1/12d_mcnemar_cnn_vs_lgbm.py
 ```
 > Bu **Bulgu #5'i de çözer** (CNN Tur1-3 McNemar yeniden üretilip arşivlenir). `12_mcnemar_test.py` çıktısını turlara göre ayrı dosyaya kaydedecek şekilde gözden geçirelim (üzerine yazmasın).
 

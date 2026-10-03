@@ -1,6 +1,6 @@
 # ============================================================
 #  KALAN TURLAR: sadece Tur3 + Tur4 (gece yeniden baslatma).
-#  Tur1/Tur2 ZATEN BITTI (JSON'lari results/ altinda).
+#  Tur1/Tur2 ZATEN BITTI (JSON'lari results/v1/ altinda).
 #  Paylasilan baseline (cnn_baseline_iter_best.pt, Tur1'den)
 #  --sadece_aug ile yuklenir; preload hizlandirmasi aktif.
 #
@@ -13,7 +13,7 @@
 # ============================================================
 
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 $bs = 64
 $baslangic = Get-Date

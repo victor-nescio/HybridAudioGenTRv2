@@ -11,7 +11,7 @@
 #                        -> "SpecAugment + generative" (istifleme)
 #  Kanonik cnn_baseline_iter_best.pt EZILMEZ (ayri tag).
 #
-#  Cikti: results/iteratif_loop_specaug_*.json
+#  Cikti: results/v1/iteratif_loop_specaug_*.json
 #    .cnn.baseline  = SpecAugment-only sinif F1
 #    .cnn.augmented = stacked sinif F1
 #  Karsilastirma: no-aug baseline (0.6716) vs SpecAugment-only vs
@@ -21,7 +21,7 @@
 #  Tahmini: ~7 saat (2 CNN egitimi)
 # ============================================================
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 
 "BASLADI $(Get-Date -Format 'yyyy-MM-dd HH:mm')" | Out-File "outputs\specaug_baslangic.txt" -Encoding utf8

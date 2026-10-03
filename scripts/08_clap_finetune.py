@@ -69,7 +69,7 @@ log = logging.getLogger(__name__)
 # ── Sabitler ──────────────────────────────────────────────────────────────────
 PARQUET      = ROOT / "data" / "processed" / "ses_metin_eslestirme.parquet"
 CHECKPT_DIR  = ROOT / "checkpoints"
-RESULT_DIR   = ROOT / "results"
+RESULT_DIR   = ROOT / "results" / "v1"
 SR           = 16_000       # CLAP beklenen ornek hizi
 CLIP_SN      = 10.0         # CLAP beklenen klip suresi (saniye)
 CLIP_SAMPLES = int(SR * CLIP_SN)

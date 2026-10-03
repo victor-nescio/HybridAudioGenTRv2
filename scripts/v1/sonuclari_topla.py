@@ -2,9 +2,9 @@
 tek bir ozet (results_summary_new.json) + konsol tablosu uretir.
 
 Kaynaklar:
-  - FAD:          results/fad_sonuclar.json (Tur1), _tur2, _tur3, _4
-  - Siniflandirma: results/iteratif_loop_{1,tur2,tur3,tur4}_*.json (EN YENI)
-  - McNemar:       results/mcnemar_*.json (varsa)
+  - FAD:          results/v1/fad_sonuclar.json (Tur1), _tur2, _tur3, _4
+  - Siniflandirma: results/v1/iteratif_loop_{1,tur2,tur3,tur4}_*.json (EN YENI)
+  - McNemar:       results/v1/mcnemar_*.json (varsa)
 
 Eksik turlar 'BEKLENIYOR' olarak isaretlenir (gece kosumu surarken de calisir).
 Kullanim:  python scripts/sonuclari_topla.py
@@ -12,8 +12,8 @@ Kullanim:  python scripts/sonuclari_topla.py
 import json, glob, os
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-RES  = ROOT / "results"
+ROOT = Path(__file__).resolve().parents[2]
+RES  = ROOT / "results" / "v1"
 HEDEF = ["insaat_sesleri", "dini_mekan", "acil_servis", "diger_hayvanlar"]
 
 def yukle(p):

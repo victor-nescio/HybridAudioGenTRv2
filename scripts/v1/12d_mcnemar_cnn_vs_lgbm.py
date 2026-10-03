@@ -23,7 +23,7 @@ from scipy.stats import chi2 as chi2_dist
 from sklearn.metrics import f1_score
 from sklearn.preprocessing import StandardScaler
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from src.data.dataset import dataloader_olustur, veri_bol
@@ -32,7 +32,7 @@ from src.models.cnn import SpectrogramCNN
 PARQUET_LISTE = ROOT / "data" / "processed" / "veri_listesi.parquet"
 PARQUET_LGBM  = ROOT / "data" / "processed" / "lgbm_ozellikler.parquet"
 MODEL_DIR     = ROOT / "models"
-RESULT_DIR    = ROOT / "results"
+RESULT_DIR    = ROOT / "results" / "v1"
 DEVICE        = "cuda" if torch.cuda.is_available() else "cpu"
 N_SINIF       = 26
 SEED          = 42

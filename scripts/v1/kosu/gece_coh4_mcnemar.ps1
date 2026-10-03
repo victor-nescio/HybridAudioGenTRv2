@@ -2,7 +2,7 @@
 #  GECE SURUCUSU 2 — coh4 (Dongu2+EN) uretim+siniflandirma +
 #  TUM koşularin (coh2/coh3/coh4) McNemar istatistiksel testleri.
 #
-#  H1 McNemar zaten yapildi (results/mcnemar_coherent.json).
+#  H1 McNemar zaten yapildi (results/v1/mcnemar_coherent.json).
 #  Bu surucu:
 #   1) coh3 McNemar  (ckpt cnn_aug_coherent_coh3.pt hazir)
 #   2) coh4: uret (Dongu2+EN seed8000) -> siniflandir -> ckpt yedekle -> McNemar
@@ -13,7 +13,7 @@
 #  Kullanim: powershell -ExecutionPolicy Bypass -File .\gece_coh4_mcnemar.ps1
 # ============================================================
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py     = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 $ckptD2 = "checkpoints/audioldm2_clap_dongu2_finetuned.pth"
 $log    = "outputs\gece_coh4.log"
@@ -23,7 +23,7 @@ Say "=== GECE SURUCUSU 2 BASLADI ==="
 
 # --- 1) coh3 McNemar (checkpoint hazir) ---
 Say "[1/?] coh3 McNemar..."
-& $py scripts/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh3.pt --etiket coh3_Dongu1_TR --out results/mcnemar_coh3.json 2>&1 | Tee-Object -FilePath $log -Append
+& $py scripts/v1/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh3.pt --etiket coh3_Dongu1_TR --out results/v1/mcnemar_coh3.json 2>&1 | Tee-Object -FilePath $log -Append
 Say "coh3 McNemar bitti."
 
 # --- 2) coh4 uretim (Dongu2 + EN, seed 8000) ---
@@ -40,7 +40,7 @@ Say "coh4 siniflandirma bitti, ckpt yedeklendi (cnn_aug_coherent_coh4.pt)."
 
 # --- coh4 McNemar ---
 Say "[2c] coh4 McNemar..."
-& $py scripts/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh4.pt --etiket coh4_Dongu2_EN --out results/mcnemar_coh4.json 2>&1 | Tee-Object -FilePath $log -Append
+& $py scripts/v1/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh4.pt --etiket coh4_Dongu2_EN --out results/v1/mcnemar_coh4.json 2>&1 | Tee-Object -FilePath $log -Append
 Say "coh4 McNemar bitti."
 "DONE coh4 $(Get-Date -Format HH:mm)" | Out-File -FilePath "outputs\coh4_done.txt" -Encoding utf8
 
@@ -52,7 +52,7 @@ Say "coh2 yeniden siniflandirma bitti, ckpt yedeklendi (cnn_aug_coherent_coh2.pt
 
 # --- coh2 McNemar ---
 Say "[3b] coh2 McNemar..."
-& $py scripts/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh2.pt --etiket coh2_Dongu1_EN --out results/mcnemar_coh2.json 2>&1 | Tee-Object -FilePath $log -Append
+& $py scripts/v1/mcnemar_coherent.py --aug_ckpt cnn_aug_coherent_coh2.pt --etiket coh2_Dongu1_EN --out results/v1/mcnemar_coh2.json 2>&1 | Tee-Object -FilePath $log -Append
 Say "coh2 McNemar bitti."
 
 Say "=== TUM ISLER TAMAMLANDI ==="

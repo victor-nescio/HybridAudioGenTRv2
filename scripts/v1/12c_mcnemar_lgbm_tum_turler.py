@@ -19,7 +19,7 @@ from scipy.stats import chi2 as chi2_dist
 from sklearn.metrics import f1_score
 from sklearn.preprocessing import StandardScaler
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from src.data.dataset import veri_bol
@@ -28,7 +28,7 @@ PARQUET_LISTE    = ROOT / "data" / "processed" / "veri_listesi.parquet"
 PARQUET_LGBM     = ROOT / "data" / "processed" / "lgbm_ozellikler.parquet"
 SENTETIK_CACHE   = ROOT / "data" / "processed" / "sentetik_lgbm_ozellikler.parquet"
 SENTETIK_TUR4    = ROOT / "data" / "synthetic_tur4"
-RESULT_DIR       = ROOT / "results"
+RESULT_DIR       = ROOT / "results" / "v1"
 SEED             = 42
 N_SINIF          = 26
 

@@ -11,7 +11,7 @@ Kullanim:
   python scripts/04_fusion.py
 
 Ciktilar:
-  results/fusion_<tarih>_sonuclar.json
+  results/v1/fusion_<tarih>_sonuclar.json
   outputs/report/fig5_fusion_comparison.pdf
 """
 
@@ -42,7 +42,7 @@ from src.models.lstm import BiLSTMClassifier
 # ── Sabitler ──────────────────────────────────────────────────────────────────
 PARQUET   = ROOT / "data/processed/veri_listesi.parquet"
 MODEL_DIR = ROOT / "models"
-RESULT_DIR = ROOT / "results"
+RESULT_DIR = ROOT / "results" / "v1"
 OUT        = ROOT / "outputs" / "report"
 RESULT_DIR.mkdir(parents=True, exist_ok=True)
 OUT.mkdir(parents=True, exist_ok=True)

@@ -15,7 +15,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT  = ROOT / "outputs" / "report" / "coherence_figs"
 OUT.mkdir(parents=True, exist_ok=True)
 
@@ -51,8 +51,8 @@ KONTROL = ["diger_hayvanlar"]
 SINIF = TUTARLI + KONTROL
 SINIF_K = ["köpek","kuş","hava","diğer hayv.\n(catch-all)"]
 
-D  = {k: jload(ROOT/"results"/ITER[k]) for k in KONFIG}
-M  = {k: jload(ROOT/"results"/MCN[k])  for k in KONFIG}
+D  = {k: jload(ROOT/"results"/"v1"/ITER[k]) for k in KONFIG}
+M  = {k: jload(ROOT/"results"/"v1"/MCN[k])  for k in KONFIG}
 BASE = D["H1"]["cnn"]["baseline"]["sinif_f1"]
 
 def yildiz(p):

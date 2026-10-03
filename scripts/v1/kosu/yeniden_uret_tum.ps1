@@ -13,7 +13,7 @@
 # ============================================================
 
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot   # her zaman proje kokunden calis
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku   # her zaman proje kokunden calis
 $py     = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 $ckptD1 = "checkpoints/audioldm2_clap_finetuned.pth"        # Dongu 1 (Tur 2-3)
 $ckptD2 = "checkpoints/audioldm2_clap_dongu2_finetuned.pth" # Dongu 2 (Tur 4)

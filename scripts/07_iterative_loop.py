@@ -7,7 +7,7 @@ Akis:
   3. CNN: augmented train seti ile yeniden egit, test F1 karsilastir
   4. LightGBM: augmented ozellik matrisi ile yeniden egit, test F1 karsilastir
   5. Her iki model icin oncesi/sonrasi delta tablosu yazdir
-  6. results/iteratif_loop_<tarih>.json'a kaydet
+  6. results/v1/iteratif_loop_<tarih>.json'a kaydet
 
 Kullanim:
     python scripts/07_iterative_loop.py
@@ -45,7 +45,7 @@ PARQUET_LGBM    = ROOT / "data" / "processed" / "lgbm_ozellikler.parquet"
 SENTETIK_DIR    = ROOT / "data" / "synthetic"
 MODEL_DIR       = ROOT / "models"
 CHECKPTS_DIR    = ROOT / "checkpoints"
-RESULT_DIR      = ROOT / "results"
+RESULT_DIR      = ROOT / "results" / "v1"
 DEVICE          = "cuda" if torch.cuda.is_available() else "cpu"
 N_SINIF         = 26
 SEED            = 42

@@ -10,17 +10,17 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "outputs" / "report" / "coherence_figs"
 def jload(p): return json.load(open(p, encoding="utf-8"))
 
 GREEN="#27AE60"; BLUE="#1380A1"; ORANGE="#E8891D"; RED="#C0392B"; GRAY="#5D6D7E"
 plt.rcParams.update({"font.size":10,"axes.spines.top":False,"axes.spines.right":False})
 
-sa=jload(ROOT/"results"/"iteratif_loop_specaug_20260606_0129.json")
+sa=jload(ROOT/"results"/"v1"/"iteratif_loop_specaug_20260606_0129.json")
 # H1: 4 sinifin dördü de (3 tutarli + catch-all kontrol) AYNI kosulda augmente
 # edildigi TEK config -> generative icin temiz apples-to-apples.
-h1=jload(ROOT/"results"/"iteratif_loop_coherent_20260604_0320.json")
+h1=jload(ROOT/"results"/"v1"/"iteratif_loop_coherent_20260604_0320.json")
 base=h1["cnn"]["baseline"]["sinif_f1"]
 sao=sa["cnn"]["baseline"]["sinif_f1"]      # SpecAugment-only (global)
 

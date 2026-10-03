@@ -17,7 +17,7 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 import matplotlib
@@ -90,9 +90,9 @@ def json_yukle(yol):
     with open(yol, encoding="utf-8") as f:
         return json.load(f)
 
-cnn_data  = json_yukle(ROOT / "results" / "cnn_20260427_0312_sonuclar.json")
-lstm_data = json_yukle(ROOT / "results" / "lstm_20260427_0732_sonuclar.json")
-ast_data  = json_yukle(ROOT / "results" / "ast_20260427_1430_sonuclar.json")
+cnn_data  = json_yukle(ROOT / "results" / "v1" / "cnn_20260427_0312_sonuclar.json")
+lstm_data = json_yukle(ROOT / "results" / "v1" / "lstm_20260427_0732_sonuclar.json")
+ast_data  = json_yukle(ROOT / "results" / "v1" / "ast_20260427_1430_sonuclar.json")
 
 ms_df = pd.read_csv(ROOT / "outputs" / "model_selection_results.csv")
 lgbm_metrics = json_yukle(ROOT / "outputs" / "lgbm_metrics.json")

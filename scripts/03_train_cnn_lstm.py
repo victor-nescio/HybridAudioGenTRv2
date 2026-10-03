@@ -9,7 +9,7 @@ Kullanim ornekleri:
 
 Ciktilar:
     models/cnn_best.pt    (veya lstm_best.pt, simple_cnn_best.pt, ...)
-    results/cnn_tarih_sonuclar.json
+    results/v1/cnn_tarih_sonuclar.json
 """
 
 import argparse
@@ -37,7 +37,7 @@ from src.models.lstm import BiLSTMClassifier, SimpleLSTM
 # ── Sabitler ──────────────────────────────────────────────────────────────────
 PARQUET = ROOT / "data/processed/veri_listesi.parquet"
 MODEL_DIR  = ROOT / "models"
-RESULT_DIR = ROOT / "results"
+RESULT_DIR = ROOT / "results" / "v1"
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 RESULT_DIR.mkdir(parents=True, exist_ok=True)
 

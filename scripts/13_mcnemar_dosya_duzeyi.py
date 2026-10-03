@@ -9,7 +9,7 @@ Sanity: segment duzeyi tutarli-3 chi2 degerleri, yayimlanan degerlerle
 (25.5 / 20.6 / 23.1 / 66.4) karsilastirilarak hat dogrulanir.
 
 Kullanim: python scripts/13_mcnemar_dosya_duzeyi.py
-Cikti   : results/mcnemar_dosya_duzeyi.json
+Cikti   : results/v1/mcnemar_dosya_duzeyi.json
 """
 import sys, json
 from pathlib import Path
@@ -152,7 +152,7 @@ def main():
             "dosya_duzeyi": blok_testler(d_dogru_b, d_dogru_a, d_gt_ad, f"{etiket} dosya"),
         }
 
-    out = ROOT / "results" / "mcnemar_dosya_duzeyi.json"
+    out = ROOT / "results" / "v1" / "mcnemar_dosya_duzeyi.json"
     out.write_text(json.dumps(sonuc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nKaydedildi: {out}")
 

@@ -31,7 +31,7 @@ checkpoints/
 outputs/
 
 # ── Türetilmiş büyük sonuç dosyaları (JSON metrikler results/ altında kalır) ─
-results/*.npz
+results/**/*.npz
 
 # ── Arşiv: eski loglar, süpersede edilmiş scriptler ──────────────────────────
 arsiv/

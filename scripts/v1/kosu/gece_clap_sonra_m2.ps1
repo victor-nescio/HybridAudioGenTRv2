@@ -1,7 +1,7 @@
 # ============================================================
 #  ZINCIRLEME SURUCU — CLAP tutarlilik bitince M2'yi baslatir.
 #
-#  1) results\sinif_tutarlilik_clap.json olusana kadar bekle
+#  1) results\v1\sinif_tutarlilik_clap.json olusana kadar bekle
 #     (CLAP embedding kosusunun bitis sinyali) + GPU bosalsin.
 #  2) M2 SpecAugment temelini calistir (07_iterative_loop
 #     --spec_augment, ~7 saat, 2 CNN: SpecAugment-only + stacked).
@@ -10,13 +10,13 @@
 #  Kullanim: powershell -ExecutionPolicy Bypass -File .\gece_clap_sonra_m2.ps1
 # ============================================================
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 
 # --- 1) CLAP bitisini bekle ---
 Write-Host "=== CLAP tutarlilik bekleniyor... $(Get-Date -Format HH:mm:ss) ==="
 $bekle = 0
-while (-not (Test-Path "results\sinif_tutarlilik_clap.json")) {
+while (-not (Test-Path "results\v1\sinif_tutarlilik_clap.json")) {
     Start-Sleep -Seconds 60
     $bekle += 1
     if ($bekle -ge 120) { Write-Host "UYARI: 2 saat beklendi, yine de devam."; break }

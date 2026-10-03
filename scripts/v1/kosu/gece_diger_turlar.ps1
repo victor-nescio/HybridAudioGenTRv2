@@ -16,7 +16,7 @@
 #  Kullanim: powershell -ExecutionPolicy Bypass -File .\gece_diger_turlar.ps1
 # ============================================================
 $ErrorActionPreference = "Continue"
-Set-Location $PSScriptRoot
+Set-Location (Resolve-Path (Join-Path $PSScriptRoot "..\..\.."))  # repo koku
 $py     = "C:\Users\User\anaconda3\envs\audiogen\python.exe"
 $ckptD1 = "checkpoints/audioldm2_clap_finetuned.pth"
 $ckptD2 = "checkpoints/audioldm2_clap_dongu2_finetuned.pth"

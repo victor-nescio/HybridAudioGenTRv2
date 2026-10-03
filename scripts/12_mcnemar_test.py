@@ -35,7 +35,7 @@ DEVICE       = "cuda" if torch.cuda.is_available() else "cpu"
 PARQUET      = ROOT / "data" / "processed" / "veri_listesi.parquet"
 MODEL_DIR    = ROOT / "models"
 CKPT_DIR     = ROOT / "checkpoints"
-RESULT_DIR   = ROOT / "results"
+RESULT_DIR   = ROOT / "results" / "v1"
 N_SINIF      = 26
 SEED         = 42
 

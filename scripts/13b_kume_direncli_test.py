@@ -10,7 +10,7 @@ Bu script iki orta-yol test uygular (dosya = kume):
    segment dogrulugu farkinin dagilimi -> p ve %95 GA.
 
 Kullanim: python scripts/13b_kume_direncli_test.py
-Cikti   : results/kume_direncli_test.json (+ results/preds_test_seg.npz)
+Cikti   : results/v1/kume_direncli_test.json (+ results/v1/preds_test_seg.npz)
 """
 import sys, json
 from pathlib import Path
@@ -141,8 +141,8 @@ def main():
               f"wilcoxon p={h['wilcoxon_p']:.4g}  bootstrap p={h['bootstrap_p']:.4g}  "
               f"GA95=[{h['bootstrap_ga95'][0]:+.4f}, {h['bootstrap_ga95'][1]:+.4f}]")
 
-    np.savez_compressed(ROOT / "results" / "preds_test_seg.npz", **kayit)
-    out = ROOT / "results" / "kume_direncli_test.json"
+    np.savez_compressed(ROOT / "results" / "v1" / "preds_test_seg.npz", **kayit)
+    out = ROOT / "results" / "v1" / "kume_direncli_test.json"
     out.write_text(json.dumps(sonuc, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nKaydedildi: {out}")
 

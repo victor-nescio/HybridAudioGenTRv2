@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT  = ROOT / "outputs" / "figures_makale"
 OUT.mkdir(parents=True, exist_ok=True)
 

@@ -13,7 +13,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 import matplotlib
@@ -69,33 +69,33 @@ def json_oku(yol):
     with open(yol, encoding="utf-8") as f:
         return json.load(f)
 
-cnn_d  = json_oku(ROOT / "results/cnn_20260427_0312_sonuclar.json")
-lstm_d = json_oku(ROOT / "results/lstm_20260427_0732_sonuclar.json")
-ast_d  = json_oku(ROOT / "results/ast_20260427_1430_sonuclar.json")
+cnn_d  = json_oku(ROOT / "results/v1/cnn_20260427_0312_sonuclar.json")
+lstm_d = json_oku(ROOT / "results/v1/lstm_20260427_0732_sonuclar.json")
+ast_d  = json_oku(ROOT / "results/v1/ast_20260427_1430_sonuclar.json")
 ms_df  = pd.read_csv(ROOT / "outputs/model_selection_results.csv")
 lgbm_m = json_oku(ROOT / "outputs/lgbm_metrics.json")
 
-fusion_files = sorted((ROOT / "results").glob("fusion_*_sonuclar.json"))
+fusion_files = sorted((ROOT / "results" / "v1").glob("fusion_*_sonuclar.json"))
 fusion_d = json_oku(fusion_files[-1]) if fusion_files else {}
 
 # Iteratif loop sonuclari — YENI (cesitli klip) kanonik kosumlar
 # (tur2_re sadece-CNN ve eski Mayis kosumlari HARIC tutulur)
 KANONIK_ITER = {
-    "tur1": ROOT / "results/iteratif_loop_1_20260601_1725.json",
-    "tur2": ROOT / "results/iteratif_loop_tur2_20260601_2132.json",
-    "tur3": ROOT / "results/iteratif_loop_tur3_20260602_0303.json",
-    "tur4": ROOT / "results/iteratif_loop_tur4_20260602_0701.json",
+    "tur1": ROOT / "results/v1/iteratif_loop_1_20260601_1725.json",
+    "tur2": ROOT / "results/v1/iteratif_loop_tur2_20260601_2132.json",
+    "tur3": ROOT / "results/v1/iteratif_loop_tur3_20260602_0303.json",
+    "tur4": ROOT / "results/v1/iteratif_loop_tur4_20260602_0701.json",
 }
 iter_d = json_oku(KANONIK_ITER["tur4"]) if KANONIK_ITER["tur4"].exists() else {}
 
 # FAD sonuclari
-fad_yol = ROOT / "results" / "fad_sonuclar.json"
+fad_yol = ROOT / "results" / "v1" / "fad_sonuclar.json"
 fad_d = json_oku(fad_yol) if fad_yol.exists() else {}
 
 # CLAP fine-tuning sonuclari — dongu1 (BBC-only) ve dongu2 (BBC+Tur2-sentetik)
-clap_files = sorted((ROOT / "results").glob("clap_finetune_*.json"))
-_d1_yol = ROOT / "results" / "clap_finetune_20260510_1712.json"
-_d2_yol = ROOT / "results" / "clap_finetune_20260523_0658.json"
+clap_files = sorted((ROOT / "results" / "v1").glob("clap_finetune_*.json"))
+_d1_yol = ROOT / "results" / "v1" / "clap_finetune_20260510_1712.json"
+_d2_yol = ROOT / "results" / "v1" / "clap_finetune_20260523_0658.json"
 clap_d1 = json_oku(_d1_yol) if _d1_yol.exists() else (json_oku(clap_files[0]) if clap_files else {})
 clap_d2 = json_oku(_d2_yol) if _d2_yol.exists() else (json_oku(clap_files[-1]) if clap_files else {})
 clap_d  = clap_d1  # backward compat: dongu1 (ilk CLAP fine-tune)
@@ -106,7 +106,7 @@ tur3_wav = list((ROOT / "data" / "synthetic_tur3").glob("**/*.wav")) if (ROOT / 
 tur4_wav = list((ROOT / "data" / "synthetic_tur4").glob("**/*.wav")) if (ROOT / "data" / "synthetic_tur4").exists() else []
 
 # FAD sonuclari — Tur4
-fad_tur4_yol = ROOT / "results" / "fad_sonuclar_4.json"
+fad_tur4_yol = ROOT / "results" / "v1" / "fad_sonuclar_4.json"
 fad_tur4_d = json_oku(fad_tur4_yol) if fad_tur4_yol.exists() else {}
 
 # ── Matplotlib tema ───────────────────────────────────────────────────────────
@@ -454,8 +454,8 @@ def fig_clap_egitim():
 
 def fig_fad_uc_tur():
     """FAD dort tur karsilastirmasi — Tur1 vs Tur2 vs Tur3 vs Tur4."""
-    fad_tur2_yol = ROOT / "results" / "fad_sonuclar_tur2.json"
-    fad_tur3_yol = ROOT / "results" / "fad_sonuclar_tur3.json"
+    fad_tur2_yol = ROOT / "results" / "v1" / "fad_sonuclar_tur2.json"
+    fad_tur3_yol = ROOT / "results" / "v1" / "fad_sonuclar_tur3.json"
     if not fad_tur2_yol.exists() or not fad_tur3_yol.exists():
         return None
     fad2 = json_oku(fad_tur2_yol)
@@ -1585,8 +1585,8 @@ def belge_olustur(figler, st):
     ]
 
     # FAD 3 tur karsilastirma tablosu
-    fad_tur2_yol = ROOT / "results" / "fad_sonuclar_tur2.json"
-    fad_tur3_yol = ROOT / "results" / "fad_sonuclar_tur3.json"
+    fad_tur2_yol = ROOT / "results" / "v1" / "fad_sonuclar_tur2.json"
+    fad_tur3_yol = ROOT / "results" / "v1" / "fad_sonuclar_tur3.json"
     if fad_tur2_yol.exists() and fad_tur3_yol.exists():
         import json as _json
         fad2 = _json.loads(fad_tur2_yol.read_text(encoding="utf-8"))

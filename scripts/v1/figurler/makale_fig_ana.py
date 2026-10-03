@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Patch
 from matplotlib.lines import Line2D
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / "outputs" / "makale_figurleri"
 OUT.mkdir(parents=True, exist_ok=True)
-SP = ROOT / "results"
+SP = ROOT / "results" / "v1"
 
 CFG_RENK = ["#A9CCE3", "#1380A1", "#7B2D8B", "#27AE60"]
 GREEN = "#1E8E5A"; RED = "#C0392B"; ORANGE = "#E8891D"; GRAY = "#5D6D7E"
@@ -46,8 +46,8 @@ MCN = {"H1": "mcnemar_coherent.json", "C2": "mcnemar_coh2.json",
        "C3": "mcnemar_coh3.json", "C4": "mcnemar_coh4.json"}
 KONFIG = ["H1", "C2", "C3", "C4"]
 CFG_AD = ["H1 (pretrained, EN)", "C2 (Cycle 1, EN)", "C3 (Cycle 1, TR)", "C4 (Cycle 2, EN)"]
-D = {k: jload(ROOT / "results" / ITER[k]) for k in KONFIG}
-M = {k: jload(ROOT / "results" / MCN[k]) for k in KONFIG}
+D = {k: jload(ROOT / "results" / "v1" / ITER[k]) for k in KONFIG}
+M = {k: jload(ROOT / "results" / "v1" / MCN[k]) for k in KONFIG}
 BASE = D["H1"]["cnn"]["baseline"]["sinif_f1"]
 HEDEF = ["kopek_sesleri", "kus_sesleri", "hava_olaylari"]
 KONTROL = "diger_hayvanlar"
