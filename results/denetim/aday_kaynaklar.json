@@ -1,0 +1,382 @@
+[
+ {
+  "anahtar": "synthio",
+  "kimlik": "arXiv:2410.02056",
+  "amac": "R1/R3: T2A augmentasyonu (küçük veri)",
+  "baslik": "Synthio: Augmenting Small-Scale Audio Classification Datasets with Synthetic Data",
+  "yazarlar": [
+   "Sreyan Ghosh",
+   "Sonal Kumar",
+   "Zhifeng Kong",
+   "Rafael Valle",
+   "Bryan Catanzaro",
+   "Dinesh Manocha"
+  ],
+  "yil": "2024",
+  "not": "Accepted at ICLR 2025. Code and Checkpoints available here: https://github.com/Sreyan88/Synthio",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "ronchini2024",
+  "kimlik": "arXiv:2403.17864",
+  "amac": "R3: T2A eğitim setleri / ESC",
+  "baslik": "Synthetic training set generation using text-to-audio models for environmental sound classification",
+  "yazarlar": [
+   "Francesca Ronchini",
+   "Luca Comanducci",
+   "Fabio Antonacci"
+  ],
+  "yil": "2024",
+  "not": "",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "mindprompt",
+  "kimlik": "arXiv:2504.03329",
+  "amac": "R3: prompt tasarımı",
+  "baslik": "Mind the Prompt: Prompting Strategies in Audio Generations for Improving Sound Classification",
+  "yazarlar": [
+   "Francesca Ronchini",
+   "Ho-Hsiang Wu",
+   "Wei-Cheng Lin",
+   "Fabio Antonacci"
+  ],
+  "yil": "2025",
+  "not": "Accepted at Generative Data Augmentation for Real-World Signal Processing Applications Workshop",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "gui2024fad",
+  "kimlik": "arXiv:2311.01616",
+  "amac": "R3/R1.6: FAD sınırları; [6] yerine; fadtk",
+  "baslik": "Adapting Frechet Audio Distance for Generative Music Evaluation",
+  "yazarlar": [
+   "Azalea Gui",
+   "Hannes Gamper",
+   "Sebastian Braun",
+   "Dimitra Emmanouilidou"
+  ],
+  "yil": "2023",
+  "not": "Submitted to IEEE ICASSP 2024",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "tailleur2024",
+  "kimlik": "arXiv:2403.17508",
+  "amac": "R3/R1.6: FAD sınırları; [6] yerine",
+  "baslik": "Correlation of Fréchet Audio Distance With Human Perception of Environmental Audio Is Embedding Dependant",
+  "yazarlar": [
+   "Modan Tailleur",
+   "Junwon Lee",
+   "Mathieu Lagrange",
+   "Keunwoo Choi",
+   "Laurie M. Heller",
+   "Keisuke Imoto",
+   "Yuki Okamoto"
+  ],
+  "yil": "2024",
+  "not": "",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "fad_interspeech",
+  "kimlik": "10.21437/Interspeech.2019-2219",
+  "amac": "[5]'in yayımlanmış sürümü",
+  "baslik": "Fréchet Audio Distance: A Reference-Free Metric for Evaluating Music Enhancement Algorithms",
+  "yazarlar": [
+   "Kevin Kilgour",
+   "Mauricio Zuluaga",
+   "Dominik Roblek",
+   "Matthew Sharifi"
+  ],
+  "yil": "2019",
+  "not": "Interspeech 2019",
+  "doi": "10.21437/interspeech.2019-2219",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "wavcaps",
+  "kimlik": "arXiv:2303.17395",
+  "amac": "R3: üretici eğitim verisi (BBC SFX içerir); [27] yerine BBC kullanımı",
+  "baslik": "WavCaps: A ChatGPT-Assisted Weakly-Labelled Audio Captioning Dataset for Audio-Language Multimodal Research",
+  "yazarlar": [
+   "Xinhao Mei",
+   "Chutong Meng",
+   "Haohe Liu",
+   "Qiuqiang Kong",
+   "Tom Ko",
+   "Chengqi Zhao",
+   "Mark D. Plumbley",
+   "Yuexian Zou",
+   "Wenwu Wang"
+  ],
+  "yil": "2023",
+  "not": "Accepted to TASLP",
+  "doi": "10.1109/TASLP.2024.3419446",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "replikasyon_t2a",
+  "kimlik": "arXiv:2509.14934",
+  "amac": "Ezber analizi gerekçesi",
+  "baslik": "Mitigating data replication in text-to-audio generative diffusion models through anti-memorization guidance",
+  "yazarlar": [
+   "Francisco Messina",
+   "Francesca Ronchini",
+   "Luca Comanducci",
+   "Paolo Bestagini",
+   "Fabio Antonacci"
+  ],
+  "yil": "2025",
+  "not": "Accepted at ICASSP 2026",
+  "doi": null,
+  "benzerlik": 0.75
+ },
+ {
+  "anahtar": "somepalli2023",
+  "kimlik": "10.1109/CVPR52729.2023.00586",
+  "amac": "Ezber analizi yöntemi",
+  "baslik": "Diffusion Art or Digital Forgery? Investigating Data Replication in Diffusion Models",
+  "yazarlar": [
+   "Gowthami Somepalli",
+   "Vasu Singla",
+   "Micah Goldblum",
+   "Jonas Geiping",
+   "Tom Goldstein"
+  ],
+  "yil": "2023",
+  "not": "2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "doi": "10.1109/cvpr52729.2023.00586",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "urbansound8k",
+  "kimlik": "10.1145/2647868.2655045",
+  "amac": "R3: açık benchmark",
+  "baslik": "A Dataset and Taxonomy for Urban Sound Research",
+  "yazarlar": [
+   "Justin Salamon",
+   "Christopher Jacoby",
+   "Juan Pablo Bello"
+  ],
+  "yil": "2014",
+  "not": "Proceedings of the 22nd ACM international conference on Multimedia",
+  "doi": "10.1145/2647868.2655045",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "fsd50k",
+  "kimlik": "10.1109/TASLP.2021.3133208",
+  "amac": "R3: açık benchmark",
+  "baslik": "FSD50K: An Open Dataset of Human-Labeled Sound Events",
+  "yazarlar": [
+   "Eduardo Fonseca",
+   "Xavier Favory",
+   "Jordi Pons",
+   "Frederic Font",
+   "Xavier Serra"
+  ],
+  "yil": "2022",
+  "not": "IEEE/ACM Transactions on Audio, Speech, and Language Processing",
+  "doi": "10.1109/taslp.2021.3133208",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "optuna",
+  "kimlik": "10.1145/3292500.3330701",
+  "amac": "R3: Optuna",
+  "baslik": "Optuna",
+  "yazarlar": [
+   "Takuya Akiba",
+   "Shotaro Sano",
+   "Toshihiko Yanase",
+   "Takeru Ohta",
+   "Masanori Koyama"
+  ],
+  "yil": "2019",
+  "not": "Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining",
+  "doi": "10.1145/3292500.3330701",
+  "benzerlik": 0.18
+ },
+ {
+  "anahtar": "holm1979",
+  "kimlik": "search:A simple sequentially rejective multiple test procedure Holm",
+  "amac": "Holm–Bonferroni",
+  "baslik": "Correction: An Improved Sequentially Rejective Bonferroni Test Procedure",
+  "yazarlar": [],
+  "yil": "1987",
+  "not": "Biometrics",
+  "doi": "10.2307/2532027",
+  "benzerlik": 0.73
+ },
+ {
+  "anahtar": "edwards1948",
+  "kimlik": "10.1007/BF02289261",
+  "amac": "McNemar Yates/süreklilik düzeltmesi",
+  "baslik": "Note on the “Correction for Continuity” in Testing the Significance of the Difference between Correlated Proportions",
+  "yazarlar": [
+   "Allen L. Edwards"
+  ],
+  "yil": "1948",
+  "not": "Psychometrika",
+  "doi": "10.1007/bf02289261",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "field2007",
+  "kimlik": "10.1111/j.1467-9868.2007.00593.x",
+  "amac": "Küme bootstrap",
+  "baslik": "Bootstrapping Clustered Data",
+  "yazarlar": [
+   "C. A. Field",
+   "A. H. Welsh"
+  ],
+  "yil": "2007",
+  "not": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "doi": "10.1111/j.1467-9868.2007.00593.x",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "lme4",
+  "kimlik": "10.18637/jss.v067.i01",
+  "amac": "Karma etkili model (v2 birincil analiz)",
+  "baslik": "Fitting Linear Mixed-Effects Models Using\n                    <b>lme4</b>",
+  "yazarlar": [
+   "Douglas Bates",
+   "Martin Mächler",
+   "Ben Bolker",
+   "Steve Walker"
+  ],
+  "yil": "2015",
+  "not": "Journal of Statistical Software",
+  "doi": "10.18637/jss.v067.i01",
+  "benzerlik": 0.81
+ },
+ {
+  "anahtar": "he2023synthetic",
+  "kimlik": "arXiv:2210.07574",
+  "amac": "[12] yerine: görüntüde sentetik veri",
+  "baslik": "Is synthetic data from generative models ready for image recognition?",
+  "yazarlar": [
+   "Ruifei He",
+   "Shuyang Sun",
+   "Xin Yu",
+   "Chuhui Xue",
+   "Wenqing Zhang",
+   "Philip Torr",
+   "Song Bai",
+   "Xiaojuan Qi"
+  ],
+  "yil": "2022",
+  "not": "ICLR 2023, spotlight",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "azizi2023",
+  "kimlik": "arXiv:2304.08466",
+  "amac": "[12] yerine: görüntüde sentetik veri",
+  "baslik": "Synthetic Data from Diffusion Models Improves ImageNet Classification",
+  "yazarlar": [
+   "Shekoofeh Azizi",
+   "Simon Kornblith",
+   "Chitwan Saharia",
+   "Mohammad Norouzi",
+   "David J. Fleet"
+  ],
+  "yil": "2023",
+  "not": "",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "envnet2017",
+  "kimlik": "10.1109/ICASSP.2017.7952651",
+  "amac": "[23] yerine: ham dalga vs log-mel",
+  "baslik": "Learning environmental sounds with end-to-end convolutional neural network",
+  "yazarlar": [
+   "Yuji Tokozume",
+   "Tatsuya Harada"
+  ],
+  "yil": "2017",
+  "not": "2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "doi": "10.1109/icassp.2017.7952651",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "dai2017raw",
+  "kimlik": "10.1109/ICASSP.2017.7952190",
+  "amac": "[23] yerine: ham dalga vs log-mel",
+  "baslik": "Very deep convolutional neural networks for raw waveforms",
+  "yazarlar": [
+   "Wei Dai",
+   "Chia Dai",
+   "Shuhui Qu",
+   "Juncheng Li",
+   "Samarjit Das"
+  ],
+  "yil": "2017",
+  "not": "2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "doi": "10.1109/icassp.2017.7952190",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "selfinstruct",
+  "kimlik": "10.18653/v1/2023.acl-long.754",
+  "amac": "[34] yerine: kendi ürettiği veriyle iyileşme",
+  "baslik": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+  "yazarlar": [
+   "Yizhong Wang",
+   "Yeganeh Kordi",
+   "Swaroop Mishra",
+   "Alisa Liu",
+   "Noah A. Smith",
+   "Daniel Khashabi",
+   "Hannaneh Hajishirzi"
+  ],
+  "yil": "2023",
+  "not": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  "doi": "10.18653/v1/2023.acl-long.754",
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "beats",
+  "kimlik": "arXiv:2212.09058",
+  "amac": "R5: öz-denetimli güçlü sınıflandırıcı",
+  "baslik": "BEATs: Audio Pre-Training with Acoustic Tokenizers",
+  "yazarlar": [
+   "Sanyuan Chen",
+   "Yu Wu",
+   "Chengyi Wang",
+   "Shujie Liu",
+   "Daniel Tompkins",
+   "Zhuo Chen",
+   "Furu Wei"
+  ],
+  "yil": "2022",
+  "not": "",
+  "doi": null,
+  "benzerlik": 1.0
+ },
+ {
+  "anahtar": "mixup",
+  "kimlik": "arXiv:1710.09412",
+  "amac": "R4: kıyas (opsiyonel)",
+  "baslik": "mixup: Beyond Empirical Risk Minimization",
+  "yazarlar": [
+   "Hongyi Zhang",
+   "Moustapha Cisse",
+   "Yann N. Dauphin",
+   "David Lopez-Paz"
+  ],
+  "yil": "2017",
+  "not": "ICLR camera ready version. Changes vs V1: fix repo URL; add ablation studies; add mixup + dropout etc",
+  "doi": null,
+  "benzerlik": 1.0
+ }
+]

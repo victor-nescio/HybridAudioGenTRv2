@@ -1,0 +1,470 @@
+[
+ {
+  "no": 1,
+  "baslik": "SpecAugment: A simple data augmentation method for automatic speech recognition",
+  "yontem": "DOI",
+  "bulunan": "SpecAugment: A Simple Data Augmentation Method for Automatic Speech Recognition",
+  "benzerlik": 1.0,
+  "ek": "Park, Chan, Zhang, Chiu",
+  "durum": "OK"
+ },
+ {
+  "no": 2,
+  "baslik": "AudioLDM 2: Learning holistic audio generation with self-supervised pretraining",
+  "yontem": "DOI",
+  "bulunan": "AudioLDM 2: Learning Holistic Audio Generation With Self-Supervised Pretraining",
+  "benzerlik": 1.0,
+  "ek": "Liu, Yuan, Liu, Mei",
+  "durum": "OK"
+ },
+ {
+  "no": 3,
+  "baslik": "AudioGen: Textually guided audio generation",
+  "yontem": "arXiv 2209.15352",
+  "bulunan": "AudioGen: Textually Guided Audio Generation",
+  "benzerlik": 1.0,
+  "ek": "Felix Kreuk, Gabriel Synnaeve, Adam Polyak, Uriel Singer",
+  "durum": "OK"
+ },
+ {
+  "no": 4,
+  "baslik": "Can synthetic audio from generative foundation models assist audio recognition?",
+  "yontem": "arama",
+  "bulunan": "Can Synthetic Audio From Generative Foundation Models Assist Audio Recognition and Speech Modeling?",
+  "benzerlik": 0.89,
+  "ek": "Feng, Dimitriadis, Narayanan | 10.21437/interspeech.2024-1350",
+  "durum": "OK"
+ },
+ {
+  "no": 5,
+  "baslik": "Fréchet audio distance: A reference-free metric for evaluating music enhancement algorithms",
+  "yontem": "arXiv 1812.08466",
+  "bulunan": "Fréchet Audio Distance: A Metric for Evaluating Music Enhancement Algorithms",
+  "benzerlik": 0.91,
+  "ek": "Kevin Kilgour, Mauricio Zuluaga, Dominik Roblek, Matthew Sharifi",
+  "durum": "OK"
+ },
+ {
+  "no": 6,
+  "baslik": "Sensitivity of Fréchet audio distance to reference set and evaluation conditions",
+  "yontem": "arXiv 2402.09498",
+  "bulunan": "Detection of the most influential variables for preventing postpartum urinary incontinence using machine learning techniques",
+  "benzerlik": 0.33,
+  "ek": "José Alberto Benítez-Andrades, María Teresa García-Ordás, María Álvarez-González, Raquel Leirós-Rodríguez",
+  "durum": "!!"
+ },
+ {
+  "no": 7,
+  "baslik": "An evolutionary-based generative approach for audio data augmentation",
+  "yontem": "DOI",
+  "bulunan": "An Evolutionary-based Generative Approach for Audio Data Augmentation",
+  "benzerlik": 1.0,
+  "ek": "Mertes, Baird, Schiller, Schuller",
+  "durum": "OK"
+ },
+ {
+  "no": 8,
+  "baslik": "Conditional generative data augmentation for clinical audio datasets",
+  "yontem": "DOI",
+  "bulunan": "Conditional Generative Data Augmentation for Clinical Audio Datasets",
+  "benzerlik": 0.99,
+  "ek": "Seibold, Hoch, Farshad, Navab",
+  "durum": "OK"
+ },
+ {
+  "no": 9,
+  "baslik": "Improved techniques for the conditional generative augmentation of clinical audio data",
+  "yontem": "DOI",
+  "bulunan": "Improved Techniques for the Conditional Generative Augmentation of Clinical Audio Data",
+  "benzerlik": 0.98,
+  "ek": "Margaryan, Seibold, Joshi, Farshad",
+  "durum": "OK"
+ },
+ {
+  "no": 10,
+  "baslik": "Data augmentation approaches for improving animal audio classification",
+  "yontem": "DOI",
+  "bulunan": "Data augmentation approaches for improving animal audio classification",
+  "benzerlik": 1.0,
+  "ek": "Nanni, Maguolo, Paci",
+  "durum": "OK"
+ },
+ {
+  "no": 11,
+  "baslik": "AudioLDM: Text-to-audio generation with latent diffusion models",
+  "yontem": "arXiv 2301.12503",
+  "bulunan": "AudioLDM: Text-to-Audio Generation with Latent Diffusion Models",
+  "benzerlik": 1.0,
+  "ek": "Haohe Liu, Zehua Chen, Yi Yuan, Xinhao Mei",
+  "durum": "OK"
+ },
+ {
+  "no": 12,
+  "baslik": "Diffusion-based data augmentation for skin disease classification",
+  "yontem": "arXiv 2301.04802",
+  "bulunan": "Diffusion-based Data Augmentation for Skin Disease Classification: Impact Across Original Medical Datasets to Fully Synthetic Images",
+  "benzerlik": 0.66,
+  "ek": "Mohamed Akrout, Bálint Gyepesi, Péter Holló, Adrienn Poór",
+  "durum": "?"
+ },
+ {
+  "no": 13,
+  "baslik": "Impact evaluation of sound dataset augmentation and synthetic generation upon classification accuracy",
+  "yontem": "DOI",
+  "bulunan": "Impact Evaluation of Sound Dataset Augmentation and Synthetic Generation upon Classification Accuracy",
+  "benzerlik": 1.0,
+  "ek": "Tsalera, Papadakis, Pagiatakis, Samarakou",
+  "durum": "OK"
+ },
+ {
+  "no": 14,
+  "baslik": "CNN architectures for large-scale audio classification",
+  "yontem": "DOI",
+  "bulunan": "CNN architectures for large-scale audio classification",
+  "benzerlik": 1.0,
+  "ek": "Hershey, Chaudhuri, Ellis, Gemmeke",
+  "durum": "OK"
+ },
+ {
+  "no": 15,
+  "baslik": "ESC: Dataset for environmental sound classification",
+  "yontem": "DOI",
+  "bulunan": "ESC",
+  "benzerlik": 0.11,
+  "ek": "Piczak",
+  "durum": "!!"
+ },
+ {
+  "no": 16,
+  "baslik": "PANNs: Large-scale pretrained audio neural networks for audio pattern recognition",
+  "yontem": "DOI",
+  "bulunan": "PANNs: Large-Scale Pretrained Audio Neural Networks for Audio Pattern Recognition",
+  "benzerlik": 1.0,
+  "ek": "Kong, Cao, Iqbal, Wang",
+  "durum": "OK"
+ },
+ {
+  "no": 17,
+  "baslik": "Deep convolutional neural networks and data augmentation for environmental sound classification",
+  "yontem": "DOI",
+  "bulunan": "Deep Convolutional Neural Networks and Data Augmentation for Environmental Sound Classification",
+  "benzerlik": 1.0,
+  "ek": "Salamon, Bello",
+  "durum": "OK"
+ },
+ {
+  "no": 18,
+  "baslik": "AST: Audio spectrogram transformer",
+  "yontem": "DOI",
+  "bulunan": "AST: Audio Spectrogram Transformer",
+  "benzerlik": 1.0,
+  "ek": "Gong, Chung, Glass",
+  "durum": "OK"
+ },
+ {
+  "no": 19,
+  "baslik": "HTS-AT: A hierarchical token-semantic audio transformer for sound classification and detection",
+  "yontem": "DOI",
+  "bulunan": "HTS-AT: A Hierarchical Token-Semantic Audio Transformer for Sound Classification and Detection",
+  "benzerlik": 1.0,
+  "ek": "Chen, Du, Zhu, Ma",
+  "durum": "OK"
+ },
+ {
+  "no": 20,
+  "baslik": "CMKD: CNN/transformer-based cross-model knowledge distillation for audio classification",
+  "yontem": "arXiv 2203.06760",
+  "bulunan": "CMKD: CNN/Transformer-Based Cross-Model Knowledge Distillation for Audio Classification",
+  "benzerlik": 1.0,
+  "ek": "Yuan Gong, Sameer Khurana, Andrew Rouditchenko, James Glass",
+  "durum": "OK"
+ },
+ {
+  "no": 21,
+  "baslik": "Environmental sound classification using temporal-frequency attention based convolutional neural network",
+  "yontem": "DOI",
+  "bulunan": "Environmental sound classification using temporal-frequency attention based convolutional neural network",
+  "benzerlik": 1.0,
+  "ek": "Mu, Yin, Huang, Xu",
+  "durum": "OK"
+ },
+ {
+  "no": 22,
+  "baslik": "Environment sound classification using multiple feature channels and attention based deep convolutional neural network",
+  "yontem": "DOI",
+  "bulunan": "Environment Sound Classification Using Multiple Feature Channels and Attention Based Deep Convolutional Neural Network",
+  "benzerlik": 1.0,
+  "ek": "Sharma, Granmo, Goodwin",
+  "durum": "OK"
+ },
+ {
+  "no": 23,
+  "baslik": "Performance analysis of deep learning model-compression techniques for audio classification on edge devices",
+  "yontem": "DOI",
+  "bulunan": "Performance Analysis of Deep Learning Model-Compression Techniques for Audio Classification on Edge Devices",
+  "benzerlik": 1.0,
+  "ek": "Mou, Milanova",
+  "durum": "OK"
+ },
+ {
+  "no": 24,
+  "baslik": "A simple fusion of deep and shallow learning for acoustic scene classification",
+  "yontem": "arXiv 1806.07506",
+  "bulunan": "A Simple Fusion of Deep and Shallow Learning for Acoustic Scene Classification",
+  "benzerlik": 1.0,
+  "ek": "Eduardo Fonseca, Rong Gong, Xavier Serra",
+  "durum": "OK"
+ },
+ {
+  "no": 25,
+  "baslik": "Binaural acoustic scene classification using wavelet scattering, parallel ensemble classifiers and nonlinear fusion",
+  "yontem": "DOI",
+  "bulunan": "Binaural Acoustic Scene Classification Using Wavelet Scattering, Parallel Ensemble Classifiers and Nonlinear Fusion",
+  "benzerlik": 1.0,
+  "ek": "Hajihashemi, Gharahbagh, Cruz, Ferreira",
+  "durum": "OK"
+ },
+ {
+  "no": 26,
+  "baslik": "A two-stage approach to device-robust acoustic scene classification",
+  "yontem": "DOI",
+  "bulunan": "A Two-Stage Approach to Device-Robust Acoustic Scene Classification",
+  "benzerlik": 1.0,
+  "ek": "Hu, Yang, Xia, Bai",
+  "durum": "OK"
+ },
+ {
+  "no": 27,
+  "baslik": "Convolutional neural network based audio event classification",
+  "yontem": "DOI",
+  "bulunan": "Convolutional Neural Network based Audio Event Classification",
+  "benzerlik": 1.0,
+  "ek": "",
+  "durum": "OK"
+ },
+ {
+  "no": 28,
+  "baslik": "Audio retrieval with natural language queries",
+  "yontem": "DOI",
+  "bulunan": "Audio Retrieval with Natural Language Queries",
+  "benzerlik": 1.0,
+  "ek": "Oncescu, Koepke, Henriques, Akata",
+  "durum": "OK"
+ },
+ {
+  "no": 29,
+  "baslik": "Audio retrieval with natural language queries: A benchmark study",
+  "yontem": "DOI",
+  "bulunan": "Audio Retrieval With Natural Language Queries: A Benchmark Study",
+  "benzerlik": 1.0,
+  "ek": "Koepke, Oncescu, Henriques, Akata",
+  "durum": "OK"
+ },
+ {
+  "no": 30,
+  "baslik": "Evaluation of classical machine learning techniques towards urban sound recognition on embedded systems",
+  "yontem": "DOI",
+  "bulunan": "Evaluation of Classical Machine Learning Techniques towards Urban Sound Recognition on Embedded Systems",
+  "benzerlik": 1.0,
+  "ek": "da Silva, W. Happi, Braeken, Touhafi",
+  "durum": "OK"
+ },
+ {
+  "no": 31,
+  "baslik": "Large-scale contrastive language-audio pretraining with feature fusion and keyword-to-caption augmentation",
+  "yontem": "DOI",
+  "bulunan": "Large-Scale Contrastive Language-Audio Pretraining with Feature Fusion and Keyword-to-Caption Augmentation",
+  "benzerlik": 1.0,
+  "ek": "Wu, Chen, Zhang, Hui",
+  "durum": "OK"
+ },
+ {
+  "no": 32,
+  "baslik": "CLAP: Learning audio concepts from natural language supervision",
+  "yontem": "DOI",
+  "bulunan": "CLAP Learning Audio Concepts from Natural Language Supervision",
+  "benzerlik": 1.0,
+  "ek": "Elizalde, Deshmukh, Ismail, Wang",
+  "durum": "OK"
+ },
+ {
+  "no": 33,
+  "baslik": "T-CLAP: Temporal-enhanced contrastive language-audio pretraining",
+  "yontem": "DOI",
+  "bulunan": "T-CLAP: Temporal-Enhanced Contrastive Language-Audio Pretraining",
+  "benzerlik": 1.0,
+  "ek": "Yuan, Chen, Liu, Liu",
+  "durum": "OK"
+ },
+ {
+  "no": 34,
+  "baslik": "Instruction tuning with GPT-4",
+  "yontem": "arXiv 2304.03277",
+  "bulunan": "Instruction Tuning with GPT-4",
+  "benzerlik": 1.0,
+  "ek": "Baolin Peng, Chunyuan Li, Pengcheng He, Michel Galley",
+  "durum": "OK"
+ },
+ {
+  "no": 35,
+  "baslik": "Self-rewarding language models",
+  "yontem": "arXiv 2401.10020",
+  "bulunan": "Self-Rewarding Language Models",
+  "benzerlik": 1.0,
+  "ek": "Weizhe Yuan, Richard Yuanzhe Pang, Kyunghyun Cho, Xian Li",
+  "durum": "OK"
+ },
+ {
+  "no": 36,
+  "baslik": "Unsupervised cross-lingual representation learning for speech recognition",
+  "yontem": "DOI",
+  "bulunan": "Unsupervised Cross-Lingual Representation Learning for Speech Recognition",
+  "benzerlik": 1.0,
+  "ek": "Conneau, Baevski, Collobert, Mohamed",
+  "durum": "OK"
+ },
+ {
+  "no": 37,
+  "baslik": "Noise-robust multilingual speech recognition and the Tatar speech corpus",
+  "yontem": "DOI",
+  "bulunan": "Noise-Robust Multilingual Speech Recognition and the Tatar Speech Corpus",
+  "benzerlik": 1.0,
+  "ek": "Mussakhojayeva, Gilmullin, Khakimov, Galimov",
+  "durum": "OK"
+ },
+ {
+  "no": 38,
+  "baslik": "Exploration of Whisper fine-tuning strategies for low-resource ASR",
+  "yontem": "DOI",
+  "bulunan": "Exploration of Whisper fine-tuning strategies for low-resource ASR",
+  "benzerlik": 1.0,
+  "ek": "Liu, Yang, Qu",
+  "durum": "OK"
+ },
+ {
+  "no": 39,
+  "baslik": "Adaptive multilingual speech recognition with pretrained models",
+  "yontem": "arXiv 2205.12304",
+  "bulunan": "Adaptive multilingual speech recognition with pretrained models",
+  "benzerlik": 1.0,
+  "ek": "Ngoc-Quan Pham, Alex Waibel, Jan Niehues",
+  "durum": "OK"
+ },
+ {
+  "no": 40,
+  "baslik": "Exploring Wav2vec 2.0 fine-tuning for improved speech emotion recognition",
+  "yontem": "arXiv 2110.06309",
+  "bulunan": "Exploring Wav2vec 2.0 fine-tuning for improved speech emotion recognition",
+  "benzerlik": 1.0,
+  "ek": "Li-Wei Chen, Alexander Rudnicky",
+  "durum": "OK"
+ },
+ {
+  "no": 41,
+  "baslik": "Data augmentation for low-resource Quechua ASR improvement",
+  "yontem": "DOI",
+  "bulunan": "Data Augmentation for Low-Resource Quechua ASR Improvement",
+  "benzerlik": 1.0,
+  "ek": "Zevallos, Bel, Cámbara, Farrús",
+  "durum": "OK"
+ },
+ {
+  "no": 42,
+  "baslik": "Speech command recognition: Text-to-speech and speech corpus scraping are all you need",
+  "yontem": "DOI",
+  "bulunan": "Speech Command Recognition: Text-to-Speech and Speech Corpus Scraping Are All You Need",
+  "benzerlik": 1.0,
+  "ek": "Kuzdeuov, Nurgaliyev, Turmakhan, Laiyk",
+  "durum": "OK"
+ },
+ {
+  "no": 43,
+  "baslik": "TREN — Turkish speech recognition platform",
+  "yontem": "DOI",
+  "bulunan": "TREN- Turkish speech recognition platform",
+  "benzerlik": 0.98,
+  "ek": "Palaz, Kanak, Bicil, Dogan",
+  "durum": "OK"
+ },
+ {
+  "no": 44,
+  "baslik": "A rule based perceptual intonation model for Turkish text-to-speech synthesis",
+  "yontem": "DOI",
+  "bulunan": "A rule based perceptual intonation model for Turkish text-to-speech synthesis",
+  "benzerlik": 1.0,
+  "ek": "Uslu, Ilk",
+  "durum": "OK"
+ },
+ {
+  "no": 45,
+  "baslik": "Building a Turkish text-to-speech engine: Addressing linguistic and technical challenges",
+  "yontem": "DOI",
+  "bulunan": "Building a Turkish Text-to-Speech Engine: Addressing Linguistic and Technical Challenges",
+  "benzerlik": 1.0,
+  "ek": "Koçak, Büyükzincir",
+  "durum": "OK"
+ },
+ {
+  "no": 46,
+  "baslik": "Emotion recognition on call center voice data",
+  "yontem": "DOI",
+  "bulunan": "Emotion Recognition on Call Center Voice Data",
+  "benzerlik": 1.0,
+  "ek": "Yurtay, Demirci, Tiryaki, Altun",
+  "durum": "OK"
+ },
+ {
+  "no": 47,
+  "baslik": "Fractional-order calculus-based data augmentation methods for environmental sound classification with deep learning",
+  "yontem": "DOI",
+  "bulunan": "Fractional-Order Calculus-Based Data Augmentation Methods for Environmental Sound Classification with Deep Learning",
+  "benzerlik": 1.0,
+  "ek": "Yazgaç, Kırcı",
+  "durum": "OK"
+ },
+ {
+  "no": 48,
+  "baslik": "AudioSet: An ontology and human-labeled dataset for audio events",
+  "yontem": "DOI",
+  "bulunan": "Audio Set: An ontology and human-labeled dataset for audio events",
+  "benzerlik": 0.99,
+  "ek": "Gemmeke, Ellis, Freedman, Jansen",
+  "durum": "OK"
+ },
+ {
+  "no": 49,
+  "baslik": "BBC Sound Effects Library.",
+  "yontem": "arama",
+  "bulunan": "Networking the British Asian Sound: The BBC Asian Network and BBC Local Radio",
+  "benzerlik": 0.3,
+  "ek": "McCarthy | 10.1007/978-3-031-35620-9_6",
+  "durum": "!!"
+ },
+ {
+  "no": 50,
+  "baslik": "LightGBM: A highly efficient gradient boosting decision tree",
+  "yontem": "arama",
+  "bulunan": "A Novel Scheme for Mapping of MVT-Type Pb–Zn Prospectivity: LightGBM, a Highly Efficient Gradient Boosting Decision Tree Machine Learning Algorithm",
+  "benzerlik": 0.58,
+  "ek": "Hajihosseinlou, Maghsoudi, Ghezelbash | 10.1007/s11053-023-10249-6",
+  "durum": "!!"
+ },
+ {
+  "no": 51,
+  "baslik": "Deep residual learning for image recognition",
+  "yontem": "DOI",
+  "bulunan": "Deep Residual Learning for Image Recognition",
+  "benzerlik": 1.0,
+  "ek": "He, Zhang, Ren, Sun",
+  "durum": "OK"
+ },
+ {
+  "no": 52,
+  "baslik": "Note on the sampling error of the difference between correlated proportions or percentages",
+  "yontem": "DOI",
+  "bulunan": "Note on the Sampling Error of the Difference Between Correlated Proportions or Percentages",
+  "benzerlik": 1.0,
+  "ek": "McNemar",
+  "durum": "OK"
+ }
+]
