@@ -35,7 +35,10 @@ MODEL_ADI      = "audioldm2-full"   # audioldm2 paketi içindeki model adı
 SURE_SN        = 5.0                # 5 saniyelik klip (eğitim segmentleriyle eşleşir)
 ORNEKLEME_HZ   = 16000
 SURE_URET_SN   = 10.0   # audioldm2 sadece 10s destekliyor
-NEGATIF_PROMPT = "low quality, noise, distortion, silence, music"
+# NOT: Bu negatif prompt hicbir zaman text_to_audio'ya verilmedi (v1 ve v2); uretim standart
+# siniflandiricisiz rehberlikle (bos kosulsuz girdi, guidance 3.5) yapilir. v1 makalesindeki
+# Tablo II bu acidan hataliydi; sabit yalnizca kayit amaciyla tutuluyor.
+NEGATIF_PROMPT = "low quality, noise, distortion, silence, music"   # KULLANILMIYOR
 
 
 def model_yukle(model_adi: str = MODEL_ADI, ckpt_yolu: str = None):
@@ -166,6 +169,9 @@ def main():
     parser.add_argument("--dil",        type=str, default="ingilizce",
                         choices=["ingilizce", "turkce"],
                         help="Prompt dili (varsayilan: ingilizce)")
+    parser.add_argument("--cikti_dir",  type=str, default=None,
+                        help="(v2) Cikti klasoru, orn. data/synthetic_v2/C2p. Verilirse --tur klasor "
+                             "kuralini gecersiz kilar; ozet results/v2/uretim/<klasor_adi>.json'a yazilir")
     parser.add_argument("--base_seed",  type=int, default=1000,
                         help="Klip seed tabani; her klip base_seed+global_idx "
                              "ile uretilir (turlar arasi farkli taban onerilir)")
@@ -193,7 +199,10 @@ def main():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # Tur 2 icin ayri cikti klasoru
     global SENTETIK_DIR
-    if args.tur != "1":
+    if args.cikti_dir:
+        SENTETIK_DIR = ROOT / args.cikti_dir
+        SENTETIK_DIR.mkdir(parents=True, exist_ok=True)
+    elif args.tur != "1":
         SENTETIK_DIR = ROOT / "data" / f"synthetic_tur{args.tur}"
         SENTETIK_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -228,10 +237,12 @@ def main():
         print(f"    {sinif:<30} {n} klip")
     print("=" * 60)
 
-    ozet_yol = ROOT / "results" / "v1" / f"sentetik_uretim_ozet_tur{args.tur}.json"
-    ozet_yol.parent.mkdir(exist_ok=True)
+    ozet_yol = (ROOT / "results" / "v2" / "uretim" / f"{Path(args.cikti_dir).name}.json" if args.cikti_dir
+                else ROOT / "results" / "v1" / f"sentetik_uretim_ozet_tur{args.tur}.json")
+    ozet_yol.parent.mkdir(parents=True, exist_ok=True)
     with open(ozet_yol, "w", encoding="utf-8") as f:
-        json.dump({"tur": args.tur, "model": args.model, "dil": args.dil,
+        json.dump({"tur": args.tur, "model": args.model, "checkpoint": args.checkpoint,
+                   "cikti_dir": args.cikti_dir, "dil": args.dil, "adimlar": args.adimlar,
                    "base_seed": args.base_seed, "siniflar": ozet,
                    "n_klip_hedef": args.n_klip}, f, ensure_ascii=False, indent=2)
     print(f"\nOzet kaydedildi: {ozet_yol}")

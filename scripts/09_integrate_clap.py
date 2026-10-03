@@ -13,6 +13,7 @@ Kullanim:
 """
 
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -33,6 +34,8 @@ def main():
                         help="CLAP checkpoint yolu (varsayilan: clap_bbc_best.pt)")
     parser.add_argument("--cikti", type=str, default=None,
                         help="Cikti checkpoint adi (varsayilan: audioldm2_clap_finetuned.pth)")
+    parser.add_argument("--zorla", action="store_true",
+                        help="Denetim basarisiz olsa da entegre et (onerilmez)")
     args = parser.parse_args()
 
     global CLAP_CKPT, CIKTI_CKPT
@@ -47,7 +50,7 @@ def main():
     audioldm2_yol = download_checkpoint("audioldm2-full")
     print(f"  Kaynak: {audioldm2_yol}")
 
-    tam_ckpt = torch.load(audioldm2_yol, map_location="cpu")
+    tam_ckpt = torch.load(audioldm2_yol, map_location="cpu", mmap=True)   # RAM dostu
     sd = tam_ckpt["state_dict"]
     print(f"  Toplam key: {len(sd)}")
 
@@ -65,6 +68,28 @@ def main():
     # model_state: 'model.X' keyleri
     ft_sd = clap_ckpt["model_state"]
     print(f"  Fine-tuned key sayisi: {len(ft_sd)}")
+
+    # ── Entegrasyon oncesi denetim (v1 hatasi bir daha sessiz gecmesin) ──
+    # v1'de ince-ayarli checkpoint'in bn0 tamponlari NaN'di ve metin kolu hazir
+    # modelden en fazla 2,5e-5 sapiyordu (fiilen degismemisti).
+    nan_tensorler = [k for k, v in ft_sd.items()
+                     if torch.is_tensor(v) and v.is_floating_point() and not torch.isfinite(v).all()]
+    metin_fark = 0.0
+    for k in clap_keyler:
+        ft_k = k[len("clap."):]
+        if (".text_branch." in k or ".text_projection." in k) and ft_k in ft_sd and sd[k].is_floating_point():
+            metin_fark = max(metin_fark, (ft_sd[ft_k].float() - sd[k].float()).abs().max().item())
+    print(f"\nDenetim: NaN/Inf iceren tensor={len(nan_tensorler)}  metin kolu maks |fark|={metin_fark:.3e}")
+    sorunlar = []
+    if nan_tensorler:
+        sorunlar.append(f"{len(nan_tensorler)} tensorde NaN/Inf (ornek: {nan_tensorler[:3]})")
+    if metin_fark < 1e-4:
+        sorunlar.append(f"metin kolu hazir modelden ayirt edilemiyor (maks fark {metin_fark:.2e} < 1e-4)")
+    if sorunlar:
+        print("  [!] DENETIM BASARISIZ: " + " | ".join(sorunlar))
+        if not args.zorla:
+            print("  Entegrasyon durduruldu (--zorla ile gecilebilir, onerilmez).")
+            sys.exit(2)
 
     # ── Key esleme: 'model.X' → 'clap.model.X' ───────────────────────────
     # AudioLDM2'de 'clap.model.X', finetune modelinde 'model.X'
@@ -117,6 +142,26 @@ def main():
     torch.save(tam_ckpt, CIKTI_CKPT)
     boyut_gb = CIKTI_CKPT.stat().st_size / 1e9
     print(f"Kaydedildi: {boyut_gb:.2f} GB")
+
+    # ── Entegrasyon sonrasi dogrulama: uretimde kullanilacak dosyanin metin kolu
+    #    ince-ayarli modelle birebir ayni mi? (kaydedilen dosyadan geri okunur)
+    kontrol = torch.load(CIKTI_CKPT, map_location="cpu", mmap=True)["state_dict"]
+    uyumsuz = [k for k in clap_keyler
+               if (".text_branch." in k or ".text_projection." in k)
+               and k[len("clap."):] in ft_sd and k in kontrol
+               and not torch.equal(kontrol[k], ft_sd[k[len("clap."):]])]
+    print(f"Dogrulama: kaydedilen checkpoint'te ince-ayarli metin koluyla uyusmayan tensor = {len(uyumsuz)}")
+    denetim = {"clap_ckpt": str(CLAP_CKPT), "cikti": str(CIKTI_CKPT), "ft_epoch": ft_epoch,
+               "ft_val_metrik": ft_metrik, "nan_tensor": len(nan_tensorler),
+               "metin_kolu_maks_fark": metin_fark, "guncellenen_anahtar": guncellenen,
+               "kayit_sonrasi_uyumsuz_metin_tensor": len(uyumsuz), "zorlandi": bool(sorunlar)}
+    denetim_yolu = ROOT / "results" / "v2" / f"clap_entegrasyon_{CIKTI_CKPT.stem}.json"
+    denetim_yolu.parent.mkdir(parents=True, exist_ok=True)
+    denetim_yolu.write_text(json.dumps(denetim, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    print(f"Denetim kaydi: {denetim_yolu}")
+    if uyumsuz:
+        print("  [!] Kaydedilen dosya ince-ayarli metin kolunu icermiyor!")
+        sys.exit(3)
     print("\nTamamlandi. Tur 2 ses uretimi icin:")
     print("  python scripts/05_generate_audio.py --checkpoint checkpoints/audioldm2_clap_finetuned.pth")
 
