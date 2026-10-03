@@ -1,0 +1,7 @@
+{
+  "aciklama": "scripts/denetim/clap_param_fark.py ciktisi (3 Ekim 2026). v1 ince-ayarli CLAP checkpoint'lerinin AudioLDM2-full icindeki hazir CLAP'ten farki. metin_maks_fark: metin kolunda en buyuk mutlak parametre farki. Not: clap_tani_20261003.json'daki metin kolu, v1'in hatali [CLS] yolu ile hesaplandi (pooler_output degil); karsilastirma amacli.",
+  "clap_bbc_best.pt": {"metin_degisen": 74, "metin_toplam": 207, "metin_maks_fark": 2.47955322265625e-05, "ses_degisen": 185, "ses_toplam": 276, "nan_tensorler": ["model.audio_branch.bn0.running_mean", "model.audio_branch.bn0.running_var"], "nan_tensor_sayisi": 2},
+  "clap_bbc_dongu2_best.pt": {"metin_degisen": 74, "metin_toplam": 207, "metin_maks_fark": 2.47955322265625e-05, "ses_degisen": 180, "ses_toplam": 276, "nan_tensorler": ["model.audio_branch.bn0.running_mean", "model.audio_branch.bn0.running_var"], "nan_tensor_sayisi": 2},
+  "audioldm2_clap_finetuned.pth": {"metin_degisen": 74, "metin_toplam": 207, "metin_maks_fark": 2.47955322265625e-05, "ses_degisen": 185, "ses_toplam": 276, "nan_tensorler": ["model.audio_branch.bn0.running_mean", "model.audio_branch.bn0.running_var"], "nan_tensor_sayisi": 2},
+  "audioldm2_clap_dongu2_finetuned.pth": {"metin_degisen": 74, "metin_toplam": 207, "metin_maks_fark": 2.47955322265625e-05, "ses_degisen": 180, "ses_toplam": 276, "nan_tensorler": ["model.audio_branch.bn0.running_mean", "model.audio_branch.bn0.running_var"], "nan_tensor_sayisi": 2}
+}
