@@ -43,7 +43,10 @@ SINIF_SIRASI = [
 K = len(SINIF_SIRASI)
 GRUPLAR = {
     "A_belirgin": ["kopek_sesleri", "kus_sesleri", "hava_olaylari"],
-    "B_dusukF1":  ["insaat_sesleri", "dini_mekan", "acil_servis"],
+    # Nesnel olcut: baseline CNN'de en dusuk 3 F1 (tarim/ciftlik ayni zamanda en kucuk sinif)
+    "B_dusukF1":  ["insaat_sesleri", "dini_mekan", "tarim_ciftlik"],
+    # 1. faz surekliligi icin ayrica raporlanir
+    "B_faz1_acil": ["acil_servis"],
     "kontrol":    ["diger_hayvanlar"],
 }
 RSCRIPT = Path(r"C:\Program Files\R\R-4.4.1\bin\Rscript.exe")

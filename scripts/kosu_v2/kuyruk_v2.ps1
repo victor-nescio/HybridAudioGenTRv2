@@ -29,22 +29,28 @@ $logdir = "outputs\v2_loglar\kuyruk"
 New-Item -ItemType Directory -Force $logdir | Out-Null
 $env:PYTHONIOENCODING = "utf-8"
 
+# Grup A: akustik kimligi belirgin (2. faz). Grup B (ONERI, onay bekliyor): nesnel olcut =
+# baseline CNN'de en dusuk 3 F1 (insaat 0,388; dini mekan 0,461; tarim/ciftlik 0,525 - ayni
+# zamanda en kucuk sinif, 79 kayit) + 1. faz surekliligi icin acil servis.
 $A   = "kopek_sesleri,kus_sesleri,hava_olaylari"
-$B   = "insaat_sesleri,dini_mekan,acil_servis"
+$B   = "insaat_sesleri,dini_mekan,tarim_ciftlik,acil_servis"
 $K   = "diger_hayvanlar"
-$TUM = "kopek_sesleri kus_sesleri hava_olaylari insaat_sesleri dini_mekan acil_servis diger_hayvanlar"
-$H1  = "--kaynak data/synthetic_turcoh:$A,$K --kaynak data/synthetic:$B"
+$TUM = "kopek_sesleri kus_sesleri hava_olaylari insaat_sesleri dini_mekan tarim_ciftlik acil_servis diger_hayvanlar"
+# H1 (hazir model): A + kontrol 2. faz kliplerinden, insaat/dini/acil 1. faz kliplerinden,
+# tarim/ciftlik yeni uretim (00_H1_tarim) - hepsi hazir model + Ingilizce prompt
+$H1  = "--kaynak data/synthetic_turcoh:$A,$K --kaynak data/synthetic:insaat_sesleri,dini_mekan,acil_servis --kaynak data/synthetic_v2/H1ek:tarim_ciftlik"
 $PAT = "--patience 30"
 
 # (ad, komut) - komutlar repo kokunden calisir
 $adimlar = @(
+  @("00_H1_tarim",      "scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/H1ek --dil ingilizce --base_seed 12000 --n_klip 50 --siniflar tarim_ciftlik"),
   @("01_CLAP_dongu1",   "scripts\08_clap_finetune.py --surum v2 --dongu dongu1 --epochs 10 --patience 3 --hassasiyet fp32 --resume"),
   @("02_entegre_d1",    "scripts\09_integrate_clap.py --clap_ckpt clap_v2_dongu1_best.pt --cikti audioldm2_clap_v2_dongu1.pth"),
   @("03_C2p_uretim",    "scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/C2p --checkpoint checkpoints/audioldm2_clap_v2_dongu1.pth --dil ingilizce --base_seed 9000 --n_klip 50 --siniflar $TUM"),
   @("04_C3p_uretim",    "scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/C3p --checkpoint checkpoints/audioldm2_clap_v2_dongu1.pth --dil turkce --base_seed 10000 --n_klip 50 --siniflar $TUM"),
   @("05_CLAP_dongu2",   "scripts\08_clap_finetune.py --surum v2 --dongu dongu2 --sentetik_veri data/synthetic_v2/C2p --epochs 10 --patience 3 --hassasiyet fp32 --resume"),
   @("06_entegre_d2",    "scripts\09_integrate_clap.py --clap_ckpt clap_v2_dongu2_best.pt --cikti audioldm2_clap_v2_dongu2.pth"),
-  @("07_C4p_uretim",    "scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/C4p --checkpoint checkpoints/audioldm2_clap_v2_dongu2.pth --dil ingilizce --base_seed 11000 --n_klip 50 --siniflar insaat_sesleri dini_mekan acil_servis"),
+  @("07_C4p_uretim",    "scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/C4p --checkpoint checkpoints/audioldm2_clap_v2_dongu2.pth --dil ingilizce --base_seed 11000 --n_klip 50 --siniflar insaat_sesleri dini_mekan tarim_ciftlik acil_servis"),
   @("08_C4p_uretim_doz","scripts\05_generate_audio.py --cikti_dir data/synthetic_v2/C4p --checkpoint checkpoints/audioldm2_clap_v2_dongu2.pth --dil ingilizce --base_seed 11000 --n_klip 200 --siniflar kopek_sesleri kus_sesleri hava_olaylari diger_hayvanlar")
 )
 # Siniflandirici kosulari (her biri ~3,5-4 sa); oncelik sirasina gore
