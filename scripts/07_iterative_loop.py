@@ -250,6 +250,18 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
         if dur:
             break
 
+    # Son epoch modeli (v2): checkpoint secimi val'e dayanmadigi icin val+test birlikte
+    # temiz degerlendirme kumesi olur (kayit sayisi iki katina cikar). En iyi-val
+    # checkpoint'inden ONCE hesaplanir; v1 ciktilari degismez.
+    son_epoch = None
+    if tahmin_dondur:
+        _, s_te_f1, s_te_tahmin, _ = degerlendir_cnn(model, dl_te, kayip_fn)
+        _, s_vl_f1, s_vl_tahmin, _ = degerlendir_cnn(model, dl_vl, kayip_fn)
+        son_epoch = {"epoch": tarih[-1]["epoch"] if tarih else None,
+                     "test_f1": round(s_te_f1, 4), "val_f1": round(s_vl_f1, 4),
+                     "test_tahmin": np.array(s_te_tahmin, dtype=np.int16),
+                     "val_tahmin": np.array(s_vl_tahmin, dtype=np.int16)}
+
     ckpt = torch.load(yol, map_location=DEVICE)
     model.load_state_dict(ckpt["model_state"])
     _, test_f1, tahmin, gercek = degerlendir_cnn(model, dl_te, kayip_fn)
@@ -273,7 +285,10 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
             "val_tahmin":  np.array(v_tahmin, dtype=np.int16),
             "val_gercek":  np.array(v_gercek, dtype=np.int16),
             "val_dosya":   np.array([w for w, _, _ in dl_vl.dataset.indeks]),
+            "son_test_tahmin": son_epoch["test_tahmin"],
+            "son_val_tahmin":  son_epoch["val_tahmin"],
         }
+        sonuc["son_epoch"] = {k: son_epoch[k] for k in ("epoch", "test_f1", "val_f1")}
     return sonuc
 
 
