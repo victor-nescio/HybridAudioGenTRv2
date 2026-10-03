@@ -1,0 +1,37 @@
+{
+ "kopek_sesleri": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 169,
+  "sinifin_tum_benzersiz_kaydi": 194
+ },
+ "kus_sesleri": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 150,
+  "sinifin_tum_benzersiz_kaydi": 164
+ },
+ "hava_olaylari": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 188,
+  "sinifin_tum_benzersiz_kaydi": 246
+ },
+ "diger_hayvanlar": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 191,
+  "sinifin_tum_benzersiz_kaydi": 243
+ },
+ "insaat_sesleri": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 181,
+  "sinifin_tum_benzersiz_kaydi": 218
+ },
+ "dini_mekan": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 116,
+  "sinifin_tum_benzersiz_kaydi": 117
+ },
+ "acil_servis": {
+  "secilen_dosya": 300,
+  "benzersiz_kayit": 180,
+  "sinifin_tum_benzersiz_kaydi": 209
+ }
+}
