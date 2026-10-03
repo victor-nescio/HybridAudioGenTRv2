@@ -1,0 +1,10 @@
+{
+ "model": "hazir_CLAP",
+ "sinif_sayisi": 26,
+ "cift_TR_EN_ort_kos": 0.1461,
+ "sinif_ici_EN_ort_kos": 0.5638,
+ "siniflar_arasi_EN_ort_kos": 0.311,
+ "TR_en_yakin_EN_kendi_cevirisi": 0.0769,
+ "TR_en_yakin_EN_kendi_sinifi": 0.1462,
+ "sans_kendi_sinifi": 0.0385
+}
