@@ -39,6 +39,8 @@ import argparse
 import json
 import logging
 import math
+import os
+import random
 import sys
 import time
 from dataclasses import asdict, dataclass
@@ -791,6 +793,30 @@ def veri_bol_v2(
 # Egitim Dongusu
 # ════════════════════════════════════════════════════════════════════════════
 
+def guvenli_kaydet(nesne: dict, yol: Path):
+    """Atomik kayit: once gecici dosyaya yaz, sonra yerine koy. Kayit sirasinda
+    elektrik kesilse bile onceki checkpoint saglam kalir."""
+    gecici = yol.with_name(yol.name + ".tmp")
+    torch.save(nesne, gecici)
+    os.replace(gecici, yol)
+
+
+def rng_durumu() -> dict:
+    return {"torch": torch.get_rng_state(),
+            "cuda": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None,
+            "numpy": np.random.get_state(), "python": random.getstate()}
+
+
+def rng_yukle(d: dict):
+    # Checkpoint map_location=cuda ile yuklenince RNG tensorleri de GPU'ya tasinir;
+    # set_rng_state CPU ByteTensor bekler
+    torch.set_rng_state(d["torch"].cpu())
+    if d.get("cuda") is not None and torch.cuda.is_available():
+        torch.cuda.set_rng_state_all([s.cpu() for s in d["cuda"]])
+    np.random.set_state(d["numpy"])
+    random.setstate(d["python"])
+
+
 def egitim_dongusu(
     model: CLAPFinetune,
     kayip_fn: NTXentHardNeg,
@@ -801,9 +827,15 @@ def egitim_dongusu(
     baslangic_epoch: int = 1,
     resume_metrik: float = -1.0,
     ckpt_adi: str = "clap_bbc_best.pt",
+    durum: Optional[dict] = None,
+    kesinti_epoch: Optional[int] = None,
 ) -> dict:
     """
     Tam egitim dongusu.
+    durum: '_son.pt' checkpoint'inden gelen tam egitim durumu (kesintiden devam).
+           Optimizer, LR takvimi, en iyi metrik, sabir sayaci, RNG ve epoch gecmisi
+           geri yuklenir; boylece devam eden kosu kesintisiz kosuyla ayni yolu izler.
+    kesinti_epoch: (yalniz test) bu epoch'un kaydindan sonra kesintiyi taklit et.
     Returns: egitim tarihi (epoch bazinda metrikler)
     """
     optimizer = AdamW(
@@ -824,6 +856,24 @@ def egitim_dongusu(
     en_iyi_epoch  = baslangic_epoch - 1
     patience_sayac = 0
     tarih = []
+    gecen_sn = 0.0
+
+    if durum is not None and "optimizer" in durum:
+        # Scheduler taban LR'yi yakaladiktan SONRA optimizer durumu yuklenir
+        optimizer.load_state_dict(durum["optimizer"])
+        scheduler.mevcut_adim = durum["scheduler_adim"]
+        scaler.load_state_dict(durum["scaler"])
+        en_iyi_metrik  = durum["en_iyi_metrik"]
+        en_iyi_epoch   = durum["en_iyi_epoch"]
+        patience_sayac = durum["patience_sayac"]
+        tarih          = list(durum["tarih"])
+        gecen_sn       = durum.get("gecen_sn", 0.0)
+        rng_yukle(durum["rng"])
+        log.info(f"Tam durum geri yuklendi: LR adimi {scheduler.mevcut_adim}, en iyi "
+                 f"{cfg.secim_metrigi}={en_iyi_metrik:.4f} (epoch {en_iyi_epoch}), sabir {patience_sayac}")
+        if patience_sayac >= cfg.patience:
+            log.info("Erken durdurma kosulu zaten saglanmis; egitim atlaniyor.")
+            baslangic_epoch = cfg.epochs + 1
 
     ckpt_yolu = CHECKPT_DIR / ckpt_adi
     CHECKPT_DIR.mkdir(parents=True, exist_ok=True)
@@ -918,7 +968,7 @@ def egitim_dongusu(
 
             # EMA agirliklarla kaydet
             ema.yukle()
-            torch.save(
+            guvenli_kaydet(
                 {
                     "epoch":       epoch,
                     "model_state": model.state_dict(),
@@ -933,19 +983,32 @@ def egitim_dongusu(
         else:
             patience_sayac += 1
 
-        # Her epoch sonunda "son durum" checkpoint'i kaydet (resume icin)
+        # Her epoch sonunda tam "son durum" checkpoint'i (kesintiden devam icin)
+        gecen_sn += time.time() - t0
         son_ckpt_yolu = ckpt_yolu.parent / ckpt_yolu.name.replace(".pt", "_son.pt")
-        torch.save(
+        guvenli_kaydet(
             {
-                "epoch":       epoch,
-                "model_state": model.state_dict(),
-                "ema_shadow":  ema.shadow,
-                "val_metrik":  val_m,
-                "cfg":         asdict(cfg),
+                "epoch":          epoch,
+                "model_state":    model.state_dict(),   # ham (EMA olmayan) agirliklar
+                "ema_shadow":     ema.shadow,
+                "val_metrik":     val_m,
+                "cfg":            asdict(cfg),
+                "optimizer":      optimizer.state_dict(),
+                "scheduler_adim": scheduler.mevcut_adim,
+                "scaler":         scaler.state_dict(),
+                "en_iyi_metrik":  en_iyi_metrik,
+                "en_iyi_epoch":   en_iyi_epoch,
+                "patience_sayac": patience_sayac,
+                "tarih":          tarih,
+                "gecen_sn":       gecen_sn,
+                "rng":            rng_durumu(),
             },
             son_ckpt_yolu,
         )
         log.info(f"  Son durum kaydedildi: epoch {epoch} -> {son_ckpt_yolu.name}")
+        if kesinti_epoch is not None and epoch >= kesinti_epoch:
+            log.warning(f"  [TEST] Kesinti taklidi: epoch {epoch} sonrasi cikiliyor (kod 3)")
+            sys.exit(3)
         if patience_sayac >= cfg.patience:
                 log.info(
                     f"Erken durdurma: {patience_sayac} epoch iyilesme yok. "
@@ -958,6 +1021,7 @@ def egitim_dongusu(
         "en_iyi_epoch":  en_iyi_epoch,
         "en_iyi_metrik": en_iyi_metrik,
         "ckpt":          str(ckpt_yolu),
+        "gecen_sn":      gecen_sn,
     }
 
 
@@ -1059,6 +1123,10 @@ def main():
                         help="En iyi model olcutu. Varsayilan: v1 -> A2T_R@1, v2 -> zs_ort")
     parser.add_argument("--duman",               action="store_true",
                         help="Duman testi: sinif basina birkac dosya, 1 epoch; ciktilar _duman alt klasorlerine")
+    parser.add_argument("--duman_epoch",         type=int, default=1,
+                        help="Duman testinde epoch sayisi (kesinti/devam testi icin 2)")
+    parser.add_argument("--kesinti_epoch",       type=int, default=None,
+                        help="(Yalniz test) bu epoch kaydedildikten sonra kesintiyi taklit et (cikis kodu 3)")
     parser.add_argument("--ema_decay",           type=float, default=0.999)
     parser.add_argument("--resume",              action="store_true",
                         help="Mevcut clap_bbc_best.pt checkpoint'ten devam et")
@@ -1092,7 +1160,7 @@ def main():
         parcali_okuma    = (args.surum == "v2"),
     )
     if args.duman:
-        cfg.epochs = 1
+        cfg.epochs = args.duman_epoch
         cfg.log_adim = 5
 
     # ── Cikti yollari (surume gore; v1 dosyalarinin uzerine yazilmaz) ─────
@@ -1231,29 +1299,35 @@ def main():
     # ── Resume ───────────────────────────────────────────────────────────
     baslangic_epoch = 1
     resume_metrik   = -1.0
+    durum           = None
     # Once "son durum" checkpoint'ini dene, yoksa "en iyi"yi kullan
     ckpt_son_adi    = ckpt_en_iyi_adi.replace(".pt", "_son.pt")
     ckpt_yolu_son   = CHECKPT_DIR / ckpt_son_adi
     ckpt_yolu_resume = ckpt_yolu_son if ckpt_yolu_son.exists() else CHECKPT_DIR / ckpt_en_iyi_adi
     if args.resume and ckpt_yolu_resume.exists():
-        ck = torch.load(ckpt_yolu_resume, map_location=DEVICE)
+        ck = torch.load(ckpt_yolu_resume, map_location=DEVICE, weights_only=False)
         model.load_state_dict(ck["model_state"])
         ema.shadow = ck["ema_shadow"]
         tamamlanan_epoch = ck.get("epoch", 0)
         baslangic_epoch  = tamamlanan_epoch + 1
         resume_metrik    = ck.get("val_metrik", {}).get(cfg.secim_metrigi, -1.0)
+        if "optimizer" in ck:
+            durum = ck          # v2 tam durum: optimizer, LR takvimi, en iyi metrik, RNG, gecmis
+        else:
+            log.warning("Eski bicim checkpoint: yalniz agirliklar yuklendi (optimizer/LR sifirdan).")
         log.info(f"Resume: {ckpt_yolu_resume.name} yuklendi (epoch {tamamlanan_epoch}), "
-                 f"A2T_R@1={resume_metrik:.4f}, epoch {baslangic_epoch}'den devam")
+                 f"epoch {baslangic_epoch}'den devam")
     elif args.resume:
         log.warning("--resume verildi ama checkpoint bulunamadi, sifirdan basliyor.")
 
     # ── Egitim ───────────────────────────────────────────────────────────
-    t0 = time.time()
     sonuc = egitim_dongusu(model, kayip_fn, dl_tr, dl_vl, cfg, ema,
                            baslangic_epoch=baslangic_epoch,
                            resume_metrik=resume_metrik,
-                           ckpt_adi=ckpt_en_iyi_adi)
-    egitim_suresi = (time.time() - t0) / 3600
+                           ckpt_adi=ckpt_en_iyi_adi,
+                           durum=durum,
+                           kesinti_epoch=args.kesinti_epoch)
+    egitim_suresi = sonuc["gecen_sn"] / 3600   # kesintiler dahil toplam egitim suresi
 
     # ── Test Degerlendirmesi (EMA agirliklarla) ───────────────────────────
     log.info("\nTest degerlendirmesi (EMA agirliklar)...")
