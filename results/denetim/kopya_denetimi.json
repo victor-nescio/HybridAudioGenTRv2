@@ -1,0 +1,33 @@
+{
+ "disarida": 5158,
+ "disarida_kopya_ad_boyut": 13,
+ "disarida_ozgun": 5145,
+ "md5_ornek_esit_30": 13,
+ "veri_ici_kopya_grubu": 0,
+ "veri_ici_kopya_dosya": 0,
+ "bolumler_arasi_kopya_grubu": 0,
+ "bolumler_arasi_md5_ayni": 0,
+ "bolumler_arasi_ornek": [],
+ "disarida_ozgun_ornek": [
+  "Ambulance, exterior, bell only. (No ambulance sounds, close perspective.) (Bedford ambulance.).07015124.wav",
+  "Ambulance, exterior, one passing. (With horn.) (Bedford ambulance.).07015122.wav",
+  "Ambulance, exterior, stretchers wheeled out. (No ambulance sounds.) (Bedford ambulance.).07015126.wav",
+  "Ambulance, exterior, bell only. (No ambulance sounds, close perspective.) (Bedford ambulance.).07015124.wav",
+  "Ambulance, exterior, one passing. (With horn.) (Bedford ambulance.).07015122.wav",
+  "Ambulance, exterior, stretchers wheeled out. (No ambulance sounds.) (Bedford ambulance.).07015126.wav",
+  "Dentists, high-speed drill operating, sounds of scraping & rinsing. (Repeated once.).07016321.wav",
+  "Dentists, slow speed drill operates with pauses, sounds of scraping & rinsing..07016319.wav",
+  "Dentists, high-speed drill operating, sounds of scraping & rinsing. (Repeated once.).07016321.wav",
+  "Dentists, slow speed drill operates with pauses, sounds of scraping & rinsing..07016319.wav",
+  "999 dialed, _Emergency, which service__.07045242.wav",
+  "Ambulance approaches junction and turns right with two-tone horn, urban background..07045316.wav",
+  "Ambulance arrives with two-tone horn siren..07045313.wav",
+  "Ambulance rear door closed. (interior acoustic).07045323.wav",
+  "Ambulance rear doors opened. (interior acoustic).07045322.wav",
+  "Ambulance service R_T chat (indistinct) with urban background as heard in ambulance without engine running..07045326.wav",
+  "Ambulance service R_T selcall bleep..07045325.wav",
+  "Ambulance wail siren changing to yelp and back several times, exterior acoustic..07045310.wav",
+  "Ambulance wail siren, exterior acoustic. (Used by St John ambulance services.).07045308.wav",
+  "Ambulance yelp siren, exterior acoustic. (Used by St John Ambulance Service.).07045309.wav"
+ ]
+}

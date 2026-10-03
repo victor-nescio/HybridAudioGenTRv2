@@ -1,0 +1,15 @@
+{
+ "veri_dosya": 15356,
+ "benzersiz_anahtar": 15356,
+ "katalogsuz_dosya": 82,
+ "tekrarli_grup": 0,
+ "tekrarli_dosya": 0,
+ "bolumler_arasi_grup": 0,
+ "bolumler_arasi_test_iceren_grup": 0,
+ "etkilenen_test_dosyasi": 0,
+ "test_dosyasi": 2304,
+ "grup_ici_farkli_sinif": 0,
+ "disarida": 5158,
+ "disarida_ayni_katalog": 5158,
+ "ornek_bolumler_arasi": {}
+}
