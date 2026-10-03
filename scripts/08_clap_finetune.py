@@ -121,6 +121,13 @@ class FinetuneConfig:
     ema_decay: float        = 0.999
     log_adim: int           = 50      # kac adimda bir log
 
+    # v2 (revizyon) ayarlari — v1 davranisi: surum="v1", hassasiyet="fp16",
+    # secim_metrigi="A2T_R@1", parcali_okuma=False
+    surum: str              = "v2"
+    hassasiyet: str         = "fp32"  # fp32 | bf16 | fp16 (autocast)
+    secim_metrigi: str      = "zs_ort"
+    parcali_okuma: bool     = True
+
 
 # ════════════════════════════════════════════════════════════════════════════
 # Veri Seti
@@ -146,6 +153,7 @@ class BBCSesMetinVeriSeti(Dataset):
         tr_orani: float = 0.5,
         sadece_ingilizce: bool = False,
         augment: bool = False,
+        parcali_okuma: bool = False,
     ):
         self.df           = df.reset_index(drop=True)
         self.root         = root
@@ -153,6 +161,7 @@ class BBCSesMetinVeriSeti(Dataset):
         self.clip_samples = clip_samples
         self.tr_orani     = 0.0 if sadece_ingilizce else tr_orani
         self.augment      = augment
+        self.parcali_okuma = parcali_okuma
 
     def __len__(self) -> int:
         return len(self.df)
@@ -188,7 +197,19 @@ class BBCSesMetinVeriSeti(Dataset):
 
         tam_yol = self.root / dosya_yolu
         try:
-            data, sr_oku = sf.read(str(tam_yol), dtype="float32", always_2d=False)
+            if self.parcali_okuma:
+                # Yalnizca gereken pencereyi oku (v2): tum dosyayi okuyup yeniden
+                # orneklemek yerine; kirpma dagilimi ayni (dosya icinde duzgun rastgele baslangic)
+                bilgi = sf.info(str(tam_yol))
+                sr_oku = bilgi.samplerate
+                pencere = int(math.ceil(self.clip_samples * sr_oku / self.sr))
+                baslangic = 0
+                if self.augment and bilgi.frames > pencere:
+                    baslangic = np.random.randint(0, bilgi.frames - pencere)
+                data, sr_oku = sf.read(str(tam_yol), dtype="float32", always_2d=False,
+                                       start=baslangic, frames=pencere)
+            else:
+                data, sr_oku = sf.read(str(tam_yol), dtype="float32", always_2d=False)
         except Exception as e:
             log.warning(f"Ses yuklenemedi: {tam_yol} — {e}")
             return torch.zeros(self.clip_samples)
@@ -204,7 +225,7 @@ class BBCSesMetinVeriSeti(Dataset):
         # Kirp veya dolgula
         if len(data) >= self.clip_samples:
             # Rastgele baslangic noktasindan kirp (egitim augmentasyonu)
-            if self.augment and len(data) > self.clip_samples:
+            if self.augment and len(data) > self.clip_samples and not self.parcali_okuma:
                 baslangic = np.random.randint(0, len(data) - self.clip_samples)
                 data = data[baslangic : baslangic + self.clip_samples]
             else:
@@ -268,6 +289,7 @@ class CLAPFinetune(nn.Module):
         from transformers import RobertaTokenizer
 
         self.cfg = cfg
+        self.son_nan_sayisi = 0
 
         log.info("AudioLDM2 CLAP modeli yukleniyor (HTSAT-base + RoBERTa-base)...")
         # training_mode=True: dropout aktif, gradient akisi acik
@@ -301,7 +323,8 @@ class CLAPFinetune(nn.Module):
         from audioldm2 import download_checkpoint
         ckpt_path = download_checkpoint("audioldm2-full")
         log.info(f"AudioLDM2 checkpoint'inden CLAP agirliklar yukleniyor: {ckpt_path}")
-        sd_tam = torch.load(ckpt_path, map_location="cpu")["state_dict"]
+        # mmap: 8,5 GB'lik tam checkpoint RAM'e kopyalanmadan okunur (yalniz CLAP anahtarlari kullanilir)
+        sd_tam = torch.load(ckpt_path, map_location="cpu", mmap=True)["state_dict"]
 
         # 'clap.model.' prefix'ini 'model.' ile degistir
         clap_sd = {}
@@ -372,6 +395,9 @@ class CLAPFinetune(nn.Module):
         # HTSAT input: dict{"waveform": (B, samples)} — kendi mel cikarmini yapiyor
         out = self.model.audio_branch({"waveform": wav}, mixup_lambda=None)
         emb = self.model.audio_projection(out["embedding"])
+        # NaN sayaci: v1'de NaN gommeler sessizce gurultuyle degistiriliyordu;
+        # v2'de sayilip loglanir (egitim dongusu ve degerlendirme raporlar)
+        self.son_nan_sayisi = int(emb.isnan().any(dim=-1).sum().item())
         # NaN koruması: sifir vektoru yerine küçük gurultu
         emb = torch.where(emb.isnan(), torch.randn_like(emb) * 1e-6, emb)
         return F.normalize(emb, dim=-1)
@@ -385,10 +411,19 @@ class CLAPFinetune(nn.Module):
             max_length=77,
             return_tensors="pt",
         ).to(DEVICE)
-        out = self.model.text_branch(**tokenized)
-        # [CLS] token embedding
-        cls_emb = out.last_hidden_state[:, 0, :]
-        emb = self.model.text_projection(cls_emb)
+        out = self.model.text_branch(
+            input_ids=tokenized["input_ids"],
+            attention_mask=tokenized["attention_mask"],
+        )
+        if self.cfg.surum == "v1":
+            # v1 (hatali): ham [CLS] gizli durumu. LAION-CLAP/AudioLDM2 metin
+            # kodlamasi RoBERTa "pooler_output" kullanir (open_clip/model.py
+            # encode_text); bu nedenle v1 metin gommeleri CLAP'in ortak uzayiyla
+            # hizasizdi. Yalnizca v1'i birebir yeniden uretmek icin korunuyor.
+            havuz = out.last_hidden_state[:, 0, :]
+        else:
+            havuz = out.pooler_output   # AudioLDM2'nin uretimde kullandigi yol
+        emb = self.model.text_projection(havuz)
         return F.normalize(emb, dim=-1)
 
     def forward(self, wav: torch.Tensor, promptlar: list[str]) -> tuple:
@@ -546,25 +581,63 @@ def sinif_knn_dogrulugu(
     return (tahmin == sinif_idx).float().mean().item()
 
 
+def autocast_ayari(hassasiyet: str) -> dict:
+    """torch.autocast parametreleri: fp32 -> kapali; bf16/fp16 -> ilgili dtype."""
+    if DEVICE != "cuda" or hassasiyet == "fp32":
+        return {"device_type": "cuda", "enabled": False}
+    dtype = torch.bfloat16 if hassasiyet == "bf16" else torch.float16
+    return {"device_type": "cuda", "dtype": dtype, "enabled": True}
+
+
+def sinif_promptlari_yukle() -> dict:
+    """{sinif_adi: {"ingilizce": [...], "turkce": [...]}} — uretimde kullanilan sablonlar."""
+    with open(ROOT / "data" / "processed" / "turkce_promptlar.json", encoding="utf-8") as f:
+        return json.load(f)
+
+
+@torch.no_grad()
+def sifir_atis_dogrulugu(model, audio_emb, sinif_idx, sinif_adlari, hassasiyet) -> dict:
+    """Sinif duzeyinde capraz-kip uyum: her sesi, sinifin sablon promptlarinin
+    ortalama metin gommesine en yakin sinifa ata (EN ve TR ayri).
+    sinif_adlari: {sinif_idx: sinif_adi}"""
+    promptlar = sinif_promptlari_yukle()
+    idxler = sorted(sinif_adlari)
+    sonuc = {}
+    for dil, kisa in (("ingilizce", "en"), ("turkce", "tr")):
+        with torch.autocast(**autocast_ayari(hassasiyet)):
+            T = torch.stack([
+                model.metin_embedding(promptlar[sinif_adlari[i]][dil]).float().mean(0)
+                for i in idxler
+            ])
+        T = F.normalize(T.cpu(), dim=-1)
+        tahmin = torch.tensor(idxler)[(audio_emb.float() @ T.T).argmax(1)]
+        sonuc[f"zs_{kisa}"] = round((tahmin == sinif_idx).float().mean().item(), 4)
+    sonuc["zs_ort"] = round((sonuc["zs_en"] + sonuc["zs_tr"]) / 2, 4)
+    return sonuc
+
+
 @torch.no_grad()
 def val_degerlendirme(
     model: CLAPFinetune,
     loader: DataLoader,
     kayip_fn: NTXentHardNeg,
+    hassasiyet: str = "fp16",
 ) -> dict:
     """Validasyon seti uzerinde tam degerlendirme."""
     model.eval()
     tum_audio, tum_metin, tum_sinif = [], [], []
-    toplam_kayip, n_batch = 0.0, 0
+    toplam_kayip, n_batch, n_nan = 0.0, 0, 0
+    sinif_adlari = dict(zip(loader.dataset.df["sinif_idx"], loader.dataset.df["sinif"]))
 
     for batch in loader:
         wav       = batch["wav"].to(DEVICE)
         promptlar = batch["prompt"]
         siniflar  = batch["sinif_idx"].to(DEVICE)
 
-        with autocast(enabled=(DEVICE == "cuda")):
+        with torch.autocast(**autocast_ayari(hassasiyet)):
             a_emb, t_emb = model(wav, promptlar)
             kayip = kayip_fn(a_emb, t_emb, siniflar)
+        n_nan += model.son_nan_sayisi
 
         toplam_kayip += kayip.item()
         n_batch      += 1
@@ -579,6 +652,8 @@ def val_degerlendirme(
     metrikler = {"val_kayip": round(toplam_kayip / n_batch, 4)}
     metrikler.update(recall_at_k(audio_emb, metin_emb))
     metrikler["knn_acc"] = round(sinif_knn_dogrulugu(audio_emb, sinif_idx), 4)
+    metrikler.update(sifir_atis_dogrulugu(model, audio_emb, sinif_idx, sinif_adlari, hassasiyet))
+    metrikler["nan_ses_orani"] = round(n_nan / len(sinif_idx), 4)
 
     return metrikler
 
@@ -665,6 +740,53 @@ def veri_bol(
     return filtre(d_tr), filtre(d_vl), filtre(d_te)
 
 
+def veri_bol_v2(
+    df: pd.DataFrame,
+    val_orani: float,
+    test_orani: float,
+    seed: int = 42,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict]:
+    """
+    v2 (sizintisiz) bolme: CLAP yalnizca SINIFLANDIRICININ EGITIM bolumundeki
+    kayitlari gorur. Siniflandiricinin bolmesi src.data.dataset.veri_bol ile
+    (07_iterative_loop ile ayni fonksiyon, seed=42, 70/15/15) yeniden uretilir;
+    CLAP'in kendi egitim/val/test bolmesi bu kumenin icinde yapilir.
+    Sentetik satirlar (gercek arsivde olmayan dosyalar) yalnizca CLAP egitimine girer.
+    Dondurur: (tr, vl, te, denetim) — denetim: bolme ozeti + ortusme kontrolu.
+    """
+    from src.data.dataset import veri_bol as siniflandirici_bol
+
+    clf_tr, clf_vl, clf_te = siniflandirici_bol(
+        ROOT / "data" / "processed" / "veri_listesi.parquet", ROOT)
+    norm = lambda s: str(s).replace("/", "\\")
+    clf_tr_set = set(clf_tr["dosya"].map(norm))
+    clf_yasak  = set(clf_vl["dosya"].map(norm)) | set(clf_te["dosya"].map(norm))
+
+    gercek_mi   = df["dosya"].map(norm).isin(clf_tr_set | clf_yasak)
+    df_gercek   = df[gercek_mi & df["dosya"].map(norm).isin(clf_tr_set)]
+    df_sentetik = df[~gercek_mi]
+
+    tr, vl, te = veri_bol(df_gercek, val_orani, test_orani, seed)
+    if len(df_sentetik):
+        tr = pd.concat([tr, df_sentetik], ignore_index=True)
+
+    clap_dosyalar = set(pd.concat([tr, vl, te])["dosya"].map(norm))
+    ortusme = clap_dosyalar & clf_yasak
+    assert not ortusme, f"SIZINTI: {len(ortusme)} CLAP dosyasi siniflandirici val/test'te"
+
+    denetim = {
+        "siniflandirici_dosya": {"train": len(clf_tr_set), "val": len(set(clf_vl["dosya"])),
+                                 "test": len(set(clf_te["dosya"]))},
+        "clap_dosya": {"train_gercek": int(tr["dosya"].map(norm).isin(clf_tr_set).sum()),
+                       "train_sentetik": int(len(df_sentetik)),
+                       "val": int(vl["dosya"].nunique()), "test": int(te["dosya"].nunique())},
+        "clap_ile_siniflandirici_val_test_ortusmesi": 0,
+        "clap_val_dosyalari": sorted(vl["dosya"].unique().tolist()),
+        "clap_test_dosyalari": sorted(te["dosya"].unique().tolist()),
+    }
+    return tr, vl, te, denetim
+
+
 # ════════════════════════════════════════════════════════════════════════════
 # Egitim Dongusu
 # ════════════════════════════════════════════════════════════════════════════
@@ -694,9 +816,11 @@ def egitim_dongusu(
     toplam_adim  = len(dl_tr) * cfg.epochs
     warmup_adim  = int(toplam_adim * cfg.warmup_orani)
     scheduler    = WarmupCosineScheduler(optimizer, warmup_adim, toplam_adim)
-    scaler       = GradScaler(enabled=(DEVICE == "cuda" and cfg.fp16))
+    # GradScaler yalnizca fp16'da gerekir (bf16/fp32 tasma riski tasimaz)
+    scaler       = GradScaler(enabled=(DEVICE == "cuda" and cfg.hassasiyet == "fp16"))
+    ac_ayar      = autocast_ayari(cfg.hassasiyet)
 
-    en_iyi_metrik = resume_metrik  # A2T R@1 izlenir
+    en_iyi_metrik = resume_metrik  # cfg.secim_metrigi izlenir
     en_iyi_epoch  = baslangic_epoch - 1
     patience_sayac = 0
     tarih = []
@@ -710,6 +834,7 @@ def egitim_dongusu(
     for epoch in range(baslangic_epoch, cfg.epochs + 1):
         model.train()
         epoch_kayip = 0.0
+        epoch_nan, epoch_ornek = 0, 0
         t0 = time.time()
 
         for adim, batch in enumerate(dl_tr, 1):
@@ -719,9 +844,11 @@ def egitim_dongusu(
 
             optimizer.zero_grad(set_to_none=True)
 
-            with autocast(enabled=(DEVICE == "cuda" and cfg.fp16)):
+            with torch.autocast(**ac_ayar):
                 a_emb, t_emb = model(wav, promptlar)
                 kayip = kayip_fn(a_emb, t_emb, siniflar)
+            epoch_nan   += model.son_nan_sayisi
+            epoch_ornek += wav.size(0)
 
             # NaN kayip: bu batch'i atla, optimizer adimi yapma
             if torch.isnan(kayip) or torch.isinf(kayip):
@@ -753,11 +880,12 @@ def egitim_dongusu(
 
         # ── Epoch sonu degerlendirme (EMA agirliklarla) ───────────────────
         ema.yukle()
-        val_m = val_degerlendirme(model, dl_vl, kayip_fn)
+        val_m = val_degerlendirme(model, dl_vl, kayip_fn, cfg.hassasiyet)
         ema.geri_al()
 
         sure = (time.time() - t0) / 60
         ort_kayip = epoch_kayip / len(dl_tr)
+        nan_orani = epoch_nan / max(1, epoch_ornek)
 
         log.info(
             f"Epoch {epoch:3d}/{cfg.epochs}  "
@@ -765,20 +893,26 @@ def egitim_dongusu(
             f"val_loss={val_m['val_kayip']:.4f}  "
             f"A2T_R@1={val_m['A2T_R@1']:.4f}  "
             f"kNN={val_m['knn_acc']:.4f}  "
+            f"ZS(en/tr)={val_m['zs_en']:.4f}/{val_m['zs_tr']:.4f}  "
+            f"NaN(train)={nan_orani:.3f}  "
             f"({sure:.1f}dk)"
         )
+        if nan_orani > 0:
+            log.warning(f"  [!] Egitimde ses gommelerinin %{100*nan_orani:.1f}'i NaN "
+                        f"(hassasiyet={cfg.hassasiyet}) — sonuc guvenilir degil")
 
         epoch_kayit = {
             "epoch": epoch,
             "train_loss": round(ort_kayip, 5),
+            "nan_ses_orani_train": round(nan_orani, 4),
             **val_m,
             "sure_dk": round(sure, 1),
         }
         tarih.append(epoch_kayit)
 
-        # En iyi model: A2T R@1 ile izle
-        if val_m["A2T_R@1"] > en_iyi_metrik:
-            en_iyi_metrik  = val_m["A2T_R@1"]
+        # En iyi model: cfg.secim_metrigi ile izle (v1: A2T_R@1)
+        if val_m[cfg.secim_metrigi] > en_iyi_metrik:
+            en_iyi_metrik  = val_m[cfg.secim_metrigi]
             en_iyi_epoch   = epoch
             patience_sayac = 0
 
@@ -795,7 +929,7 @@ def egitim_dongusu(
                 ckpt_yolu,
             )
             ema.geri_al()
-            log.info(f"  ✓ En iyi model kaydedildi: A2T_R@1={en_iyi_metrik:.4f}")
+            log.info(f"  ✓ En iyi model kaydedildi: {cfg.secim_metrigi}={en_iyi_metrik:.4f}")
         else:
             patience_sayac += 1
 
@@ -913,7 +1047,18 @@ def main():
                         help="Ablasyon: sadece Ingilizce prompt kullan")
     parser.add_argument("--kuru_calistirma",     action="store_true",
                         help="Egitim baslatmadan dogrulama yap")
-    parser.add_argument("--fp16",                action="store_true", default=True)
+    parser.add_argument("--fp16",                action="store_true", default=True,
+                        help="(v1 uyumlulugu; etkisiz — hassasiyet --hassasiyet ile secilir)")
+    parser.add_argument("--surum",               choices=["v1", "v2"], default="v2",
+                        help="v1: ilk gonderim davranisi (tum arsiv bolmesi, fp16, A2T_R@1 secimi, "
+                             "results/v1, clap_bbc_*.pt). v2: yalniz siniflandirici-egitim bolmesi, "
+                             "results/v2, clap_v2_*.pt")
+    parser.add_argument("--hassasiyet",          choices=["fp32", "bf16", "fp16"], default=None,
+                        help="Varsayilan: v1 -> fp16, v2 -> fp32")
+    parser.add_argument("--secim_metrigi",       type=str, default=None,
+                        help="En iyi model olcutu. Varsayilan: v1 -> A2T_R@1, v2 -> zs_ort")
+    parser.add_argument("--duman",               action="store_true",
+                        help="Duman testi: sinif basina birkac dosya, 1 epoch; ciktilar _duman alt klasorlerine")
     parser.add_argument("--ema_decay",           type=float, default=0.999)
     parser.add_argument("--resume",              action="store_true",
                         help="Mevcut clap_bbc_best.pt checkpoint'ten devam et")
@@ -941,7 +1086,21 @@ def main():
         sadece_ingilizce = args.sadece_ingilizce,
         fp16             = args.fp16,
         ema_decay        = args.ema_decay,
+        surum            = args.surum,
+        hassasiyet       = args.hassasiyet or ("fp16" if args.surum == "v1" else "fp32"),
+        secim_metrigi    = args.secim_metrigi or ("A2T_R@1" if args.surum == "v1" else "zs_ort"),
+        parcali_okuma    = (args.surum == "v2"),
     )
+    if args.duman:
+        cfg.epochs = 1
+        cfg.log_adim = 5
+
+    # ── Cikti yollari (surume gore; v1 dosyalarinin uzerine yazilmaz) ─────
+    global RESULT_DIR, CHECKPT_DIR
+    RESULT_DIR = ROOT / "results" / cfg.surum
+    if args.duman:
+        RESULT_DIR  = RESULT_DIR / "_duman"
+        CHECKPT_DIR = CHECKPT_DIR / "_duman"
 
     log.info("=" * 60)
     log.info("  CLAP Fine-Tuning — BBC Ses Arsivi")
@@ -951,6 +1110,9 @@ def main():
     log.info(f"  Donuk   : audio={cfg.n_frozen_audio} blok, text={cfg.n_frozen_text} katman")
     log.info(f"  TR/EN   : {cfg.tr_orani:.0%} Turkce" +
              (" (ABLASYON: sadece EN)" if cfg.sadece_ingilizce else ""))
+    log.info(f"  Surum   : {cfg.surum}  Hassasiyet: {cfg.hassasiyet}  "
+             f"Secim: {cfg.secim_metrigi}  Parcali okuma: {cfg.parcali_okuma}"
+             + ("  [DUMAN TESTI]" if args.duman else ""))
     log.info("=" * 60)
 
     if args.kuru_calistirma:
@@ -958,11 +1120,11 @@ def main():
         return
 
     # ── Checkpoint adini belirle ──────────────────────────────────────────
-    global CHECKPT_DIR
-    ckpt_en_iyi_adi = "clap_bbc_best.pt"
+    onek = "clap_bbc" if cfg.surum == "v1" else "clap_v2"
+    ckpt_en_iyi_adi = f"{onek}_best.pt"
     if args.dongu:
-        ckpt_en_iyi_adi = f"clap_bbc_{args.dongu}_best.pt"
-        log.info(f"  Checkpoint: {ckpt_en_iyi_adi}")
+        ckpt_en_iyi_adi = f"{onek}_{args.dongu}_best.pt"
+    log.info(f"  Checkpoint: {CHECKPT_DIR / ckpt_en_iyi_adi}")
 
     # ── Veri ─────────────────────────────────────────────────────────────
     log.info(f"\nVeri yukleniyor: {PARQUET}")
@@ -1003,7 +1165,18 @@ def main():
         else:
             log.warning(f"  Sentetik dizinde gecerli WAV bulunamadi: {synt_dir}")
 
-    df_tr, df_vl, df_te = veri_bol(df, cfg.val_orani, cfg.test_orani, cfg.seed)
+    denetim = None
+    if cfg.surum == "v2":
+        df_tr, df_vl, df_te, denetim = veri_bol_v2(df, cfg.val_orani, cfg.test_orani, cfg.seed)
+        log.info(f"  v2 bolme: CLAP yalnizca siniflandirici egitim bolumunu goruyor "
+                 f"(ortusme kontrolu gecti): {denetim['clap_dosya']}")
+    else:
+        df_tr, df_vl, df_te = veri_bol(df, cfg.val_orani, cfg.test_orani, cfg.seed)
+    if args.duman:
+        kucuk = lambda d, n: (d.groupby("sinif_idx", group_keys=False)
+                              .apply(lambda g: g.sample(min(len(g), n), random_state=cfg.seed))
+                              .reset_index(drop=True))
+        df_tr, df_vl, df_te = kucuk(df_tr, 4), kucuk(df_vl, 2), kucuk(df_te, 2)
     log.info(f"  Train={len(df_tr)}  Val={len(df_vl)}  Test={len(df_te)}")
 
     ds_tr = BBCSesMetinVeriSeti(
@@ -1011,16 +1184,19 @@ def main():
         tr_orani=cfg.tr_orani,
         sadece_ingilizce=cfg.sadece_ingilizce,
         augment=True,
+        parcali_okuma=cfg.parcali_okuma,
     )
     ds_vl = BBCSesMetinVeriSeti(
         df_vl, ROOT,
         tr_orani=0.5,   # val'da her iki dili de degerlendir
         augment=False,
+        parcali_okuma=cfg.parcali_okuma,
     )
     ds_te = BBCSesMetinVeriSeti(
         df_te, ROOT,
         tr_orani=0.5,
         augment=False,
+        parcali_okuma=cfg.parcali_okuma,
     )
 
     sampler = sinif_dengeli_sampler(df_tr)
@@ -1048,6 +1224,9 @@ def main():
     model    = CLAPFinetune(cfg).to(DEVICE)
     kayip_fn = NTXentHardNeg(cfg.sicaklik, cfg.hard_neg_beta)
     ema      = EMA(model, decay=cfg.ema_decay)
+    # Hazir (ince-ayarsiz) agirliklarin kopyasi: sonda ayni test bolumunde referans
+    # degerlendirme icin (8,5 GB'lik checkpoint'i ikinci kez yuklememek icin)
+    hazir_state = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
 
     # ── Resume ───────────────────────────────────────────────────────────
     baslangic_epoch = 1
@@ -1062,7 +1241,7 @@ def main():
         ema.shadow = ck["ema_shadow"]
         tamamlanan_epoch = ck.get("epoch", 0)
         baslangic_epoch  = tamamlanan_epoch + 1
-        resume_metrik    = ck.get("val_metrik", {}).get("A2T_R@1", -1.0)
+        resume_metrik    = ck.get("val_metrik", {}).get(cfg.secim_metrigi, -1.0)
         log.info(f"Resume: {ckpt_yolu_resume.name} yuklendi (epoch {tamamlanan_epoch}), "
                  f"A2T_R@1={resume_metrik:.4f}, epoch {baslangic_epoch}'den devam")
     elif args.resume:
@@ -1080,24 +1259,40 @@ def main():
     log.info("\nTest degerlendirmesi (EMA agirliklar)...")
     ckpt = torch.load(sonuc["ckpt"], map_location=DEVICE)
     model.load_state_dict(ckpt["model_state"])
-    test_m = val_degerlendirme(model, dl_te, kayip_fn)
+    test_m = val_degerlendirme(model, dl_te, kayip_fn, cfg.hassasiyet)
     log.info("Test metrikleri:")
     for k, v in test_m.items():
         log.info(f"  {k}: {v}")
 
+    # Referans: ince-ayarsiz (hazir) CLAP'in ayni test bolumundeki degerleri
+    log.info("\nReferans: hazir CLAP (ince-ayarsiz) ayni test bolumunde...")
+    model.load_state_dict(hazir_state)
+    hazir_m = val_degerlendirme(model, dl_te, kayip_fn, cfg.hassasiyet)
+    for k, v in hazir_m.items():
+        log.info(f"  {k}: {v}")
+
     # ── Kaydet ───────────────────────────────────────────────────────────
-    RESULT_DIR.mkdir(exist_ok=True)
+    RESULT_DIR.mkdir(parents=True, exist_ok=True)
     tarih_str = datetime.now().strftime("%Y%m%d_%H%M")
-    cikti = RESULT_DIR / f"clap_finetune_{tarih_str}.json"
+    etiket = f"_{args.dongu}" if args.dongu else ""
+    cikti = RESULT_DIR / f"clap_finetune{etiket}_{tarih_str}.json"
     kayit = {
         "tarih":          tarih_str,
         "cfg":            asdict(cfg),
+        "dongu":          args.dongu,
+        "sentetik_veri":  args.sentetik_veri,
+        "checkpoint":     sonuc["ckpt"],
         "egitim_saat":    round(egitim_suresi, 2),
         "en_iyi_epoch":   sonuc["en_iyi_epoch"],
-        "val_A2T_R1":     sonuc["en_iyi_metrik"],
+        "secim_metrigi":  cfg.secim_metrigi,
+        "val_en_iyi":     sonuc["en_iyi_metrik"],
         "test":           test_m,
+        "test_hazir_clap": hazir_m,
         "tarih_detay":    sonuc["tarih"],
     }
+    if denetim is not None:
+        with open(RESULT_DIR / f"clap_bolme{etiket}_{tarih_str}.json", "w", encoding="utf-8") as f:
+            json.dump(denetim, f, ensure_ascii=False, indent=1)
     with open(cikti, "w", encoding="utf-8") as f:
         json.dump(kayit, f, ensure_ascii=False, indent=2)
 
