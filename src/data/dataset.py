@@ -80,7 +80,8 @@ class BBCSegmentDataset(Dataset):
     def __init__(self, df: pd.DataFrame, root,
                  mod: str = "cnn", sr: int = SR,
                  segment_sn: float = SEGMENT_SN, T_max: int = T_MAX,
-                 preload: bool = True, spec_augment: bool = False):
+                 preload: bool = True, spec_augment: bool = False,
+                 sa_seed: int = 0):
         self.root       = Path(root)
         self.mod        = mod
         self.sr         = sr
@@ -89,8 +90,9 @@ class BBCSegmentDataset(Dataset):
         self.cache_dir  = self.root / "data" / "mel_cache"
         # SpecAugment (yalnizca egitimde aciktir): normalize sonrasi mel uzerinde
         # zaman/frekans maskeleme. Geleneksel augmentasyon temeli (M2) icin.
+        # sa_seed: maske ureteci tohumu (v1 = 0; v2 coklu seed kosularinda seed'e baglanir)
         self.spec_augment = spec_augment
-        self._sa_rng = np.random.default_rng(0)
+        self._sa_rng = np.random.default_rng(sa_seed)
 
         self.indeks = self._indeks_olustur(df)
 
@@ -241,11 +243,12 @@ def dataloader_olustur(
     num_workers: int = 0,
     preload: bool = False,
     spec_augment: bool = False,
+    sa_seed: int = 0,
 ) -> DataLoader:
     """BBCSegmentDataset + DataLoader'u tek satirda olusturur."""
     dataset = BBCSegmentDataset(
         df, root, mod=mod, sr=sr, T_max=T_max, preload=preload,
-        spec_augment=spec_augment)
+        spec_augment=spec_augment, sa_seed=sa_seed)
     return DataLoader(
         dataset,
         batch_size=batch_size,

@@ -135,11 +135,33 @@ def degerlendir_cnn(model, loader, kayip_fn):
     return toplam / n, f1, tahminler, gercekler
 
 
+def _guvenli_kaydet(nesne, yol: Path):
+    """Atomik kayit (tmp + os.replace): kayit sirasinda kesinti olsa da eski dosya saglam kalir."""
+    import os
+    gecici = yol.with_name(yol.name + ".tmp")
+    torch.save(nesne, gecici)
+    os.replace(gecici, yol)
+
+
 def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
-             spec_augment=False):
-    torch.manual_seed(SEED); np.random.seed(SEED)
+             spec_augment=False, seed=None, model_yolu=None, durum_yolu=None,
+             tahmin_dondur=False, kesinti_epoch=None):
+    """
+    v1 egitim proseduru. Yeni parametrelerin varsayilanlari v1 davranisini birebir korur:
+      seed=None        -> SEED (42); v2 coklu seed kosularinda farkli deger verilir
+                          (agirlik baslatma, karistirma sirasi, SpecAugment maskeleri).
+      model_yolu=None  -> models/cnn_<tag>_best.pt
+      durum_yolu=None  -> epoch duzeyinde devam KAPALI. Verilirse her epoch sonunda tam
+                          durum (model, optimizer, LR takvimi, AMP olcegi, en iyi metrik,
+                          sabir, gecmis, RNG'ler) atomik kaydedilir; dosya varsa kaldigi
+                          epoch'tan birebir devam edilir.
+      tahmin_dondur    -> test/val segment tahminleri + kayit (dosya) kimlikleri dondurulur.
+    """
+    tohum = SEED if seed is None else seed
+    torch.manual_seed(tohum); np.random.seed(tohum)
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
-    yol = MODEL_DIR / f"cnn_{tag}_best.pt"
+    yol = Path(model_yolu) if model_yolu else MODEL_DIR / f"cnn_{tag}_best.pt"
+    yol.parent.mkdir(parents=True, exist_ok=True)
 
     # HIZLANDIRMA (sonuc-notr): preload=True + num_workers=0.
     # Mel cache (float16) RAM'e bir kez yuklenir -> her epoch tekrarli np.load
@@ -149,7 +171,8 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
     # bu nedenle num_workers=0 zorunlu (RAM diliminden okuma zaten anlik).
     dl_tr = dataloader_olustur(df_train, ROOT, mod="cnn",
                                batch_size=batch_size, num_workers=0, preload=True,
-                               spec_augment=spec_augment)
+                               spec_augment=spec_augment,
+                               sa_seed=0 if seed is None else tohum)
     dl_vl = dataloader_olustur(df_val,   ROOT, mod="cnn",
                                batch_size=batch_size*2, shuffle=False,
                                num_workers=0, preload=False)
@@ -168,8 +191,28 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
     en_iyi, pc = 0.0, 0
     tarih = []
     t0_toplam = time.time()
+    gecen_sn = 0.0
+    bas_ep = 1
+    durum_yolu = Path(durum_yolu) if durum_yolu else None
 
-    for ep in range(1, epochs + 1):
+    if durum_yolu is not None and durum_yolu.exists():
+        d = torch.load(durum_yolu, map_location="cpu", weights_only=False)
+        model.load_state_dict(d["model_state"])
+        optimizer.load_state_dict(d["optimizer"])
+        scheduler.load_state_dict(d["scheduler"])
+        scaler.load_state_dict(d["scaler"])
+        en_iyi, pc, tarih, gecen_sn = d["en_iyi"], d["pc"], list(d["tarih"]), d["gecen_sn"]
+        bas_ep = d["epoch"] + 1
+        torch.set_rng_state(d["rng"]["torch"].cpu())
+        if d["rng"]["cuda"] is not None and torch.cuda.is_available():
+            torch.cuda.set_rng_state_all([s.cpu() for s in d["rng"]["cuda"]])
+        np.random.set_state(d["rng"]["numpy"])
+        dl_tr.dataset._sa_rng.bit_generator.state = d["rng"]["sa"]
+        print(f"  Devam: epoch {d['epoch']} durumu yuklendi (en iyi val_F1={en_iyi:.4f}, sabir {pc})")
+        if pc >= patience:
+            bas_ep = epochs + 1
+
+    for ep in range(bas_ep, epochs + 1):
         t0 = time.time()
         loss = egit_epoch_cnn(model, dl_tr, optimizer, kayip_fn, scaler)
         _, vf1, _, _ = degerlendir_cnn(model, dl_vl, kayip_fn)
@@ -177,14 +220,35 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
         print(f"  Epoch {ep:3d}/{epochs}  loss={loss:.4f}  val_f1={vf1:.4f}  "
               f"{time.time()-t0:.0f}s")
         tarih.append({"epoch": ep, "train_loss": round(loss,5), "val_f1": round(vf1,4)})
+        dur = False
         if vf1 > en_iyi:
             en_iyi = vf1; pc = 0
-            torch.save({"model_state": model.state_dict(), "val_f1": vf1}, yol)
+            if durum_yolu is not None:
+                _guvenli_kaydet({"model_state": model.state_dict(), "val_f1": vf1}, yol)
+            else:
+                torch.save({"model_state": model.state_dict(), "val_f1": vf1}, yol)
         else:
             pc += 1
             if pc >= patience:
                 print(f"  Erken durdurma (epoch {ep})")
-                break
+                dur = True
+        gecen_sn += time.time() - t0
+        if durum_yolu is not None:
+            _guvenli_kaydet({
+                "epoch": ep, "model_state": model.state_dict(),
+                "optimizer": optimizer.state_dict(), "scheduler": scheduler.state_dict(),
+                "scaler": scaler.state_dict(), "en_iyi": en_iyi, "pc": pc,
+                "tarih": tarih, "gecen_sn": gecen_sn,
+                "rng": {"torch": torch.get_rng_state(),
+                        "cuda": torch.cuda.get_rng_state_all() if torch.cuda.is_available() else None,
+                        "numpy": np.random.get_state(),
+                        "sa": dl_tr.dataset._sa_rng.bit_generator.state},
+            }, durum_yolu)
+        if kesinti_epoch is not None and ep >= kesinti_epoch:
+            print(f"  [TEST] Kesinti taklidi: epoch {ep} sonrasi cikiliyor (kod 3)")
+            sys.exit(3)
+        if dur:
+            break
 
     ckpt = torch.load(yol, map_location=DEVICE)
     model.load_state_dict(ckpt["model_state"])
@@ -193,10 +257,24 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
                                   output_dict=True, zero_division=0)
     sinif_f1 = {SINIF_SIRASI[i]: round(rapor[SINIF_SIRASI[i]]["f1-score"], 4)
                 for i in range(N_SINIF)}
-    sure_dk = (time.time() - t0_toplam) / 60
+    sure_dk = (time.time() - t0_toplam) / 60 if durum_yolu is None else gecen_sn / 60
     print(f"  [{tag}] val_F1={en_iyi:.4f}  test_F1={test_f1:.4f}  ({sure_dk:.1f}dk)")
-    return {"val_f1": round(en_iyi,4), "test_f1": round(test_f1,4),
-            "sinif_f1": sinif_f1, "tarih": tarih, "sure_dk": round(sure_dk,1)}
+    sonuc = {"val_f1": round(en_iyi,4), "test_f1": round(test_f1,4),
+             "sinif_f1": sinif_f1, "tarih": tarih, "sure_dk": round(sure_dk,1)}
+    if tahmin_dondur:
+        _, _, v_tahmin, v_gercek = degerlendir_cnn(model, dl_vl, kayip_fn)
+        rapor_v = classification_report(v_gercek, v_tahmin, target_names=SINIF_SIRASI,
+                                         output_dict=True, zero_division=0)
+        sonuc["val_sinif_f1"] = {s: round(rapor_v[s]["f1-score"], 4) for s in SINIF_SIRASI}
+        sonuc["_tahminler"] = {
+            "test_tahmin": np.array(tahmin, dtype=np.int16),
+            "test_gercek": np.array(gercek, dtype=np.int16),
+            "test_dosya":  np.array([w for w, _, _ in dl_te.dataset.indeks]),
+            "val_tahmin":  np.array(v_tahmin, dtype=np.int16),
+            "val_gercek":  np.array(v_gercek, dtype=np.int16),
+            "val_dosya":   np.array([w for w, _, _ in dl_vl.dataset.indeks]),
+        }
+    return sonuc
 
 
 def baseline_cnn_yukle(df_test) -> dict:
