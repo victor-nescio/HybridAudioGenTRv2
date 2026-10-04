@@ -47,6 +47,8 @@ MODEL_DIR       = ROOT / "models"
 CHECKPTS_DIR    = ROOT / "checkpoints"
 RESULT_DIR      = ROOT / "results" / "v1"
 DEVICE          = "cuda" if torch.cuda.is_available() else "cpu"
+# Kuyrugu temiz duraklatma: bu dosya varsa egitim epoch sonunda durumu kaydedip cikar (kod 4)
+DURDUR_DOSYASI  = ROOT / "outputs" / "v2_loglar" / "kuyruk" / "DURDUR"
 N_SINIF         = 26
 SEED            = 42
 
@@ -173,12 +175,15 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
                                batch_size=batch_size, num_workers=0, preload=True,
                                spec_augment=spec_augment,
                                sa_seed=0 if seed is None else tohum)
+    # Val/test RAM'e on-yuklenir: her epoch 50 bin segmenti diskten okumak ~2-3 dk
+    # suruyordu (RAM'den ~27 sn). Veri ayni float16 mel cache dilimi oldugundan
+    # sonuclar diskten okumayla OZDESTIR (v1 ciktilari degismez).
     dl_vl = dataloader_olustur(df_val,   ROOT, mod="cnn",
                                batch_size=batch_size*2, shuffle=False,
-                               num_workers=0, preload=False)
+                               num_workers=0, preload=True)
     dl_te = dataloader_olustur(df_test,  ROOT, mod="cnn",
                                batch_size=batch_size*2, shuffle=False,
-                               num_workers=0, preload=False)
+                               num_workers=0, preload=True)
     print(f"  Train={len(dl_tr.dataset):,}  Val={len(dl_vl.dataset):,}  "
           f"Test={len(dl_te.dataset):,}")
 
@@ -247,6 +252,10 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
         if kesinti_epoch is not None and ep >= kesinti_epoch:
             print(f"  [TEST] Kesinti taklidi: epoch {ep} sonrasi cikiliyor (kod 3)")
             sys.exit(3)
+        if durum_yolu is not None and DURDUR_DOSYASI.exists() and not dur and ep < epochs:
+            print(f"  [DURDUR] Istek alindi: epoch {ep} durumu kaydedildi, cikiliyor (kod 4). "
+                  f"Ayni komut kaldigi yerden devam eder.")
+            sys.exit(4)
         if dur:
             break
 

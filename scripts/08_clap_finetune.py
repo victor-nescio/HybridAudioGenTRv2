@@ -1009,6 +1009,10 @@ def egitim_dongusu(
         if kesinti_epoch is not None and epoch >= kesinti_epoch:
             log.warning(f"  [TEST] Kesinti taklidi: epoch {epoch} sonrasi cikiliyor (kod 3)")
             sys.exit(3)
+        durdur = ROOT / "outputs" / "v2_loglar" / "kuyruk" / "DURDUR"
+        if durdur.exists() and epoch < cfg.epochs and patience_sayac < cfg.patience:
+            log.warning(f"  [DURDUR] Istek alindi: epoch {epoch} durumu kaydedildi, cikiliyor (kod 4)")
+            sys.exit(4)
         if patience_sayac >= cfg.patience:
                 log.info(
                     f"Erken durdurma: {patience_sayac} epoch iyilesme yok. "

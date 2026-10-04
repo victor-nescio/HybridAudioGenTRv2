@@ -120,7 +120,12 @@ def sinif_uret(model, sinif: str, promptlar: list[str], n_klip: int,
         return n_mevcut
 
     toplam_uretilen = 0
+    durdur = ROOT / "outputs" / "v2_loglar" / "kuyruk" / "DURDUR"
     for idx in range(n_mevcut, n_klip):          # global klip indeksi (resume güvenli)
+        if durdur.exists():
+            print(f"  [DURDUR] Istek alindi: {sinif} icin {n_mevcut + toplam_uretilen} klip hazir, "
+                  f"cikiliyor (kod 4). Ayni komut kaldigi yerden devam eder.")
+            sys.exit(4)
         p_idx   = idx % n_prompt                 # promptları döngüsel ata
         prompt  = promptlar[p_idx]
         seed    = base_seed + idx                # BENZERSİZ seed (her klip farklı)

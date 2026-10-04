@@ -52,12 +52,16 @@ SEED_RE    = re.compile(r"_s(\d+)_")
 
 
 def sentetik_sec(kaynaklar: list[str], n_klip: int | None) -> pd.DataFrame:
-    """--kaynak 'klasor:sinif1,sinif2' girdilerinden sentetik egitim satirlari.
-    Her sinif icin klipler uretim seed'ine gore siralanir, ilk n_klip alinir.
-    Eksik klip varsa sessizce devam etmez, hata verir."""
+    """--kaynak 'klasor:sinif1,sinif2[#n]' girdilerinden sentetik egitim satirlari.
+    Her sinif icin klipler uretim seed'ine gore siralanir, ilk n alinir ('#n' verilmisse o
+    kaynak icin n, yoksa --n_klip). Eksik klip varsa sessizce devam etmez, hata verir."""
     satirlar, gorulen = [], set()
     for k in kaynaklar:
         klasor, siniflar = k.split(":")
+        n_kaynak = n_klip
+        if "#" in siniflar:
+            siniflar, n_str = siniflar.split("#")
+            n_kaynak = int(n_str)
         for sinif in [s.strip() for s in siniflar.split(",") if s.strip()]:
             if sinif not in IL.SINIF_IDX:
                 raise SystemExit(f"HATA: bilinmeyen sinif {sinif}")
@@ -66,14 +70,28 @@ def sentetik_sec(kaynaklar: list[str], n_klip: int | None) -> pd.DataFrame:
             gorulen.add(sinif)
             wavlar = [w for w in (ROOT / klasor / sinif).glob("*.wav") if w.stat().st_size > 1000]
             wavlar.sort(key=lambda w: (int(SEED_RE.search(w.name).group(1)) if SEED_RE.search(w.name) else 10**9, w.name))
-            if n_klip is not None:
-                if len(wavlar) < n_klip:
-                    raise SystemExit(f"HATA: {klasor}/{sinif} icinde {len(wavlar)} klip var, {n_klip} istendi")
-                wavlar = wavlar[:n_klip]
+            if n_kaynak is not None:
+                if len(wavlar) < n_kaynak:
+                    raise SystemExit(f"HATA: {klasor}/{sinif} icinde {len(wavlar)} klip var, {n_kaynak} istendi")
+                wavlar = wavlar[:n_kaynak]
             for w in wavlar:
                 satirlar.append({"dosya": str(w.relative_to(ROOT)), "sinif": sinif,
                                  "sinif_idx": IL.SINIF_IDX[sinif], "n_segs": 1})
     return pd.DataFrame(satirlar, columns=["dosya", "sinif", "sinif_idx", "n_segs"])
+
+
+def etiket_kaydir(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
+    """Icerik kontrolu (K14): augmente edilen siniflar alfabetik siralanir ve her sinifin
+    klipleri bir SONRAKI sinifin etiketiyle egitime girer (dongusel kaydirma). Sinif basina
+    klip sayisi ve kliplerin kendisi ayni kalir; yalnizca icerik-etiket uyumu bozulur."""
+    siniflar = sorted(df["sinif"].unique())
+    if len(siniflar) < 2:
+        raise SystemExit("HATA: etiket kaydirma icin en az 2 sinif gerekli")
+    harita = {s: siniflar[(i + 1) % len(siniflar)] for i, s in enumerate(siniflar)}
+    df = df.copy()
+    df["sinif"] = df["sinif"].map(harita)
+    df["sinif_idx"] = df["sinif"].map(IL.SINIF_IDX)
+    return df, harita
 
 
 def git_surumu() -> str:
@@ -98,6 +116,8 @@ def main():
     p.add_argument("--patience", type=int, default=7)
     p.add_argument("--zorla", action="store_true", help="Sonuc dosyasi olsa da yeniden kos")
     p.add_argument("--kesinti_epoch", type=int, default=None, help="(Yalniz test) kesinti taklidi")
+    p.add_argument("--etiket_kaydir", action="store_true",
+                   help="Icerik kontrolu (K14): sentetik kliplerin etiketleri siniflar arasinda dongusel kaydirilir")
     a = p.parse_args()
 
     ad = f"{a.konfig}_s{a.seed}"
@@ -113,6 +133,10 @@ def main():
     print("=" * 62)
     df_tr, df_vl, df_te = IL.veri_bol(IL.PARQUET_LISTE, ROOT)
     df_synt = sentetik_sec(a.kaynak, a.n_klip)
+    kaydirma = None
+    if a.etiket_kaydir:
+        df_synt, kaydirma = etiket_kaydir(df_synt)
+        print("  [K14] Etiket kaydirma: " + ", ".join(f"{k}->{v}" for k, v in kaydirma.items()))
     if len(df_synt):
         print("  Sentetik: " + "  ".join(f"{s}={n}" for s, n in df_synt["sinif"].value_counts().sort_index().items()))
         df_tr = pd.concat([df_tr, df_synt], ignore_index=True)
@@ -131,6 +155,7 @@ def main():
         "konfig": a.konfig, "seed": a.seed, "tarih": datetime.now().strftime("%Y%m%d_%H%M"),
         "git": git_surumu(), "argumanlar": vars(a),
         "sentetik_sayisi": df_synt["sinif"].value_counts().sort_index().to_dict(),
+        "etiket_kaydirma": kaydirma,
         "sentetik_dosyalar": df_synt["dosya"].tolist(),
         **sonuc,
     }
