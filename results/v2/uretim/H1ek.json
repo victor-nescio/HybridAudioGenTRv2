@@ -1,0 +1,13 @@
+{
+  "tur": "1",
+  "model": "audioldm2-full",
+  "checkpoint": null,
+  "cikti_dir": "data/synthetic_v2/H1ek",
+  "dil": "ingilizce",
+  "adimlar": 200,
+  "base_seed": 12000,
+  "siniflar": {
+    "tarim_ciftlik": 50
+  },
+  "n_klip_hedef": 50
+}
