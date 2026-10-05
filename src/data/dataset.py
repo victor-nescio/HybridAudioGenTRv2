@@ -151,7 +151,9 @@ class BBCSegmentDataset(Dataset):
                 mel = self._mel_ram[wav_yolu][:, baslangic: baslangic + self.T_max].astype(np.float32)
             # 2. Disk cache
             elif (cache_yolu := self._cache_yolu(wav_yolu)) and cache_yolu.exists():
-                mel_tam   = np.load(str(cache_yolu))
+                # mmap: yalnizca gereken 5 sn'lik dilim okunur (tum dosyayi okumak val'de
+                # epoch basina ~1,5-2,5 dk suruyordu; mmap ~30 sn). Okunan baytlar ayni.
+                mel_tam   = np.load(str(cache_yolu), mmap_mode="r")
                 baslangic = seg_no * self.T_max
                 mel       = mel_tam[:, baslangic: baslangic + self.T_max].astype(np.float32)
             else:

@@ -137,6 +137,32 @@ def degerlendir_cnn(model, loader, kayip_fn):
     return toplam / n, f1, tahminler, gercekler
 
 
+def _ram_bekle(df_train, pay_gb: float = 3.0):
+    """Egitim kumesi RAM'e on-yuklenir (~19 GB). Bos RAM yetmiyorsa (gunduz PC kullanimi)
+    bellek yetersizliginden cokmek yerine RAM bosalana kadar bekler; beklerken DURDUR
+    istegine uyar (kod 4). (USB SSD uzerinde karisik sirali mmap okuma egitim icin cok
+    yavas oldugundan on-yuklemeden vazgecilmedi.)"""
+    import psutil
+    gerekli = 0
+    for d in df_train["dosya"].unique():
+        c = ROOT / "data" / "mel_cache" / Path(d).with_suffix(".npy")
+        if c.exists():
+            gerekli += c.stat().st_size
+    esik = gerekli + pay_gb * 1e9
+    son_log = 0.0
+    while psutil.virtual_memory().available < esik:
+        if DURDUR_DOSYASI.exists():
+            print("  [DURDUR] RAM beklenirken duraklatma istegi alindi (kod 4).", flush=True)
+            sys.exit(4)
+        if time.time() - son_log > 300:
+            print(f"  [RAM] Egitim icin {esik/1e9:.1f} GB bos RAM gerekli, su an "
+                  f"{psutil.virtual_memory().available/1e9:.1f} GB; bekleniyor...", flush=True)
+            son_log = time.time()
+        time.sleep(30)
+    print(f"  RAM: {psutil.virtual_memory().available/1e9:.1f} GB bos, egitim kumesi on-yukleme "
+          f"{gerekli/1e9:.1f} GB", flush=True)
+
+
 def _guvenli_kaydet(nesne, yol: Path):
     """Atomik kayit (tmp + os.replace): kayit sirasinda kesinti olsa da eski dosya saglam kalir."""
     import os
@@ -171,19 +197,20 @@ def egit_cnn(df_train, df_val, df_test, tag, epochs, batch_size, lr, patience,
     # float16 cache oldugundan sonuc preload=False ile OZDESTIR.
     # Windows'ta num_workers>0 + preload Dataset'i her worker'a kopyalar (OOM);
     # bu nedenle num_workers=0 zorunlu (RAM diliminden okuma zaten anlik).
+    _ram_bekle(df_train)
     dl_tr = dataloader_olustur(df_train, ROOT, mod="cnn",
                                batch_size=batch_size, num_workers=0, preload=True,
                                spec_augment=spec_augment,
                                sa_seed=0 if seed is None else tohum)
-    # Val/test RAM'e on-yuklenir: her epoch 50 bin segmenti diskten okumak ~2-3 dk
-    # suruyordu (RAM'den ~27 sn). Veri ayni float16 mel cache dilimi oldugundan
-    # sonuclar diskten okumayla OZDESTIR (v1 ciktilari degismez).
+    # Val/test diskten (mmap, yalniz gereken dilim) okunur. RAM'e on-yukleme (~4 GB ek)
+    # gunduz PC kullanimiyla birlikte bellek yetersizligine yol acti (5 Eki); mmap
+    # neredeyse ayni hizda (~30 sn/val) ve ek RAM gerektirmez. Veri ozdes.
     dl_vl = dataloader_olustur(df_val,   ROOT, mod="cnn",
                                batch_size=batch_size*2, shuffle=False,
-                               num_workers=0, preload=True)
+                               num_workers=0, preload=False)
     dl_te = dataloader_olustur(df_test,  ROOT, mod="cnn",
                                batch_size=batch_size*2, shuffle=False,
-                               num_workers=0, preload=True)
+                               num_workers=0, preload=False)
     print(f"  Train={len(dl_tr.dataset):,}  Val={len(dl_vl.dataset):,}  "
           f"Test={len(dl_te.dataset):,}")
 
