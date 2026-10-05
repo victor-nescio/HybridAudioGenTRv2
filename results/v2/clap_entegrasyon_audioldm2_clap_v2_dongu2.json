@@ -1,0 +1,24 @@
+{
+ "clap_ckpt": "F:\\Drthesiscode\\checkpoints\\clap_v2_dongu2_best.pt",
+ "cikti": "F:\\Drthesiscode\\checkpoints\\audioldm2_clap_v2_dongu2.pth",
+ "ft_epoch": 10,
+ "ft_val_metrik": {
+  "val_kayip": 0.5428,
+  "A2T_R@1": 0.0242,
+  "T2A_R@1": 0.0316,
+  "A2T_R@5": 0.0967,
+  "T2A_R@5": 0.1256,
+  "A2T_R@10": 0.1814,
+  "T2A_R@10": 0.2186,
+  "knn_acc": 0.6419,
+  "zs_en": 0.6679,
+  "zs_tr": 0.666,
+  "zs_ort": 0.667,
+  "nan_ses_orani": 0.0
+ },
+ "nan_tensor": 0,
+ "metin_kolu_maks_fark": 0.010029762983322144,
+ "guncellenen_anahtar": 504,
+ "kayit_sonrasi_uyumsuz_metin_tensor": 0,
+ "zorlandi": false
+}
