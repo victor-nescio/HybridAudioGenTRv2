@@ -101,10 +101,42 @@ def sentetik_cnn_df(siniflar: list[str]) -> pd.DataFrame:
     return df
 
 
+def arka_plan(loader, derinlik: int = 4):
+    """DataLoader'dan batch'leri arka plan is parcaciginda onceden hazirlar; GPU bir batch'i
+    islerken sonraki batch'ler hazirlanir. num_workers=0 kullanildigi icin (Windows'ta isci
+    surecleri ~19 GB'lik RAM on-yuklemesini kopyalar) veri hazirlama ana is parcaciginda GPU ile
+    SIRAYLA calisiyordu (~23 ms + ~67 ms / batch). Karistirma sirasi iter() ile ANA is parcaciginda
+    ayni RNG'den uretilir; is parcacigi ayni batch'leri ayni sirayla uretir -> sonuclar ozdes."""
+    import queue
+    import threading
+    kuyruk = queue.Queue(maxsize=derinlik)
+    bitti = object()
+    it = iter(loader)                      # sampler permutasyonu burada (ana is parcacigi)
+
+    def uret():
+        try:
+            for b in it:
+                kuyruk.put(b)
+            kuyruk.put(bitti)
+        except BaseException as e:         # hatayi ana is parcacigina tasi
+            kuyruk.put(e)
+
+    t = threading.Thread(target=uret, daemon=True)
+    t.start()
+    while True:
+        b = kuyruk.get()
+        if b is bitti:
+            break
+        if isinstance(b, BaseException):
+            raise b
+        yield b
+    t.join()
+
+
 def egit_epoch_cnn(model, loader, optimizer, kayip_fn, scaler):
     model.train()
     toplam, n = 0.0, 0
-    for x, y in loader:
+    for x, y in arka_plan(loader):
         x, y = x.to(DEVICE), y.to(DEVICE)
         optimizer.zero_grad(set_to_none=True)
         with autocast(enabled=(DEVICE == "cuda")):
@@ -124,7 +156,7 @@ def degerlendir_cnn(model, loader, kayip_fn):
     toplam, n = 0.0, 0
     tahminler, gercekler = [], []
     with torch.no_grad():
-        for x, y in loader:
+        for x, y in arka_plan(loader):
             x, y = x.to(DEVICE), y.to(DEVICE)
             with autocast(enabled=(DEVICE == "cuda")):
                 cikis = model(x)
