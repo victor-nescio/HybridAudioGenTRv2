@@ -201,6 +201,13 @@ def _ram_bekle(df_train, pay_gb: float = 3.0):
             m.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
             ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
             taahhut = m.ullAvailPageFile
+            # Sistem tarafindan yonetilen sayfalama dosyasi (C:) gerektiginde buyur: C:'deki bos
+            # alanin 4 GB disindaki kismi da taahhut kapasitesi sayilir.
+            try:
+                import shutil
+                taahhut += max(0, shutil.disk_usage("C:\\").free - 4e9)
+            except Exception:
+                pass
         return fiziksel, taahhut
 
     son_log = 0.0
