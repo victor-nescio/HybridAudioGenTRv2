@@ -181,18 +181,42 @@ def _ram_bekle(df_train, pay_gb: float = 3.0):
         if c.exists():
             gerekli += c.stat().st_size
     esik = gerekli + pay_gb * 1e9
+
+    def kullanilabilir():
+        """(fiziksel bos RAM, kullanilabilir taahhut). Windows'ta tahsis siniri fiziksel RAM degil
+        TAAHHUT limitidir (RAM + sayfalama dosyasi); 7 Eki'deki cokme fiziksel RAM yeterliyken
+        taahhut yetmedigi icin oldu. Ikisinin kucugu esas alinir."""
+        fiziksel = psutil.virtual_memory().available
+        taahhut = fiziksel
+        if sys.platform == "win32":
+            import ctypes
+
+            class MEMORYSTATUSEX(ctypes.Structure):
+                _fields_ = [("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
+                            ("ullTotalPhys", ctypes.c_ulonglong), ("ullAvailPhys", ctypes.c_ulonglong),
+                            ("ullTotalPageFile", ctypes.c_ulonglong), ("ullAvailPageFile", ctypes.c_ulonglong),
+                            ("ullTotalVirtual", ctypes.c_ulonglong), ("ullAvailVirtual", ctypes.c_ulonglong),
+                            ("ullAvailExtendedVirtual", ctypes.c_ulonglong)]
+            m = MEMORYSTATUSEX()
+            m.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
+            ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(m))
+            taahhut = m.ullAvailPageFile
+        return fiziksel, taahhut
+
     son_log = 0.0
-    while psutil.virtual_memory().available < esik:
+    while min(kullanilabilir()) < esik:
         if DURDUR_DOSYASI.exists():
             print("  [DURDUR] RAM beklenirken duraklatma istegi alindi (kod 4).", flush=True)
             sys.exit(4)
         if time.time() - son_log > 300:
-            print(f"  [RAM] Egitim icin {esik/1e9:.1f} GB bos RAM gerekli, su an "
-                  f"{psutil.virtual_memory().available/1e9:.1f} GB; bekleniyor...", flush=True)
+            f, t = kullanilabilir()
+            print(f"  [RAM] Egitim icin {esik/1e9:.1f} GB gerekli; bos fiziksel {f/1e9:.1f} GB, "
+                  f"kullanilabilir taahhut {t/1e9:.1f} GB; bekleniyor...", flush=True)
             son_log = time.time()
         time.sleep(30)
-    print(f"  RAM: {psutil.virtual_memory().available/1e9:.1f} GB bos, egitim kumesi on-yukleme "
-          f"{gerekli/1e9:.1f} GB", flush=True)
+    f, t = kullanilabilir()
+    print(f"  RAM: bos fiziksel {f/1e9:.1f} GB, kullanilabilir taahhut {t/1e9:.1f} GB; egitim kumesi "
+          f"on-yukleme {gerekli/1e9:.1f} GB", flush=True)
 
 
 def _guvenli_kaydet(nesne, yol: Path):
