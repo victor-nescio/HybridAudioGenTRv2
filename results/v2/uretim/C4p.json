@@ -1,0 +1,20 @@
+{
+  "tur": "1",
+  "model": "audioldm2-full",
+  "checkpoint": "checkpoints/audioldm2_clap_v2_dongu2.pth",
+  "cikti_dir": "data/synthetic_v2/C4p",
+  "dil": "ingilizce",
+  "adimlar": 200,
+  "base_seed": 11000,
+  "siniflar": {
+    "kopek_sesleri": 50,
+    "kus_sesleri": 50,
+    "hava_olaylari": 50,
+    "insaat_sesleri": 50,
+    "dini_mekan": 50,
+    "tarim_ciftlik": 50,
+    "acil_servis": 50,
+    "diger_hayvanlar": 50
+  },
+  "n_klip_hedef": 50
+}
