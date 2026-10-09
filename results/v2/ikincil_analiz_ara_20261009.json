@@ -1,0 +1,570 @@
+{
+ "tarih": "20261009_1135",
+ "kaynak": "v2",
+ "B": 10000,
+ "n_segment": 98128,
+ "n_kayit": 4608,
+ "karsilastirmalar": [
+  {
+   "test": "C4p",
+   "referans": "baseline",
+   "seedler": [
+    42,
+    43,
+    44,
+    45,
+    46
+   ],
+   "gruplar": {
+    "A_belirgin": {
+     "delta_f1": 0.0181,
+     "ga95": [
+      0.0043,
+      0.0328
+     ],
+     "p_bootstrap": 0.01,
+     "sinif": {
+      "kopek_sesleri": {
+       "delta_f1": 0.0213,
+       "ga95": [
+        0.0067,
+        0.0379
+       ]
+      },
+      "kus_sesleri": {
+       "delta_f1": 0.0357,
+       "ga95": [
+        0.0048,
+        0.0697
+       ]
+      },
+      "hava_olaylari": {
+       "delta_f1": -0.0027,
+       "ga95": [
+        -0.0245,
+        0.0179
+       ]
+      }
+     },
+     "p_holm": 0.2
+    },
+    "B_dusukF1": {
+     "delta_f1": -0.0082,
+     "ga95": [
+      -0.0228,
+      0.0067
+     ],
+     "p_bootstrap": 0.2762,
+     "sinif": {
+      "insaat_sesleri": {
+       "delta_f1": 0.0041,
+       "ga95": [
+        -0.0213,
+        0.0293
+       ]
+      },
+      "dini_mekan": {
+       "delta_f1": -0.0345,
+       "ga95": [
+        -0.0667,
+        -0.003
+       ]
+      },
+      "tarim_ciftlik": {
+       "delta_f1": 0.0058,
+       "ga95": [
+        -0.0104,
+        0.0247
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_faz1_acil": {
+     "delta_f1": 0.0028,
+     "ga95": [
+      -0.0111,
+      0.0167
+     ],
+     "p_bootstrap": 0.6664,
+     "sinif": {
+      "acil_servis": {
+       "delta_f1": 0.0028,
+       "ga95": [
+        -0.0111,
+        0.0167
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "kontrol": {
+     "delta_f1": -0.0048,
+     "ga95": [
+      -0.0214,
+      0.0119
+     ],
+     "p_bootstrap": 0.5854,
+     "sinif": {
+      "diger_hayvanlar": {
+       "delta_f1": -0.0048,
+       "ga95": [
+        -0.0214,
+        0.0119
+       ]
+      }
+     },
+     "p_holm": 1.0
+    }
+   }
+  },
+  {
+   "test": "H1",
+   "referans": "baseline",
+   "seedler": [
+    42,
+    43,
+    44,
+    45,
+    46
+   ],
+   "gruplar": {
+    "A_belirgin": {
+     "delta_f1": 0.0117,
+     "ga95": [
+      -0.0049,
+      0.0282
+     ],
+     "p_bootstrap": 0.1782,
+     "sinif": {
+      "kopek_sesleri": {
+       "delta_f1": 0.0149,
+       "ga95": [
+        0.0033,
+        0.0279
+       ]
+      },
+      "kus_sesleri": {
+       "delta_f1": 0.024,
+       "ga95": [
+        -0.0166,
+        0.0648
+       ]
+      },
+      "hava_olaylari": {
+       "delta_f1": -0.0037,
+       "ga95": [
+        -0.0304,
+        0.0204
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_dusukF1": {
+     "delta_f1": -0.0112,
+     "ga95": [
+      -0.0236,
+      0.0014
+     ],
+     "p_bootstrap": 0.0858,
+     "sinif": {
+      "insaat_sesleri": {
+       "delta_f1": -0.0064,
+       "ga95": [
+        -0.0204,
+        0.0077
+       ]
+      },
+      "dini_mekan": {
+       "delta_f1": -0.0169,
+       "ga95": [
+        -0.0452,
+        0.0092
+       ]
+      },
+      "tarim_ciftlik": {
+       "delta_f1": -0.0103,
+       "ga95": [
+        -0.0303,
+        0.0144
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_faz1_acil": {
+     "delta_f1": -0.0033,
+     "ga95": [
+      -0.0162,
+      0.0093
+     ],
+     "p_bootstrap": 0.6116,
+     "sinif": {
+      "acil_servis": {
+       "delta_f1": -0.0033,
+       "ga95": [
+        -0.0162,
+        0.0093
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "kontrol": {
+     "delta_f1": 0.0011,
+     "ga95": [
+      -0.0196,
+      0.0207
+     ],
+     "p_bootstrap": 0.8908,
+     "sinif": {
+      "diger_hayvanlar": {
+       "delta_f1": 0.0011,
+       "ga95": [
+        -0.0196,
+        0.0207
+       ]
+      }
+     },
+     "p_holm": 1.0
+    }
+   }
+  },
+  {
+   "test": "C4p_kaydir",
+   "referans": "baseline",
+   "seedler": [
+    42,
+    43,
+    44
+   ],
+   "gruplar": {
+    "A_belirgin": {
+     "delta_f1": 0.0013,
+     "ga95": [
+      -0.0245,
+      0.024
+     ],
+     "p_bootstrap": 0.8782,
+     "sinif": {
+      "kopek_sesleri": {
+       "delta_f1": 0.0227,
+       "ga95": [
+        0.0053,
+        0.041
+       ]
+      },
+      "kus_sesleri": {
+       "delta_f1": -0.0019,
+       "ga95": [
+        -0.0529,
+        0.0428
+       ]
+      },
+      "hava_olaylari": {
+       "delta_f1": -0.0169,
+       "ga95": [
+        -0.0745,
+        0.0284
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_dusukF1": {
+     "delta_f1": -0.0066,
+     "ga95": [
+      -0.0292,
+      0.018
+     ],
+     "p_bootstrap": 0.5316,
+     "sinif": {
+      "insaat_sesleri": {
+       "delta_f1": -0.0139,
+       "ga95": [
+        -0.0369,
+        0.0069
+       ]
+      },
+      "dini_mekan": {
+       "delta_f1": -0.0144,
+       "ga95": [
+        -0.0493,
+        0.0206
+       ]
+      },
+      "tarim_ciftlik": {
+       "delta_f1": 0.0083,
+       "ga95": [
+        -0.045,
+        0.0716
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_faz1_acil": {
+     "delta_f1": -0.0041,
+     "ga95": [
+      -0.0229,
+      0.0158
+     ],
+     "p_bootstrap": 0.7066,
+     "sinif": {
+      "acil_servis": {
+       "delta_f1": -0.0041,
+       "ga95": [
+        -0.0229,
+        0.0158
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "kontrol": {
+     "delta_f1": -0.0145,
+     "ga95": [
+      -0.0422,
+      0.0113
+     ],
+     "p_bootstrap": 0.262,
+     "sinif": {
+      "diger_hayvanlar": {
+       "delta_f1": -0.0145,
+       "ga95": [
+        -0.0422,
+        0.0113
+       ]
+      }
+     },
+     "p_holm": 1.0
+    }
+   }
+  },
+  {
+   "test": "C4p",
+   "referans": "H1",
+   "seedler": [
+    42,
+    43,
+    44,
+    45,
+    46
+   ],
+   "gruplar": {
+    "A_belirgin": {
+     "delta_f1": 0.0064,
+     "ga95": [
+      -0.0101,
+      0.0223
+     ],
+     "p_bootstrap": 0.4248,
+     "sinif": {
+      "kopek_sesleri": {
+       "delta_f1": 0.0065,
+       "ga95": [
+        -0.0063,
+        0.0185
+       ]
+      },
+      "kus_sesleri": {
+       "delta_f1": 0.0117,
+       "ga95": [
+        -0.0318,
+        0.0524
+       ]
+      },
+      "hava_olaylari": {
+       "delta_f1": 0.0011,
+       "ga95": [
+        -0.0197,
+        0.0229
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_dusukF1": {
+     "delta_f1": 0.003,
+     "ga95": [
+      -0.0108,
+      0.0168
+     ],
+     "p_bootstrap": 0.6556,
+     "sinif": {
+      "insaat_sesleri": {
+       "delta_f1": 0.0105,
+       "ga95": [
+        -0.0134,
+        0.0371
+       ]
+      },
+      "dini_mekan": {
+       "delta_f1": -0.0177,
+       "ga95": [
+        -0.0474,
+        0.0063
+       ]
+      },
+      "tarim_ciftlik": {
+       "delta_f1": 0.016,
+       "ga95": [
+        -0.0002,
+        0.0349
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_faz1_acil": {
+     "delta_f1": 0.0061,
+     "ga95": [
+      -0.0085,
+      0.0203
+     ],
+     "p_bootstrap": 0.3896,
+     "sinif": {
+      "acil_servis": {
+       "delta_f1": 0.0061,
+       "ga95": [
+        -0.0085,
+        0.0203
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "kontrol": {
+     "delta_f1": -0.0059,
+     "ga95": [
+      -0.0207,
+      0.0096
+     ],
+     "p_bootstrap": 0.4464,
+     "sinif": {
+      "diger_hayvanlar": {
+       "delta_f1": -0.0059,
+       "ga95": [
+        -0.0207,
+        0.0096
+       ]
+      }
+     },
+     "p_holm": 1.0
+    }
+   }
+  },
+  {
+   "test": "C4p",
+   "referans": "C4p_kaydir",
+   "seedler": [
+    42,
+    43,
+    44
+   ],
+   "gruplar": {
+    "A_belirgin": {
+     "delta_f1": 0.0067,
+     "ga95": [
+      -0.0131,
+      0.026
+     ],
+     "p_bootstrap": 0.4976,
+     "sinif": {
+      "kopek_sesleri": {
+       "delta_f1": -0.006,
+       "ga95": [
+        -0.0242,
+        0.0113
+       ]
+      },
+      "kus_sesleri": {
+       "delta_f1": 0.0241,
+       "ga95": [
+        -0.0219,
+        0.0692
+       ]
+      },
+      "hava_olaylari": {
+       "delta_f1": 0.0021,
+       "ga95": [
+        -0.0317,
+        0.0327
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_dusukF1": {
+     "delta_f1": 0.0048,
+     "ga95": [
+      -0.0101,
+      0.0221
+     ],
+     "p_bootstrap": 0.5286,
+     "sinif": {
+      "insaat_sesleri": {
+       "delta_f1": 0.0203,
+       "ga95": [
+        -0.0069,
+        0.0542
+       ]
+      },
+      "dini_mekan": {
+       "delta_f1": -0.0153,
+       "ga95": [
+        -0.0361,
+        0.005
+       ]
+      },
+      "tarim_ciftlik": {
+       "delta_f1": 0.0095,
+       "ga95": [
+        -0.0164,
+        0.0422
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "B_faz1_acil": {
+     "delta_f1": 0.0114,
+     "ga95": [
+      -0.0094,
+      0.0298
+     ],
+     "p_bootstrap": 0.27,
+     "sinif": {
+      "acil_servis": {
+       "delta_f1": 0.0114,
+       "ga95": [
+        -0.0094,
+        0.0298
+       ]
+      }
+     },
+     "p_holm": 1.0
+    },
+    "kontrol": {
+     "delta_f1": 0.0082,
+     "ga95": [
+      -0.0121,
+      0.0323
+     ],
+     "p_bootstrap": 0.472,
+     "sinif": {
+      "diger_hayvanlar": {
+       "delta_f1": 0.0082,
+       "ga95": [
+        -0.0121,
+        0.0323
+       ]
+      }
+     },
+     "p_holm": 1.0
+    }
+   }
+  }
+ ]
+}
