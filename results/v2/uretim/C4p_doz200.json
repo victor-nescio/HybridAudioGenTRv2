@@ -1,0 +1,16 @@
+{
+  "tur": "1",
+  "model": "audioldm2-full",
+  "checkpoint": "checkpoints/audioldm2_clap_v2_dongu2.pth",
+  "cikti_dir": "data/synthetic_v2/C4p",
+  "dil": "ingilizce",
+  "adimlar": 200,
+  "base_seed": 11000,
+  "siniflar": {
+    "kopek_sesleri": 200,
+    "kus_sesleri": 200,
+    "hava_olaylari": 200,
+    "diger_hayvanlar": 200
+  },
+  "n_klip_hedef": 200
+}
