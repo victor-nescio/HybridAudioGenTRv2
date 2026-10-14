@@ -169,11 +169,31 @@ def degerlendir_cnn(model, loader, kayip_fn):
     return toplam / n, f1, tahminler, gercekler
 
 
-def _ram_bekle(df_train, pay_gb: float = 3.0):
+def _ram_uyarisi(gerekli_gb: float, bos_gb: float, dakika: int):
+    """Ekrana bloklamayan bir uyari penceresi acar (ayri surec; egitim sureci beklemez)."""
+    if sys.platform != "win32":
+        return
+    import subprocess
+    metin = (f"Eğitim kuyruğu {dakika} dakikadır RAM bekliyor: {gerekli_gb:.1f} GB gerekli, "
+             f"{bos_gb:.1f} GB boş. ChatGPT, VS Code, Chrome gibi uygulamaları kapatırsanız "
+             f"eğitim kendiliğinden başlar.")
+    komut = ("(New-Object -ComObject WScript.Shell).Popup('" + metin.replace("'", "''") +
+             "', 0, 'Eğitim RAM bekliyor', 48)")
+    try:
+        subprocess.Popen(["powershell", "-NoProfile", "-Command", komut],
+                         creationflags=0x08000000)  # CREATE_NO_WINDOW
+    except Exception:
+        pass
+
+
+def _ram_bekle(df_train, pay_gb: float = 1.0):
     """Egitim kumesi RAM'e on-yuklenir (~19 GB). Bos RAM yetmiyorsa (gunduz PC kullanimi)
     bellek yetersizliginden cokmek yerine RAM bosalana kadar bekler; beklerken DURDUR
     istegine uyar (kod 4). (USB SSD uzerinde karisik sirali mmap okuma egitim icin cok
-    yavas oldugundan on-yuklemeden vazgecilmedi.)"""
+    yavas oldugundan on-yuklemeden vazgecilmedi.)
+    pay_gb 3 -> 1 (14 Eki): 11 Eki'de egitim ~2 GB bos RAM ile epoch suresi degismeden
+    calisti; 3 GB pay, acik uygulamalar yuzunden kosulari saatlerce bekletiyordu. Bekleme
+    10 dk'yi gecerse (sonra saatte bir) ekrana uyari cikar."""
     import psutil
     gerekli = 0
     for d in df_train["dosya"].unique():
@@ -211,6 +231,8 @@ def _ram_bekle(df_train, pay_gb: float = 3.0):
         return fiziksel, taahhut
 
     son_log = 0.0
+    bekleme_basi = time.time()
+    sonraki_uyari = bekleme_basi + 600
     while min(kullanilabilir()) < esik:
         if DURDUR_DOSYASI.exists():
             print("  [DURDUR] RAM beklenirken duraklatma istegi alindi (kod 4).", flush=True)
@@ -220,6 +242,9 @@ def _ram_bekle(df_train, pay_gb: float = 3.0):
             print(f"  [RAM] Egitim icin {esik/1e9:.1f} GB gerekli; bos fiziksel {f/1e9:.1f} GB, "
                   f"kullanilabilir taahhut {t/1e9:.1f} GB; bekleniyor...", flush=True)
             son_log = time.time()
+        if time.time() >= sonraki_uyari:
+            _ram_uyarisi(esik / 1e9, min(kullanilabilir()) / 1e9, int((time.time() - bekleme_basi) / 60))
+            sonraki_uyari = time.time() + 3600
         time.sleep(30)
     f, t = kullanilabilir()
     print(f"  RAM: bos fiziksel {f/1e9:.1f} GB, kullanilabilir taahhut {t/1e9:.1f} GB; egitim kumesi "
