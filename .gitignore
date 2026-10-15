@@ -55,3 +55,7 @@ wandb/
 .vscode/
 Thumbs.db
 desktop.ini
+
+# BEATs gommeleri (scripts/19_beats_probe.py gomme ile yeniden uretilir)
+data/beats_gomme/
+data/beats_gomme_deneme/
