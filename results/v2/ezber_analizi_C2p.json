@@ -1,0 +1,94 @@
+{
+ "etiket": "C2p",
+ "gomme": "VGGish (fadtk), zaman ortalamasi",
+ "siniflar": {
+  "kopek_sesleri": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 194,
+   "n_gercek_segment": 1077,
+   "sentetik_gercek_nn_medyan": 0.9424,
+   "gercek_gercek_nn_medyan": 0.958,
+   "sentetik_gercek_nn_p95": 0.9729,
+   "gercek_gercek_nn_p95": 0.9819,
+   "yakin_kopya_esigi_p99": 0.9863,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "kus_sesleri": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 164,
+   "n_gercek_segment": 865,
+   "sentetik_gercek_nn_medyan": 0.9634,
+   "gercek_gercek_nn_medyan": 0.9507,
+   "sentetik_gercek_nn_p95": 0.98,
+   "gercek_gercek_nn_p95": 0.9839,
+   "yakin_kopya_esigi_p99": 0.9878,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "hava_olaylari": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 246,
+   "n_gercek_segment": 1258,
+   "sentetik_gercek_nn_medyan": 0.9541,
+   "gercek_gercek_nn_medyan": 0.9546,
+   "sentetik_gercek_nn_p95": 0.974,
+   "gercek_gercek_nn_p95": 0.9888,
+   "yakin_kopya_esigi_p99": 0.9937,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "insaat_sesleri": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 218,
+   "n_gercek_segment": 1054,
+   "sentetik_gercek_nn_medyan": 0.9365,
+   "gercek_gercek_nn_medyan": 0.9595,
+   "sentetik_gercek_nn_p95": 0.9672,
+   "gercek_gercek_nn_p95": 0.9883,
+   "yakin_kopya_esigi_p99": 0.9956,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "dini_mekan": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 117,
+   "n_gercek_segment": 680,
+   "sentetik_gercek_nn_medyan": 0.8613,
+   "gercek_gercek_nn_medyan": 0.9658,
+   "sentetik_gercek_nn_p95": 0.9438,
+   "gercek_gercek_nn_p95": 0.9942,
+   "yakin_kopya_esigi_p99": 0.9971,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "tarim_ciftlik": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 79,
+   "n_gercek_segment": 463,
+   "sentetik_gercek_nn_medyan": 0.9229,
+   "gercek_gercek_nn_medyan": 0.9634,
+   "sentetik_gercek_nn_p95": 0.9639,
+   "gercek_gercek_nn_p95": 0.9863,
+   "yakin_kopya_esigi_p99": 0.9917,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "acil_servis": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 209,
+   "n_gercek_segment": 1087,
+   "sentetik_gercek_nn_medyan": 0.9277,
+   "gercek_gercek_nn_medyan": 0.9482,
+   "sentetik_gercek_nn_p95": 0.9552,
+   "gercek_gercek_nn_p95": 0.981,
+   "yakin_kopya_esigi_p99": 0.9929,
+   "esigi_asan_sentetik_orani": 0.0
+  },
+  "diger_hayvanlar": {
+   "n_sentetik": 50,
+   "n_gercek_kayit": 243,
+   "n_gercek_segment": 1133,
+   "sentetik_gercek_nn_medyan": 0.9238,
+   "gercek_gercek_nn_medyan": 0.9502,
+   "sentetik_gercek_nn_p95": 0.9654,
+   "gercek_gercek_nn_p95": 0.9775,
+   "yakin_kopya_esigi_p99": 0.9839,
+   "esigi_asan_sentetik_orani": 0.0
+  }
+ }
+}

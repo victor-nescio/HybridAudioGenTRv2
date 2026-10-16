@@ -1,0 +1,10 @@
+{
+ "model": "clap_v2_dongu1_best",
+ "sinif_sayisi": 26,
+ "cift_TR_EN_ort_kos": 0.8972,
+ "sinif_ici_EN_ort_kos": 0.8966,
+ "siniflar_arasi_EN_ort_kos": 0.04,
+ "TR_en_yakin_EN_kendi_cevirisi": 0.5769,
+ "TR_en_yakin_EN_kendi_sinifi": 1.0,
+ "sans_kendi_sinifi": 0.0385
+}
