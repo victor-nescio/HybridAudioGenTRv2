@@ -1,0 +1,374 @@
+{
+ "[3] AudioGen": {
+  "baslik": "AudioGen: Textually Guided Audio Generation",
+  "yazarlar": [
+   "Felix Kreuk",
+   "Gabriel Synnaeve",
+   "Adam Polyak",
+   "Uriel Singer",
+   "Alexandre Défossez",
+   "Jade Copet",
+   "Devi Parikh",
+   "Yaniv Taigman",
+   "Yossi Adi"
+  ],
+  "arxiv": "2209.15352",
+  "yil_arxiv": 2022,
+  "yorum": "Accepted to ICLR 2023",
+  "sorgu": "AudioGen: Textually Guided Audio Generation"
+ },
+ "[6] Gui2024": {
+  "baslik": "Adapting Frechet Audio Distance for Generative Music Evaluation",
+  "yazarlar": [
+   "A. Gui",
+   "H. Gamper",
+   "S. Braun",
+   "D. Emmanouilidou"
+  ],
+  "yer": "ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "yil": 2024,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "1331-1335",
+  "doi": "10.1109/icassp48485.2024.10446663",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Adapting Frechet Audio Distance for Generative Music Evaluation"
+ },
+ "[12] He2023": {
+  "baslik": "Is synthetic data from generative models ready for image recognition?",
+  "yazarlar": [
+   "Ruifei He",
+   "Shuyang Sun",
+   "Xin Yu",
+   "Chuhui Xue",
+   "Wenqing Zhang",
+   "Philip Torr",
+   "Song Bai",
+   "Xiaojuan Qi"
+  ],
+  "arxiv": "2210.07574",
+  "yil_arxiv": 2022,
+  "yorum": "ICLR 2023, spotlight",
+  "sorgu": "Is synthetic data from generative models ready for image recognition?"
+ },
+ "[23] Tokozume2017": {
+  "baslik": "Learning environmental sounds with end-to-end convolutional neural network",
+  "yazarlar": [
+   "Y. Tokozume",
+   "T. Harada"
+  ],
+  "yer": "2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "yil": 2017,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "2721-2725",
+  "doi": "10.1109/icassp.2017.7952651",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Learning environmental sounds with end-to-end convolutional neural network"
+ },
+ "[27] WavCaps": {
+  "baslik": "WavCaps: A ChatGPT-Assisted Weakly-Labelled Audio Captioning Dataset for Audio-Language Multimodal Research",
+  "yazarlar": [
+   "X. Mei",
+   "C. Meng",
+   "H. Liu",
+   "Q. Kong",
+   "T. Ko",
+   "C. Zhao",
+   "M. D. Plumbley",
+   "Y. Zou",
+   "W. Wang"
+  ],
+  "yer": "IEEE/ACM Transactions on Audio, Speech, and Language Processing",
+  "yil": 2024,
+  "cilt": "32",
+  "sayi": null,
+  "sayfa": "3339-3354",
+  "doi": "10.1109/taslp.2024.3419446",
+  "tur": "journal-article",
+  "benzerlik": 1.0,
+  "sorgu": "WavCaps: A ChatGPT-Assisted Weakly-Labelled Audio Captioning Dataset for Audio-Language Multimodal Research"
+ },
+ "[34] SelfInstruct": {
+  "baslik": "Self-Instruct: Aligning Language Models with Self-Generated Instructions",
+  "yazarlar": [
+   "Y. Wang",
+   "Y. Kordi",
+   "S. Mishra",
+   "A. Liu",
+   "N. A. Smith",
+   "D. Khashabi",
+   "H. Hajishirzi"
+  ],
+  "yer": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+  "yil": 2023,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "13484-13508",
+  "doi": "10.18653/v1/2023.acl-long.754",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Self-Instruct: Aligning Language Models with Self-Generated Instructions"
+ },
+ "Tailleur2024": {
+  "baslik": "Correlation of Fréchet Audio Distance With Human Perception of Environmental Audio Is Embedding Dependent",
+  "yazarlar": [
+   "M. Tailleur",
+   "J. Lee",
+   "M. Lagrange",
+   "K. Choi",
+   "L. M. Heller",
+   "K. Imoto",
+   "Y. Okamoto"
+  ],
+  "yer": "2024 32nd European Signal Processing Conference (EUSIPCO)",
+  "yil": 2024,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "56-60",
+  "doi": "10.23919/eusipco63174.2024.10714935",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Correlation of Frechet Audio Distance With Human Perception of Environmental Audio Is Embedding Dependent"
+ },
+ "Azizi2023": {
+  "baslik": "Synthetic Data from Diffusion Models Improves ImageNet Classification",
+  "yazarlar": [
+   "Shekoofeh Azizi",
+   "Simon Kornblith",
+   "Chitwan Saharia",
+   "Mohammad Norouzi",
+   "David J. Fleet"
+  ],
+  "arxiv": "2304.08466",
+  "yil_arxiv": 2023,
+  "yorum": null,
+  "sorgu": "Synthetic Data from Diffusion Models Improves ImageNet Classification"
+ },
+ "Dai2017": {
+  "baslik": "Very deep convolutional neural networks for raw waveforms",
+  "yazarlar": [
+   "W. Dai",
+   "C. Dai",
+   "S. Qu",
+   "J. Li",
+   "S. Das"
+  ],
+  "yer": "2017 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)",
+  "yil": 2017,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "421-425",
+  "doi": "10.1109/icassp.2017.7952190",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Very deep convolutional neural networks for raw waveforms"
+ },
+ "Ghosh2025": {
+  "baslik": "Synthio: Augmenting Small-Scale Audio Classification Datasets with Synthetic Data",
+  "yazarlar": [
+   "Sreyan Ghosh",
+   "Sonal Kumar",
+   "Zhifeng Kong",
+   "Rafael Valle",
+   "Bryan Catanzaro",
+   "Dinesh Manocha"
+  ],
+  "arxiv": "2410.02056",
+  "yil_arxiv": 2024,
+  "yorum": "Accepted at ICLR 2025. Code and Checkpoints available here: https://github.com/Sreyan88/Synthio",
+  "sorgu": "Synthio: Augmenting Small-Scale Audio Classification Datasets with Synthetic Data"
+ },
+ "Ronchini2024": {
+  "baslik": "Synthetic training set generation using text-to-audio models for environmental sound classification",
+  "yazarlar": [
+   "Francesca Ronchini",
+   "Luca Comanducci",
+   "Fabio Antonacci"
+  ],
+  "arxiv": "2403.17864",
+  "yil_arxiv": 2024,
+  "yorum": null,
+  "sorgu": "Synthetic training set generation using text-to-audio models for environmental sound classification"
+ },
+ "MindPrompt2025": {
+  "baslik": "Mind the Prompt: Prompting Strategies in Audio Generations for Improving Sound Classification",
+  "yazarlar": [
+   "Francesca Ronchini",
+   "Ho-Hsiang Wu",
+   "Wei-Cheng Lin",
+   "Fabio Antonacci"
+  ],
+  "arxiv": "2504.03329",
+  "yil_arxiv": 2025,
+  "yorum": "Accepted at Generative Data Augmentation for Real-World Signal Processing Applications Workshop",
+  "sorgu": "Mind the Prompt: Prompting Strategies in Audio Generations for Improving Sound Classification"
+ },
+ "Messina2026": {
+  "baslik": "Mitigating data replication in text-to-audio generative diffusion models through anti-memorization guidance",
+  "yazarlar": [
+   "Francisco Messina",
+   "Francesca Ronchini",
+   "Luca Comanducci",
+   "Paolo Bestagini",
+   "Fabio Antonacci"
+  ],
+  "arxiv": "2509.14934",
+  "yil_arxiv": 2025,
+  "yorum": "Accepted at ICASSP 2026",
+  "sorgu": "Mitigating data replication in text-to-audio generative diffusion models through anti-memorization guidance"
+ },
+ "Somepalli2023": {
+  "baslik": "Diffusion Art or Digital Forgery? Investigating Data Replication in Diffusion Models",
+  "yazarlar": [
+   "G. Somepalli",
+   "V. Singla",
+   "M. Goldblum",
+   "J. Geiping",
+   "T. Goldstein"
+  ],
+  "yer": "2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "yil": 2023,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "6048-6058",
+  "doi": "10.1109/cvpr52729.2023.00586",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "Diffusion Art or Digital Forgery? Investigating Data Replication in Diffusion Models"
+ },
+ "Chen2023BEATs": {
+  "baslik": "BEATs: Audio Pre-Training with Acoustic Tokenizers",
+  "yazarlar": [
+   "Sanyuan Chen",
+   "Yu Wu",
+   "Chengyi Wang",
+   "Shujie Liu",
+   "Daniel Tompkins",
+   "Zhuo Chen",
+   "Furu Wei"
+  ],
+  "arxiv": "2212.09058",
+  "yil_arxiv": 2022,
+  "yorum": null,
+  "sorgu": "BEATs: Audio Pre-Training with Acoustic Tokenizers"
+ },
+ "US8K": {
+  "baslik": "A Dataset and Taxonomy for Urban Sound Research",
+  "yazarlar": [
+   "J. Salamon",
+   "C. Jacoby",
+   "J. P. Bello"
+  ],
+  "yer": "Proceedings of the 22nd ACM international conference on Multimedia",
+  "yil": 2014,
+  "cilt": null,
+  "sayi": null,
+  "sayfa": "1041-1044",
+  "doi": "10.1145/2647868.2655045",
+  "tur": "proceedings-article",
+  "benzerlik": 1.0,
+  "sorgu": "A Dataset and Taxonomy for Urban Sound Research"
+ },
+ "FSD50K": {
+  "baslik": "FSD50K: An Open Dataset of Human-Labeled Sound Events",
+  "yazarlar": [
+   "E. Fonseca",
+   "X. Favory",
+   "J. Pons",
+   "F. Font",
+   "X. Serra"
+  ],
+  "yer": "IEEE/ACM Transactions on Audio, Speech, and Language Processing",
+  "yil": 2022,
+  "cilt": "30",
+  "sayi": null,
+  "sayfa": "829-852",
+  "doi": "10.1109/taslp.2021.3133208",
+  "tur": "journal-article",
+  "benzerlik": 1.0,
+  "sorgu": "FSD50K: An Open Dataset of Human-Labeled Sound Events"
+ },
+ "Akiba2019": {
+  "baslik": "Direction change motion generation of peristaltic robot by numerical optimization",
+  "yazarlar": [
+   "T. AKIBA",
+   "N. KAMAMICHI"
+  ],
+  "yer": "The Proceedings of JSME annual Conference on Robotics and Mechatronics (Robomec)",
+  "yil": 2021,
+  "cilt": "2021",
+  "sayi": "0",
+  "sayfa": "2A1-I17",
+  "doi": "10.1299/jsmermd.2021.2a1-i17",
+  "tur": "journal-article",
+  "benzerlik": 0.51,
+  "sorgu": "Optuna: A Next-generation Hyperparameter Optimization Framework"
+ },
+ "Holm1979": {
+  "baslik": "On multiple test procedures",
+  "yazarlar": [
+   "S. Holm"
+  ],
+  "yer": "Banach Center Publications",
+  "yil": 1980,
+  "cilt": "6",
+  "sayi": "1",
+  "sayfa": "159-168",
+  "doi": "10.4064/-6-1-159-168",
+  "tur": "journal-article",
+  "benzerlik": 0.61,
+  "sorgu": "A simple sequentially rejective multiple test procedure"
+ },
+ "Edwards1948": {
+  "baslik": "Note on the “Correction for Continuity” in Testing the Significance of the Difference between Correlated Proportions",
+  "yazarlar": [
+   "A. L. Edwards"
+  ],
+  "yer": "Psychometrika",
+  "yil": 1948,
+  "cilt": "13",
+  "sayi": "3",
+  "sayfa": "185-187",
+  "doi": "10.1007/bf02289261",
+  "tur": "journal-article",
+  "benzerlik": 1.0,
+  "sorgu": "Note on the correction for continuity in testing the significance of the difference between correlated proportions"
+ },
+ "Field2007": {
+  "baslik": "Bootstrapping Clustered Data",
+  "yazarlar": [
+   "C. A. Field",
+   "A. H. Welsh"
+  ],
+  "yer": "Journal of the Royal Statistical Society Series B: Statistical Methodology",
+  "yil": 2007,
+  "cilt": "69",
+  "sayi": "3",
+  "sayfa": "369-390",
+  "doi": "10.1111/j.1467-9868.2007.00593.x",
+  "tur": "journal-article",
+  "benzerlik": 1.0,
+  "sorgu": "Bootstrapping clustered data"
+ },
+ "Bates2015": {
+  "baslik": "Fitting Linear Mixed-Effects Models Using\n                    <b>lme4</b>",
+  "yazarlar": [
+   "D. Bates",
+   "M. Mächler",
+   "B. Bolker",
+   "S. Walker"
+  ],
+  "yer": "Journal of Statistical Software",
+  "yil": 2015,
+  "cilt": "67",
+  "sayi": "1",
+  "sayfa": null,
+  "doi": "10.18637/jss.v067.i01",
+  "tur": "journal-article",
+  "benzerlik": 0.81,
+  "sorgu": "Fitting Linear Mixed-Effects Models Using lme4"
+ }
+}

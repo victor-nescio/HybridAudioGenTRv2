@@ -1,0 +1,242 @@
+{
+ "tarih": "20261018_1207",
+ "tanim": "Sentetik ses kalite metrikleri (revizyon K8; R1.6, R2.6, R5.8). Konfigurasyonlar H1, C2', C3', C4';",
+ "fad_vggish": {
+  "kopek_sesleri": {
+   "n_referans_kare": 3775,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 4.571,
+    "ss": 0.238
+   },
+   "H1": 7.574,
+   "C2p": 6.198,
+   "C3p": 23.132,
+   "C4p": 7.016
+  },
+  "kus_sesleri": {
+   "n_referans_kare": 3090,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 3.073,
+    "ss": 0.0
+   },
+   "H1": 22.127,
+   "C2p": 22.178,
+   "C3p": 21.847,
+   "C4p": 21.533
+  },
+  "hava_olaylari": {
+   "n_referans_kare": 4449,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 3.789,
+    "ss": 0.184
+   },
+   "H1": 8.053,
+   "C2p": 8.862,
+   "C3p": 15.776,
+   "C4p": 7.977
+  },
+  "insaat_sesleri": {
+   "n_referans_kare": 3705,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 4.095,
+    "ss": 0.415
+   },
+   "H1": 8.922,
+   "C2p": 8.946,
+   "C3p": 15.084,
+   "C4p": 7.666
+  },
+  "dini_mekan": {
+   "n_referans_kare": 2410,
+   "gercek_kalibrasyon": {
+    "n_kayit": 35,
+    "ort": 3.087,
+    "ss": 0.0
+   },
+   "H1": 14.097,
+   "C2p": 14.294,
+   "C3p": 18.699,
+   "C4p": 14.93
+  },
+  "tarim_ciftlik": {
+   "n_referans_kare": 1630,
+   "gercek_kalibrasyon": {
+    "n_kayit": 24,
+    "ort": 14.469,
+    "ss": 0.0
+   },
+   "H1": 13.338,
+   "C2p": 13.719,
+   "C3p": 44.732,
+   "C4p": 13.54
+  },
+  "acil_servis": {
+   "n_referans_kare": 3820,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 4.365,
+    "ss": 0.367
+   },
+   "H1": 21.67,
+   "C2p": 25.986,
+   "C3p": 8.736,
+   "C4p": 29.974
+  },
+  "diger_hayvanlar": {
+   "n_referans_kare": 3810,
+   "gercek_kalibrasyon": {
+    "n_kayit": 50,
+    "ort": 3.078,
+    "ss": 0.267
+   },
+   "H1": 5.937,
+   "C2p": 5.861,
+   "C3p": 10.235,
+   "C4p": 5.361
+  }
+ },
+ "clap_skoru": {
+  "kopek_sesleri": {
+   "gercek_valtest": {
+    "n": 58,
+    "ort": 0.2771
+   },
+   "H1": 0.3406,
+   "C2p": 0.3215,
+   "C3p": -0.0104,
+   "C4p": 0.3459
+  },
+  "kus_sesleri": {
+   "gercek_valtest": {
+    "n": 50,
+    "ort": 0.2637
+   },
+   "H1": 0.2844,
+   "C2p": 0.2931,
+   "C3p": 0.041,
+   "C4p": 0.2842
+  },
+  "hava_olaylari": {
+   "gercek_valtest": {
+    "n": 74,
+    "ort": 0.1366
+   },
+   "H1": 0.2312,
+   "C2p": 0.2298,
+   "C3p": -0.0165,
+   "C4p": 0.2161
+  },
+  "insaat_sesleri": {
+   "gercek_valtest": {
+    "n": 66,
+    "ort": 0.1468
+   },
+   "H1": 0.1122,
+   "C2p": 0.0985,
+   "C3p": 0.0206,
+   "C4p": 0.1292
+  },
+  "dini_mekan": {
+   "gercek_valtest": {
+    "n": 35,
+    "ort": 0.1622
+   },
+   "H1": 0.1418,
+   "C2p": 0.1435,
+   "C3p": 0.1351,
+   "C4p": 0.1344
+  },
+  "tarim_ciftlik": {
+   "gercek_valtest": {
+    "n": 24,
+    "ort": 0.1963
+   },
+   "H1": 0.182,
+   "C2p": 0.1757,
+   "C3p": -0.0051,
+   "C4p": 0.1635
+  },
+  "acil_servis": {
+   "gercek_valtest": {
+    "n": 62,
+    "ort": 0.206
+   },
+   "H1": 0.2404,
+   "C2p": 0.2432,
+   "C3p": 0.1173,
+   "C4p": 0.2488
+  },
+  "diger_hayvanlar": {
+   "gercek_valtest": {
+    "n": 73,
+    "ort": 0.2111
+   },
+   "H1": 0.1775,
+   "C2p": 0.1762,
+   "C3p": 0.0105,
+   "C4p": 0.1905
+  }
+ },
+ "siniflandirici_gecerliligi": {
+  "kopek_sesleri": {
+   "gercek_test_recall": 0.5788,
+   "H1": 0.356,
+   "C2p": 0.372,
+   "C3p": 0.016,
+   "C4p": 0.336
+  },
+  "kus_sesleri": {
+   "gercek_test_recall": 0.5907,
+   "H1": 0.048,
+   "C2p": 0.112,
+   "C3p": 0.008,
+   "C4p": 0.084
+  },
+  "hava_olaylari": {
+   "gercek_test_recall": 0.477,
+   "H1": 0.04,
+   "C2p": 0.044,
+   "C3p": 0.0,
+   "C4p": 0.044
+  },
+  "insaat_sesleri": {
+   "gercek_test_recall": 0.3618,
+   "H1": 0.016,
+   "C2p": 0.02,
+   "C3p": 0.008,
+   "C4p": 0.02
+  },
+  "dini_mekan": {
+   "gercek_test_recall": 0.4209,
+   "H1": 0.016,
+   "C2p": 0.004,
+   "C3p": 0.012,
+   "C4p": 0.032
+  },
+  "tarim_ciftlik": {
+   "gercek_test_recall": 0.4872,
+   "H1": 0.008,
+   "C2p": 0.04,
+   "C3p": 0.0,
+   "C4p": 0.016
+  },
+  "acil_servis": {
+   "gercek_test_recall": 0.4761,
+   "H1": 0.288,
+   "C2p": 0.248,
+   "C3p": 0.076,
+   "C4p": 0.276
+  },
+  "diger_hayvanlar": {
+   "gercek_test_recall": 0.4467,
+   "H1": 0.392,
+   "C2p": 0.388,
+   "C3p": 0.092,
+   "C4p": 0.456
+  }
+ }
+}

@@ -48,10 +48,10 @@ CNN_KONFIG = ["baseline", "C4p", "H1", "C2p", "C3p", "C4p_kaydir", "specaug", "s
 def ozet(nokta, boot, grup, seedler):
     ix = [BA.SINIF_SIRASI.index(s) for s in BA.GRUPLAR[grup]]
     gd = boot[:, ix].mean(1)
-    return {"delta_f1": round(float(nokta[ix].mean()), 4),
-            "ga95": [round(float(np.percentile(gd, 2.5)), 4), round(float(np.percentile(gd, 97.5)), 4)],
+    return {"delta_f1": round(float(nokta[ix].mean()), 6),
+            "ga95": [round(float(np.percentile(gd, 2.5)), 6), round(float(np.percentile(gd, 97.5)), 6)],
             "p_bootstrap": round(BA.p_iki_yonlu(gd), 5), "seedler": seedler,
-            "sinif": {s: round(float(nokta[BA.SINIF_SIRASI.index(s)]), 4) for s in BA.GRUPLAR[grup]}}
+            "sinif": {s: round(float(nokta[BA.SINIF_SIRASI.index(s)]), 6) for s in BA.GRUPLAR[grup]}}
 
 
 def hazirla(konfigler, degerlendirme):

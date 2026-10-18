@@ -218,7 +218,7 @@ BEATs iter3+ (AS2M), time-averaged final-layer embeddings of the same segments a
 |---|---|---|---|---|
 | BEATs C4′ vs BEATs baseline | Group A | −0.008 | [−0.020, +0.004] | 0.16 |
 | BEATs C4′ vs BEATs baseline | Group B | +0.002 | [−0.007, +0.012] | 0.70 |
-| BEATs C4′ vs BEATs baseline | control | −0.006 | [−0.018, +0.006] | 0.35 |
+| BEATs C4′ vs BEATs baseline | control | −0.006 | [−0.018, +0.007] | 0.35 |
 | BEATs H1 vs BEATs baseline | Group A | −0.003 | [−0.015, +0.009] | 0.61 |
 | BEATs H1 vs BEATs baseline | Group B | +0.001 | [−0.009, +0.013] | 0.83 |
 | BEATs H1 vs BEATs baseline | control | +0.003 | [−0.010, +0.016] | 0.65 |
