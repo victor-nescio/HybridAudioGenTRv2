@@ -1,0 +1,62 @@
+{
+ "gpu": "NVIDIA GeForce RTX 3060 (12 GB), tek GPU",
+ "clap_ince_ayar": {
+  "dongu1": {
+   "epoch": 10,
+   "epoch_basina_dk_medyan": 40.1,
+   "toplam_saat": 6.66
+  },
+  "dongu2": {
+   "epoch": 10,
+   "epoch_basina_dk_medyan": 38.1,
+   "toplam_saat": 6.47
+  }
+ },
+ "uretim": {
+  "konfig": {
+   "C2p": {
+    "n_klip": 400,
+    "klip_basina_sn_medyan": 66.0
+   },
+   "C3p": {
+    "n_klip": 400,
+    "klip_basina_sn_medyan": 58.0
+   },
+   "C4p": {
+    "n_klip": 1000,
+    "klip_basina_sn_medyan": 62.0
+   },
+   "H1ek": {
+    "n_klip": 50,
+    "klip_basina_sn_medyan": 58.0
+   }
+  },
+  "klip_basina_sn_medyan": 60.0,
+  "toplam_klip": 1850
+ },
+ "resnet18": {
+  "n_kosu": 39,
+  "kosu_basina_dk_medyan": 202.9,
+  "toplam_saat": 129.4,
+  "konfig_medyan_dk": {
+   "baseline": 199.4,
+   "C2p": 203.4,
+   "C3p": 203.5,
+   "C4p_kaydir": 203.1,
+   "C4p": 172.4,
+   "doz100": 206.0,
+   "doz200": 204.9,
+   "doz25": 202.8,
+   "H1": 203.4,
+   "specaug": 202.0,
+   "specaugC4p": 203.5
+  }
+ },
+ "beats": {
+  "gomme_dk": 145.5,
+  "n_kafa": 9,
+  "kafa_basina_dk_medyan": 1.1
+ },
+ "toplam_gpu_saat_yaklasik": 175.9,
+ "not": "Uretim toplami v2'de uretilen klipler icindir (H1 klipleri ilk calismadan yeniden kullanildi); kalite metrikleri ve analizler dahil degildir."
+}
