@@ -1,0 +1,293 @@
+[
+ {
+  "no": 1,
+  "atif": "D. S. Park, W. Chan, Y. Zhang, C.-C. Chiu, B. Zoph, E. D. Cubuk, and Q. V. Le, “SpecAugment: A simple data augmentation method for automatic speech recognition,” in Proc. Interspeech, 2019, pp. 2613–2617, doi: 10.21437/Interspeech.2019-2680.",
+  "sorunlar": []
+ },
+ {
+  "no": 2,
+  "atif": "H. Liu, Y. Yuan, X. Liu, X. Mei, Q. Kong, Q. Tian, Y. Wang, W. Wang, Y. Wang, and M. D. Plumbley, “AudioLDM 2: Learning holistic audio generation with self-supervised pretraining,” IEEE/ACM Trans. Audio, Speech, Language Process., vol. 32, pp. 2871–2883, 2024, doi: 10.1109/TASLP.2024.3399607.",
+  "sorunlar": []
+ },
+ {
+  "no": 3,
+  "atif": "F. Kreuk, G. Synnaeve, A. Polyak, U. Singer, A. Défossez, J. Copet, D. Parikh, Y. Taigman, and Y. Adi, “AudioGen: Textually guided audio generation,” 2023, arXiv:2209.15352.",
+  "sorunlar": [
+   "arXiv yili 2022 atifta yok [2023]"
+  ]
+ },
+ {
+  "no": 4,
+  "atif": "T. Feng, D. Dimitriadis, and S. Narayanan, “Can synthetic audio from generative foundation models assist audio recognition?” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2024.",
+  "sorunlar": [
+   "yayin yeri: Crossref 'Interspeech 2024' atifta yok",
+   "baslik benzerligi 0.89: 'Can Synthetic Audio From Generative Foundation Models Assist Audio Recognition and Speech Modeling?'"
+  ],
+  "crossref": {
+   "baslik": "Can Synthetic Audio From Generative Foundation Models Assist Audio Recognition and Speech Modeling?",
+   "yer": "Interspeech 2024",
+   "yil": 2024,
+   "sayfa": "542-546"
+  }
+ },
+ {
+  "no": 5,
+  "atif": "K. Kilgour, M. Zuluaga, D. Roblek, and M. Sharifi, “Fréchet audio distance: A reference-free metric for evaluating music enhancement algorithms,” 2019, arXiv:1812.08466.",
+  "sorunlar": [
+   "arXiv yili 2018 atifta yok [2019]"
+  ]
+ },
+ {
+  "no": 6,
+  "atif": "L. Nimalainen and T. Virtanen, “Sensitivity of Fréchet audio distance to reference set and evaluation conditions,” 2024, arXiv:2402.09498.",
+  "sorunlar": []
+ },
+ {
+  "no": 7,
+  "atif": "S. Mertes, A. Baird, D. Schiller, B. W. Schuller, and E. André, “An evolutionary-based generative approach for audio data augmentation,” in Proc. IEEE 22nd Int. Workshop Multimedia Signal Process. (MMSP), 2020, pp. 1–6, doi: 10.1109/MMSP48831.2020.9287156.",
+  "sorunlar": []
+ },
+ {
+  "no": 8,
+  "atif": "M. Seibold, A. Hoch, M. Farshad, N. Navab, and P. Fürnstahl, “Conditional generative data augmentation for clinical audio datasets,” in Proc. Med. Image Comput. Comput. Assist. Intervent. (MICCAI), LNCS vol. 13437, 2022, pp. 345–354, doi: 10.1007/978-3-031-16449-1_33.",
+  "sorunlar": []
+ },
+ {
+  "no": 9,
+  "atif": "M. Margaryan, M. Seibold, I. Joshi, M. Farshad, P. Fürnstahl, and N. Navab, “Improved techniques for the conditional generative augmentation of clinical audio data,” in Proc. Med. Imag. Comput.-Aided Diagnosis (MICAD), LNEE vol. 810, 2023, pp. 389–398, doi: 10.1007/978-981-16-6775-6_32.",
+  "sorunlar": []
+ },
+ {
+  "no": 10,
+  "atif": "L. Nanni, G. Maguolo, and M. Paci, “Data augmentation approaches for improving animal audio classification,” Ecol. Inform., vol. 57, Art. no. 101084, 2020, doi: 10.1016/j.ecoinf.2020.101084.",
+  "sorunlar": []
+ },
+ {
+  "no": 11,
+  "atif": "H. Liu, Z. Chen, Y. Yuan, X. Mei, X. Liu, D. Mandic, W. Wang, and M. D. Plumbley, “AudioLDM: Text-to-audio generation with latent diffusion models,” in Proc. 40th Int. Conf. Mach. Learn. (ICML), 2023, doi: 10.48550/arXiv.2301.12503.",
+  "sorunlar": []
+ },
+ {
+  "no": 12,
+  "atif": "M. Akrout, B. Gyepesi, P. Holló, A. Poór, B. Kincső, et al., “Diffusion-based data augmentation for skin disease classification,” 2023, arXiv:2301.04802.",
+  "sorunlar": []
+ },
+ {
+  "no": 13,
+  "atif": "E. Tsalera, A. Papadakis, G. Pagiatakis, and M. Samarakou, “Impact evaluation of sound dataset augmentation and synthetic generation upon classification accuracy,” J. Sens. Actuator Netw., vol. 14, no. 5, Art. no. 91, 2025, doi: 10.3390/jsan14050091.",
+  "sorunlar": []
+ },
+ {
+  "no": 14,
+  "atif": "S. Hershey, S. Chaudhuri, D. P. W. Ellis, et al., “CNN architectures for large-scale audio classification,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2017, pp. 131–135, doi: 10.1109/ICASSP.2017.7952132.",
+  "sorunlar": []
+ },
+ {
+  "no": 15,
+  "atif": "K. J. Piczak, “ESC: Dataset for environmental sound classification,” in Proc. 23rd ACM Int. Conf. Multimedia (MM), 2015, pp. 1015–1018, doi: 10.1145/2733373.2806390.",
+  "sorunlar": []
+ },
+ {
+  "no": 16,
+  "atif": "Q. Kong, Y. Cao, T. Iqbal, Y. Wang, W. Wang, and M. D. Plumbley, “PANNs: Large-scale pretrained audio neural networks for audio pattern recognition,” IEEE/ACM Trans. Audio, Speech, Language Process., vol. 28, pp. 2880–2894, 2020, doi: 10.1109/TASLP.2020.3030497.",
+  "sorunlar": []
+ },
+ {
+  "no": 17,
+  "atif": "J. Salamon and J. P. Bello, “Deep convolutional neural networks and data augmentation for environmental sound classification,” IEEE Signal Process. Lett., vol. 24, no. 3, pp. 279–283, 2017, doi: 10.1109/LSP.2017.2657381.",
+  "sorunlar": []
+ },
+ {
+  "no": 18,
+  "atif": "Y. Gong, Y.-A. Chung, and J. Glass, “AST: Audio spectrogram transformer,” in Proc. Interspeech, 2021, pp. 571–575, doi: 10.21437/Interspeech.2021-698.",
+  "sorunlar": []
+ },
+ {
+  "no": 19,
+  "atif": "K. Chen, X. Du, B. Zhu, Z. Ma, T. Berg-Kirkpatrick, and S. Dubnov, “HTS-AT: A hierarchical token-semantic audio transformer for sound classification and detection,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2022, doi: 10.1109/ICASSP43922.2022.9746312.",
+  "sorunlar": []
+ },
+ {
+  "no": 20,
+  "atif": "Y. Gong, S. Khurana, A. Rouditchenko, and J. Glass, “CMKD: CNN/transformer-based cross-model knowledge distillation for audio classification,” 2022, arXiv:2203.06760.",
+  "sorunlar": []
+ },
+ {
+  "no": 21,
+  "atif": "W. Mu, B. Yin, X. Huang, J. Xu, and Z. Du, “Environmental sound classification using temporal-frequency attention based convolutional neural network,” Sci. Rep., vol. 11, Art. no. 21552, 2021, doi: 10.1038/s41598-021-01045-4.",
+  "sorunlar": []
+ },
+ {
+  "no": 22,
+  "atif": "J. Sharma, O.-C. Granmo, and M. Goodwin, “Environment sound classification using multiple feature channels and attention based deep convolutional neural network,” in Proc. Interspeech, 2020, pp. 1186–1190, doi: 10.21437/Interspeech.2020-1303.",
+  "sorunlar": []
+ },
+ {
+  "no": 23,
+  "atif": "A. Mou and M. Milanova, “Performance analysis of deep learning model-compression techniques for audio classification on edge devices,” Sci, vol. 6, no. 2, Art. no. 21, 2024, doi: 10.3390/sci6020021.",
+  "sorunlar": []
+ },
+ {
+  "no": 24,
+  "atif": "E. Fonseca, R. Gong, D. Bogdanov, O. Slizovskaia, E. Gómez, and X. Serra, “A simple fusion of deep and shallow learning for acoustic scene classification,” in Proc. Sound Music Comput. Conf. (SMC), 2018, doi: 10.48550/arXiv.1806.07506.",
+  "sorunlar": []
+ },
+ {
+  "no": 25,
+  "atif": "V. Hajihashemi, A. Alavi Gharahbagh, P. M. Cruz, M. C. Ferreira, J. J. M. Machado, and J. M. R. S. Tavares, “Binaural acoustic scene classification using wavelet scattering, parallel ensemble classifiers and nonlinear fusion,” Sensors, vol. 22, no. 4, Art. no. 1535, 2022, doi: 10.3390/s22041535.",
+  "sorunlar": []
+ },
+ {
+  "no": 26,
+  "atif": "H. Hu, C.-H. H. Yang, X. Xia, X. Bai, X. Tang, Y. Wang, et al., “A two-stage approach to device-robust acoustic scene classification,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2021, pp. 845–849, doi: 10.1109/ICASSP39728.2021.9414835.",
+  "sorunlar": []
+ },
+ {
+  "no": 27,
+  "atif": "M. Lim, D. Lee, H. Park, Y. Kang, J. Oh, J.-S. Park, G.-J. Jang, and J.-H. Kim, “Convolutional neural network based audio event classification,” KSII Trans. Internet Inf. Syst., vol. 12, no. 6, pp. 2748–2760, 2018, doi: 10.3837/tiis.2018.06.017.",
+  "sorunlar": []
+ },
+ {
+  "no": 28,
+  "atif": "A.-M. Oncescu, A. S. Koepke, J. F. Henriques, Z. Akata, and S. Albanie, “Audio retrieval with natural language queries,” in Proc. Interspeech, 2021, pp. 2411–2415, doi: 10.21437/Interspeech.2021-2227.",
+  "sorunlar": []
+ },
+ {
+  "no": 29,
+  "atif": "A. S. Koepke, A.-M. Oncescu, J. F. Henriques, Z. Akata, and S. Albanie, “Audio retrieval with natural language queries: A benchmark study,” IEEE Trans. Multimedia, vol. 25, pp. 2675–2685, 2022, doi: 10.1109/TMM.2022.3149712.",
+  "sorunlar": []
+ },
+ {
+  "no": 30,
+  "atif": "B. da Silva, A. W. Happi, A. Braeken, and A. Touhafi, “Evaluation of classical machine learning techniques towards urban sound recognition on embedded systems,” Appl. Sci., vol. 9, no. 18, Art. no. 3885, 2019, doi: 10.3390/app9183885.",
+  "sorunlar": []
+ },
+ {
+  "no": 31,
+  "atif": "Y. Wu, K. Chen, T. Zhang, Y. Hui, T. Berg-Kirkpatrick, and S. Dubnov, “Large-scale contrastive language-audio pretraining with feature fusion and keyword-to-caption augmentation,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2023, pp. 1–5, doi: 10.1109/ICASSP49357.2023.10095969.",
+  "sorunlar": []
+ },
+ {
+  "no": 32,
+  "atif": "B. Elizalde, S. Deshmukh, M. Al Ismail, and H. Wang, “CLAP: Learning audio concepts from natural language supervision,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2023, doi: 10.1109/ICASSP49357.2023.10095889.",
+  "sorunlar": []
+ },
+ {
+  "no": 33,
+  "atif": "Y. Yuan, Z. Chen, X. Liu, H. Liu, X. Xu, D. Jia, Y. Chen, M. D. Plumbley, and W. Wang, “T-CLAP: Temporal-enhanced contrastive language-audio pretraining,” in Proc. IEEE Int. Workshop Mach. Learn. Signal Process. (MLSP), 2024, doi: 10.1109/MLSP58920.2024.10734763.",
+  "sorunlar": []
+ },
+ {
+  "no": 34,
+  "atif": "B. Peng, C. Li, P. He, M. Galley, and J. Gao, “Instruction tuning with GPT-4,” 2023, arXiv:2304.03277.",
+  "sorunlar": []
+ },
+ {
+  "no": 35,
+  "atif": "W. Yuan, R. Y. Pang, K. Cho, X. Li, S. Sukhbaatar, J. Xu, and J. Weston, “Self-rewarding language models,” 2024, arXiv:2401.10020.",
+  "sorunlar": []
+ },
+ {
+  "no": 36,
+  "atif": "A. Conneau, A. Baevski, R. Collobert, A. Mohamed, and M. Auli, “Unsupervised cross-lingual representation learning for speech recognition,” in Proc. Interspeech, 2021, pp. 2426–2430, doi: 10.21437/Interspeech.2021-329.",
+  "sorunlar": []
+ },
+ {
+  "no": 37,
+  "atif": "S. Mussakhojayeva, R. Gilmullin, B. Khakimov, M. Galimova, D. Karabalayeva, et al., “Noise-robust multilingual speech recognition and the Tatar speech corpus,” TechRxiv preprint, 2024, doi: 10.22541/au.170750106.64166861/v1.",
+  "sorunlar": []
+ },
+ {
+  "no": 38,
+  "atif": "Y. Liu, X. Yang, and D. Qu, “Exploration of Whisper fine-tuning strategies for low-resource ASR,” EURASIP J. Audio, Speech, Music Process., vol. 2024, Art. no. 29, 2024, doi: 10.1186/s13636-024-00349-3.",
+  "sorunlar": []
+ },
+ {
+  "no": 39,
+  "atif": "N.-Q. Pham, A. Waibel, and J. Niehues, “Adaptive multilingual speech recognition with pretrained models,” 2022, arXiv:2205.12304.",
+  "sorunlar": []
+ },
+ {
+  "no": 40,
+  "atif": "L.-W. Chen and A. Rudnicky, “Exploring Wav2vec 2.0 fine-tuning for improved speech emotion recognition,” 2021, arXiv:2110.06309.",
+  "sorunlar": []
+ },
+ {
+  "no": 41,
+  "atif": "R. Zevallos, N. Bel, G. Cámbara, M. Farrús, and J. Luque, “Data augmentation for low-resource Quechua ASR improvement,” in Proc. Interspeech, 2022, pp. 3518–3522, doi: 10.21437/Interspeech.2022-770.",
+  "sorunlar": []
+ },
+ {
+  "no": 42,
+  "atif": "A. Kuzdeuov, S. Nurgaliyev, D. Turmakhan, N. Laiyk, and H. A. Varol, “Speech command recognition: Text-to-speech and speech corpus scraping are all you need,” in Proc. Int. Conf. Robot., Autom. Artif. Intell. (RAAI), 2023, pp. 286–291, doi: 10.1109/RAAI59955.2023.10601292.",
+  "sorunlar": []
+ },
+ {
+  "no": 43,
+  "atif": "H. Palaz, A. Kanak, and Y. Biçil, “TREN — Turkish speech recognition platform,” in Proc. IEEE 13th Signal Process. Commun. Appl. Conf. (SIU), 2005, pp. 585–588, doi: 10.1109/SIU.2005.1567752.",
+  "sorunlar": []
+ },
+ {
+  "no": 44,
+  "atif": "İ. Uslu and H. G. İlk, “A rule based perceptual intonation model for Turkish text-to-speech synthesis,” in Proc. IEEE 20th Signal Process. Commun. Appl. Conf. (SIU), 2012, doi: 10.1109/SIU.2012.6204475.",
+  "sorunlar": []
+ },
+ {
+  "no": 45,
+  "atif": "T. Kocak and M. Büyükzincir, “Building a Turkish text-to-speech engine: Addressing linguistic and technical challenges,” in Proc. 24th Int. Conf. Digit. Signal Process. (DSP), 2023, pp. 1–4, doi: 10.1109/DSP58604.2023.10167970.",
+  "sorunlar": []
+ },
+ {
+  "no": 46,
+  "atif": "Y. Yurtay, H. Demirci, H. T. Tiryaki, and T. Altun, “Emotion recognition on call center voice data,” Appl. Sci., vol. 14, no. 20, Art. no. 9458, 2024, doi: 10.3390/app14209458.",
+  "sorunlar": []
+ },
+ {
+  "no": 47,
+  "atif": "B. G. Yazgaç and M. Kırcı, “Fractional-order calculus-based data augmentation methods for environmental sound classification with deep learning,” Fractal Fract., vol. 6, no. 10, Art. no. 555, 2022, doi: 10.3390/fractalfract6100555.",
+  "sorunlar": []
+ },
+ {
+  "no": 48,
+  "atif": "J. F. Gemmeke, D. P. W. Ellis, D. Freedman, A. Jansen, W. Lawrence, R. C. Moore, M. Plakal, and M. Ritter, “AudioSet: An ontology and human-labeled dataset for audio events,” in Proc. IEEE Int. Conf. Acoust., Speech Signal Process. (ICASSP), 2017, pp. 776–780, doi: 10.1109/ICASSP.2017.7952261.",
+  "sorunlar": []
+ },
+ {
+  "no": 49,
+  "atif": "BBC. “BBC Sound Effects Library.” Accessed: Jul. 24, 2026. [Online]. Available: https://sound-effects.bbcrewind.co.uk/",
+  "sorunlar": [
+   "yil: atif [2026] / Crossref 2023",
+   "baslik benzerligi 0.3: 'Networking the British Asian Sound: The BBC Asian Network and BBC Local Radio'"
+  ],
+  "crossref": {
+   "baslik": "Networking the British Asian Sound: The BBC Asian Network and BBC Local Radio",
+   "yer": "Finding a New British Asian Sound on BBC Radio",
+   "yil": 2023,
+   "sayfa": "155-186"
+  }
+ },
+ {
+  "no": 50,
+  "atif": "G. Ke, Q. Meng, T. Finley, T. Wang, W. Chen, W. Ma, Q. Ye, and T.-Y. Liu, “LightGBM: A highly efficient gradient boosting decision tree,” in Proc. Adv. Neural Inf. Process. Syst. (NeurIPS), vol. 30, 2017.",
+  "sorunlar": [
+   "yil: atif [2017] / Crossref 2023",
+   "baslik benzerligi 0.58: 'A Novel Scheme for Mapping of MVT-Type Pb–Zn Prospectivity: LightGBM, a Highly Efficient Gradient Boosting Decision Tree Machine Learning Algorithm'"
+  ],
+  "crossref": {
+   "baslik": "A Novel Scheme for Mapping of MVT-Type Pb–Zn Prospectivity: LightGBM, a Highly Efficient Gradient Boosting Decision Tree Machine Learning Algorithm",
+   "yer": "Natural Resources Research",
+   "yil": 2023,
+   "sayfa": "2417-2438"
+  }
+ },
+ {
+  "no": 51,
+  "atif": "K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), 2016, pp. 770–778, doi: 10.1109/CVPR.2016.90.",
+  "sorunlar": []
+ },
+ {
+  "no": 52,
+  "atif": "Q. McNemar, “Note on the sampling error of the difference between correlated proportions or percentages,” Psychometrika, vol. 12, pp. 153–157, 1947, doi: 10.1007/BF02295996.",
+  "sorunlar": []
+ }
+]
