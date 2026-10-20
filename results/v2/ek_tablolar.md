@@ -305,7 +305,7 @@ Median nearest-neighbour cosine similarity of synthetic clips to real recordings
 | C4′ | 45 | 391 | 200 | 61.08 | 5.5e-15 |
 | C4′ | 46 | 319 | 242 | 10.30 | 0.0013 |
 
-### S7c. Original (v1) predictions re-analysed at the recording level (Group A; single seed; test)
+### S7c. Original (v1) predictions re-analyzed at the recording level (Group A; single seed; test)
 
 | Comparison | ΔF1 | 95% CI | p | p (Holm) |
 |---|---|---|---|---|

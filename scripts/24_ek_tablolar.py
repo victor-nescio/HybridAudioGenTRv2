@@ -158,7 +158,7 @@ def main():
                "inference and are shown only for continuity with the original submission.", ""]
     md.append(tablo(["Config. vs baseline", "Seed", "Only config. correct", "Only baseline correct", "χ²", "p"], s7b))
     v1 = json.loads((ROOT / "results" / "v1" / "birincil_analiz_v1.json").read_text(encoding="utf-8"))
-    md += ["", "### S7c. Original (v1) predictions re-analysed at the recording level (Group A; single seed; test)", ""]
+    md += ["", "### S7c. Original (v1) predictions re-analyzed at the recording level (Group A; single seed; test)", ""]
     md.append(tablo(["Comparison", "ΔF1", "95% CI", "p", "p (Holm)"],
                     [(f"{k['test']} − {k['referans']}", f(k["gruplar"]["A_belirgin"]["delta_f1"]),
                       f"[{f(k['gruplar']['A_belirgin']['ga95'][0])}, {f(k['gruplar']['A_belirgin']['ga95'][1])}]",
