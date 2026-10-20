@@ -1,0 +1,78 @@
+{
+ "kaynak": "data/_dup_backup_20260531 (sabit seed, duzeltme oncesi)",
+ "olcut": "MD5",
+ "sayim": {
+  "R1": {
+   "insaat_sesleri": {
+    "dosya": 50,
+    "benzersiz": 12
+   },
+   "dini_mekan": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "acil_servis": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "diger_hayvanlar": {
+    "dosya": 50,
+    "benzersiz": 5
+   }
+  },
+  "R2": {
+   "insaat_sesleri": {
+    "dosya": 50,
+    "benzersiz": 7
+   },
+   "dini_mekan": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "acil_servis": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "diger_hayvanlar": {
+    "dosya": 50,
+    "benzersiz": 5
+   }
+  },
+  "R3": {
+   "insaat_sesleri": {
+    "dosya": 50,
+    "benzersiz": 6
+   },
+   "dini_mekan": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "acil_servis": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "diger_hayvanlar": {
+    "dosya": 50,
+    "benzersiz": 5
+   }
+  },
+  "R4": {
+   "insaat_sesleri": {
+    "dosya": 50,
+    "benzersiz": 6
+   },
+   "dini_mekan": {
+    "dosya": 50,
+    "benzersiz": 8
+   },
+   "acil_servis": {
+    "dosya": 50,
+    "benzersiz": 5
+   },
+   "diger_hayvanlar": {
+    "dosya": 50,
+    "benzersiz": 5
+   }
+  }
+ }
+}
