@@ -22,6 +22,8 @@ Kullanim:
 
 import argparse
 import json
+import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -49,7 +51,8 @@ GRUPLAR = {
     "B_faz1_acil": ["acil_servis"],
     "kontrol":    ["diger_hayvanlar"],
 }
-RSCRIPT = Path(r"C:\Program Files\R\R-4.4.1\bin\Rscript.exe")
+# Rscript: RSCRIPT ortam degiskeni > PATH > gelistirme makinesindeki varsayilan kurulum
+RSCRIPT = Path(os.environ.get("RSCRIPT") or shutil.which("Rscript") or r"C:\Program Files\R\R-4.4.1\bin\Rscript.exe")
 
 
 # ── Veri yukleme ──────────────────────────────────────────────────────────────

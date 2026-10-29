@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code, please cite the paper below (under review at IEEE Access)."
-title: "HybridAudioGenTR: Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Low-Resource Environmental Sound Classification"
+title: "HybridAudioGenTR: Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Environmental Sound Classification"
 type: software
 authors:
   - family-names: "Cellat"
@@ -21,7 +21,7 @@ keywords:
   - Fréchet Audio Distance
 preferred-citation:
   type: article
-  title: "Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Low-Resource Environmental Sound Classification: A Reproducible Multi-Configuration Evaluation"
+  title: "Fine-Tuned CLAP-Guided Text-to-Audio Generative Augmentation for Environmental Sound Classification: A Controlled Multi-Configuration Evaluation"
   authors:
     - family-names: "Cellat"
       given-names: "Fatih Doğan"

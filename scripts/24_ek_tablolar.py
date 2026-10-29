@@ -1,5 +1,5 @@
 """
-Ek dosya (Supplementary Material) tablolari S1-S8 — tumu kayitli ciktilardan uretilir (elle sayi yok).
+Ek dosya (Supplementary Material) tablolari S1-S9 — tumu kayitli ciktilardan uretilir (elle sayi yok).
 
   S1 taksonomi kurallari (src/data/labels.py)        S5 BEATs saglamlik analizi
   S2 ilk hedef seti (31 May-2 Haz 2026, results/v1)   S6 ezber analizi
@@ -107,15 +107,19 @@ def main():
                      enumerate(zip(pr[c]["turkce"], pr[c]["ingilizce"]))]))
 
     # S4
+    BA_GRUP = _modul("ba0", ROOT / "scripts" / "16_birincil_analiz.py").GRUPLAR
     IL = _modul("il", ROOT / "scripts" / "07_iterative_loop.py")
     tr, vl, te = IL.veri_bol(IL.PARQUET_LISTE, ROOT)
     md += ["", "## Table S4. Real training data and synthetic share per augmented class", "",
-           "Each synthetic clip contributes one 5-s training segment. Share = synthetic / (real + synthetic) segments.", ""]
+           "Each synthetic clip contributes one 5-s training segment. Share = synthetic / (real + synthetic) segments. "
+           "The dose series (25, 100 and 200 clips) was applied to Group A and the control class only; Group B and "
+           "emergency service received 50 clips in every run (— = not applied).", ""]
     s4 = []
     for c in AUG:
         n = int(tr[tr.sinif == c].n_segs.sum())
+        dozlu = c in BA_GRUP["A_belirgin"] + BA_GRUP["kontrol"]
         s4.append((EN[c], len(tr[tr.sinif == c]), n, len(vl[vl.sinif == c]) + len(te[te.sinif == c]),
-                   *[f"{100 * k / (n + k):.1f}%" for k in (25, 50, 100, 200)]))
+                   *[f"{100 * k / (n + k):.1f}%" if (dozlu or k == 50) else "—" for k in (25, 50, 100, 200)]))
     md.append(tablo(["Class", "Train rec.", "Train seg.", "Val+test rec.", "25 clips", "50", "100", "200"], s4))
 
     # S5
@@ -189,6 +193,34 @@ def main():
         ("BEATs embedding extraction + MLP heads", f"{c['beats']['kafa_basina_dk_medyan']:.1f} min/head",
          f"{(c['beats']['gomme_dk'] + c['beats']['kafa_basina_dk_medyan'] * c['beats']['n_kafa']) / 60:.1f} h"),
         ("**Total**", "", f"**≈{c['toplam_gpu_saat_yaklasik']:.0f} GPU-hours**")]))
+    md += ["", "Generation and training runs of the revision. The H1 clips were reused from the original study; "
+               "quality metrics and statistical analyses are not included."]
+
+    # S9 (sonradan; on kayitta yok)
+    sd = json.loads((ROOT / "results" / "v2" / "sonradan_duyarlilik.json").read_text(encoding="utf-8"))
+    md += ["", "## Table S9. Post hoc analyses (not pre-registered)", "",
+           "Same implementation as the primary analysis: final-epoch models, class F1 from segment predictions, "
+           "class-stratified cluster bootstrap over recordings (10,000 replicates), differences averaged over paired "
+           "seeds. These analyses do not replace the pre-registered primary analysis.", "",
+           "### S9a. Primary effect (C4′ − baseline, Group A, seeds 42–46) by evaluation partition", "",
+           "The validation partition was used to choose the classifier family on baseline runs, and both partitions "
+           "were used in the original study; the test partition alone is therefore reported as a sensitivity "
+           "analysis.", ""]
+    ad9 = {"test": "Test only", "val": "Validation only", "valtest": "Validation + test (pre-registered)"}
+    md.append(tablo(["Partition", "Recordings", "ΔF1", "95% CI", "p"],
+                    [(ad9[b], f"{v['n_kayit']:,}", f(v["delta_f1"]), f"[{f(v['ga95'][0])}, {f(v['ga95'][1])}]",
+                      f"{v['p_bootstrap']:.3f}") for b, v in sd["birincil_bolum_bazinda"].items()]))
+    md += ["", "### S9b. Classes that received no synthetic clips (18 classes; configuration − baseline; "
+               "validation + test)", "",
+           "A small change in the 26-class macro-F1 can hide losses in individual classes. Group macro-F1 change of "
+           "the 18 classes outside Groups A and B, emergency service and the control class, with the range of the "
+           "per-class changes.", ""]
+    md.append(tablo(["Configuration", "Seeds", "ΔF1 (18 classes)", "95% CI", "p", "Per-class range"],
+                    [(KON[k], len(v["seedler"]), f(v["delta_f1"]), f"[{f(v['ga95'][0])}, {f(v['ga95'][1])}]",
+                      f"{v['p_bootstrap']:.3f}",
+                      f"{f(v['sinif'][v['sinif_min']])} ({EN[v['sinif_min']]}) to "
+                      f"{f(v['sinif'][v['sinif_maks']])} ({EN[v['sinif_maks']]})")
+                     for k, v in sd["artirilmayan_siniflar"].items()]))
 
     cikti = ROOT / "results" / "v2" / "ek_tablolar.md"
     cikti.write_text("\n".join(md) + "\n", encoding="utf-8")

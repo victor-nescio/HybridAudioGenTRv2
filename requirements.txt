@@ -29,6 +29,13 @@ transformers==4.57.6
 diffusers==0.37.1
 accelerate==1.13.0
 
+# Revision (v2): quality metrics, memorization screen, resampling
+fadtk==1.1.0
+resampy==0.4.3
+soxr==1.0.0
+# Mixed-model sensitivity analysis: R >= 4.4 with lme4 (outside pip)
+# BEATs checkpoint and source files: see README (outside pip)
+
 # Visualisation & reporting
 matplotlib==3.10.8
 seaborn==0.13.2

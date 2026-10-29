@@ -189,17 +189,17 @@ Used for generation (assigned cyclically to clips) and as class-level CLAP capti
 
 ## Table S4. Real training data and synthetic share per augmented class
 
-Each synthetic clip contributes one 5-s training segment. Share = synthetic / (real + synthetic) segments.
+Each synthetic clip contributes one 5-s training segment. Share = synthetic / (real + synthetic) segments. The dose series (25, 100 and 200 clips) was applied to Group A and the control class only; Group B and emergency service received 50 clips in every run (— = not applied).
 
 | Class | Train rec. | Train seg. | Val+test rec. | 25 clips | 50 | 100 | 200 |
 |---|---|---|---|---|---|---|---|
 | dog sounds | 136 | 2367 | 58 | 1.0% | 2.1% | 4.1% | 7.8% |
 | bird sounds | 114 | 2788 | 50 | 0.9% | 1.8% | 3.5% | 6.7% |
 | weather events | 172 | 6418 | 74 | 0.4% | 0.8% | 1.5% | 3.0% |
-| construction | 152 | 3147 | 66 | 0.8% | 1.6% | 3.1% | 6.0% |
-| religious place | 82 | 2771 | 35 | 0.9% | 1.8% | 3.5% | 6.7% |
-| farm/livestock | 55 | 1401 | 24 | 1.8% | 3.4% | 6.7% | 12.5% |
-| emergency service | 147 | 2789 | 62 | 0.9% | 1.8% | 3.5% | 6.7% |
+| construction | 152 | 3147 | 66 | — | 1.6% | — | — |
+| religious place | 82 | 2771 | 35 | — | 1.8% | — | — |
+| farm/livestock | 55 | 1401 | 24 | — | 3.4% | — | — |
+| emergency service | 147 | 2789 | 62 | — | 1.8% | — | — |
 | other animals | 170 | 2853 | 73 | 0.9% | 1.7% | 3.4% | 6.6% |
 
 ## Table S5. Second classifier: frozen BEATs embeddings + MLP (not pre-registered)
@@ -330,3 +330,33 @@ Median nearest-neighbor cosine similarity of synthetic clips to real recordings 
 | ResNet-18 training (30 epochs) | 3.4 h/run | 129.4 h (39 runs) |
 | BEATs embedding extraction + MLP heads | 1.1 min/head | 2.6 h |
 | **Total** |  | **≈176 GPU-hours** |
+
+Generation and training runs of the revision. The H1 clips were reused from the original study; quality metrics and statistical analyses are not included.
+
+## Table S9. Post hoc analyses (not pre-registered)
+
+Same implementation as the primary analysis: final-epoch models, class F1 from segment predictions, class-stratified cluster bootstrap over recordings (10,000 replicates), differences averaged over paired seeds. These analyses do not replace the pre-registered primary analysis.
+
+### S9a. Primary effect (C4′ − baseline, Group A, seeds 42–46) by evaluation partition
+
+The validation partition was used to choose the classifier family on baseline runs, and both partitions were used in the original study; the test partition alone is therefore reported as a sensitivity analysis.
+
+| Partition | Recordings | ΔF1 | 95% CI | p |
+|---|---|---|---|---|
+| Test only | 2,304 | +0.018 | [+0.001, +0.036] | 0.044 |
+| Validation only | 2,304 | +0.018 | [−0.003, +0.043] | 0.102 |
+| Validation + test (pre-registered) | 4,608 | +0.018 | [+0.004, +0.033] | 0.010 |
+
+### S9b. Classes that received no synthetic clips (18 classes; configuration − baseline; validation + test)
+
+A small change in the 26-class macro-F1 can hide losses in individual classes. Group macro-F1 change of the 18 classes outside Groups A and B, emergency service and the control class, with the range of the per-class changes.
+
+| Configuration | Seeds | ΔF1 (18 classes) | 95% CI | p | Per-class range |
+|---|---|---|---|---|---|
+| H1 | 5 | −0.003 | [−0.006, +0.000] | 0.091 | −0.016 (city atmosphere) to +0.013 (land vehicles) |
+| C2′ | 3 | −0.005 | [−0.009, −0.000] | 0.032 | −0.021 (office/communication) to +0.010 (land vehicles) |
+| C3′ | 3 | −0.003 | [−0.007, +0.001] | 0.115 | −0.021 (city atmosphere) to +0.022 (door sounds) |
+| C4′ | 5 | +0.000 | [−0.003, +0.003] | 0.972 | −0.016 (indoor sounds) to +0.013 (train sounds) |
+| C4′-shift | 3 | −0.005 | [−0.009, −0.000] | 0.030 | −0.022 (city atmosphere) to +0.009 (train sounds) |
+| SpecAugment | 3 | +0.009 | [+0.003, +0.014] | 0.002 | −0.017 (nature atmosphere) to +0.029 (door sounds) |
+| SpecAugment + C4′ | 3 | +0.007 | [+0.002, +0.012] | 0.009 | −0.017 (clock/bell) to +0.031 (door sounds) |

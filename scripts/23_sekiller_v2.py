@@ -405,7 +405,7 @@ def is_akisi():
              GRI_ACIK)
     ok(0.5, y, y - ok_boyu); y -= ok_boyu
     y = kutu(0.04, y, 0.92, "Main finding",
-             "+0.018 macro-F1 for acoustically distinctive classes\n(95% CI [0.004, 0.033], p = 0.010); grows with dose\n"
+             "+0.018 macro-F1 for acoustically distinctive classes\n(95% CI [0.004, 0.033], p = 0.010; pre-registered)\n"
              "no gain for lowest-F1 classes, control or BEATs\nno added benefit of CLAP fine-tuning", "#ffffff",
              kenar=MAVI, kalin=1.4)
     if y < 0:
